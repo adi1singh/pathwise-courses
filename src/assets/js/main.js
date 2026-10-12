@@ -424,7 +424,10 @@
     };
     const play = () => {
       if (!allowed() || userPaused || !inView) return;
-      if (!video.src) video.src = video.dataset.src;
+      if (!video.src) {
+        const h264 = video.canPlayType('video/mp4; codecs="avc1.42E01E"');
+        video.src = !h264 && video.canPlayType('video/webm; codecs="vp9"') ? video.dataset.srcWebm : video.dataset.src;
+      }
       video.play().then(() => {
         video.classList.add('is-playing');
         pauseBtn.hidden = false;
@@ -522,6 +525,7 @@
     const rows = [
       ['Area', 'sector'],
       ['Level', 'level'],
+      ['Typical price', 'price'],
       ['Good for', 'suits'],
       ['Study online (typical)', 'study'],
       ['Through RPL (typical)', 'rpl'],

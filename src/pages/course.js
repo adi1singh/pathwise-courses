@@ -1,7 +1,8 @@
 import { site } from '../data/site.js';
 import { courses, courseByCode, sectorById, levelById, pathways } from '../data/courses.js';
 import { html, link, icon, esc, tbc, tgaUrl } from '../templates/helpers.js';
-import { breadcrumbs, sectorChip, courseCard, checklist, faqList, contactOptions, advisorAvatar } from '../templates/components.js';
+import { breadcrumbs, sectorChip, courseCard, checklist, faqList, contactOptions, advisorAvatar, photo } from '../templates/components.js';
+import { priceDetail, pricesCheckedOn } from '../data/prices.js';
 
 const rtoBlock = (c) => {
   const rto = c.rto && site.partnerRtos.find((r) => r.id === c.rto);
@@ -58,13 +59,17 @@ export default function coursePage(c) {
     ? `${c.duration.study}`
     : [c.pathways.includes('rpl') ? `RPL: ${c.duration.rpl.replace(/^Often /, '')}` : '', `Online study: ${c.duration.study}`].filter(Boolean).join(' · ');
 
+  const price = priceDetail(c);
+  const typical = price?.study
+    ? `${price.study} to study${price.rpl ? `, ${price.rpl} with RPL` : ''}`
+    : '';
   const glance = [
     { id: 'suits', ic: 'user', label: 'Who it suits', value: esc(c.suits[0]) },
     { id: 'study', ic: 'laptop', label: 'Study options', value: `${esc(studyLine)} ${confirm('duration')}` },
     { id: 'placement', ic: 'briefcase', label: c.unit ? 'Practical' : 'Work placement', value: `${esc(c.placement.required ? c.placement.detail : c.unit ? 'In-person practical assessment' : 'Not required')} ${confirm('placement')}` },
     { id: 'entry', ic: 'file', label: 'Entry requirements', value: `${esc(c.entry.length)} things you’ll need, including a USI ${confirm('entry')}` },
     { id: 'provider', ic: 'building', label: 'Training provider', value: rto ? `${esc(rto.name)} (RTO ${esc(rto.code)})` : `Confirmed before you enrol ${tbc('Add the delivering RTO for this course')}` },
-    { id: 'provider', ic: 'coins', label: 'Fees', value: c.fees ? esc(c.fees) : `Ask ${site.advisor} for a written quote ${tbc('Add verified fees, or keep “ask for a quote”')}` },
+    { id: 'provider', ic: 'coins', label: c.fees ? 'Fees' : 'Typical price', value: c.fees ? esc(c.fees) : typical ? `${esc(typical)} <span class="glance__note">Typical across providers. Ask ${site.advisor} for an exact quote.</span>` : `Ask ${site.advisor} for a written quote` },
   ];
 
   const sections = [
@@ -80,20 +85,26 @@ export default function coursePage(c) {
 
   const body = html`
   <section class="page-hero page-hero--course">
-    <div class="container">
-      ${breadcrumbs([{ label: 'Courses', href: 'courses.html' }, { label: c.title }], d)}
-      <div class="course-hero__tags">
-        ${sectorChip(c.sector)}
-        <span class="course-hero__level">${level}</span>
-        <span class="code-badge">${c.code}</span>
-        ${confirm('code') && `<span>${confirm('code')}</span>`}
+    <div class="container course-hero">
+      <div class="course-hero__text">
+        ${breadcrumbs([{ label: 'Courses', href: 'courses.html' }, { label: c.title }], d)}
+        <div class="course-hero__tags">
+          ${sectorChip(c.sector)}
+          <span class="course-hero__level">${level}</span>
+          <span class="code-badge">${c.code}</span>
+          ${confirm('code') && `<span>${confirm('code')}</span>`}
+        </div>
+        <h1>${esc(c.title)}</h1>
+        <p class="lead">${esc(c.summary)}</p>
+        <div class="btn-row">
+          <a class="btn btn--primary btn--lg" href="${link(d, `eligibility.html${q}`)}">Ask ${site.advisor} about this course ${icon('arrow-right')}</a>
+          <a class="btn btn--secondary btn--lg" href="${link(d, 'course-finder.html')}">Not sure? Find my course</a>
+        </div>
       </div>
-      <h1>${esc(c.title)}</h1>
-      <p class="lead">${esc(c.summary)}</p>
-      <div class="btn-row">
-        <a class="btn btn--primary btn--lg" href="${link(d, `eligibility.html${q}`)}">Ask ${site.advisor} about this course ${icon('arrow-right')}</a>
-        <a class="btn btn--secondary btn--lg" href="${link(d, 'course-finder.html')}">Not sure? Find my course</a>
-      </div>
+      <figure class="course-hero__media">
+        ${photo(c.image.file, d, { sizes: '(min-width: 1000px) 460px, 92vw', lazy: false })}
+        ${typical ? `<figcaption class="course-hero__price"><span>Typical price</span><strong>${esc(price.study)}</strong></figcaption>` : ''}
+      </figure>
     </div>
   </section>
 
@@ -180,7 +191,14 @@ export default function coursePage(c) {
             <h3 class="prose-section__sub">${icon('coins')} What it costs</h3>
             ${c.fees
               ? `<p><strong>${esc(c.fees)}</strong></p>`
-              : html`<p>Fees depend on the training provider and on whether you use RPL or study the full course. ${site.advisor} will get you a written quote that shows the full cost, including any extra fees, before you decide. ${tbc('Add verified fees, or keep “ask for a quote”')}</p>
+              : html`${typical
+                  ? html`<dl class="price-table">
+                      <div><dt>Full course</dt><dd>${esc(price.study)}</dd></div>
+                      ${price.rpl ? `<div><dt>RPL</dt><dd>${esc(price.rpl)}</dd></div>` : ''}
+                    </dl>
+                    <p class="small muted">Typical full-fee prices published by Australian training providers, checked ${pricesCheckedOn}. Government funding can lower the cost in some states. These are not ${site.advisor}’s prices.</p>`
+                  : ''}
+                <p>Your price depends on the training provider and on whether you use RPL or study the full course. ${site.advisor} will get you a written quote that shows the full cost, including any extra fees, before you decide. ${tbc('Add agreed fees once set with the partner RTO')}</p>
                 <a class="link-arrow" href="${link(d, `contact.html?topic=course&course=${encodeURIComponent(c.code)}`)}">Ask for a quote ${icon('arrow-right')}</a>`}
           </div>
         </div>

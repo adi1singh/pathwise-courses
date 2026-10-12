@@ -1,4 +1,6 @@
+import { site } from '../data/site.js';
 import { courses, sectors, levels, levelById, sectorById, pathways } from '../data/courses.js';
+import { priceDetail, pricesCheckedOn } from '../data/prices.js';
 import { html, icon, esc } from '../templates/helpers.js';
 import { courseCard, breadcrumbs, ctaBand } from '../templates/components.js';
 
@@ -21,6 +23,7 @@ const compareData = () =>
           placement: c.placement.detail,
           roles: c.roles.slice(0, 3).join(', '),
           ways: c.pathways.map((p) => pathways[p]).join(' · '),
+          price: (() => { const p = priceDetail(c); return c.fees || (p?.study ? `${p.study}${p.rpl ? ` (RPL ${p.rpl})` : ''}` : 'Ask for a quote'); })(),
         },
       ])
     )
@@ -90,6 +93,7 @@ export default function coursesPage() {
       <div class="course-grid" data-results>
         ${courses.map((c) => courseCard(c, d, { compare: true }))}
       </div>
+      <p class="areas__note">Typical prices are full-fee ranges published by Australian training providers (${pricesCheckedOn}). They are not ${site.advisor}’s prices, and government funding can lower the cost in some states. Ask ${site.advisor} for an exact quote.</p>
 
       <div class="empty-state" data-empty hidden>
         <h2 class="h3-size">No courses match <span data-empty-query></span></h2>
@@ -132,7 +136,7 @@ export default function coursesPage() {
       <button type="button" class="icon-btn" data-compare-close aria-label="Close comparison">${icon('x')}</button>
     </div>
     <div class="compare-dialog__body" data-compare-body></div>
-    <p class="compare-dialog__note">Durations are typical. The training provider confirms exact timeframes, placement hours and entry requirements before you enrol.</p>
+    <p class="compare-dialog__note">Durations and prices are typical. Prices are full-fee ranges published by Australian providers (${pricesCheckedOn}), not ${site.advisor}’s prices. The training provider confirms exact fees, timeframes, placement hours and entry requirements before you enrol.</p>
   </dialog>
   <script id="compare-data" type="application/json">${compareData()}</script>
 
