@@ -280,6 +280,178 @@
     apply();
   });
 
+  /* ── Home hero: search suggestions, typing hints, background video ───── */
+  const heroForm = $('[data-hero-search]');
+  if (heroForm) {
+    const input = $('[data-hero-input]', heroForm);
+    const panel = $('[data-hero-panel]', heroForm);
+    const list = $('[data-hero-results]', heroForm);
+    const status = $('[data-hero-status]', heroForm);
+    let data = [];
+    try { data = JSON.parse($('[data-hero-data]', heroForm).textContent); } catch { /* suggestions off */ }
+    const items = data.map((d) => ({ ...d, card: { dataset: { sTitle: d.s.title, sKeywords: d.s.keywords, sRoles: d.s.roles, sText: d.s.text, code: d.code } } }));
+    const allHref = (q) => `courses.html?q=${encodeURIComponent(q)}`;
+    let options = [];
+    let active = -1;
+    let statusTimer;
+
+    input.setAttribute('role', 'combobox');
+    input.setAttribute('aria-autocomplete', 'list');
+    input.setAttribute('aria-expanded', 'false');
+    input.setAttribute('aria-controls', 'hero-results');
+
+    // Bold the parts of a title that match what was typed.
+    const highlight = (title, q) => {
+      const words = terms(q).flatMap((t) => [t, ...(SYNONYMS[t] || [])]).filter((t) => t.length > 1);
+      if (!words.length) return esc(title);
+      const re = new RegExp(`(${words.map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`, 'gi');
+      return title.split(re).map((part, i) => (i % 2 ? `<mark>${esc(part)}</mark>` : esc(part))).join('');
+    };
+
+    const setActive = (i) => {
+      options.forEach((o, n) => o.setAttribute('aria-selected', String(n === i)));
+      active = i;
+      if (i >= 0) {
+        input.setAttribute('aria-activedescendant', options[i].id);
+        options[i].scrollIntoView({ block: 'nearest' });
+      } else input.removeAttribute('aria-activedescendant');
+    };
+
+    const close = () => {
+      panel.hidden = true;
+      input.setAttribute('aria-expanded', 'false');
+      setActive(-1);
+    };
+
+    const render = () => {
+      const q = input.value.trim();
+      if (q.length < 2 || !items.length) { close(); list.innerHTML = ''; return; }
+      const ranked = items
+        .map((it, i) => ({ it, i, score: scoreCard(it.card, q) }))
+        .filter((r) => r.score > 0)
+        .sort((a, b) => b.score - a.score || a.i - b.i)
+        .slice(0, 5)
+        .map((r) => r.it);
+      const rows = ranked.map((it, n) => `
+        <li class="hs-option" role="option" id="hs-opt-${n}" aria-selected="false" data-href="${esc(it.href)}">
+          <img src="${esc(it.img)}" alt="" width="64" height="48" loading="lazy">
+          <span><span class="hs-option__title">${highlight(it.title, q)}</span><span class="hs-option__meta">${esc(it.level)} · ${esc(it.code)}</span></span>
+          ${it.from ? `<span class="hs-option__price">from $${Number(it.from).toLocaleString('en-AU')}<small>typical price</small></span>` : '<span></span>'}
+        </li>`);
+      if (!ranked.length) {
+        rows.push(`<li class="hs-option hs-option--finder" role="option" id="hs-opt-0" aria-selected="false" data-href="course-finder.html">${ICON.info}<span>No course matches “${esc(q)}”. Answer 4 quick questions instead</span>${ICON.arrow}</li>`);
+      }
+      rows.push(`<li class="hs-option hs-option--all" role="option" id="hs-opt-${rows.length}" aria-selected="false" data-href="${esc(allHref(q))}"><span>${ranked.length ? `See all results for “${esc(q)}”` : 'Browse all courses'}</span>${ICON.arrow}</li>`);
+      list.innerHTML = rows.join('');
+      options = $$('.hs-option', list);
+      panel.hidden = false;
+      input.setAttribute('aria-expanded', 'true');
+      setActive(-1);
+      clearTimeout(statusTimer);
+      statusTimer = setTimeout(() => {
+        status.textContent = ranked.length
+          ? `${ranked.length} ${ranked.length === 1 ? 'course' : 'courses'} suggested. Use the up and down arrows to choose.`
+          : 'No matching course. Suggestions are available with the arrow keys.';
+      }, 400);
+    };
+
+    const go = (option) => { if (option) location.href = option.dataset.href; };
+
+    input.addEventListener('input', render);
+    input.addEventListener('focus', () => { if (input.value.trim().length >= 2) render(); });
+    input.addEventListener('keydown', (e) => {
+      const open = !panel.hidden;
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (!open) render();
+        if (options.length) setActive((active + 1) % options.length);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (options.length) setActive(active <= 0 ? options.length - 1 : active - 1);
+      } else if (e.key === 'Enter' && open && active >= 0) {
+        e.preventDefault();
+        go(options[active]);
+      } else if (e.key === 'Escape' && open) {
+        e.preventDefault();
+        close();
+      }
+    });
+    list.addEventListener('mousedown', (e) => e.preventDefault()); // keep focus in the input
+    list.addEventListener('click', (e) => go(e.target.closest('.hs-option')));
+    list.addEventListener('mousemove', (e) => {
+      const o = e.target.closest('.hs-option');
+      if (o && options.indexOf(o) !== active) setActive(options.indexOf(o));
+    });
+    input.addEventListener('blur', () => setTimeout(close, 120));
+    heroForm.addEventListener('submit', (e) => {
+      if (!input.value.trim()) { e.preventDefault(); location.href = 'courses.html'; }
+    });
+
+    // Typing hints in the empty search box (skipped for reduced motion).
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!reduceMotion.matches) {
+      const hints = ['aged care', 'childcare', 'teacher aide', 'NDIS disability support', 'Cert IV in Training and Assessment', 'first aid', 'counselling', 'team leader'];
+      const resting = input.getAttribute('placeholder');
+      let h = 0; let c = 0; let deleting = false; let timer;
+      const tick = () => {
+        if (document.activeElement === input || input.value) { input.setAttribute('placeholder', resting); timer = setTimeout(tick, 1200); return; }
+        const word = hints[h];
+        c += deleting ? -1 : 1;
+        input.setAttribute('placeholder', `Try “${word.slice(0, c)}”`);
+        let wait = deleting ? 35 : 75;
+        if (!deleting && c === word.length) { deleting = true; wait = 1700; }
+        else if (deleting && c === 0) { deleting = false; h = (h + 1) % hints.length; wait = 350; }
+        timer = setTimeout(tick, wait);
+      };
+      timer = setTimeout(tick, 1800);
+      reduceMotion.addEventListener('change', (e) => { if (e.matches) { clearTimeout(timer); input.setAttribute('placeholder', resting); } });
+    }
+  }
+
+  // Background video: larger screens only, never with reduced motion or data saver.
+  const video = $('[data-hero-video]');
+  if (video) {
+    const pauseBtn = $('[data-hero-pause]');
+    const pauseLabel = $('[data-hero-pause-label]');
+    const wide = window.matchMedia('(min-width: 900px)');
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let userPaused = false;
+    let inView = true;
+    const allowed = () => wide.matches && !still.matches && !navigator.connection?.saveData;
+    const setPausedUI = (paused) => {
+      pauseBtn.setAttribute('aria-pressed', String(paused));
+      pauseLabel.textContent = paused ? 'Play video' : 'Pause video';
+    };
+    const play = () => {
+      if (!allowed() || userPaused || !inView) return;
+      if (!video.src) video.src = video.dataset.src;
+      video.play().then(() => {
+        video.classList.add('is-playing');
+        pauseBtn.hidden = false;
+        setPausedUI(false);
+      }).catch(() => { /* autoplay blocked: the poster stays */ });
+    };
+    const stop = () => { if (!video.paused) video.pause(); };
+    pauseBtn.addEventListener('click', () => {
+      userPaused = !video.paused;
+      if (userPaused) { stop(); setPausedUI(true); } else play();
+    });
+    const check = () => {
+      if (allowed()) play();
+      else { stop(); video.classList.remove('is-playing'); pauseBtn.hidden = true; }
+    };
+    wide.addEventListener('change', check);
+    still.addEventListener('change', check);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([entry]) => {
+        inView = entry.isIntersecting;
+        if (inView) play(); else stop();
+      }).observe(video.closest('.hero'));
+    }
+    if (document.readyState === 'complete') check();
+    else window.addEventListener('load', check, { once: true });
+  }
+
   /* ── Course comparison ────────────────────────────────────────────────── */
   const tray = $('[data-compare-tray]');
   const dialog = $('[data-compare-dialog]');

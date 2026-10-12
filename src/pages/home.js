@@ -3,7 +3,7 @@ import { courses, sectors, levelById } from '../data/courses.js';
 import { faqGroups } from '../data/faqs.js';
 import { interests } from '../data/finder.js';
 import { facts, careerLinks } from '../data/why.js';
-import { priceFrom, money, pricesCheckedOn } from '../data/prices.js';
+import { priceFrom, pricesCheckedOn } from '../data/prices.js';
 import { html, link, icon, tbc, esc } from '../templates/helpers.js';
 import { faqList, ctaBand, areaCard, advisorAvatar, advisorPortrait, searchFields } from '../templates/components.js';
 
@@ -196,7 +196,7 @@ const whyMatters = () => html`
     <div class="container">
       <div class="section-head section-head--center">
         <p class="eyebrow eyebrow--on-dark">Why these courses matter</p>
-        <h2 id="matters-title">Skills Australia needs, in jobs that make a difference</h2>
+        <h2 id="matters-title">In-demand work that makes a difference</h2>
         <p class="lead">Care, early childhood and education roles are among the fastest-growing areas of work in Australia. Here’s what official sources say.</p>
       </div>
       <ul class="facts-grid" role="list">

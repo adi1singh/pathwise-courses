@@ -135,7 +135,7 @@ export const layout = ({ title, description, path, depth = 0, active = '', body,
   <title>${esc(fullTitle)}</title>
   <meta name="description" content="${esc(description)}">
   <link rel="canonical" href="${esc(canonical)}">
-  <meta name="theme-color" content="#0e5e63">
+  <meta name="theme-color" content="#0a1f46">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="${esc(site.name)}">
   <meta property="og:title" content="${esc(fullTitle)}">
@@ -147,7 +147,7 @@ export const layout = ({ title, description, path, depth = 0, active = '', body,
   <link rel="icon" href="${link(depth, 'assets/img/favicon.svg')}" type="image/svg+xml">
   <link rel="apple-touch-icon" href="${link(depth, 'assets/img/apple-touch-icon.png')}">
   <link rel="preload" href="${link(depth, 'assets/fonts/figtree-var-latin.woff2')}" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="${link(depth, 'assets/fonts/fraunces-600-latin.woff2')}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="${link(depth, 'assets/fonts/jakarta-var-latin.woff2')}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="${link(depth, 'assets/css/styles.css')}">
   <script>document.documentElement.classList.add('js')</script>
   <script id="site-config" type="application/json">${clientConfig()}</script>

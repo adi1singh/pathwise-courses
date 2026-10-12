@@ -1,14 +1,14 @@
 import { site } from '../data/site.js';
 import { html, icon, tbc } from '../templates/helpers.js';
-import { pageHero, sectionHead, ctaBand, checklist } from '../templates/components.js';
+import { pageHero, sectionHead, ctaBand, checklist, advisorPortrait } from '../templates/components.js';
 
 export default function about() {
   const d = 0;
   const p = site.advisor;
 
   const portrait = html`
-    <div class="about-portrait" aria-hidden="true">
-      <div class="portrait portrait--lg">${site.advisorPhoto ? `<img src="${site.advisorPhoto}" alt="" width="600" height="750">` : `<span class="portrait__initial">${site.advisor[0]}</span>`}</div>
+    <div class="about-portrait">
+      <div class="portrait portrait--lg">${advisorPortrait(d, { sizes: '300px', lazy: false })}</div>
       ${site.draft && !site.advisorPhoto ? '<p class="meet__photo-note">Add a friendly photo of Poonam</p>' : ''}
     </div>`;
 
