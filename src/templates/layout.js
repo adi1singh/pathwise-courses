@@ -105,7 +105,7 @@ const footer = (depth) => {
             <li><a href="${link(depth, 'privacy.html')}">Privacy</a></li>
             <li><a href="${link(depth, 'contact.html')}">Contact</a></li>
           </ul>
-          <a class="powered" href="https://jobgen.ai" rel="noopener">Powered by <strong>JobGen</strong></a>
+          <a class="powered" href="https://jobgen.ai" rel="noopener">Powered by <strong>jobgen.ai</strong></a>
         </div>
       </div>
     </div>
