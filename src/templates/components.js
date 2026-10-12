@@ -76,17 +76,18 @@ export const sectionHead = ({ eyebrow, title, lead, id, align = '' }) => html`
     ${lead && `<p class="lead">${lead}</p>`}
   </div>`;
 
-export const pageHero = ({ eyebrow, title, lead, crumbs = [], depth = 0, aside = '', actions = '' }) => html`
-  <section class="page-hero">
-    <div class="container page-hero__inner${aside ? ' page-hero__inner--split' : ''}">
-      <div>
+export const pageHero = ({ eyebrow, title, lead, crumbs = [], depth = 0, aside = '', actions = '', media = null, stats = [] }) => html`
+  <section class="page-hero${media ? ' page-hero--media' : ''}">
+    <div class="container page-hero__inner${aside || media ? ' page-hero__inner--split' : ''}">
+      <div class="page-hero__text">
         ${crumbs.length ? breadcrumbs(crumbs, depth) : ''}
-        ${eyebrow && `<p class="eyebrow">${eyebrow}</p>`}
+        ${eyebrow && `<p class="eyebrow eyebrow--on-dark">${eyebrow}</p>`}
         <h1>${title}</h1>
         ${lead && `<p class="lead">${lead}</p>`}
         ${actions && `<div class="btn-row">${actions}</div>`}
+        ${stats.length ? html`<ul class="hero-stats" role="list">${stats.map(([v, l]) => `<li><strong>${v}</strong><span>${l}</span></li>`)}</ul>` : ''}
       </div>
-      ${aside}
+      ${media ? html`<figure class="page-hero__media">${photo(media.file, depth, { alt: media.alt ?? '', sizes: '(min-width: 900px) 440px, 92vw', lazy: false })}${media.badge ? `<figcaption class="page-hero__badge">${media.badge}</figcaption>` : ''}</figure>` : aside}
     </div>
   </section>`;
 
