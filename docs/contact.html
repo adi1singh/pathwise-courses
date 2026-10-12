@@ -17,11 +17,11 @@
   <meta name="robots" content="noindex">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-  <link rel="preload" href="assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/figtree-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/fraunces-600-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/styles.css">
   <script>document.documentElement.classList.add('js')</script>
-  <script id="site-config" type="application/json">{"endpoint":"","extraFields":{},"draft":true,"phone":null,"email":null,"whatsapp":null}</script>
+  <script id="site-config" type="application/json">{"endpoint":"","extraFields":{},"draft":true,"advisor":"Poonam","phone":null,"email":null,"whatsapp":null}</script>
   <script src="assets/js/main.js" defer></script>
   
 </head>
@@ -29,7 +29,7 @@
   <a class="skip-link" href="#main">Skip to main content</a>
   <aside class="draft-banner" aria-label="Preview notice">
         <div class="container">
-          <strong>Preview site.</strong> Details marked <span class="tbc tbc--inline"><span aria-hidden="true">●</span> To confirm</span> are waiting on Poonam before launch, and the enquiry forms are not connected yet.
+          <strong>Preview.</strong> Details marked <span class="tbc tbc--inline"><span aria-hidden="true">●</span> To confirm</span> are waiting on Poonam, and online enquiries aren’t open yet.
         </div>
       </aside>
   
@@ -40,7 +40,7 @@
     <svg class="logo__mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
       <rect width="40" height="40" rx="12" fill="var(--primary)"/>
       <path d="M14 29V11h7.5a6 6 0 0 1 0 12H19" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-      <circle cx="14" cy="29.5" r="3.2" fill="var(--sun)"/>
+      <circle cx="14" cy="29.5" r="3.2" fill="var(--gold)"/>
     </svg>
     <span class="logo__text">Pathwise<span class="logo__sub">Courses</span></span>
   </a>
@@ -52,11 +52,10 @@
         </button>
         <div class="site-menu" id="site-menu" data-nav-menu>
           <ul class="site-menu__list" role="list">
-            <li><a href="courses.html">Courses</a></li><li><a href="ways-to-study.html">Ways to study</a></li><li><a href="short-courses.html">Short courses</a></li><li><a href="about.html">About Poonam</a></li><li><a href="faq.html">FAQ</a></li>
+            <li><a href="course-finder.html">Find my course</a></li><li><a href="courses.html">Courses</a></li><li><a href="ways-to-study.html">Ways to study</a></li><li><a href="short-courses.html">Short courses</a></li><li><a href="about.html">About Poonam</a></li>
           </ul>
           <div class="site-menu__cta">
-            <a class="btn btn--ghost" href="contact.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg> Talk to Poonam</a>
-            <a class="btn btn--primary" href="eligibility.html">Check eligibility</a>
+            <a class="btn btn--primary" href="contact.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg> Talk to Poonam</a>
           </div>
         </div>
       </nav>
@@ -77,7 +76,7 @@
   </nav>
         <p class="eyebrow">Contact</p>
         <h1>Talk to Poonam</h1>
-        <p class="lead">Ask a question, request a call back or tell us about your team’s training needs. However you get in touch, you’ll hear back from a real person.</p>
+        <p class="lead">Ask a question, request a call back or tell us about your team’s training needs. You’ll hear back from Poonam herself.</p>
         
       </div>
       
@@ -89,15 +88,16 @@
       <div class="card form-card">
         <h2 class="h3-size">Send an enquiry</h2>
         <p class="muted">Fields marked <span class="req" aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.</p>
-        <div class="notice notice--warn" role="note">
+        <div class="notice notice--warn form-unavailable" role="note">
         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg>
         <div>
-          <p><strong>Online forms are being set up.</strong> Until then, submitting this form will not send your details to Poonam – please use the phone, WhatsApp or email options instead.</p>
-          <p class="notice__dev">Site owner: add a form endpoint in <code>src/data/site.js</code> (<code>forms.endpoint</code>). See “Connecting the forms” in the README.</p>
+          <p><strong>Online enquiries aren’t open yet.</strong> This form can’t send messages at the moment, so it’s switched off for now.</p>
+          <p>Poonam’s phone, WhatsApp and email details will be added here soon.</p>
         </div>
       </div>
-        <noscript><div class="notice notice--warn"><p>This form needs JavaScript and isn’t connected yet. Please contact Poonam directly using the details on this page.</p></div></noscript>
-        <form class="form" data-form="contact" method="post" action="#" accept-charset="utf-8" data-subject="New enquiry from the Pathwise Courses website">
+        <form class="form" data-form="contact" data-unavailable method="post" action="#" accept-charset="utf-8" data-subject="New enquiry from the Pathwise Courses website">
+          <div class="selection" data-selection hidden></div><input type="hidden" name="finder_results" data-finder-field>
+          <fieldset class="form-lock" disabled><legend class="visually-hidden">This form is not available yet</legend>
           
   <div class="field" data-field>
     <label class="field__label" for="topic">What can we help with?<span class="req" aria-hidden="true">*</span></label>
@@ -192,7 +192,8 @@
     <p class="field__error" id="contact-consent-error" data-error></p>
   </div>
           <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
-          <button class="btn btn--primary btn--lg" type="submit" data-submit>Send enquiry <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <button class="btn btn--primary btn--lg" type="submit" data-submit>Online enquiries open soon</button>
+          </fieldset>
           <div class="form-status" data-form-status tabindex="-1" aria-live="polite"></div>
         </form>
       </div>
@@ -228,14 +229,18 @@
   </ul>
         </div>
         <div class="card card--soft">
+          <h2 class="h4">What happens next</h2>
+          <ol class="next-steps " role="list"><li>You send a few details: the course you’re curious about and how to reach you.</li><li>Poonam reviews them and contacts you the way you prefer.</li><li>You talk through your options. If you go ahead, she helps you enrol with the right training organisation.</li></ol>
+        </div>
+        <div class="card card--soft">
           <h2 class="h4"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Hours</h2>
           <p><span class="placeholder">Contact hours to be added</span><span class="tbc" title="Add Poonam’s contact hours"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: Add Poonam’s contact hours</span></span></p>
           <h2 class="h4"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> Where we help</h2>
           <p><span class="placeholder">Service area to be added</span><span class="tbc" title="Add where Poonam is based and which states she helps"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: Add where Poonam is based and which states she helps</span></span></p>
         </div>
-        <a class="side-link" href="eligibility.html">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>
-          <span><strong>Prefer a quick eligibility check?</strong><span>Answer a few questions in about 2 minutes</span></span>
+        <a class="side-link" href="course-finder.html">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg>
+          <span><strong>Not sure which course?</strong><span>Answer four quick questions</span></span>
           <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </aside>
@@ -253,7 +258,7 @@
     <svg class="logo__mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
       <rect width="40" height="40" rx="12" fill="var(--primary)"/>
       <path d="M14 29V11h7.5a6 6 0 0 1 0 12H19" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-      <circle cx="14" cy="29.5" r="3.2" fill="var(--sun)"/>
+      <circle cx="14" cy="29.5" r="3.2" fill="var(--gold)"/>
     </svg>
     <span class="logo__text">Pathwise<span class="logo__sub">Courses</span></span>
   </a>
@@ -263,8 +268,9 @@
         <div>
           <h2 class="site-footer__heading">Explore</h2>
           <ul role="list">
-            <li><a href="courses.html">Courses</a></li><li><a href="ways-to-study.html">Ways to study</a></li><li><a href="short-courses.html">Short courses</a></li><li><a href="about.html">About Poonam</a></li><li><a href="faq.html">FAQ</a></li>
-            <li><a href="eligibility.html">Free eligibility check</a></li>
+            <li><a href="course-finder.html">Find my course</a></li><li><a href="courses.html">Courses</a></li><li><a href="ways-to-study.html">Ways to study</a></li><li><a href="short-courses.html">Short courses</a></li><li><a href="about.html">About Poonam</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="eligibility.html">Eligibility check</a></li>
           </ul>
         </div>
 
@@ -298,6 +304,7 @@
             <li><a href="privacy.html">Privacy</a></li>
             <li><a href="contact.html">Contact</a></li>
           </ul>
+          <a class="powered" href="https://jobgen.ai" rel="noopener">Powered by <strong>JobGen</strong></a>
         </div>
       </div>
     </div>

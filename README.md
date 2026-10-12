@@ -10,15 +10,16 @@ short course), and make an enquiry or talk to Poonam.
 
 | Page | File | Purpose |
 | --- | --- | --- |
-| Home | `index.html` | Starting points by situation, browse by area, popular courses, how it works, meet Poonam |
-| Courses | `courses.html` | Search and filter by area, level and RPL; compare up to 3 courses side by side |
-| Course pages (16) | `course/*.html` | Key facts, who it suits, jobs, topics, pathways, placement, entry needs, FAQs |
-| Ways to study | `ways-to-study.html` | RPL vs online study vs short courses, a 3-question pathway check, RPL evidence checklist |
+| Home | `index.html` | Poonam's introduction, course finder entry, course areas, why Poonam, how it works, FAQs, enquiry invitation |
+| Find my course | `course-finder.html` | Four questions, one at a time, then suggested courses and pathways with reasons; answers can be edited |
+| Courses | `courses.html` | Ranked search (everyday words and job titles), area chips, a folding filter panel on mobile, removable filter chips, compare up to 3 |
+| Course pages (16) | `course/*.html` | At a glance (suits, study options, placement, entry, provider, fees), section links, full detail, FAQs |
+| Ways to study | `ways-to-study.html` | RPL vs online study vs short courses, RPL evidence checklist, link to the course finder |
 | Short courses | `short-courses.html` | 24 CPD short courses with topic and length filters, team training, first aid |
 | About Poonam | `about.html` | Story, services, what to expect, who does what |
 | FAQ | `faq.html` | Grouped questions with topic links |
-| Contact | `contact.html` | Enquiry / call-back form plus direct contact details |
-| Eligibility check | `eligibility.html` | Three-step eligibility form |
+| Contact | `contact.html` | Enquiry / call-back form, contact details, what happens next |
+| Ask about a course | `eligibility.html` | Three-step form; shows the course, pathway and finder answers the visitor arrived with |
 | Privacy | `privacy.html` | Draft privacy notice |
 
 ## Working on the site
@@ -37,13 +38,14 @@ generated from data, so most edits are in `src/data/`:
 
 | To change… | Edit |
 | --- | --- |
-| Contact details, business name, partner RTOs, form endpoint, draft mode | `src/data/site.js` |
-| Courses (text, durations, placement, entry needs, pathways) | `src/data/courses.js` |
+| Contact details, Poonam's photo, response time, testimonials, business name, partner RTOs, form endpoint, draft mode | `src/data/site.js` |
+| Courses (text, durations, placement, entry needs, pathways, fees, search keywords, area photos) | `src/data/courses.js` |
+| Course finder questions and which courses each interest suggests | `src/data/finder.js` |
 | Short courses | `src/data/short-courses.js` |
 | FAQs | `src/data/faqs.js` |
 | Page wording and layout | `src/pages/*.js` |
 | Header, footer and shared pieces | `src/templates/*.js` |
-| Styles / behaviour | `src/assets/css/styles.css`, `src/assets/js/main.js` |
+| Styles / behaviour | `src/assets/css/styles.css`, `src/assets/js/main.js`, `src/assets/js/finder.js` |
 
 Run `npm run build` after any change and commit the updated `docs/` folder along with your edits.
 
@@ -53,17 +55,39 @@ Run `npm run build` after any change and commit the updated `docs/` folder along
 to every detail Poonam still needs to confirm. It also adds `noindex` so search engines stay
 away. To find what's outstanding, search for `confirm` in `src/data/` and `tbc(` in `src/`.
 
-### Missing contact details
+### Missing details never become fake ones
 
-Phone, WhatsApp and email are `null` until Poonam supplies them. The site then shows "coming
-soon" text instead of a fake number, and leaves the link out.
+- **Phone, WhatsApp, email:** `null` until supplied. The site shows "coming soon" and leaves the
+  link out.
+- **Poonam's photo** (`advisorPhoto`): until set, the hero shows a designed placeholder with her
+  name. No stand-in face is used.
+- **Fees** (`fees` on each course): until set, course pages explain how to get a written quote.
+- **Training provider** (`partnerRtos` + `rto` on each course): until set, pages say the provider
+  is confirmed before enrolment.
+- **Response time** and **testimonials:** hidden until supplied.
+
+### How the course finder suggests courses
+
+`src/data/finder.js` maps each interest to a set of courses. The browser then uses only course
+data from `courses.js`: it skips levels the visitor already holds, prefers the next level up,
+favours leadership roles for "step up" goals, and suggests RPL when the visitor reports 3+ years'
+experience. Each suggestion lists the reasons that applied. There are no match scores, and
+results say that eligibility is confirmed by the training provider. Results appear before any
+contact details are asked for. The chosen course, pathway and answers carry into the enquiry form.
+
+### Search
+
+Course search ranks results. A title or keyword match counts for more than a word in the
+description, and everyday words map to course terms ("childcare", "nursing home", "teacher
+aide", "OH&S", "cert 3"). Add words people use to `keywords` on each course.
 
 ## Connecting the forms
 
-Both forms send a JSON `POST` to `forms.endpoint`. Until it is set, they validate as normal but
-tell the visitor that **nothing was sent**, and offer other contact options and a "Copy my
-answers" button. They never show a false success message. A failed or unreachable endpoint
-shows an error and the direct contact options.
+Both forms send a JSON `POST` to `forms.endpoint`. **Until it is set, both forms are shown
+switched off** with a short note that online enquiries aren't open yet, so nobody fills one in for
+nothing. Once connected, fields are validated with clear messages, success is shown only after
+the service accepts the submission (a 2xx response that isn't `{ success: false }`), and a
+failure keeps everything the visitor typed.
 
 **Formspree (simplest):**
 
@@ -101,18 +125,23 @@ and the social sharing image use it.
   and mobile widths
 - no horizontal scrolling at 320, 390, 768, 1024 and 1440px
 - mobile menu (open, Escape, focus return)
-- course filters, search and shareable URLs
-- compare (limit of three, dialog)
-- pathway check and evidence checklist
-- both forms: validation messages, focus handling, prefilled course links, the
-  "not connected" message, a successful submission and a failed one
+- no developer instructions on visitor-facing pages
+- search ranking (including "childcare" returning both early childhood qualifications first),
+  removable filter chips, the folding mobile filter panel and results on the first mobile screen
+- compare: limit of three, course names in the tray, table on desktop and stacked view on mobile
+- course finder: one question at a time, Back, results with reasons, editing an answer without
+  restarting, keyboard-only use, skipped questions, and carrying the choice into the enquiry form
+- course pages: at-a-glance details, section links, mobile enquiry bar
+- forms: switched off without a form service; on a test build with one connected, validation,
+  focus handling, success only when accepted, and a failure that keeps the visitor's answers
 
-Lighthouse (mobile) at the time of handover: Performance 98–99, Accessibility 100,
-Best Practices 100. SEO scores 66 only because of draft-mode `noindex`.
+Lighthouse (mobile), measured before and after the redesign on the same local server with
+compression: Performance 100, Accessibility 100, Best Practices 100 on every page measured.
+SEO shows 66 only because draft mode adds `noindex`; it scores 100 with `draft: false`.
 
 ## Notes
 
-- Fonts: Fraunces and Inter, self-hosted (SIL Open Font License).
+- Fonts: Fraunces (headings) and Figtree (text), self-hosted. Photo credits: [CREDITS.md](CREDITS.md).
 - `scripts/make-images.mjs` regenerates the social sharing image and the Apple touch icon.
 - No cookies or tracking. The compare list and evidence checklist use the visitor's own browser
   storage.

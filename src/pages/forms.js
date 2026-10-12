@@ -1,6 +1,6 @@
 import { site } from '../data/site.js';
 import { html, icon, esc, tbc } from '../templates/helpers.js';
-import { pageHero, contactOptions, formNotConnected, courseOptions, STATES } from '../templates/components.js';
+import { pageHero, contactOptions, formUnavailable, courseOptions, STATES, nextSteps } from '../templates/components.js';
 
 // ── Field helpers ───────────────────────────────────────────────────────────
 // Each field gets a hint and an error slot linked by aria-describedby. The
@@ -59,10 +59,14 @@ const honeypot = () => `<div class="hp" aria-hidden="true"><label>Leave this emp
 
 const statusArea = () => `<div class="form-status" data-form-status tabindex="-1" aria-live="polite"></div>`;
 
-const noscript = () =>
-  site.forms.endpoint
-    ? ''
-    : `<noscript><div class="notice notice--warn"><p>This form needs JavaScript and isn’t connected yet. Please contact ${esc(site.advisor)} directly using the details on this page.</p></div></noscript>`;
+// While no submission service is connected the whole form is disabled, so
+// nobody fills it in only to find it can't send.
+const lockOpen = () => (site.forms.endpoint ? '' : '<fieldset class="form-lock" disabled><legend class="visually-hidden">This form is not available yet</legend>');
+const lockClose = () => (site.forms.endpoint ? '' : '</fieldset>');
+
+// Filled in by the browser when someone arrives from the course finder or a
+// course page, so they can see what they're asking about.
+const selection = () => `<div class="selection" data-selection hidden></div><input type="hidden" name="finder_results" data-finder-field>`;
 
 const PREFERRED = [
   ['phone', `${icon('phone')} Phone call`],
@@ -71,7 +75,7 @@ const PREFERRED = [
 ];
 
 const formAttrs = (name) =>
-  `class="form" data-form="${name}" method="post" action="${esc(site.forms.endpoint || '#')}" accept-charset="utf-8"`;
+  `class="form" data-form="${name}"${site.forms.endpoint ? '' : ' data-unavailable'} method="post" action="${esc(site.forms.endpoint || '#')}" accept-charset="utf-8"`;
 
 // ── Contact page ────────────────────────────────────────────────────────────
 
@@ -81,7 +85,7 @@ export function contact() {
   ${pageHero({
     eyebrow: 'Contact',
     title: `Talk to ${site.advisor}`,
-    lead: 'Ask a question, request a call back or tell us about your team’s training needs. However you get in touch, you’ll hear back from a real person.',
+    lead: 'Ask a question, request a call back or tell us about your team’s training needs. You’ll hear back from Poonam herself.',
     crumbs: [{ label: 'Contact' }],
     depth: d,
   })}
@@ -91,9 +95,10 @@ export function contact() {
       <div class="card form-card">
         <h2 class="h3-size">Send an enquiry</h2>
         <p class="muted">Fields marked <span class="req" aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.</p>
-        ${formNotConnected()}
-        ${noscript()}
+        ${formUnavailable()}
         <form ${formAttrs('contact')} data-subject="New enquiry from the ${esc(site.name)} website">
+          ${selection()}
+          ${lockOpen()}
           ${select({
             id: 'topic', label: 'What can we help with?', required: true, msg: 'Please choose what your enquiry is about.',
             options: `<option value="">Choose one</option>
@@ -120,7 +125,8 @@ export function contact() {
           ${textarea({ id: 'message', label: 'Your message', optional: true, hint: 'Tell us a little about your experience or what you’d like to know.' })}
           ${consent('contact-consent')}
           ${honeypot()}
-          <button class="btn btn--primary btn--lg" type="submit" data-submit>Send enquiry ${icon('arrow-right')}</button>
+          <button class="btn btn--primary btn--lg" type="submit" data-submit>${site.forms.endpoint ? `Send enquiry ${icon('arrow-right')}` : 'Online enquiries open soon'}</button>
+          ${lockClose()}
           ${statusArea()}
         </form>
       </div>
@@ -131,14 +137,18 @@ export function contact() {
           ${contactOptions()}
         </div>
         <div class="card card--soft">
+          <h2 class="h4">What happens next</h2>
+          ${nextSteps()}
+        </div>
+        <div class="card card--soft">
           <h2 class="h4">${icon('clock')} Hours</h2>
           <p>${site.contact.hours ? esc(site.contact.hours) : `<span class="placeholder">Contact hours to be added</span>${tbc('Add Poonam’s contact hours')}`}</p>
           <h2 class="h4">${icon('pin')} Where we help</h2>
           <p>${site.contact.serviceArea ? esc(site.contact.serviceArea) : `<span class="placeholder">Service area to be added</span>${tbc('Add where Poonam is based and which states she helps')}`}</p>
         </div>
-        <a class="side-link" href="eligibility.html">
-          ${icon('shield')}
-          <span><strong>Prefer a quick eligibility check?</strong><span>Answer a few questions in about 2 minutes</span></span>
+        <a class="side-link" href="course-finder.html">
+          ${icon('compass')}
+          <span><strong>Not sure which course?</strong><span>Answer four quick questions</span></span>
           ${icon('arrow-right', 'icon--sm')}
         </a>
       </aside>
@@ -168,9 +178,9 @@ export function eligibility() {
 
   const body = html`
   ${pageHero({
-    eyebrow: 'Free eligibility check',
-    title: 'See if you’re eligible',
-    lead: `Answer a few quick questions – it takes about two minutes. ${site.advisor} will review your answers and get in touch to talk through your options. Free, with no obligation to enrol.`,
+    eyebrow: 'Eligibility check',
+    title: 'Ask about a course',
+    lead: `Answer a few quick questions, in about two minutes, so ${site.advisor} can check the entry requirements and talk you through your options.`,
     crumbs: [{ label: 'Eligibility check' }],
     depth: d,
   })}
@@ -178,9 +188,10 @@ export function eligibility() {
   <section class="section section--tight">
     <div class="container elig-layout">
       <div class="card form-card">
-        ${formNotConnected()}
-        ${noscript()}
+        ${formUnavailable()}
         <form ${formAttrs('eligibility')} data-steps data-subject="New eligibility check from the ${esc(site.name)} website">
+          ${selection()}
+          ${lockOpen()}
           <ol class="stepper" role="list" data-stepper aria-label="Progress">
             <li class="stepper__item is-current" aria-current="step"><span>1</span> Your goal</li>
             <li class="stepper__item"><span>2</span> Experience</li>
@@ -236,20 +247,18 @@ export function eligibility() {
           <div class="form-nav">
             <button class="btn btn--secondary" type="button" data-step-back hidden>${icon('arrow-left')} Back</button>
             <button class="btn btn--primary btn--lg" type="button" data-step-next hidden>Next ${icon('arrow-right')}</button>
-            <button class="btn btn--primary btn--lg" type="submit" data-submit>Send my eligibility check ${icon('arrow-right')}</button>
+            <button class="btn btn--primary btn--lg" type="submit" data-submit>${site.forms.endpoint ? `Send to ${site.advisor} ${icon('arrow-right')}` : 'Online enquiries open soon'}</button>
           </div>
+          ${lockClose()}
           ${statusArea()}
         </form>
       </div>
 
       <aside class="elig-side" aria-label="About the eligibility check">
         <div class="card card--soft">
-          <h2 class="h4">What happens next?</h2>
-          <ol class="mini-steps" role="list">
-            <li><span>1</span>${site.advisor} reviews your answers.</li>
-            <li><span>2</span>She contacts you the way you prefer to talk through options.</li>
-            <li><span>3</span>If you decide to go ahead, she helps you enrol with the right training organisation.</li>
-          </ol>
+          <h2 class="h4">What happens next</h2>
+          ${nextSteps()}
+          <p class="small muted">Eligibility is confirmed by the training provider after assessing your experience and documents.</p>
         </div>
         <div class="card">
           <h2 class="h4">Rather talk now?</h2>
@@ -262,9 +271,9 @@ export function eligibility() {
 
   return {
     path: 'eligibility.html',
-    title: 'Free eligibility check',
+    title: 'Ask about a course',
     active: 'eligibility',
-    description: `Find out if you're eligible for a nationally recognised course or RPL. Answer a few quick questions and ${site.advisor} will be in touch – free, with no obligation.`,
+    description: `Answer a few quick questions so ${site.advisor} can check entry requirements for a nationally recognised course or RPL and talk you through your options.`,
     body,
   };
 }

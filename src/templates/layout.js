@@ -3,11 +3,11 @@ import { courses } from '../data/courses.js';
 import { esc, html, link, icon, contactLinks, placeholder, tbc } from './helpers.js';
 
 export const NAV = [
+  { id: 'finder', label: 'Find my course', href: 'course-finder.html' },
   { id: 'courses', label: 'Courses', href: 'courses.html' },
   { id: 'ways', label: 'Ways to study', href: 'ways-to-study.html' },
   { id: 'short', label: 'Short courses', href: 'short-courses.html' },
   { id: 'about', label: 'About Poonam', href: 'about.html' },
-  { id: 'faq', label: 'FAQ', href: 'faq.html' },
 ];
 
 const logo = (depth) => html`
@@ -15,7 +15,7 @@ const logo = (depth) => html`
     <svg class="logo__mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
       <rect width="40" height="40" rx="12" fill="var(--primary)"/>
       <path d="M14 29V11h7.5a6 6 0 0 1 0 12H19" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-      <circle cx="14" cy="29.5" r="3.2" fill="var(--sun)"/>
+      <circle cx="14" cy="29.5" r="3.2" fill="var(--gold)"/>
     </svg>
     <span class="logo__text">Pathwise<span class="logo__sub">Courses</span></span>
   </a>`;
@@ -37,8 +37,7 @@ const header = (depth, active) => html`
             )}
           </ul>
           <div class="site-menu__cta">
-            <a class="btn btn--ghost" href="${link(depth, 'contact.html')}"${active === 'contact' ? ' aria-current="page"' : ''}>${icon('chat')} Talk to Poonam</a>
-            <a class="btn btn--primary" href="${link(depth, 'eligibility.html')}"${active === 'eligibility' ? ' aria-current="page"' : ''}>Check eligibility</a>
+            <a class="btn btn--primary" href="${link(depth, 'contact.html')}"${active === 'contact' ? ' aria-current="page"' : ''}>${icon('chat')} Talk to ${site.advisor}</a>
           </div>
         </div>
       </nav>
@@ -49,7 +48,7 @@ const draftBanner = () =>
   site.draft
     ? html`<aside class="draft-banner" aria-label="Preview notice">
         <div class="container">
-          <strong>Preview site.</strong> Details marked <span class="tbc tbc--inline"><span aria-hidden="true">●</span> To confirm</span> are waiting on Poonam before launch, and the enquiry forms are not connected yet.
+          <strong>Preview.</strong> Details marked <span class="tbc tbc--inline"><span aria-hidden="true">●</span> To confirm</span> are waiting on Poonam, and online enquiries aren’t open yet.
         </div>
       </aside>`
     : '';
@@ -71,7 +70,8 @@ const footer = (depth) => {
           <h2 class="site-footer__heading">Explore</h2>
           <ul role="list">
             ${NAV.map((item) => `<li><a href="${link(depth, item.href)}">${item.label}</a></li>`)}
-            <li><a href="${link(depth, 'eligibility.html')}">Free eligibility check</a></li>
+            <li><a href="${link(depth, 'faq.html')}">FAQ</a></li>
+            <li><a href="${link(depth, 'eligibility.html')}">Eligibility check</a></li>
           </ul>
         </div>
 
@@ -105,6 +105,7 @@ const footer = (depth) => {
             <li><a href="${link(depth, 'privacy.html')}">Privacy</a></li>
             <li><a href="${link(depth, 'contact.html')}">Contact</a></li>
           </ul>
+          <a class="powered" href="https://jobgen.ai" rel="noopener">Powered by <strong>JobGen</strong></a>
         </div>
       </div>
     </div>
@@ -117,6 +118,7 @@ const clientConfig = () =>
     endpoint: site.forms.endpoint || '',
     extraFields: site.forms.extraFields || {},
     draft: site.draft,
+    advisor: site.advisor,
     phone: site.contact.phone,
     email: site.contact.email,
     whatsapp: site.contact.whatsapp,
@@ -144,7 +146,7 @@ export const layout = ({ title, description, path, depth = 0, active = '', body,
   ${site.draft ? '<meta name="robots" content="noindex">' : ''}
   <link rel="icon" href="${link(depth, 'assets/img/favicon.svg')}" type="image/svg+xml">
   <link rel="apple-touch-icon" href="${link(depth, 'assets/img/apple-touch-icon.png')}">
-  <link rel="preload" href="${link(depth, 'assets/fonts/inter-var-latin.woff2')}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="${link(depth, 'assets/fonts/figtree-var-latin.woff2')}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="${link(depth, 'assets/fonts/fraunces-600-latin.woff2')}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="${link(depth, 'assets/css/styles.css')}">
   <script>document.documentElement.classList.add('js')</script>

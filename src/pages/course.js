@@ -1,7 +1,7 @@
 import { site } from '../data/site.js';
 import { courses, courseByCode, sectorById, levelById, pathways } from '../data/courses.js';
 import { html, link, icon, esc, tbc, tgaUrl } from '../templates/helpers.js';
-import { breadcrumbs, sectorChip, courseCard, checklist, faqList, contactOptions } from '../templates/components.js';
+import { breadcrumbs, sectorChip, courseCard, checklist, faqList, contactOptions, advisorAvatar } from '../templates/components.js';
 
 const rtoBlock = (c) => {
   const rto = c.rto && site.partnerRtos.find((r) => r.id === c.rto);
@@ -53,38 +53,59 @@ export default function coursePage(c) {
   const next = c.next.map((code) => courseByCode[code]).filter(Boolean);
   const confirm = (key) => (c.confirm?.includes(key) ? tbc('Typical figure – confirm with the delivering RTO') : '');
 
-  const facts = [
-    { label: 'Level', value: level, ic: 'award' },
-    c.unit
-      ? { label: 'Format', value: c.duration.study, ic: 'laptop', key: 'duration' }
-      : { label: 'Study online', value: `${c.duration.study} (typical)`, ic: 'laptop', key: 'duration' },
-    c.pathways.includes('rpl') ? { label: 'Through RPL', value: c.duration.rpl, ic: 'briefcase', key: 'duration' } : null,
-    { label: c.unit ? 'Practical' : 'Work placement', value: c.placement.required ? 'Required' : c.unit ? 'Practical assessment' : 'Not required', ic: 'users', key: 'placement' },
-  ].filter(Boolean);
+  const rto = c.rto && site.partnerRtos.find((r) => r.id === c.rto);
+  const studyLine = c.unit
+    ? `${c.duration.study}`
+    : [c.pathways.includes('rpl') ? `RPL: ${c.duration.rpl.replace(/^Often /, '')}` : '', `Online study: ${c.duration.study}`].filter(Boolean).join(' · ');
+
+  const glance = [
+    { id: 'suits', ic: 'user', label: 'Who it suits', value: esc(c.suits[0]) },
+    { id: 'study', ic: 'laptop', label: 'Study options', value: `${esc(studyLine)} ${confirm('duration')}` },
+    { id: 'placement', ic: 'briefcase', label: c.unit ? 'Practical' : 'Work placement', value: `${esc(c.placement.required ? c.placement.detail : c.unit ? 'In-person practical assessment' : 'Not required')} ${confirm('placement')}` },
+    { id: 'entry', ic: 'file', label: 'Entry requirements', value: `${esc(c.entry.length)} things you’ll need, including a USI ${confirm('entry')}` },
+    { id: 'provider', ic: 'building', label: 'Training provider', value: rto ? `${esc(rto.name)} (RTO ${esc(rto.code)})` : `Confirmed before you enrol ${tbc('Add the delivering RTO for this course')}` },
+    { id: 'provider', ic: 'coins', label: 'Fees', value: c.fees ? esc(c.fees) : `Ask ${site.advisor} for a written quote ${tbc('Add verified fees, or keep “ask for a quote”')}` },
+  ];
+
+  const sections = [
+    ['about', 'About'],
+    ['suits', 'Who it suits'],
+    ['study', 'Study options'],
+    ['placement', c.unit ? 'Practical' : 'Placement'],
+    ['entry', 'Entry requirements'],
+    ['provider', 'Provider & fees'],
+    ['topics', 'What you’ll cover'],
+    ['course-faq', 'FAQs'],
+  ];
 
   const body = html`
   <section class="page-hero page-hero--course">
     <div class="container">
       ${breadcrumbs([{ label: 'Courses', href: 'courses.html' }, { label: c.title }], d)}
-      <div class="course-hero">
-        <div class="course-hero__text">
-          <div class="course-hero__tags">
-            ${sectorChip(c.sector)}
-            <span class="code-badge">${c.code}</span>
-            ${confirm('code') && `<span>${confirm('code')}</span>`}
-          </div>
-          <h1>${esc(c.title)}</h1>
-          <p class="lead">${esc(c.summary)}</p>
-          <div class="btn-row">
-            <a class="btn btn--primary btn--lg" href="${link(d, `eligibility.html${q}`)}">Check my eligibility ${icon('arrow-right')}</a>
-            <a class="btn btn--secondary btn--lg" href="${link(d, `contact.html${q}`)}">${icon('chat')} Ask a question</a>
-          </div>
-        </div>
-        <dl class="facts">
-          ${facts.map(
-            (f) => html`<div class="fact">
-              <dt>${icon(f.ic)} ${f.label}</dt>
-              <dd>${esc(f.value)} ${f.key ? confirm(f.key) : ''}</dd>
+      <div class="course-hero__tags">
+        ${sectorChip(c.sector)}
+        <span class="course-hero__level">${level}</span>
+        <span class="code-badge">${c.code}</span>
+        ${confirm('code') && `<span>${confirm('code')}</span>`}
+      </div>
+      <h1>${esc(c.title)}</h1>
+      <p class="lead">${esc(c.summary)}</p>
+      <div class="btn-row">
+        <a class="btn btn--primary btn--lg" href="${link(d, `eligibility.html${q}`)}">Ask ${site.advisor} about this course ${icon('arrow-right')}</a>
+        <a class="btn btn--secondary btn--lg" href="${link(d, 'course-finder.html')}">Not sure? Find my course</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="glance-wrap" aria-labelledby="glance-title">
+    <div class="container">
+      <div class="glance">
+        <h2 class="glance__title" id="glance-title">At a glance</h2>
+        <dl class="glance__grid">
+          ${glance.map(
+            (g) => html`<div class="glance__item">
+              <dt>${icon(g.ic)} ${g.label}</dt>
+              <dd>${g.value} <a class="glance__more" href="#${g.id}">Details<span class="visually-hidden"> about ${g.label.toLowerCase()}</span></a></dd>
             </div>`
           )}
         </dl>
@@ -94,44 +115,39 @@ export default function coursePage(c) {
 
   <div class="container course-layout">
     <div class="course-main">
-      <section class="prose-section" aria-labelledby="about-course">
-        <h2 id="about-course">About this course</h2>
+      <nav class="on-page" aria-label="On this page">
+        <p class="on-page__title">On this page</p>
+        <ul role="list">${sections.map(([id, label]) => `<li><a href="#${id}">${label}</a></li>`).join('')}</ul>
+      </nav>
+
+      <section class="prose-section" aria-labelledby="about">
+        <h2 id="about">About this course</h2>
         <p>${esc(c.intro)}</p>
       </section>
 
       <section class="prose-section" aria-labelledby="suits">
-        <h2 id="suits">Is it right for you?</h2>
-        <p>This course is a good fit for:</p>
+        <h2 id="suits">Who it suits</h2>
         ${checklist(c.suits)}
-      </section>
-
-      <section class="prose-section" aria-labelledby="roles">
-        <h2 id="roles">${c.unit ? 'Who needs it' : 'Jobs it can lead to'}</h2>
+        <h3 class="prose-section__sub">${c.unit ? 'Often required for' : 'Jobs it can lead to'}</h3>
         <ul class="tag-list" role="list">${c.roles.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>
         ${!c.unit ? '<p class="small muted">Job titles vary between employers and states. Some roles also need experience or extra checks.</p>' : ''}
       </section>
 
-      <section class="prose-section" aria-labelledby="topics">
-        <h2 id="topics">What you’ll cover</h2>
-        <ul class="topic-grid" role="list">
-          ${c.topics.map((t) => `<li>${icon('book')}<span>${esc(t)}</span></li>`)}
-        </ul>
-        <p class="small muted">The exact units depend on the electives the training provider offers. The full list of units for ${c.code} is on <a href="${tgaUrl(c.code)}" rel="noopener">training.gov.au ${icon('external', 'icon--sm')}</a>.</p>
-      </section>
-
-      <section class="prose-section" aria-labelledby="ways">
-        <h2 id="ways">Ways to get this ${c.unit ? 'certificate' : 'qualification'}</h2>
+      <section class="prose-section" aria-labelledby="study">
+        <h2 id="study">Study options and commitment ${confirm('duration')}</h2>
         <div class="grid grid--2">
           ${c.pathways.includes('rpl') ? html`
           <div class="way-card">
             <h3>${icon('briefcase')} ${pathways.rpl}</h3>
-            <p>For people with relevant experience. Show what you already know, then fill any gaps. Typical timeframe: <strong>${esc(c.duration.rpl)}</strong>, depending on your evidence.</p>
+            <p class="way-card__time">Typically ${esc(c.duration.rpl.replace(/^Often /, ''))}</p>
+            <p>For people with relevant experience. You show what you already know, then fill any gaps. Timing depends mostly on how quickly you gather evidence.</p>
             <a class="link-arrow" href="${link(d, 'ways-to-study.html#rpl')}">How RPL works ${icon('arrow-right')}</a>
           </div>` : ''}
           ${c.pathways.includes('online') ? html`
           <div class="way-card">
             <h3>${icon('laptop')} ${pathways.online}</h3>
-            <p>Learn the full course at your own pace with trainer support. Typical timeframe: <strong>${esc(c.duration.study)}</strong>.</p>
+            <p class="way-card__time">Typically ${esc(c.duration.study)}</p>
+            <p>Learn the full course at your own pace with trainer support. Most people studying alongside work plan for around 8–15 hours a week.</p>
             <a class="link-arrow" href="${link(d, 'ways-to-study.html#online')}">How online study works ${icon('arrow-right')}</a>
           </div>` : ''}
           ${c.pathways.includes('practical') ? html`
@@ -148,14 +164,34 @@ export default function coursePage(c) {
       </section>
 
       <section class="prose-section" aria-labelledby="entry">
-        <h2 id="entry">What you’ll need ${confirm('entry')}</h2>
+        <h2 id="entry">Entry requirements ${confirm('entry')}</h2>
         ${checklist(c.entry)}
-        <p class="small muted">Entry requirements are set by the training provider. ${site.advisor} will check them with you before you enrol.</p>
+        <p class="small muted">Entry requirements are set by the training provider. ${site.advisor} checks them with you before you enrol.</p>
       </section>
 
-      <section class="prose-section" aria-labelledby="rto">
-        <h2 id="rto">Who delivers this course</h2>
-        ${rtoBlock(c)}
+      <section class="prose-section" aria-labelledby="provider">
+        <h2 id="provider">Training provider and fees</h2>
+        <div class="provider-fees">
+          <div>
+            <h3 class="prose-section__sub">${icon('building')} Who delivers it</h3>
+            ${rtoBlock(c)}
+          </div>
+          <div>
+            <h3 class="prose-section__sub">${icon('coins')} What it costs</h3>
+            ${c.fees
+              ? `<p><strong>${esc(c.fees)}</strong></p>`
+              : html`<p>Fees depend on the training provider and on whether you use RPL or study the full course. ${site.advisor} will get you a written quote that shows the full cost, including any extra fees, before you decide. ${tbc('Add verified fees, or keep “ask for a quote”')}</p>
+                <a class="link-arrow" href="${link(d, `contact.html?topic=course&course=${encodeURIComponent(c.code)}`)}">Ask for a quote ${icon('arrow-right')}</a>`}
+          </div>
+        </div>
+      </section>
+
+      <section class="prose-section" aria-labelledby="topics">
+        <h2 id="topics">What you’ll cover</h2>
+        <ul class="topic-grid" role="list">
+          ${c.topics.map((t) => `<li>${icon('book')}<span>${esc(t)}</span></li>`)}
+        </ul>
+        <p class="small muted">The exact units depend on the electives the training provider offers. The full list of units for ${c.code} is on <a href="${tgaUrl(c.code)}" rel="noopener">training.gov.au ${icon('external', 'icon--sm')}</a>.</p>
       </section>
 
       ${next.length ? html`
@@ -174,10 +210,11 @@ export default function coursePage(c) {
 
     <aside class="course-side" aria-label="Enquire about this course">
       <div class="side-card">
+        <span class="avatar" aria-hidden="true">${advisorAvatar(d)}</span>
         <h2 class="side-card__title">Talk to ${site.advisor} about this course</h2>
         <p>Get a straight answer on whether it suits you, how long it would take and what it costs.</p>
-        <a class="btn btn--primary btn--block" href="${link(d, `eligibility.html${q}`)}">Check my eligibility</a>
-        <a class="btn btn--secondary btn--block" href="${link(d, `contact.html${q}`)}">Ask a question</a>
+        <a class="btn btn--primary btn--block" href="${link(d, `eligibility.html${q}`)}">Ask about this course</a>
+        <a class="btn btn--secondary btn--block" href="${link(d, `contact.html${q}`)}">Send a quick question</a>
         <div class="side-card__contact">${contactOptions()}</div>
       </div>
       <a class="side-link" href="${tgaUrl(c.code)}" rel="noopener">
@@ -197,8 +234,8 @@ export default function coursePage(c) {
   </section>` : ''}
 
   <div class="mobile-cta" data-mobile-cta>
-    <a class="btn btn--primary btn--block" href="${link(d, `eligibility.html${q}`)}">Check my eligibility</a>
-    <a class="btn btn--secondary" href="${link(d, `contact.html${q}`)}" aria-label="Ask Poonam a question about this course">${icon('chat')}</a>
+    <a class="btn btn--primary btn--block" href="${link(d, `eligibility.html${q}`)}">Ask ${site.advisor} about this course</a>
+    <a class="btn btn--secondary mobile-cta__icon" href="${link(d, `contact.html${q}`)}" aria-label="Send ${site.advisor} a quick question about this course">${icon('chat')}</a>
   </div>
   `;
 

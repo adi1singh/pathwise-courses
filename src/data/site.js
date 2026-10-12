@@ -22,6 +22,20 @@ export const site = {
     hours: null, // e.g. 'Mon–Fri 9am–6pm, Sat 10am–2pm (AEST)'
   },
 
+  // Poonam's portrait, e.g. 'assets/img/poonam.jpg' (a square or 4:5 photo,
+  // at least 800px wide). Until one is supplied the site shows a designed
+  // placeholder composition instead – never a stand-in face.
+  advisorPhoto: null,
+
+  // How quickly Poonam replies to enquiries, e.g. 'within one business day'.
+  // Only shown once she confirms she can meet it.
+  responseTime: null,
+
+  // Approved testimonials only, with the person's permission, e.g.
+  // { quote: '…', name: 'Priya', detail: 'Certificate III in Individual Support, 2026' }
+  // The testimonials section stays hidden while this list is empty.
+  testimonials: [],
+
   business: {
     legalName: null, // e.g. 'Pathwise Courses Pty Ltd'
     abn: null,

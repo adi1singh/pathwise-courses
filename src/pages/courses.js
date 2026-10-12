@@ -1,6 +1,6 @@
 import { courses, sectors, levels, levelById, sectorById, pathways } from '../data/courses.js';
 import { html, icon, esc } from '../templates/helpers.js';
-import { courseCard, pageHero, ctaBand } from '../templates/components.js';
+import { courseCard, breadcrumbs, ctaBand } from '../templates/components.js';
 
 // Data the compare dialog needs, embedded so the page works without extra requests.
 const compareData = () =>
@@ -11,6 +11,7 @@ const compareData = () =>
         {
           code: c.code,
           title: c.title,
+          short: `${c.short ?? c.title} (${levelById[c.level].name})`,
           href: `course/${c.slug}.html`,
           sector: sectorById[c.sector].name,
           level: levelById[c.level].name,
@@ -31,32 +32,37 @@ export default function coursesPage() {
   const unitCount = courses.length - qualCount;
 
   const body = html`
-  ${pageHero({
-    eyebrow: `${qualCount} qualifications · ${unitCount} first aid units`,
-    title: 'Find your course',
-    lead: 'Filter by area or level, then compare up to three courses side by side. Every course can be discussed with Poonam before you decide.',
-    crumbs: [{ label: 'Courses' }],
-    depth: d,
-  })}
-
-  <section class="section section--tight">
+  <section class="page-hero page-hero--compact">
     <div class="container">
-      <form class="filters" data-filters="courses" role="search" aria-label="Filter courses" onsubmit="return false">
-        <div class="filters__search">
-          <label for="course-search" class="visually-hidden">Search courses</label>
-          ${icon('search')}
-          <input id="course-search" type="search" name="q" placeholder="Search by job, course name or code" autocomplete="off" data-filter-search>
+      ${breadcrumbs([{ label: 'Courses' }], d)}
+      <h1>Courses</h1>
+      <p class="lead">${qualCount} qualifications and ${unitCount} first aid units. Search, filter, then compare up to three side by side.</p>
+    </div>
+  </section>
+
+  <section class="section section--catalogue">
+    <div class="container">
+      <form class="filters" data-filters="courses" role="search" aria-label="Search and filter courses" onsubmit="return false">
+        <div class="filters__top">
+          <div class="filters__search">
+            <label for="course-search" class="visually-hidden">Search courses</label>
+            ${icon('search')}
+            <input id="course-search" type="search" name="q" placeholder="Search, e.g. childcare" autocomplete="off" enterkeyhint="search" data-filter-search>
+          </div>
+          <button type="button" class="btn btn--secondary filters__toggle" aria-expanded="false" aria-controls="more-filters" data-filters-toggle>
+            ${icon('sliders')} Filters <span class="filters__badge" data-filters-badge hidden></span>
+          </button>
         </div>
 
-        <fieldset class="filters__group">
-          <legend class="filters__legend">Area</legend>
-          <div class="chip-row" data-filter-chips="sector">
-            <button type="button" class="filter-chip" aria-pressed="true" data-value="">All areas</button>
-            ${sectors.map((s) => `<button type="button" class="filter-chip" aria-pressed="false" data-value="${s.id}">${icon(s.icon)}${esc(s.short)}</button>`)}
+        <div class="filters__group" role="group" aria-labelledby="area-label">
+          <p class="filters__legend" id="area-label">Area</p>
+          <div class="chip-row chip-row--scroll" data-filter-chips="sector">
+            <button type="button" class="filter-chip" aria-pressed="true" data-value="">All</button>
+            ${sectors.map((s) => `<button type="button" class="filter-chip" aria-pressed="false" data-value="${s.id}" data-label="${esc(s.name)}">${icon(s.icon)}${esc(s.short)}</button>`)}
           </div>
-        </fieldset>
+        </div>
 
-        <div class="filters__row">
+        <div class="filters__more" id="more-filters" data-filters-more>
           <div class="filters__field">
             <label for="level-filter" class="filters__legend">Level</label>
             <select id="level-filter" data-filter-select="level">
@@ -65,47 +71,56 @@ export default function coursesPage() {
             </select>
           </div>
           <label class="switch">
-            <input type="checkbox" data-filter-toggle="rpl">
+            <input type="checkbox" data-filter-toggle="rpl" data-label="RPL available">
             <span class="switch__track" aria-hidden="true"></span>
-            <span>RPL available</span>
+            <span>Only show courses with RPL</span>
           </label>
-          <button type="button" class="btn btn--text" data-filter-reset hidden>${icon('x')} Clear filters</button>
         </div>
       </form>
 
-      <h2 class="visually-hidden">Course list</h2>
-      <p class="results-count" data-results-count aria-live="polite">Showing all ${courses.length} courses</p>
+      <div class="results-bar">
+        <p class="results-count" data-results-count aria-live="polite">Showing all ${courses.length} courses</p>
+        <div class="active-filters" data-active-filters hidden>
+          <ul class="active-filters__list" role="list" data-active-list aria-label="Active filters"></ul>
+          <button type="button" class="btn btn--text btn--sm" data-filter-reset>Clear all</button>
+        </div>
+      </div>
 
+      <h2 class="visually-hidden">Course list</h2>
       <div class="course-grid" data-results>
         ${courses.map((c) => courseCard(c, d, { compare: true }))}
       </div>
 
       <div class="empty-state" data-empty hidden>
-        <h2>No courses match those filters</h2>
-        <p>Try removing a filter – or ask Poonam. If the course you want isn’t listed, she may still be able to help.</p>
+        <h2 class="h3-size">No courses match <span data-empty-query></span></h2>
+        <p>Try a different word, or one of these:</p>
+        <ul class="suggest-list" role="list">
+          ${['aged care', 'childcare', 'disability', 'teacher aide', 'trainer', 'first aid', 'manager', 'builder'].map((t) => `<li><button type="button" class="pill-option pill-option--light" data-suggest="${t}">${t}</button></li>`)}
+        </ul>
         <div class="btn-row btn-row--center">
-          <button type="button" class="btn btn--secondary" data-filter-reset>Clear filters</button>
-          <a class="btn btn--primary" href="contact.html">Ask Poonam</a>
+          <button type="button" class="btn btn--secondary" data-filter-reset>Show all courses</button>
+          <a class="btn btn--primary" href="course-finder.html">Use the course finder</a>
         </div>
+        <p class="small muted">Looking for something we don’t list? <a href="contact.html">Ask Poonam</a> – she may still be able to help.</p>
       </div>
 
       <div class="hint-card">
         ${icon('compass')}
         <div>
-          <h2 class="hint-card__title">Not sure which pathway suits you?</h2>
-          <p>Answer three quick questions to see whether RPL, online study or a short course is the best fit.</p>
+          <h2 class="hint-card__title">Not sure where to start?</h2>
+          <p>Answer four quick questions and see suggested courses, with reasons, before sharing any details.</p>
         </div>
-        <a class="btn btn--secondary" href="ways-to-study.html#quiz">Take the pathway check</a>
+        <a class="btn btn--primary" href="course-finder.html">Find my course</a>
       </div>
     </div>
   </section>
 
   <div class="compare-tray" data-compare-tray hidden>
     <div class="container compare-tray__inner">
-      <p class="compare-tray__label"><strong data-compare-count>0</strong> of 3 selected</p>
-      <ul class="compare-tray__list" role="list" data-compare-list></ul>
+      <p class="compare-tray__label"><strong data-compare-count>0</strong> of 3 selected <span class="compare-tray__hint" data-compare-hint hidden>· choose one more to compare</span></p>
+      <ul class="compare-tray__list" role="list" data-compare-list aria-label="Courses to compare"></ul>
       <div class="compare-tray__actions">
-        <button type="button" class="btn btn--text" data-compare-clear>Clear</button>
+        <button type="button" class="btn btn--text" data-compare-clear>Clear<span class="visually-hidden"> comparison</span></button>
         <button type="button" class="btn btn--primary" data-compare-open>${icon('compare')} Compare</button>
       </div>
     </div>
@@ -121,12 +136,12 @@ export default function coursesPage() {
   </dialog>
   <script id="compare-data" type="application/json">${compareData()}</script>
 
-  ${ctaBand(d, { title: 'Can’t decide between two courses?', text: 'Poonam can talk you through the differences in job options, study time and entry requirements – usually in about 15 minutes.' })}
+  ${ctaBand(d, { title: 'Can’t decide between courses?', text: 'Poonam can talk you through the differences in job options, study time and entry requirements.' })}
   `;
 
   return {
     path: 'courses.html',
-    title: 'Find your course',
+    title: 'Courses',
     active: 'courses',
     description: 'Browse and compare nationally recognised courses in community care, disability, aged care, early childhood, training and assessment, leadership, WHS, building and first aid.',
     bodyClass: 'has-compare',

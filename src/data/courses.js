@@ -9,6 +9,7 @@
 export const sectors = [
   {
     id: 'care',
+    image: { file: 'care', alt: 'A support worker helping two older people with an activity', credit: 'Age Cymru', url: 'https://unsplash.com/photos/caregiver-assisting-elderly-couple-with-coloring-bSXk1lOp8T0' },
     name: 'Community & care',
     short: 'Care',
     blurb: 'Aged care, disability support, community services and counselling.',
@@ -16,6 +17,7 @@ export const sectors = [
   },
   {
     id: 'education',
+    image: { file: 'education', alt: 'Educators and young children playing in a bright room', credit: 'Rewired Digital', url: 'https://unsplash.com/photos/children-playing-with-toys-in-a-bright-room-4UFIg9htJgE' },
     name: 'Early childhood & education',
     short: 'Education',
     blurb: 'Childcare, school support and outside-school-hours care.',
@@ -23,6 +25,7 @@ export const sectors = [
   },
   {
     id: 'training',
+    image: { file: 'training', alt: 'A trainer leading a session at a whiteboard', credit: 'Vitaly Gariev', url: 'https://unsplash.com/photos/team-collaborating-around-a-whiteboard-in-a-modern-office-K0aM-ztA76Q' },
     name: 'Training & assessment',
     short: 'Training',
     blurb: 'Become a qualified trainer and assessor in your industry.',
@@ -30,6 +33,7 @@ export const sectors = [
   },
   {
     id: 'business',
+    image: { file: 'business', alt: 'A team meeting around an office table', credit: 'Vitaly Gariev', url: 'https://unsplash.com/photos/diverse-business-team-collaborating-in-a-modern-office-_4tpElFQemQ' },
     name: 'Leadership & safety',
     short: 'Leadership',
     blurb: 'Lead teams and manage health and safety at work.',
@@ -37,6 +41,7 @@ export const sectors = [
   },
   {
     id: 'construction',
+    image: { file: 'construction', alt: 'Two people in hard hats reviewing a building site', credit: 'Mark Potterton', url: 'https://unsplash.com/photos/sNVkn3507Oo' },
     name: 'Building & construction',
     short: 'Building',
     blurb: 'Step up to site, project and building management roles.',
@@ -44,6 +49,7 @@ export const sectors = [
   },
   {
     id: 'firstaid',
+    image: { file: 'firstaid', alt: 'Hands practising CPR on a training manikin', credit: 'Frederick Shaw', url: 'https://unsplash.com/photos/person-practicing-cpr-on-a-training-dummy-E2JjBMyxBVw' },
     name: 'First aid & CPR',
     short: 'First aid',
     blurb: 'Short, practical certificates many jobs ask for.',
@@ -76,6 +82,9 @@ export const courses = [
   // ── Community & care ────────────────────────────────────────────────────
   {
     code: 'CHC33021',
+    short: 'Individual Support',
+    keywords: 'aged care, aged-care, nursing home, residential care, home care, personal care, personal care assistant, pca, carer, caregiver, care worker, support worker, disability, ndis, community care, cert 3, cert iii, certificate 3, assistant in nursing, ain, elderly',
+    fees: null, // CONFIRM: add the verified fee, e.g. 'From $1,200 (RPL)'
     slug: 'chc33021-certificate-iii-individual-support',
     title: 'Certificate III in Individual Support',
     sector: 'care',
@@ -114,6 +123,9 @@ export const courses = [
   },
   {
     code: 'CHC43121',
+    short: 'Disability Support',
+    keywords: 'disability, ndis, support worker, disability support worker, senior support worker, team leader, behaviour support, community access, cert 4, cert iv, certificate 4, carer',
+    fees: null, // CONFIRM: add the verified fee, e.g. 'From $1,200 (RPL)'
     slug: 'chc43121-certificate-iv-disability-support',
     title: 'Certificate IV in Disability Support',
     sector: 'care',
@@ -152,6 +164,9 @@ export const courses = [
   },
   {
     code: 'CHC43015',
+    short: 'Ageing Support',
+    keywords: 'aged care, aged-care, nursing home, residential care, senior carer, care coordinator, team leader, dementia, palliative, lifestyle coordinator, cert 4, cert iv, certificate 4, elderly',
+    fees: null, // CONFIRM: add the verified fee, e.g. 'From $1,200 (RPL)'
     slug: 'chc43015-certificate-iv-ageing-support',
     title: 'Certificate IV in Ageing Support',
     sector: 'care',
@@ -188,6 +203,9 @@ export const courses = [
   },
   {
     code: 'CHC52025',
+    short: 'Community Services',
+    keywords: 'community services, community work, case manager, case management, social work, social worker, youth worker, family support, housing, welfare, coordinator, diploma',
+    fees: null, // CONFIRM: add the verified fee, e.g. 'From $1,200 (RPL)'
     slug: 'chc52025-diploma-of-community-services',
     title: 'Diploma of Community Services',
     sector: 'care',
@@ -226,6 +244,9 @@ export const courses = [
   },
   {
     code: 'CHC62015',
+    short: 'Community Sector Management',
+    keywords: 'manager, management, service manager, not-for-profit, nfp, ngo, community sector, operations manager, advanced diploma, leadership',
+    fees: null, // CONFIRM: add the verified fee, e.g. 'From $1,200 (RPL)'
     slug: 'chc62015-advanced-diploma-community-sector-management',
     title: 'Advanced Diploma of Community Sector Management',
     sector: 'care',
@@ -262,6 +283,9 @@ export const courses = [
   },
   {
     code: 'CHC51015',
+    short: 'Counselling',
+    keywords: 'counselling, counseling, counsellor, counselor, mental health, wellbeing, therapy, family support, youth worker, diploma',
+    fees: null, // CONFIRM: add the verified fee, e.g. 'From $1,200 (RPL)'
     slug: 'chc51015-diploma-of-counselling',
     title: 'Diploma of Counselling',
     sector: 'care',
@@ -300,6 +324,9 @@ export const courses = [
   // ── Early childhood & education ─────────────────────────────────────────
   {
     code: 'CHC30125',
+    short: 'Early Childhood Education and Care',
+    keywords: 'childcare, child care, daycare, day care, early childhood, early learning, ecec, kindy, kindergarten, preschool, pre-school, nursery, educator, family day care, cert 3, cert iii, certificate 3, babies, toddlers',
+    fees: null, // CONFIRM: add the verified fee, e.g. 'From $1,200 (RPL)'
     slug: 'chc30125-certificate-iii-early-childhood-education-care',
     title: 'Certificate III in Early Childhood Education and Care',
     sector: 'education',
@@ -337,6 +364,9 @@ export const courses = [
   },
   {
     code: 'CHC40225',
+    short: 'School Based Education Support',
+    keywords: 'teacher aide, teachers aide, teacher assistant, education support, integration aide, learning support, school support officer, classroom assistant, school, cert 4, cert iv, certificate 4',
+    fees: null, // CONFIRM: add the verified fee, e.g. 'From $1,200 (RPL)'
     slug: 'chc40225-certificate-iv-school-based-education-support',
     title: 'Certificate IV in School Based Education Support',
     sector: 'education',
@@ -373,6 +403,9 @@ export const courses = [
   },
   {
     code: 'CHC50125',
+    short: 'Early Childhood Education and Care (Diploma)',
+    keywords: 'childcare, child care, daycare, day care, early childhood, early learning, ecec, kindy, kindergarten, preschool, room leader, educational leader, centre director, center director, childcare diploma, diploma',
+    fees: null, // CONFIRM: add the verified fee, e.g. 'From $1,200 (RPL)'
     slug: 'chc50125-diploma-early-childhood-education-care',
     title: 'Diploma of Early Childhood Education and Care',
     sector: 'education',
@@ -410,6 +443,9 @@ export const courses = [
   },
   {
     code: 'CHC50225',
+    short: 'School Age Education and Care',
+    keywords: 'oshc, outside school hours care, after school care, before school care, vacation care, holiday program, school age care, childcare, child care, coordinator, diploma',
+    fees: null, // CONFIRM: add the verified fee, e.g. 'From $1,200 (RPL)'
     slug: 'chc50225-diploma-school-age-education-care',
     title: 'Diploma of School Age Education and Care',
     sector: 'education',
@@ -448,6 +484,9 @@ export const courses = [
   // ── Training & assessment ───────────────────────────────────────────────
   {
     code: 'TAE40122',
+    short: 'Training and Assessment',
+    keywords: 'tae, trainer, assessor, trainer and assessor, teaching adults, teach, workplace trainer, vet, rto trainer, learning and development, l&d, cert 4, cert iv, certificate 4',
+    fees: null, // CONFIRM: add the verified fee, e.g. 'From $1,200 (RPL)'
     slug: 'tae40122-certificate-iv-training-assessment',
     title: 'Certificate IV in Training and Assessment',
     sector: 'training',
@@ -487,6 +526,9 @@ export const courses = [
   // ── Leadership & safety ─────────────────────────────────────────────────
   {
     code: 'BSB41419',
+    short: 'Work Health and Safety',
+    keywords: 'whs, ohs, oh&s, ohs officer, safety officer, health and safety, workplace safety, safety, hsr, health and safety representative, cert 4, cert iv, certificate 4',
+    fees: null, // CONFIRM: add the verified fee, e.g. 'From $1,200 (RPL)'
     slug: 'bsb41419-certificate-iv-work-health-safety',
     title: 'Certificate IV in Work Health and Safety',
     sector: 'business',
@@ -523,6 +565,9 @@ export const courses = [
   },
   {
     code: 'BSB50420',
+    short: 'Leadership and Management',
+    keywords: 'leadership, management, manager, team leader, supervisor, frontline manager, people management, business, diploma',
+    fees: null, // CONFIRM: add the verified fee, e.g. 'From $1,200 (RPL)'
     slug: 'bsb50420-diploma-leadership-management',
     title: 'Diploma of Leadership and Management',
     sector: 'business',
@@ -561,6 +606,9 @@ export const courses = [
   // ── Building & construction ─────────────────────────────────────────────
   {
     code: 'CPC50220',
+    short: 'Building and Construction',
+    keywords: 'builder, building, construction, builders licence, builders license, building licence, site supervisor, site manager, project manager, estimator, carpenter, trades, diploma',
+    fees: null, // CONFIRM: add the verified fee, e.g. 'From $1,200 (RPL)'
     slug: 'cpc50220-diploma-building-construction',
     title: 'Diploma of Building and Construction (Building)',
     sector: 'construction',
@@ -599,6 +647,9 @@ export const courses = [
   // ── First aid & CPR ─────────────────────────────────────────────────────
   {
     code: 'HLTAID009',
+    short: 'CPR',
+    keywords: 'cpr, resuscitation, defibrillator, defib, aed, cpr refresher, cpr certificate, first aid',
+    fees: null, // CONFIRM: add the verified fee, e.g. 'From $1,200 (RPL)'
     slug: 'hltaid009-provide-cpr',
     title: 'Provide Cardiopulmonary Resuscitation (CPR)',
     sector: 'firstaid',
@@ -629,6 +680,9 @@ export const courses = [
   },
   {
     code: 'HLTAID011',
+    short: 'First Aid',
+    keywords: 'first aid, first-aid, first aid certificate, provide first aid, workplace first aid, cpr',
+    fees: null, // CONFIRM: add the verified fee, e.g. 'From $1,200 (RPL)'
     slug: 'hltaid011-provide-first-aid',
     title: 'Provide First Aid',
     sector: 'firstaid',

@@ -1,211 +1,138 @@
 import { site } from '../data/site.js';
 import { courses, sectors } from '../data/courses.js';
 import { faqGroups } from '../data/faqs.js';
-import { html, link, icon, tbc } from '../templates/helpers.js';
-import { courseCard, sectionHead, steps, faqList, ctaBand } from '../templates/components.js';
+import { interests } from '../data/finder.js';
+import { html, link, icon, tbc, esc } from '../templates/helpers.js';
+import { faqList, ctaBand, areaCard, journeyPath, advisorAvatar } from '../templates/components.js';
+
+// Hero visual: Poonam's portrait when supplied, otherwise a designed
+// composition with her name – never a stand-in face.
+const heroVisual = (depth) => html`
+  <figure class="hero-visual${site.advisorPhoto ? ' hero-visual--photo' : ''}">
+    <div class="hero-visual__arch">
+      ${site.advisorPhoto
+        ? `<img src="${link(depth, site.advisorPhoto)}" alt="${esc(site.advisor)}, course guide at ${esc(site.name)}" width="640" height="800" fetchpriority="high">`
+        : html`<span class="hero-visual__monogram" aria-hidden="true">${site.advisor[0]}</span>
+          ${journeyPath('hero-visual__path')}`}
+      <span class="hero-visual__plate">
+        <span class="hero-visual__name">${site.advisor}</span>
+        <span class="hero-visual__role">Your course guide</span>
+      </span>
+    </div>
+    <figcaption class="hero-note">
+      <p class="hero-note__quote">“I’ll listen to your experience and goals, suggest courses that fit, then help you through enrolment.”</p>
+      <p class="hero-note__by">${site.advisor} ${tbc('Poonam to approve her introduction')}</p>
+    </figcaption>
+    ${site.draft && !site.advisorPhoto ? '<p class="hero-visual__todo">Placeholder until Poonam’s photo is supplied</p>' : ''}
+  </figure>`;
 
 export default function home() {
   const d = 0;
-  const popular = courses.filter((c) => c.popular).slice(0, 6);
   const faqs = [faqGroups[0].items[0], faqGroups[1].items[1], faqGroups[0].items[2], faqGroups[3].items[0]];
 
   const body = html`
-  <section class="hero">
+  <section class="hero" aria-labelledby="hero-title">
     <div class="container hero__inner">
       <div class="hero__text">
-        <p class="eyebrow eyebrow--pill">${icon('route')} Course guidance with ${site.advisor}</p>
-        <h1>Find the right course, with a real person to guide you.</h1>
-        <p class="lead">
-          Nationally recognised qualifications in care, education, training, leadership and building – through
-          recognition of prior learning, online study or short courses. Talk it through with ${site.advisor} first.
-          No pressure, no jargon.
+        <h1 id="hero-title">Find your course, <em>with ${site.advisor} by your side.</em></h1>
+        <p class="lead hero__lead">
+          ${site.advisor} helps you choose a nationally recognised course in care, education, training, leadership or building, and the best way to get it.
+          You get honest, personal advice from your first question to enrolment.
         </p>
         <div class="btn-row">
-          <a class="btn btn--primary btn--lg" href="eligibility.html">Check my eligibility ${icon('arrow-right')}</a>
+          <a class="btn btn--primary btn--lg" href="course-finder.html">Find my course ${icon('arrow-right')}</a>
           <a class="btn btn--secondary btn--lg" href="courses.html">Browse courses</a>
         </div>
-        <ul class="hero__points" role="list">
-          <li>${icon('check')} Free, no-obligation chat</li>
-          <li>${icon('check')} Use your experience to get qualified sooner</li>
-          <li>${icon('check')} Study online, around work and family</li>
+        <div class="hero__intro">
+          <span class="avatar" aria-hidden="true">${advisorAvatar(d)}</span>
+          <p><strong>Hi, I’m ${site.advisor}.</strong> I’ll listen first, suggest courses that fit your experience, and help you through enrolment.</p>
+        </div>
+      </div>
+      ${heroVisual(d)}
+    </div>
+  </section>
+
+  <section class="section section--teal finder-entry" aria-labelledby="finder-title">
+    <div class="container finder-entry__inner">
+      <div class="finder-entry__text">
+        <p class="eyebrow eyebrow--on-dark">Course finder</p>
+        <h2 id="finder-title">Not sure which course fits? Answer four quick questions.</h2>
+        <p>Tell us what interests you, your experience and your goal. You’ll see suggested courses and study pathways, with the reasons why, before we ask for any contact details.</p>
+        <ol class="finder-entry__path" role="list" aria-label="Four questions">
+          <li class="is-current">Interest</li><li>Experience</li><li>Qualifications</li><li>Goal</li>
+        </ol>
+      </div>
+      <div class="finder-entry__start">
+        <p class="finder-entry__q" id="finder-q1">Question 1 of 4 · What kind of work interests you?</p>
+        <ul class="finder-entry__options" role="list" aria-labelledby="finder-q1">
+          ${interests.map((o) => `<li><a class="pill-option" href="course-finder.html?interest=${o.id}">${esc(o.label)}</a></li>`)}
         </ul>
       </div>
-
-      <div class="hero__aside">
-        <div class="path-card">
-          <p class="path-card__title">Your path to a qualification</p>
-          <ol class="path-card__steps" role="list">
-            <li><span class="path-card__dot">${icon('chat')}</span><div><strong>Have a chat</strong><span>Share your experience and goals</span></div></li>
-            <li><span class="path-card__dot">${icon('compass')}</span><div><strong>Choose your course</strong><span>And the best way to get it</span></div></li>
-            <li><span class="path-card__dot">${icon('file')}</span><div><strong>Show or build your skills</strong><span>Evidence for RPL, or study online</span></div></li>
-            <li><span class="path-card__dot path-card__dot--done">${icon('award')}</span><div><strong>Get qualified</strong><span>Issued by a registered training organisation</span></div></li>
-          </ol>
-        </div>
-        <form class="finder" action="courses.html" method="get" data-finder>
-          <label for="finder-sector" class="finder__label">I’d like to work in…</label>
-          <div class="finder__row">
-            <select id="finder-sector" name="sector">
-              <option value="">Any area</option>
-              ${sectors.map((s) => `<option value="${s.id}">${s.name}</option>`)}
-            </select>
-            <button class="btn btn--primary" type="submit">Show courses</button>
-          </div>
-        </form>
-      </div>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="start-title">
-    <div class="container">
-      ${sectionHead({
-        eyebrow: 'Start here',
-        title: 'Where are you starting from?',
-        id: 'start-title',
-        lead: 'Everyone’s path is different. Pick the one that sounds most like you.',
-      })}
-      <div class="grid grid--3">
-        <a class="choice-card" href="ways-to-study.html#rpl">
-          <span class="choice-card__icon choice-card__icon--teal">${icon('briefcase')}</span>
-          <h3>“I’ve been doing this work for a while.”</h3>
-          <p>Have your experience formally assessed through <strong>recognition of prior learning (RPL)</strong> and only study the parts you’re missing.</p>
-          <span class="link-arrow">How RPL works ${icon('arrow-right')}</span>
-        </a>
-        <a class="choice-card" href="ways-to-study.html#online">
-          <span class="choice-card__icon choice-card__icon--sun">${icon('laptop')}</span>
-          <h3>“I’m new to this kind of work.”</h3>
-          <p>Study the <strong>full course online</strong> at your own pace, with trainer support and a work placement where the course needs one.</p>
-          <span class="link-arrow">How online study works ${icon('arrow-right')}</span>
-        </a>
-        <a class="choice-card" href="short-courses.html">
-          <span class="choice-card__icon choice-card__icon--coral">${icon('zap')}</span>
-          <h3>“I need a specific skill or refresher.”</h3>
-          <p>Pick up a <strong>short course</strong> – from first aid and CPR to dementia, medication or behaviour support.</p>
-          <span class="link-arrow">See short courses ${icon('arrow-right')}</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--sand" aria-labelledby="sectors-title">
-    <div class="container">
-      ${sectionHead({
-        eyebrow: 'Browse by area',
-        title: 'Courses for careers that matter',
-        id: 'sectors-title',
-        lead: 'Every qualification here is part of Australia’s national training system.',
-      })}
-      <ul class="sector-grid" role="list">
-        ${sectors.map((s) => {
-          const n = courses.filter((c) => c.sector === s.id).length;
-          return html`<li>
-            <a class="sector-tile sector-tile--${s.id}" href="courses.html?sector=${s.id}">
-              <span class="sector-tile__icon">${icon(s.icon)}</span>
-              <span class="sector-tile__body">
-                <span class="sector-tile__name">${s.name}</span>
-                <span class="sector-tile__blurb">${s.blurb}</span>
-              </span>
-              <span class="sector-tile__count">${n} ${n === 1 ? 'course' : 'courses'}</span>
-            </a>
-          </li>`;
-        })}
-      </ul>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="popular-title">
+  <section class="section" aria-labelledby="areas-title">
     <div class="container">
       <div class="section-head section-head--row">
         <div>
-          <p class="eyebrow">Popular choices</p>
-          <h2 id="popular-title">Courses people ask about most</h2>
+          <p class="eyebrow">Course areas</p>
+          <h2 id="areas-title">Where would you like to work?</h2>
         </div>
-        <a class="btn btn--secondary" href="courses.html">See all ${courses.length} courses ${icon('arrow-right')}</a>
+        <a class="link-arrow" href="courses.html">All ${courses.length} courses ${icon('arrow-right')}</a>
       </div>
-      <div class="course-grid course-grid--home">
-        ${popular.map((c) => courseCard(c, d))}
+      <div class="area-grid">
+        ${sectors.map((s) => areaCard(s, courses.filter((c) => c.sector === s.id).length, d))}
       </div>
     </div>
   </section>
 
-  <section class="section section--ink" aria-labelledby="how-title">
-    <div class="container how">
-      <div class="how__intro">
-        <p class="eyebrow eyebrow--on-dark">How it works</p>
-        <h2 id="how-title">Four simple steps, with ${site.advisor} beside you</h2>
-        <p class="lead">You’ll always know what happens next, who you’re dealing with and what it costs – before you commit to anything.</p>
-        <a class="btn btn--sun" href="ways-to-study.html">Compare ways to study ${icon('arrow-right')}</a>
+  <section class="section section--sand" aria-labelledby="why-title">
+    <div class="container why">
+      <div class="why__intro">
+        <p class="eyebrow">Why ${site.advisor}</p>
+        <h2 id="why-title">Personal guidance, not a sales call</h2>
+        <p class="lead">Choosing a course is a big decision. ${site.advisor} takes the time to understand where you are now and gives you a straight answer about what fits.${tbc('Poonam to confirm these commitments')}</p>
+        <a class="link-arrow" href="about.html">More about ${site.advisor} ${icon('arrow-right')}</a>
       </div>
-      ${steps([
-        { title: 'Have a chat', text: `Tell ${site.advisor} about your work history, any qualifications you hold and where you’d like to go next.` },
-        { title: 'Check your eligibility', text: 'Together you’ll pick the right course and pathway, and confirm the entry requirements with the training provider.' },
-        { title: 'Enrol and get started', text: 'You enrol with a registered training organisation, then either build your RPL evidence or start studying online.' },
-        { title: 'Get qualified', text: 'Once you’re assessed as competent, the training organisation issues your nationally recognised qualification.' },
-      ])}
+      <ul class="why__list" role="list">
+        <li>${icon('user')}<div><h3>One person, start to finish</h3><p>You talk to ${site.advisor} each time, so you never have to repeat your story.</p></div></li>
+        <li>${icon('shield')}<div><h3>Honest about fit</h3><p>If a course or pathway isn’t right for you, she’ll tell you, even if that means not enrolling.</p></div></li>
+        <li>${icon('file')}<div><h3>Help with the paperwork</h3><p>From organising RPL evidence to enrolment forms, you get help getting it right first time.</p></div></li>
+        <li>${icon('info')}<div><h3>Clear about who does what</h3><p>${site.advisor} guides you. A Registered Training Organisation (RTO) trains, assesses and issues your qualification, and you’ll know which one before you pay anything.${tbc('Add partner RTO names and RTO codes')}</p></div></li>
+      </ul>
+      ${site.testimonials.length
+        ? html`<div class="why__stories">
+            ${site.testimonials.map((t) => html`<blockquote class="story"><p>“${esc(t.quote)}”</p><footer>${esc(t.name)}${t.detail ? ` · ${esc(t.detail)}` : ''}</footer></blockquote>`)}
+          </div>`
+        : ''}
     </div>
   </section>
 
-  <section class="section" aria-labelledby="meet-title">
-    <div class="container meet">
-      <div class="meet__portrait" aria-hidden="true">
-        <div class="portrait">
-          <span class="portrait__initial">P</span>
-        </div>
-        ${site.draft ? '<p class="meet__photo-note">Photo of Poonam goes here</p>' : ''}
-      </div>
-      <div class="meet__text">
-        <p class="eyebrow">Meet your advisor</p>
-        <h2 id="meet-title">Hi, I’m ${site.advisor}.</h2>
-        <p class="lead">I help people turn the skills they already have into qualifications that open doors – and I’ll give you a straight answer about what’s right for you.${tbc('Poonam to review and personalise this introduction')}</p>
-        <ul class="values" role="list">
-          <li>${icon('shield')}<div><strong>Honest advice.</strong> If a course or pathway isn’t right for you, I’ll tell you.</div></li>
-          <li>${icon('chat')}<div><strong>Plain language.</strong> No jargon – just clear next steps and clear costs.</div></li>
-          <li>${icon('user')}<div><strong>One familiar contact.</strong> Questions go to me, from your first chat to your certificate.</div></li>
-        </ul>
-        <div class="btn-row">
-          <a class="btn btn--primary" href="contact.html">${icon('chat')} Talk to ${site.advisor}</a>
-          <a class="btn btn--ghost" href="about.html">More about me</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--sand" aria-labelledby="clear-title">
+  <section class="section" aria-labelledby="how-title">
     <div class="container">
-      ${sectionHead({
-        eyebrow: 'Clear from the start',
-        title: 'Who does what',
-        id: 'clear-title',
-        lead: 'Only a Registered Training Organisation (RTO) can issue a nationally recognised qualification. Here’s how the work is shared.',
-      })}
-      <div class="grid grid--2 who">
-        <div class="who__card">
-          <h3>${icon('user')} ${site.advisor} at ${site.shortName}</h3>
-          <ul class="checklist" role="list">
-            <li>${icon('check')}<span>Helps you choose the right course and pathway</span></li>
-            <li>${icon('check')}<span>Checks your eligibility and explains the costs</span></li>
-            <li>${icon('check')}<span>Guides you through enrolment and organising evidence</span></li>
-            <li>${icon('check')}<span>Checks in and answers questions along the way</span></li>
-          </ul>
-        </div>
-        <div class="who__card">
-          <h3>${icon('award')} The partner RTO ${tbc('Add partner RTO names and RTO codes')}</h3>
-          <ul class="checklist" role="list">
-            <li>${icon('check')}<span>Enrols you and provides the training</span></li>
-            <li>${icon('check')}<span>Assesses your skills and evidence</span></li>
-            <li>${icon('check')}<span>Arranges work placement requirements</span></li>
-            <li>${icon('check')}<span>Issues your qualification and transcript</span></li>
-          </ul>
-        </div>
+      <div class="section-head section-head--center">
+        <p class="eyebrow">How it works</p>
+        <h2 id="how-title">Your path to a qualification</h2>
       </div>
-      <p class="who__note">${icon('info')}<span>You’ll always know which RTO you’re enrolling with before you pay anything. You can look up any course or RTO on <a href="https://training.gov.au" rel="noopener">training.gov.au</a>.</span></p>
+      <ol class="route" role="list">
+        <li class="route__stop"><span class="route__dot">${icon('chat')}</span><h3>Have a chat</h3><p>Share your experience and goals with ${site.advisor}.</p></li>
+        <li class="route__stop"><span class="route__dot">${icon('compass')}</span><h3>Choose your course</h3><p>Agree the right course and the best way to get it.</p></li>
+        <li class="route__stop"><span class="route__dot">${icon('file')}</span><h3>Show or build your skills</h3><p>Gather evidence for RPL, or study the course online.</p></li>
+        <li class="route__stop route__stop--end"><span class="route__dot">${icon('award')}</span><h3>Get qualified</h3><p>Your training organisation issues your qualification.</p></li>
+      </ol>
+      <p class="center"><a class="link-arrow" href="ways-to-study.html">Compare RPL, online study and short courses ${icon('arrow-right')}</a></p>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="faq-title">
-    <div class="container narrow">
-      ${sectionHead({ eyebrow: 'Questions', title: 'Good questions to ask first', id: 'faq-title', align: 'center' })}
+  <section class="section section--sand" aria-labelledby="faq-title">
+    <div class="container faq-split">
+      <div class="faq-split__intro">
+        <p class="eyebrow">Questions</p>
+        <h2 id="faq-title">Good questions to ask first</h2>
+        <p>Straight answers to what people ask most before choosing a course.</p>
+        <a class="link-arrow" href="faq.html">Read all FAQs ${icon('arrow-right')}</a>
+      </div>
       ${faqList(faqs)}
-      <p class="center"><a class="link-arrow" href="faq.html">Read all FAQs ${icon('arrow-right')}</a></p>
     </div>
   </section>
 
@@ -215,7 +142,8 @@ export default function home() {
   return {
     path: 'index.html',
     title: '',
-    description: `Friendly course guidance from ${site.advisor}. Find nationally recognised courses in care, early childhood, training, leadership and building – via RPL, online study or short courses.`,
+    bodyClass: 'page-home',
+    description: `Personal course guidance from ${site.advisor}. Find a nationally recognised course in care, early childhood, training, leadership or building, and the best way to get it.`,
     body,
   };
 }

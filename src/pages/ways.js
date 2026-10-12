@@ -19,10 +19,10 @@ export default function ways() {
   ${pageHero({
     eyebrow: 'Ways to study',
     title: 'Three ways to get qualified',
-    lead: 'The right route depends on what you already know. Compare your options below, or take the two-minute pathway check.',
+    lead: 'The right route depends on what you already know. Compare your options below, or let the course finder suggest a course and pathway for you.',
     crumbs: [{ label: 'Ways to study' }],
     depth: d,
-    actions: `<a class="btn btn--primary" href="#quiz">Take the pathway check ${icon('arrow-right')}</a><a class="btn btn--secondary" href="#compare">Compare options</a>`,
+    actions: `<a class="btn btn--primary" href="course-finder.html">Find my course ${icon('arrow-right')}</a><a class="btn btn--secondary" href="#compare">Compare options</a>`,
   })}
 
   <section class="section section--tight" aria-labelledby="compare">
@@ -76,45 +76,16 @@ export default function ways() {
     </div>
   </section>
 
-  <section class="section section--sand" aria-labelledby="quiz-title" id="quiz">
-    <div class="container narrow">
-      ${sectionHead({
-        eyebrow: 'Pathway check',
-        title: 'Which path suits me?',
-        id: 'quiz-title',
-        lead: 'Three quick questions. Nothing is sent anywhere – it just points you in the right direction.',
-        align: 'center',
-      })}
-      <form class="quiz card" data-quiz novalidate>
-        <fieldset class="quiz__q">
-          <legend>1. How much experience do you have in the kind of work this course is for?</legend>
-          <div class="option-grid">
-            <label class="option"><input type="radio" name="exp" value="0" required><span>None yet</span></label>
-            <label class="option"><input type="radio" name="exp" value="1"><span>Less than a year</span></label>
-            <label class="option"><input type="radio" name="exp" value="2"><span>1–2 years</span></label>
-            <label class="option"><input type="radio" name="exp" value="3"><span>3 years or more</span></label>
-          </div>
-        </fieldset>
-        <fieldset class="quiz__q">
-          <legend>2. What are you hoping to get?</legend>
-          <div class="option-grid">
-            <label class="option"><input type="radio" name="goal" value="qual" required><span>A full qualification</span></label>
-            <label class="option"><input type="radio" name="goal" value="skill"><span>One specific skill or refresher</span></label>
-            <label class="option"><input type="radio" name="goal" value="unsure"><span>I’m not sure yet</span></label>
-          </div>
-        </fieldset>
-        <fieldset class="quiz__q">
-          <legend>3. Could you show evidence of your work – references, duties, examples?</legend>
-          <div class="option-grid">
-            <label class="option"><input type="radio" name="evidence" value="yes" required><span>Yes, most of it</span></label>
-            <label class="option"><input type="radio" name="evidence" value="some"><span>Some of it</span></label>
-            <label class="option"><input type="radio" name="evidence" value="no"><span>Not really</span></label>
-          </div>
-        </fieldset>
-        <p class="form-error" data-quiz-error hidden role="alert">Please answer all three questions to see your result.</p>
-        <button class="btn btn--primary btn--lg" type="submit">See my result</button>
-        <div class="quiz__result" data-quiz-result tabindex="-1" aria-live="polite"></div>
-      </form>
+  <section class="section section--tight" id="quiz" aria-labelledby="quiz-title">
+    <div class="container">
+      <div class="hint-card hint-card--wide">
+        ${icon('compass')}
+        <div>
+          <h2 class="hint-card__title" id="quiz-title">Which path suits me?</h2>
+          <p>The course finder asks about your interests, experience and goals, then suggests courses and a likely pathway, with the reasons why.</p>
+        </div>
+        <a class="btn btn--primary" href="course-finder.html">Find my course ${icon('arrow-right')}</a>
+      </div>
     </div>
   </section>
 

@@ -55,18 +55,80 @@
     window.matchMedia('(min-width: 1080px)').addEventListener('change', (e) => { if (e.matches) setOpen(false); });
   }
 
-  /* ── Filters (courses + short courses) ────────────────────────────────── */
+  /* ── Filters and search (courses + short courses) ─────────────────────── */
+  // Everyday words people type, mapped to the terms used in course data.
+  const SYNONYMS = {
+    childcare: ['child care', 'early childhood'], 'child care': ['childcare'], daycare: ['childcare'], kindy: ['kindergarten'],
+    'aged care': ['aged-care', 'nursing home'], 'nursing home': ['aged care'], carer: ['care worker', 'support worker'],
+    caregiver: ['carer'], ndis: ['disability'], oshc: ['outside school hours care'], 'teachers aide': ['teacher aide'],
+    ohs: ['whs'], 'oh&s': ['whs'], safety: ['whs'], counsellor: ['counselling'], counselor: ['counselling'], counseling: ['counselling'],
+    trainer: ['training'], teach: ['trainer'], boss: ['manager'], supervisor: ['team leader'], builder: ['building'],
+    'first-aid': ['first aid'], resus: ['cpr'], 'cert 3': ['certificate iii'], 'cert iii': ['certificate iii'],
+    'cert 4': ['certificate iv'], 'cert iv': ['certificate iv'], 'certificate 3': ['certificate iii'], 'certificate 4': ['certificate iv'],
+  };
+  const FIELD_WEIGHT = { title: 12, keywords: 9, roles: 6, text: 2 };
+  const normalise = (q) => q.toLowerCase().replace(/[’']/g, '').replace(/[^\w&+\- ]+/g, ' ').replace(/\s+/g, ' ').trim();
+  // Splits a query into terms, keeping known phrases ("aged care", "cert 3") together.
+  const terms = (q) => {
+    let rest = ` ${normalise(q)} `;
+    const out = [];
+    Object.keys(SYNONYMS).filter((k) => k.includes(' ')).sort((a, b) => b.length - a.length).forEach((phrase) => {
+      if (rest.includes(` ${phrase} `)) { out.push(phrase); rest = rest.replace(` ${phrase} `, ' '); }
+    });
+    return out.concat(rest.trim().split(' ').filter((t) => t.length > 1 && !['a', 'an', 'the', 'in', 'of', 'for', 'and', 'to', 'course', 'courses'].includes(t)));
+  };
+  // Level words ("cert 3", "diploma") should match the course itself, not a
+  // description that mentions another level.
+  const LEVEL_TERM = /^(cert|certificate|diploma|advanced)\b|^(iii|iv|3|4)$/;
+  const matchTerm = (card, term) => {
+    const variants = [term, ...(SYNONYMS[term] || [])];
+    const levelOnly = LEVEL_TERM.test(term);
+    let best = 0;
+    for (const [field, weight] of Object.entries(FIELD_WEIGHT)) {
+      if (levelOnly && (field === 'roles' || field === 'text')) continue;
+      const text = card.dataset[`s${field[0].toUpperCase()}${field.slice(1)}`] || '';
+      for (const v of variants) {
+        const at = text.indexOf(v);
+        if (at === -1) continue;
+        const wholeWord = (at === 0 || /\W/.test(text[at - 1])) && !/\w/.test(text[at + v.length] || '');
+        best = Math.max(best, weight * (wholeWord ? 1 : 0.5) * (v === term ? 1 : 0.85));
+      }
+    }
+    const code = (card.dataset.code || '').toLowerCase();
+    if (code && (code === term || code.startsWith(term)) && term.length >= 3) best = Math.max(best, 40);
+    return best;
+  };
+  const scoreCard = (card, query) => {
+    const ts = terms(query);
+    if (!ts.length) return 1;
+    let total = 0;
+    for (const t of ts) {
+      const s = matchTerm(card, t);
+      if (!s) return 0; // every word must match something
+      total += s;
+    }
+    return total;
+  };
+
   $$('[data-filters]').forEach((form) => {
     const section = form.closest('section') || document;
-    const cards = $$('[data-course-card]', $('[data-results]', section));
+    const grid = $('[data-results]', section);
+    const cards = $$('[data-course-card]', grid);
     const countEl = $('[data-results-count]', section);
     const emptyEl = $('[data-empty]', section);
+    const emptyQuery = $('[data-empty-query]', section);
     const search = $('[data-filter-search]', form);
     const chipGroups = $$('[data-filter-chips]', form);
     const selects = $$('[data-filter-select]', form);
     const toggles = $$('[data-filter-toggle]', form);
     const resets = $$('[data-filter-reset]', section);
+    const activeBox = $('[data-active-filters]', section);
+    const activeList = $('[data-active-list]', section);
+    const moreToggle = $('[data-filters-toggle]', form);
+    const more = $('[data-filters-more]', form);
+    const badge = $('[data-filters-badge]', form);
     const noun = form.dataset.filters === 'short' ? 'short courses' : 'courses';
+    const usesRanking = !!cards[0]?.dataset.sTitle;
     const state = {};
 
     const readParams = () => {
@@ -92,7 +154,7 @@
         if (s.value !== state[s.dataset.filterSelect]) { state[s.dataset.filterSelect] = ''; s.value = ''; }
       });
       toggles.forEach((t) => { t.checked = !!state[t.dataset.filterToggle]; });
-      if (search) search.value = state.q;
+      if (search && search.value !== state.q) search.value = state.q;
     };
 
     const writeParams = () => {
@@ -104,28 +166,66 @@
       history.replaceState(null, '', url);
     };
 
+    // Chips describing every active filter, each with its own remove button.
+    const renderActive = () => {
+      if (!activeBox) return;
+      const items = [];
+      if (state.q.trim()) items.push({ key: 'q', label: `“${state.q.trim()}”` });
+      chipGroups.forEach((g) => {
+        const v = state[g.dataset.filterChips];
+        if (v) items.push({ key: g.dataset.filterChips, label: $(`.filter-chip[data-value="${CSS.escape(v)}"]`, g)?.dataset.label || v });
+      });
+      selects.forEach((s) => { if (state[s.dataset.filterSelect]) items.push({ key: s.dataset.filterSelect, label: s.selectedOptions[0]?.textContent.trim() }); });
+      toggles.forEach((t) => { if (state[t.dataset.filterToggle]) items.push({ key: t.dataset.filterToggle, label: t.dataset.label || 'On' }); });
+      activeBox.hidden = items.length === 0;
+      activeList.innerHTML = items
+        .map((i) => `<li><button type="button" class="active-chip" data-remove-filter="${esc(i.key)}">${esc(i.label)}${ICON.x}<span class="visually-hidden"> – remove this filter</span></button></li>`)
+        .join('');
+      const secondary = selects.filter((s) => state[s.dataset.filterSelect]).length + toggles.filter((t) => state[t.dataset.filterToggle]).length;
+      if (badge) { badge.hidden = !secondary; badge.textContent = secondary; }
+    };
+
     const apply = () => {
-      const terms = state.q.toLowerCase().trim().split(/\s+/).filter(Boolean);
-      let shown = 0;
-      cards.forEach((card) => {
+      const query = state.q.trim();
+      const scored = cards.map((card, i) => {
         const d = card.dataset;
-        const ok =
+        const passes =
           chipGroups.every((g) => !state[g.dataset.filterChips] || d[g.dataset.filterChips] === state[g.dataset.filterChips]) &&
           selects.every((s) => !state[s.dataset.filterSelect] || d[s.dataset.filterSelect] === state[s.dataset.filterSelect]) &&
-          toggles.every((t) => !state[t.dataset.filterToggle] || (d.pathways || '').split(' ').includes(t.dataset.filterToggle)) &&
-          terms.every((term) => (d.search || '').includes(term));
-        card.hidden = !ok;
-        if (ok) shown++;
+          toggles.every((t) => !state[t.dataset.filterToggle] || (d.pathways || '').split(' ').includes(t.dataset.filterToggle));
+        let score = passes ? 1 : 0;
+        if (passes && query) {
+          score = usesRanking
+            ? scoreCard(card, query)
+            : terms(query).every((t) => [t, ...(SYNONYMS[t] || [])].some((v) => (d.search || '').includes(v))) ? 1 : 0;
+        }
+        return { card, i, score };
       });
+      const shown = scored.filter((s) => s.score > 0);
+      // Best matches first while searching; otherwise the usual order.
+      const order = query && usesRanking ? [...shown].sort((a, b) => b.score - a.score || a.i - b.i) : shown;
+      scored.forEach(({ card, score }) => { card.hidden = score === 0; });
+      order.concat(scored.filter((s) => s.score === 0)).forEach(({ card }) => grid.append(card));
+
       const active = Object.values(state).some((v) => v !== '' && v !== false);
       if (countEl) {
         countEl.innerHTML = active
-          ? `Showing <strong>${shown}</strong> of ${cards.length} ${noun}`
+          ? `Showing <strong>${shown.length}</strong> of ${cards.length} ${noun}${query && usesRanking && shown.length > 1 ? ', best matches first' : ''}`
           : `Showing all ${cards.length} ${noun}`;
       }
-      if (emptyEl) emptyEl.hidden = shown > 0;
+      if (emptyEl) {
+        emptyEl.hidden = shown.length > 0;
+        if (emptyQuery) emptyQuery.textContent = query ? `“${query}”` : 'those filters';
+      }
       resets.forEach((r) => { if (r.closest('[data-filters]')) r.hidden = !active; });
+      renderActive();
       writeParams();
+    };
+
+    const reset = (keys = Object.keys(state)) => {
+      keys.forEach((k) => { state[k] = typeof state[k] === 'boolean' ? false : ''; });
+      syncControls();
+      apply();
     };
 
     chipGroups.forEach((g) =>
@@ -144,14 +244,35 @@
       clearTimeout(timer);
       timer = setTimeout(() => { state.q = search.value; apply(); }, 120);
     });
-    resets.forEach((r) =>
-      r.addEventListener('click', () => {
-        Object.keys(state).forEach((k) => { state[k] = typeof state[k] === 'boolean' ? false : ''; });
-        syncControls();
-        apply();
-        search?.focus();
-      })
-    );
+    resets.forEach((r) => r.addEventListener('click', () => { reset(); search?.focus(); }));
+    activeList?.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-remove-filter]');
+      if (!btn) return;
+      reset([btn.dataset.removeFilter]);
+      (activeList.querySelector('button') || search)?.focus();
+    });
+    section.addEventListener('click', (e) => {
+      const s = e.target.closest('[data-suggest]');
+      if (!s) return;
+      reset();
+      state.q = s.dataset.suggest;
+      syncControls();
+      apply();
+      search?.focus();
+    });
+
+    // Secondary filters fold away on small screens.
+    if (moreToggle && more) {
+      const mq = matchMedia('(max-width: 759.98px)');
+      const setOpen = (open) => {
+        moreToggle.setAttribute('aria-expanded', String(open));
+        more.classList.toggle('is-open', open);
+      };
+      const hasSecondary = () => selects.some((s) => state[s.dataset.filterSelect]) || toggles.some((t) => state[t.dataset.filterToggle]);
+      moreToggle.addEventListener('click', () => setOpen(moreToggle.getAttribute('aria-expanded') !== 'true'));
+      setOpen(!mq.matches || hasSecondary());
+      mq.addEventListener('change', (e) => setOpen(!e.matches || hasSecondary()));
+    }
 
     readParams();
     syncControls();
@@ -184,10 +305,11 @@
       document.body.classList.toggle('tray-open', selected.length > 0);
       countEl.textContent = selected.length;
       list.innerHTML = selected
-        .map((c) => `<li>${esc(c)}<button type="button" data-remove="${esc(c)}" aria-label="Remove ${esc(data[c].title)} from comparison">${ICON.x}</button></li>`)
+        .map((c) => `<li><span class="compare-tray__name">${esc(data[c].short || data[c].title)}</span><button type="button" data-remove="${esc(c)}" aria-label="Remove ${esc(data[c].title)} from comparison">${ICON.x}</button></li>`)
         .join('');
       openBtn.disabled = selected.length < 2;
       openBtn.title = selected.length < 2 ? 'Choose at least two courses to compare' : '';
+      $('[data-compare-hint]', tray)?.toggleAttribute('hidden', selected.length !== 1);
       store.set('pathwise-compare', selected);
     };
 
@@ -237,11 +359,20 @@
     openBtn.addEventListener('click', () => {
       const cols = selected.map((c) => data[c]);
       $('[data-compare-body]', dialog).innerHTML = `
+        <div class="cmp-stack">
+          ${cols.map((c) => `
+            <section class="cmp-card" aria-label="${esc(c.title)}">
+              <p class="cmp-card__code">${esc(c.code)}</p>
+              <h3><a href="${rootPrefix}${esc(c.href)}">${esc(c.title)}</a></h3>
+              <dl>${rows.map(([label, key]) => `<div><dt>${label}</dt><dd>${esc(c[key])}</dd></div>`).join('')}</dl>
+              <a class="btn btn--primary btn--block" href="${rootPrefix}eligibility.html?course=${encodeURIComponent(c.code)}">Ask about this course</a>
+            </section>`).join('')}
+        </div>
         <table class="cmp">
           <caption class="visually-hidden">Comparison of ${cols.length} courses</caption>
           <thead><tr><td></td>${cols.map((c) => `<th scope="col"><span>${esc(c.code)}</span><a href="${rootPrefix}${esc(c.href)}">${esc(c.title)}</a></th>`).join('')}</tr></thead>
           <tbody>${rows.map(([label, key]) => `<tr><th scope="row">${label}</th>${cols.map((c) => `<td>${esc(c[key])}</td>`).join('')}</tr>`).join('')}</tbody>
-          <tfoot><tr><td></td>${cols.map((c) => `<td><a class="btn btn--primary" href="${rootPrefix}eligibility.html?course=${encodeURIComponent(c.code)}">Check eligibility</a></td>`).join('')}</tr></tfoot>
+          <tfoot><tr><td></td>${cols.map((c) => `<td><a class="btn btn--primary" href="${rootPrefix}eligibility.html?course=${encodeURIComponent(c.code)}">Ask about this course</a></td>`).join('')}</tr></tfoot>
         </table>`;
       dialog.showModal();
     });
@@ -249,60 +380,6 @@
     dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
     dialog.addEventListener('close', () => openBtn.focus());
     render();
-  }
-
-  /* ── Pathway check ────────────────────────────────────────────────────── */
-  const quiz = $('[data-quiz]');
-  if (quiz) {
-    const result = $('[data-quiz-result]', quiz);
-    const error = $('[data-quiz-error]', quiz);
-    quiz.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const fd = new FormData(quiz);
-      const exp = fd.get('exp');
-      const goal = fd.get('goal');
-      const evidence = fd.get('evidence');
-      if (exp === null || !goal || !evidence) {
-        error.hidden = false;
-        const firstMissing = ['exp', 'goal', 'evidence'].find((n) => !fd.get(n));
-        quiz.querySelector(`input[name="${firstMissing}"]`)?.focus();
-        return;
-      }
-      error.hidden = true;
-      const years = Number(exp);
-      let r;
-      if (goal === 'skill') {
-        r = {
-          title: 'A short course is probably your best fit',
-          text: 'Short courses build one specific skill quickly – ideal for refreshers and workplace training requirements. If your role needs a formal qualification later, your experience could count towards RPL.',
-          links: [['short-courses.html', 'Browse short courses', true], ['courses.html?sector=firstaid', 'First aid & CPR']],
-        };
-      } else if (years >= 2 && evidence !== 'no') {
-        r = {
-          title: 'Recognition of prior learning looks promising',
-          text: 'With your experience and evidence, RPL could recognise much of what you already know – so you only complete what’s missing. Poonam can confirm this in a short chat.',
-          links: [['eligibility.html?pathway=rpl', 'Check my RPL eligibility', true], ['#rpl', 'How RPL works']],
-        };
-      } else if (years >= 1) {
-        r = {
-          title: 'Online study, with credit for what you know',
-          text: 'You have a head start, but may not yet have enough evidence for full RPL. Many people study online and have some units recognised along the way. Poonam can help you work out the mix.',
-          links: [['eligibility.html', 'Check my eligibility', true], ['#online', 'How online study works']],
-        };
-      } else {
-        r = {
-          title: 'Studying the full course online suits you',
-          text: 'Starting fresh is completely normal. Online study teaches you everything step by step, with trainer support and a work placement where the course needs one.',
-          links: [['courses.html', 'Browse courses', true], ['#online', 'How online study works']],
-        };
-      }
-      result.innerHTML = `
-        <p class="quiz__result-label">Your result</p>
-        <h3>${r.title}</h3>
-        <p>${r.text}</p>
-        <div class="btn-row">${r.links.map(([href, label, primary]) => `<a class="btn ${primary ? 'btn--primary' : 'btn--secondary'}" href="${href}">${label}${primary ? ' ' + ICON.arrow : ''}</a>`).join('')}</div>`;
-      result.focus();
-    });
   }
 
   /* ── RPL evidence checklist ───────────────────────────────────────────── */
@@ -325,7 +402,7 @@
 
   /* ── Sticky enquiry bar on course pages (mobile) ──────────────────────── */
   const mobileCta = $('[data-mobile-cta]');
-  const heroActions = $('.course-hero .btn-row');
+  const heroActions = $('.page-hero--course .btn-row');
   if (mobileCta && heroActions && 'IntersectionObserver' in window) {
     new IntersectionObserver(([entry]) => {
       mobileCta.classList.toggle('is-visible', !entry.isIntersecting && entry.boundingClientRect.top < 0);
@@ -443,7 +520,6 @@
       `<div class="notice notice--warn" role="alert">${ICON.alert}<div>
         <p><strong>Your details have not been sent.</strong> This form isn’t connected to an inbox yet, so nothing was submitted.</p>
         ${directContacts()}
-        ${config.draft ? '<p class="notice__dev">Site owner: set <code>forms.endpoint</code> in <code>src/data/site.js</code> and rebuild – see “Connecting the forms” in the README.</p>' : ''}
         <div class="btn-row"><button type="button" class="btn btn--secondary" data-copy>Copy my answers</button></div>
       </div></div>`
     );
@@ -471,12 +547,14 @@
     const name = (data.first_name || data.name || '').split(' ')[0];
     const how = { phone: 'by phone', whatsapp: 'on WhatsApp', email: 'by email' }[form.querySelector('input[name="preferred"]:checked')?.value] || '';
     const isElig = form.dataset.form === 'eligibility';
+    const nextStepsHtml = $('.next-steps')?.outerHTML || '';
     const card = form.closest('.form-card') || form.parentElement;
     card.innerHTML = `
       <div class="form-success" tabindex="-1">
         <div class="form-success__icon">${ICON.check}</div>
         <h2>Thanks${name ? `, ${esc(name)}` : ''} – that’s on its way.</h2>
-        <p class="lead">Your ${isElig ? 'eligibility check' : 'enquiry'} has been sent to Poonam. She’ll be in touch ${how} to talk through your options.</p>
+        <p class="lead">Your ${isElig ? 'details have' : 'enquiry has'} been received. ${esc(config.advisor || 'Poonam')} will be in touch ${how} to talk through your options.</p>
+        ${nextStepsHtml ? `<div class="form-success__next"><h3>What happens next</h3>${nextStepsHtml}</div>` : ''}
         <div class="btn-row btn-row--center"><a class="btn btn--secondary" href="${rootPrefix}courses.html">Keep browsing courses</a></div>
       </div>`;
     $('.form-success', card).focus();
@@ -498,10 +576,13 @@
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({ ...config.extraFields, ...data, _subject: subject, subject, form: form.dataset.form, page: location.href }),
       });
-      if (res.ok) succeeded(form, data);
-      else sendFailed(form, `The form service responded with an error (${res.status}).`);
+      // Some services answer 200 with { success: false }, so check the body too.
+      let body = {};
+      try { body = await res.clone().json(); } catch { /* not JSON */ }
+      if (res.ok && body.ok !== false && body.success !== false) succeeded(form, data);
+      else sendFailed(form, `The form service didn’t accept it (error ${res.status}). Everything you entered is still here.`);
     } catch {
-      sendFailed(form, 'We couldn’t reach the form service – check your internet connection.');
+      sendFailed(form, 'We couldn’t reach the form service, so please check your internet connection. Everything you entered is still here.');
     } finally {
       button.classList.remove('is-loading');
       button.disabled = false;
@@ -553,7 +634,41 @@
       if ([...topicSelect.options].some((o) => o.value === t)) topicSelect.value = t;
     }
     const pathway = params.get('pathway');
-    if (pathway) form.querySelector(`input[name="pathway"][value="${CSS.escape(pathway)}"]`)?.click();
+    const pathwayInput = pathway && form.querySelector(`input[name="pathway"][value="${CSS.escape(pathway)}"]`);
+    if (pathwayInput) pathwayInput.checked = true;
+    const exp = params.get('exp');
+    const expInput = exp && form.querySelector(`input[name="experience"][value="${CSS.escape(exp)}"]`);
+    if (expInput) expInput.checked = true;
+
+    // Show what they're asking about, and pass course finder answers along.
+    const selectionBox = $('[data-selection]', form);
+    const finderField = $('[data-finder-field]', form);
+    let finder = null;
+    if (params.get('from') === 'finder') {
+      try { finder = JSON.parse(sessionStorage.getItem('pathwise-finder')); } catch { /* none */ }
+    }
+    const chosen = courseSelect && courseSelect.value && courseSelect.value !== 'short-course' && courseSelect.value !== 'other' ? courseSelect.selectedOptions[0].textContent.trim() : '';
+    if (selectionBox && (chosen || finder)) {
+      const bits = [];
+      if (pathwayInput) bits.push(`Possible pathway: ${pathwayInput.closest('label').textContent.trim()}`);
+      if (expInput) bits.push(`Experience: ${expInput.closest('label').textContent.trim()}`);
+      selectionBox.innerHTML = `
+        <p class="selection__label">${chosen ? 'You’re asking about' : 'Your course finder suggestions'}</p>
+        ${chosen ? `<p class="selection__course">${esc(chosen)}</p>` : ''}
+        ${!chosen && finder?.suggestions?.length ? `<ul class="selection__list">${finder.suggestions.map((x) => `<li>${esc(x.title)} <span>· ${esc(x.pathway)}</span></li>`).join('')}</ul>` : ''}
+        ${bits.length ? `<p class="selection__meta">${esc(bits.join(' · '))}</p>` : ''}
+        ${finder ? `<p class="selection__meta">Your course finder answers are included: ${esc(finder.summary)}. <a href="${rootPrefix}course-finder.html${finder.answers ? `?${new URLSearchParams(finder.answers)}#results` : ''}">Change them</a></p>` : ''}`;
+      selectionBox.hidden = false;
+    }
+    if (finderField && finder) {
+      finderField.value = `${finder.summary}. Suggested: ${(finder.suggestions || []).map((x) => `${x.title} (${x.pathway})`).join('; ')}`;
+    }
+
+    // Online enquiries not open yet: the form is shown switched off.
+    if (form.hasAttribute('data-unavailable')) {
+      $('[data-step]', form)?.classList.add('is-active');
+      return;
+    }
 
     // Multi-step behaviour (eligibility check).
     const steps = $$('[data-step]', form);

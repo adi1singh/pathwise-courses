@@ -18,12 +18,24 @@ const pathwayBadges = (c) =>
     )
     .join('');
 
+// Separate fields so the browser can rank results: a title or keyword match
+// counts for more than a word buried in the description.
+const searchAttrs = (c) =>
+  [
+    ['title', `${c.title} ${c.short ?? ''}`],
+    ['keywords', `${c.keywords ?? ''} ${sectorById[c.sector].name}`],
+    ['roles', c.roles.join(' | ')],
+    ['text', `${c.summary} ${c.topics.join(' ')} ${c.suits.join(' ')}`],
+  ]
+    .map(([k, v]) => `data-s-${k}="${esc(v.toLowerCase())}"`)
+    .join(' ');
+
 export const courseCard = (c, depth, { compare = false } = {}) => {
   const level = levelById[c.level].name;
   const href = link(depth, `course/${c.slug}.html`);
   const titleId = `t-${c.code.toLowerCase()}`;
   return html`
-  <article class="course-card" data-course-card data-code="${c.code}" data-sector="${c.sector}" data-level="${c.level}" data-pathways="${c.pathways.join(' ')}" data-search="${esc(`${c.code} ${c.title} ${c.summary} ${c.roles.join(' ')}`.toLowerCase())}" aria-labelledby="${titleId}">
+  <article class="course-card" data-course-card data-code="${c.code}" data-sector="${c.sector}" data-level="${c.level}" data-pathways="${c.pathways.join(' ')}" ${searchAttrs(c)} aria-labelledby="${titleId}">
     <div class="course-card__top">
       ${sectorChip(c.sector)}
       <span class="course-card__code">${c.code}</span>
@@ -106,24 +118,63 @@ export const faqList = (items) => html`
     )}
   </div>`;
 
-export const ctaBand = (depth, { title = 'Not sure where to start?', text = 'Tell Poonam a little about your work and goals. She’ll suggest a course and the most sensible way to get it – with no pressure to enrol.', course } = {}) => {
+// What happens after someone gets in touch. Shown on the final invitation,
+// beside both forms and after a successful submission.
+export const afterEnquiry = () => [
+  'You send a few details: the course you’re curious about and how to reach you.',
+  `${site.advisor} reviews them and contacts you the way you prefer${site.responseTime ? `, ${site.responseTime}` : ''}.`,
+  'You talk through your options. If you go ahead, she helps you enrol with the right training organisation.',
+];
+
+export const nextSteps = (cls = '') =>
+  `<ol class="next-steps ${cls}" role="list">${afterEnquiry().map((t) => `<li>${esc(t)}</li>`).join('')}</ol>`;
+
+export const ctaBand = (depth, { title = 'Ready to talk it through?', text = `Tell ${site.advisor} a little about your work and goals. She’ll suggest courses that fit and the most sensible way to get there, with no pressure to enrol.`, course } = {}) => {
   const q = course ? `?course=${encodeURIComponent(course)}` : '';
   return html`
-  <section class="section">
+  <section class="section section--invite">
     <div class="container">
-      <div class="cta-band">
-        <div class="cta-band__text">
+      <div class="invite">
+        <div class="invite__text">
+          <span class="avatar avatar--lg" aria-hidden="true">${advisorAvatar(depth)}</span>
           <h2>${title}</h2>
-          <p>${text}</p>
+          <p class="lead">${text}${tbc('Confirm the first conversation is free and without obligation')}</p>
+          <div class="btn-row">
+            <a class="btn btn--primary btn--lg" href="${link(depth, `contact.html${q}`)}">${icon('chat')} Talk to ${site.advisor}</a>
+            <a class="btn btn--secondary btn--lg" href="${link(depth, 'course-finder.html')}">Find my course</a>
+          </div>
         </div>
-        <div class="btn-row">
-          <a class="btn btn--primary btn--lg" href="${link(depth, `eligibility.html${q}`)}">Check my eligibility ${icon('arrow-right')}</a>
-          <a class="btn btn--secondary btn--lg" href="${link(depth, `contact.html${q}`)}">${icon('chat')} Talk to Poonam</a>
+        <div class="invite__steps">
+          <h3 class="invite__steps-title">What happens next</h3>
+          ${nextSteps()}
         </div>
       </div>
     </div>
   </section>`;
 };
+
+// Small round avatar: Poonam's photo when supplied, otherwise her initial.
+export const advisorAvatar = (depth) =>
+  site.advisorPhoto
+    ? `<img src="${link(depth, site.advisorPhoto)}" alt="" width="96" height="96" loading="lazy">`
+    : `<span class="avatar__initial">${site.advisor[0]}</span>`;
+
+// Decorative winding path used as the Pathwise journey motif.
+export const journeyPath = (cls = '') =>
+  `<svg class="journey-path ${cls}" viewBox="0 0 600 220" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 196C120 196 132 108 236 108S352 30 456 30 560 18 596 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="2 9"/></svg>`;
+
+// Photo card for a course area. Images are Unsplash-licensed; see CREDITS.md.
+export const areaCard = (s, count, depth) => html`
+  <a class="area-card" href="${link(depth, `courses.html?sector=${s.id}`)}">
+    <span class="area-card__media">
+      <img src="${link(depth, `assets/img/areas/${s.image.file}-480.webp`)}" srcset="${link(depth, `assets/img/areas/${s.image.file}-480.webp`)} 480w, ${link(depth, `assets/img/areas/${s.image.file}-800.webp`)} 800w" sizes="(min-width: 1000px) 360px, (min-width: 640px) 45vw, 48vw" width="480" height="360" alt="${esc(s.image.alt)}" loading="lazy" decoding="async">
+    </span>
+    <span class="area-card__body">
+      <span class="area-card__name">${esc(s.name)}</span>
+      <span class="area-card__blurb">${esc(s.blurb)}</span>
+      <span class="area-card__count">${count} ${count === 1 ? 'course' : 'courses'} ${icon('arrow-right')}</span>
+    </span>
+  </a>`;
 
 // Phone / WhatsApp / email tiles. Missing details show a placeholder.
 export const contactOptions = () => {
@@ -143,14 +194,15 @@ export const contactOptions = () => {
   </ul>`;
 };
 
-export const formNotConnected = () =>
+// Shown instead of a working form while no submission service is connected.
+export const formUnavailable = () =>
   site.forms.endpoint
     ? ''
-    : html`<div class="notice notice--warn" role="note">
+    : html`<div class="notice notice--warn form-unavailable" role="note">
         ${icon('info')}
         <div>
-          <p><strong>Online forms are being set up.</strong> Until then, submitting this form will not send your details to Poonam – please use the phone, WhatsApp or email options instead.</p>
-          ${site.draft ? `<p class="notice__dev">Site owner: add a form endpoint in <code>src/data/site.js</code> (<code>forms.endpoint</code>). See “Connecting the forms” in the README.</p>` : ''}
+          <p><strong>Online enquiries aren’t open yet.</strong> This form can’t send messages at the moment, so it’s switched off for now.</p>
+          <p>${contactLinks().phone || contactLinks().email ? `Please contact ${site.advisor} directly using the details on this page.` : `${site.advisor}’s phone, WhatsApp and email details will be added here soon.`}</p>
         </div>
       </div>`;
 

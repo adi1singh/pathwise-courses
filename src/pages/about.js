@@ -8,8 +8,8 @@ export default function about() {
 
   const portrait = html`
     <div class="about-portrait" aria-hidden="true">
-      <div class="portrait portrait--lg"><span class="portrait__initial">P</span></div>
-      ${site.draft ? '<p class="meet__photo-note">Add a friendly photo of Poonam</p>' : ''}
+      <div class="portrait portrait--lg">${site.advisorPhoto ? `<img src="${site.advisorPhoto}" alt="" width="600" height="750">` : `<span class="portrait__initial">${site.advisor[0]}</span>`}</div>
+      ${site.draft && !site.advisorPhoto ? '<p class="meet__photo-note">Add a friendly photo of Poonam</p>' : ''}
     </div>`;
 
   const body = html`

@@ -34,6 +34,8 @@ only if they belong to Poonam's business.
       - **BSB41419** Certificate IV in Work Health and Safety
       - **CHC43015** Certificate IV in Ageing Support
       - The new 2025 releases **CHC30125, CHC40225, CHC50125, CHC50225, CHC52025**
+- [ ] **Fees:** add a verified fee to `fees` on each course, or leave it empty. Course pages
+      then explain how to get a written quote; no price is ever invented.
 - [ ] **Confirm the details on each course page.** These are typical figures only and must match
       what the delivering RTO says:
       - online study duration
@@ -46,26 +48,35 @@ only if they belong to Poonam's business.
 
 ## 3. Content from Poonam
 
-- [ ] Phone number, WhatsApp number, email address, contact hours, and where she's based / which
-      states she helps. Add these to `contact` in `src/data/site.js`.
-- [ ] A friendly photo of Poonam (home page and About page).
-- [ ] Her own story for the About page. The current text is placeholder copy: her background,
-      how long she's been helping students, and the languages she speaks.
-- [ ] Confirm the promises in the copy:
-      - the free, no-obligation chat and eligibility check
+- [ ] **Contact details:** phone, WhatsApp number, email address, contact hours, and where
+      she's based / which states she helps. Add these to `contact` in `src/data/site.js`.
+- [ ] **Portrait of Poonam:** a friendly, recent photo she's happy to use, at least 800px wide,
+      in a 4:5 or square shape. Save it as `src/assets/img/poonam.jpg` and set `advisorPhoto`.
+      Until then the hero shows a designed placeholder, never a stand-in face.
+- [ ] **Approved introduction and background:** check the homepage greeting and quote ("I'll
+      listen to your experience and goals…") and write her own story for the About page. The
+      About text is placeholder copy. Cover her relevant background, how long she's been
+      helping students, and the languages she speaks. Only include credentials she can show.
+- [ ] **Response time:** if Poonam can commit to one (e.g. "within one business day"), set
+      `responseTime`. It's shown in "What happens next" only once set.
+- [ ] **Promises in the copy:**
+      - the first conversation is free and without obligation
       - "no payment details needed" for a first chat
       - first chats take about 15 minutes, by phone, WhatsApp or video
-      - one familiar contact from first chat to certificate
-      - check-ins during study
-      - help organising RPL evidence
-      - team training for employers
-- [ ] **FAQ answers marked "To confirm".** These cover costs, instalments, government funding,
-      RPL timing, weekly study hours and where study can happen.
-- [ ] **Business name.** Check "Pathwise Courses" is available on the ASIC business names register
+      - "One person, start to finish": she's the contact from first chat to certificate
+      - "Honest about fit": she'll say if a course isn't right
+      - check-ins during study, help organising RPL evidence, team training for employers
+- [ ] **FAQ answers marked "To confirm":** costs, instalments, government funding, RPL timing,
+      weekly study hours, and where study can happen.
+- [ ] **Business name:** check "Pathwise Courses" is available on the ASIC business names register
       and at IP Australia (trade marks), and that a suitable domain is free. Add the legal name
       and ABN to `business` in `src/data/site.js`.
-- [ ] **Testimonials (optional).** Add only genuine reviews, with the person's permission. None
-      are included.
+- [ ] **Testimonials (optional):** add only genuine, approved stories to `testimonials`, with the
+      person's permission. The section stays hidden while the list is empty.
+- [ ] **Imagery:** the six course-area photos are licensed from Unsplash (see `CREDITS.md`).
+      Confirm Poonam is happy with them, or supply her own photos (with consent from anyone shown).
+- [ ] **Course finder rules:** check `src/data/finder.js`. Each interest suggests a set of
+      courses; adjust if Poonam would steer people differently.
 
 ## 4. Policies
 
@@ -75,12 +86,11 @@ only if they belong to Poonam's business.
 
 ## 5. Configuration
 
-- [ ] **Connect the forms.** Set `forms.endpoint` in `src/data/site.js` (see "Connecting the
-      forms" in the README), rebuild, and send a test from both the Contact page and the
-      Eligibility check. Until then the forms say plainly that nothing was sent.
-- [ ] **Create the GitHub repository and push this repo to it.** The build session couldn't
-      create repos. The full history is also on the `claude/determined-lovelace-osq66a` branch of
-      `adi1singh/jobgen-olivia-redesign` as a backup.
+- [ ] **Connect the forms:** choose where enquiries should go (Formspree is simplest; see
+      "Connecting the forms" in the README) and set `forms.endpoint` in `src/data/site.js`.
+      Rebuild, then send a real test from both the Contact page and "Ask about a course". Until
+      then both forms are shown switched off with a short note to visitors.
+- [x] **GitHub repository:** `adi1singh/pathwise-courses`, deployed on Vercel from `main`.
 - [ ] **Hosting and domain.** Deploy `docs/` (GitHub Pages, Netlify or Vercel), point the domain
       at it, and set `url` in `src/data/site.js` to the final address.
 - [ ] **Go live.** Set `draft: false`, run `npm run build`, run `npm test`, then commit and

@@ -1,6 +1,6 @@
 // Builds the static site into docs/ (served as-is by GitHub Pages, Netlify,
 // Vercel or any static host). Run: npm run build
-import { mkdir, rm, writeFile, cp, readdir } from 'node:fs/promises';
+import { mkdir, rm, writeFile, cp, readdir, readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -9,6 +9,7 @@ import { courses } from '../src/data/courses.js';
 import { layout } from '../src/templates/layout.js';
 import home from '../src/pages/home.js';
 import coursesPage from '../src/pages/courses.js';
+import finder from '../src/pages/finder.js';
 import coursePage from '../src/pages/course.js';
 import ways from '../src/pages/ways.js';
 import shortPage from '../src/pages/short.js';
@@ -18,10 +19,14 @@ import { contact, eligibility } from '../src/pages/forms.js';
 import { privacy, notFound } from '../src/pages/misc.js';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const out = join(root, 'docs');
+// PATHWISE_OUT and PATHWISE_FORM_ENDPOINT let the test suite build a copy of
+// the site with a (fake) form service connected, without touching docs/.
+const out = process.env.PATHWISE_OUT || join(root, 'docs');
+if (process.env.PATHWISE_FORM_ENDPOINT) site.forms.endpoint = process.env.PATHWISE_FORM_ENDPOINT;
 
 const pages = [
   home(),
+  finder(),
   coursesPage(),
   ...courses.map(coursePage),
   ways(),
@@ -45,6 +50,19 @@ for (const page of pages) {
 
 await cp(join(root, 'src/assets'), join(out, 'assets'), { recursive: true });
 
+// Light CSS minification: drop comments and collapse whitespace.
+const cssFile = join(out, 'assets/css/styles.css');
+const css = await readFile(cssFile, 'utf8');
+await writeFile(
+  cssFile,
+  css
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/\s+/g, ' ')
+    .replace(/\s*([{};,>])\s*/g, '$1')
+    .replace(/;}/g, '}')
+    .trim()
+);
+
 // Search engine files. While in draft the site asks not to be indexed.
 const indexable = pages.filter((p) => p.path !== '404.html');
 await writeFile(
@@ -63,4 +81,4 @@ await writeFile(
 await writeFile(join(out, '.nojekyll'), '');
 
 const count = (await readdir(out, { recursive: true })).filter((f) => f.endsWith('.html')).length;
-console.log(`Built ${count} pages into docs/${site.draft ? ' (draft mode)' : ''}`);
+console.log(`Built ${count} pages into ${process.env.PATHWISE_OUT ? out : 'docs/'}${site.draft ? ' (draft mode)' : ''}`);
