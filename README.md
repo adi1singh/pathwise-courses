@@ -10,7 +10,7 @@ short course), and make an enquiry or talk to Poonam.
 
 | Page | File | Purpose |
 | --- | --- | --- |
-| Home | `index.html` | Video hero with course search suggestions and Poonam, course finder entry, course areas (bento), About Poonam, student stories (samples in preview only), why these courses matter, how it works, FAQs, enquiry invitation |
+| Home | `index.html` | Video hero with course search suggestions and Poonam, scrolling job band, **Pathway Map** (pick an area and your experience to see the route, jobs, time, typical prices and where RPL could count), course finder entry, course areas (bento), About Poonam, student stories (samples in preview only), why these courses matter, how it works, FAQs, enquiry invitation |
 | Find my course | `course-finder.html` | Four questions, one at a time, then suggested courses and pathways with reasons; answers can be edited |
 | Courses | `courses.html` | Ranked search (everyday words and job titles), area chips, a folding filter panel on mobile, removable filter chips, compare up to 3 |
 | Course pages (16) | `course/*.html` | At a glance (suits, study options, placement, entry, provider, fees), section links, full detail, FAQs |
@@ -41,6 +41,7 @@ generated from data, so most edits are in `src/data/`:
 | Contact details, Poonam's photo, response time, testimonials, business name, partner RTOs, form endpoint, draft mode | `src/data/site.js` |
 | Courses (text, durations, placement, entry needs, pathways, fees, search keywords, area photos) | `src/data/courses.js` |
 | Course finder questions and which courses each interest suggests | `src/data/finder.js` |
+| Pathway Map routes (which courses sit at each step) | `src/data/pathway-map.js` |
 | Short courses | `src/data/short-courses.js` |
 | FAQs | `src/data/faqs.js` |
 | Page wording and layout | `src/pages/*.js` |

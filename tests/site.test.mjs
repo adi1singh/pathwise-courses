@@ -159,6 +159,25 @@ test('homepage hero: search suggests courses, and the finder is one click away',
   await page.context().close();
 });
 
+test('Pathway Map: tabs switch routes and the starting point follows experience', async () => {
+  const page = await newPage(undefined, { reducedMotion: 'reduce' });
+  await page.goto(BASE + 'index.html');
+  const map = page.locator('#pathway-map');
+  await map.getByRole('tab', { name: 'Early childhood' }).click();
+  const panel = map.getByRole('tabpanel', { name: /Early childhood/ });
+  assert.ok(await panel.isVisible(), 'chosen route shows');
+  assert.equal(await map.locator('[role="tabpanel"]:visible').count(), 1, 'one route at a time');
+  assert.match(await panel.locator('.pmap__stop.is-start').textContent(), /Certificate III/);
+  await map.locator('input[name="pmap-exp"][value="qual"]').check();
+  assert.match(await panel.locator('.pmap__stop.is-start').textContent(), /Diploma/);
+  assert.ok(await panel.locator('.pmap__stop').first().getByText('Already done').isVisible());
+  await map.locator('input[name="pmap-exp"][value="exp"]').check();
+  assert.ok(await panel.locator('.pmap__stop.is-start [data-rpl-note]').isVisible(), 'experience shows where RPL could count');
+  await map.getByRole('tab', { name: 'Early childhood' }).press('ArrowRight');
+  assert.equal(await map.getByRole('tab', { name: 'Schools & OSHC' }).getAttribute('aria-selected'), 'true', 'arrow keys move between tabs');
+  await page.context().close();
+});
+
 /* ── Search, filters and comparison ────────────────────────────────────── */
 
 test('search understands everyday words and ranks the best matches first', async () => {

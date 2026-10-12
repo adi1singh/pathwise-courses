@@ -455,6 +455,71 @@
     else window.addEventListener('load', check, { once: true });
   }
 
+  /* ── Pathway Map: pick an area and a starting point ──────────────────── */
+  const pmap = $('[data-pmap]');
+  if (pmap) {
+    const tabs = $$('[data-pmap-tab]', pmap);
+    const panels = $$('[data-pmap-panel]', pmap);
+    let exp = 'new';
+    let current = tabs[0]?.dataset.pmapTab;
+    let seen = false;
+
+    const draw = (panel) => {
+      panel.classList.remove('is-drawn');
+      void panel.offsetWidth; // restart the route animation
+      if (seen) panel.classList.add('is-drawn');
+    };
+
+    const apply = () => {
+      const panel = panels.find((p) => p.dataset.pmapPanel === current);
+      const stops = $$('.pmap__stop', panel);
+      const start = exp === 'qual' ? Math.min(1, stops.length - 1) : 0;
+      stops.forEach((st, i) => {
+        st.classList.toggle('is-done', i < start);
+        st.classList.toggle('is-start', i === start);
+        st.classList.toggle('is-ahead', i >= start);
+        st.style.setProperty('--i', Math.max(i - start, 0));
+        $('[data-you]', st).hidden = i !== start;
+        $('[data-done]', st).hidden = i >= start;
+        const note = $('[data-rpl-note]', st);
+        if (note) note.hidden = !((exp === 'some' && i === start) || (exp === 'exp' && (i === start || i === start + 1)) );
+      });
+      draw(panel);
+    };
+
+    const select = (tab, focus) => {
+      current = tab.dataset.pmapTab;
+      tabs.forEach((t) => {
+        const on = t === tab;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+      });
+      panels.forEach((p) => { p.toggleAttribute('data-inactive', p.dataset.pmapPanel !== current); });
+      if (focus) tab.focus();
+      tab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      apply();
+    };
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => select(tab));
+      tab.addEventListener('keydown', (e) => {
+        const step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (e.key === 'Home') { e.preventDefault(); select(tabs[0], true); }
+        else if (e.key === 'End') { e.preventDefault(); select(tabs[tabs.length - 1], true); }
+        else if (step) { e.preventDefault(); select(tabs[(i + step + tabs.length) % tabs.length], true); }
+      });
+    });
+    $$('input[name="pmap-exp"]', pmap).forEach((r) => r.addEventListener('change', () => { exp = r.value; apply(); }));
+
+    apply();
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) { seen = true; apply(); io.disconnect(); }
+      }, { threshold: 0.25 });
+      io.observe(pmap);
+    } else { seen = true; apply(); }
+  }
+
   /* ── Gentle reveal as sections scroll into view ─────────────────────── */
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const targets = $$([

@@ -122,21 +122,252 @@
     </div>
   </aside>
   
-  <section class="section section--navy finder-entry" aria-labelledby="finder-title">
-    <div class="container finder-entry__inner">
-      <div class="finder-entry__text">
-        <p class="eyebrow eyebrow--on-dark">Course finder</p>
-        <h2 id="finder-title">Not sure which course fits? Answer four quick questions.</h2>
-        <p>Tell us what interests you, your experience and your goal. You’ll see suggested courses and study pathways, with the reasons why, before we ask for any contact details.</p>
-        <ol class="finder-entry__path" role="list" aria-label="Four questions">
-          <li class="is-current">Interest</li><li>Experience</li><li>Qualifications</li><li>Goal</li>
-        </ol>
+  <div class="job-band" aria-label="Jobs these courses lead to">
+    <ul class="job-band__track" role="list">
+      <li>Aged care worker</li><li>Early childhood educator</li><li>Teacher aide</li><li>Disability support worker</li><li>Trainer & assessor</li><li>Team leader</li><li>Counsellor</li><li>WHS officer</li><li>Community worker</li><li>OSHC coordinator</li><li>Site supervisor</li><li aria-hidden="true">Aged care worker</li><li aria-hidden="true">Early childhood educator</li><li aria-hidden="true">Teacher aide</li><li aria-hidden="true">Disability support worker</li><li aria-hidden="true">Trainer & assessor</li><li aria-hidden="true">Team leader</li><li aria-hidden="true">Counsellor</li><li aria-hidden="true">WHS officer</li><li aria-hidden="true">Community worker</li><li aria-hidden="true">OSHC coordinator</li><li aria-hidden="true">Site supervisor</li>
+    </ul>
+  </div>
+  
+  <section class="section pmap" id="pathway-map" aria-labelledby="pmap-title" data-pmap>
+    <div class="container">
+      <div class="pmap__head">
+        <div>
+          <p class="eyebrow eyebrow--on-dark">The Pathway Map</p>
+          <h2 id="pmap-title">See where your next step <em>could take you</em></h2>
+        </div>
+        <p class="lead">Pick the work you love. Then tell us where you are now: we’ll show your starting point, the jobs each step opens up, the time it takes and typical prices. If you’ve already got experience, see where it could count.</p>
       </div>
-      <div class="finder-entry__start">
-        <p class="finder-entry__q" id="finder-q1">Question 1 of 4 · What kind of work interests you?</p>
-        <ul class="finder-entry__options" role="list" aria-labelledby="finder-q1">
-          <li><a class="pill-option" href="course-finder.html?interest=aged-disability">Aged care or disability support</a></li><li><a class="pill-option" href="course-finder.html?interest=early-childhood">Childcare and early learning</a></li><li><a class="pill-option" href="course-finder.html?interest=school">Schools and after-school care</a></li><li><a class="pill-option" href="course-finder.html?interest=community">Community services or counselling</a></li><li><a class="pill-option" href="course-finder.html?interest=training">Training and assessing others</a></li><li><a class="pill-option" href="course-finder.html?interest=leadership">Leading teams or workplace safety</a></li><li><a class="pill-option" href="course-finder.html?interest=building">Building and construction</a></li><li><a class="pill-option" href="course-finder.html?interest=firstaid">A first aid or CPR certificate</a></li><li><a class="pill-option" href="course-finder.html?interest=unsure">I’m not sure yet</a></li>
-        </ul>
+
+      <div class="pmap__controls">
+        <div class="pmap__tabs" role="tablist" aria-label="Choose an area of work">
+          <button type="button" role="tab" id="pmt-care" aria-controls="pm-care" aria-selected="true" tabindex="0" data-pmap-tab="care"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a4.8 4.8 0 0 1 9-3 4.8 4.8 0 0 1 9 3c-2 4.6-9 9-9 9z"/></svg>Aged care & disability</button><button type="button" role="tab" id="pmt-early" aria-controls="pm-early" aria-selected="false" tabindex="-1" data-pmap-tab="early"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/><rect x="8" y="3" width="8" height="8" rx="1.5"/></svg>Early childhood</button><button type="button" role="tab" id="pmt-school" aria-controls="pm-school" aria-selected="false" tabindex="-1" data-pmap-tab="school"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2zM21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/></svg>Schools & OSHC</button><button type="button" role="tab" id="pmt-community" aria-controls="pm-community" aria-selected="false" tabindex="-1" data-pmap-tab="community"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6.5 6.5 0 0 1 3.5 6"/></svg>Community & counselling</button><button type="button" role="tab" id="pmt-lead" aria-controls="pm-lead" aria-selected="false" tabindex="-1" data-pmap-tab="lead"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg>Training & leadership</button>
+        </div>
+        <fieldset class="pmap__exp" data-pmap-exp>
+          <legend>Where are you now?</legend>
+          <div>
+            <label><input type="radio" name="pmap-exp" value="new" checked><span>I’m new to this work</span></label><label><input type="radio" name="pmap-exp" value="some"><span>Under 2 years’ experience</span></label><label><input type="radio" name="pmap-exp" value="exp"><span>2+ years in the field</span></label><label><input type="radio" name="pmap-exp" value="qual"><span>I hold the first qualification</span></label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="pmap__panel" role="tabpanel" id="pm-care" aria-labelledby="pmt-care" data-pmap-panel="care">
+          <h3 class="visually-hidden">Aged care & disability pathway</h3>
+          <ol class="pmap__route" role="list" style="--stops:4">
+            <li class="pmap__stop" data-step="0" data-rpl="1">
+    <span class="pmap__node" aria-hidden="true"><span>1</span></span>
+    <div class="pmap__card">
+      <p class="pmap__you" data-you hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> You start here</p>
+      <p class="pmap__level">Certificate III</p>
+      <h3 class="pmap__title"><a href="course/chc33021-certificate-iii-individual-support.html">Individual Support</a></h3>
+      <p class="pmap__roles">Personal care worker · Aged care worker</p>
+      <dl class="pmap__facts">
+        <div><dt>Study</dt><dd>6–12 months</dd></div>
+        <div><dt>Typical price</dt><dd>$3,000–$12,450</dd></div>
+      </dl>
+      <p class="pmap__rpl" data-rpl-note hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></svg><span><strong>Your experience may count.</strong> RPL often 4–12 weeks, typically $1,400–$2,500.</span></p>
+      <p class="pmap__done" data-done hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Already done</p>
+    </div>
+  </li><li class="pmap__stop" data-step="1" data-rpl="1">
+    <span class="pmap__node" aria-hidden="true"><span>2</span></span>
+    <div class="pmap__card">
+      <p class="pmap__you" data-you hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> You start here</p>
+      <p class="pmap__level">Certificate IV</p>
+      <h3 class="pmap__title"><a href="course/chc43121-certificate-iv-disability-support.html">Disability Support</a><span class="pmap__or"> or </span><a href="course/chc43015-certificate-iv-ageing-support.html">Ageing Support</a></h3>
+      <p class="pmap__roles">Senior disability support worker · Team leader – disability services</p>
+      <dl class="pmap__facts">
+        <div><dt>Study</dt><dd>6–12 months</dd></div>
+        <div><dt>Typical price</dt><dd>$3,000–$10,650</dd></div>
+      </dl>
+      <p class="pmap__rpl" data-rpl-note hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></svg><span><strong>Your experience may count.</strong> RPL often 4–12 weeks, typically $2,000–$2,550.</span></p>
+      <p class="pmap__done" data-done hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Already done</p>
+    </div>
+  </li><li class="pmap__stop" data-step="2" data-rpl="1">
+    <span class="pmap__node" aria-hidden="true"><span>3</span></span>
+    <div class="pmap__card">
+      <p class="pmap__you" data-you hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> You start here</p>
+      <p class="pmap__level">Diploma</p>
+      <h3 class="pmap__title"><a href="course/chc52025-diploma-of-community-services.html">Community Services</a></h3>
+      <p class="pmap__roles">Case manager · Community services coordinator</p>
+      <dl class="pmap__facts">
+        <div><dt>Study</dt><dd>12–18 months</dd></div>
+        <div><dt>Typical price</dt><dd>$6,500–$22,850</dd></div>
+      </dl>
+      <p class="pmap__rpl" data-rpl-note hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></svg><span><strong>Your experience may count.</strong> RPL often 6–12 weeks, typically $3,500–$4,000.</span></p>
+      <p class="pmap__done" data-done hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Already done</p>
+    </div>
+  </li><li class="pmap__stop" data-step="3" data-rpl="1">
+    <span class="pmap__node" aria-hidden="true"><span>4</span></span>
+    <div class="pmap__card">
+      <p class="pmap__you" data-you hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> You start here</p>
+      <p class="pmap__level">Advanced Diploma</p>
+      <h3 class="pmap__title"><a href="course/chc62015-advanced-diploma-community-sector-management.html">Community Sector Management</a></h3>
+      <p class="pmap__roles">Service manager · Operations or program manager</p>
+      <dl class="pmap__facts">
+        <div><dt>Study</dt><dd>12–18 months</dd></div>
+        <div><dt>Typical price</dt><dd>$5,000–$6,000</dd></div>
+      </dl>
+      <p class="pmap__rpl" data-rpl-note hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></svg><span><strong>Your experience may count.</strong> RPL often 6–12 weeks.</span></p>
+      <p class="pmap__done" data-done hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Already done</p>
+    </div>
+  </li>
+          </ol>
+        </div><div class="pmap__panel" role="tabpanel" id="pm-early" aria-labelledby="pmt-early" data-pmap-panel="early" data-inactive>
+          <h3 class="visually-hidden">Early childhood pathway</h3>
+          <ol class="pmap__route" role="list" style="--stops:2">
+            <li class="pmap__stop" data-step="0" data-rpl="1">
+    <span class="pmap__node" aria-hidden="true"><span>1</span></span>
+    <div class="pmap__card">
+      <p class="pmap__you" data-you hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> You start here</p>
+      <p class="pmap__level">Certificate III</p>
+      <h3 class="pmap__title"><a href="course/chc30125-certificate-iii-early-childhood-education-care.html">Early Childhood Education and Care</a></h3>
+      <p class="pmap__roles">Early childhood educator · Childcare assistant</p>
+      <dl class="pmap__facts">
+        <div><dt>Study</dt><dd>6–12 months</dd></div>
+        <div><dt>Typical price</dt><dd>$3,000–$3,400</dd></div>
+      </dl>
+      <p class="pmap__rpl" data-rpl-note hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></svg><span><strong>Your experience may count.</strong> RPL often 4–12 weeks, typically $2,000–$2,700.</span></p>
+      <p class="pmap__done" data-done hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Already done</p>
+    </div>
+  </li><li class="pmap__stop" data-step="1" data-rpl="1">
+    <span class="pmap__node" aria-hidden="true"><span>2</span></span>
+    <div class="pmap__card">
+      <p class="pmap__you" data-you hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> You start here</p>
+      <p class="pmap__level">Diploma</p>
+      <h3 class="pmap__title"><a href="course/chc50125-diploma-early-childhood-education-care.html">Early Childhood Education and Care (Diploma)</a></h3>
+      <p class="pmap__roles">Diploma-qualified educator · Room leader</p>
+      <dl class="pmap__facts">
+        <div><dt>Study</dt><dd>12–18 months</dd></div>
+        <div><dt>Typical price</dt><dd>$3,300–$7,500</dd></div>
+      </dl>
+      <p class="pmap__rpl" data-rpl-note hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></svg><span><strong>Your experience may count.</strong> RPL often 6–12 weeks, typically $2,100–$2,700.</span></p>
+      <p class="pmap__done" data-done hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Already done</p>
+    </div>
+  </li>
+          </ol>
+        </div><div class="pmap__panel" role="tabpanel" id="pm-school" aria-labelledby="pmt-school" data-pmap-panel="school" data-inactive>
+          <h3 class="visually-hidden">Schools & OSHC pathway</h3>
+          <ol class="pmap__route" role="list" style="--stops:2">
+            <li class="pmap__stop" data-step="0" data-rpl="1">
+    <span class="pmap__node" aria-hidden="true"><span>1</span></span>
+    <div class="pmap__card">
+      <p class="pmap__you" data-you hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> You start here</p>
+      <p class="pmap__level">Certificate IV</p>
+      <h3 class="pmap__title"><a href="course/chc40225-certificate-iv-school-based-education-support.html">School Based Education Support</a></h3>
+      <p class="pmap__roles">Education support officer · Teacher aide or assistant</p>
+      <dl class="pmap__facts">
+        <div><dt>Study</dt><dd>6–12 months</dd></div>
+        <div><dt>Typical price</dt><dd>$3,250–$5,900</dd></div>
+      </dl>
+      <p class="pmap__rpl" data-rpl-note hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></svg><span><strong>Your experience may count.</strong> RPL often 4–12 weeks.</span></p>
+      <p class="pmap__done" data-done hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Already done</p>
+    </div>
+  </li><li class="pmap__stop" data-step="1" data-rpl="1">
+    <span class="pmap__node" aria-hidden="true"><span>2</span></span>
+    <div class="pmap__card">
+      <p class="pmap__you" data-you hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> You start here</p>
+      <p class="pmap__level">Diploma</p>
+      <h3 class="pmap__title"><a href="course/chc50225-diploma-school-age-education-care.html">School Age Education and Care</a></h3>
+      <p class="pmap__roles">OSHC coordinator · Assistant coordinator</p>
+      <dl class="pmap__facts">
+        <div><dt>Study</dt><dd>12–18 months</dd></div>
+        <div><dt>Typical price</dt><dd>$3,500–$7,900</dd></div>
+      </dl>
+      <p class="pmap__rpl" data-rpl-note hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></svg><span><strong>Your experience may count.</strong> RPL often 6–12 weeks.</span></p>
+      <p class="pmap__done" data-done hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Already done</p>
+    </div>
+  </li>
+          </ol>
+        </div><div class="pmap__panel" role="tabpanel" id="pm-community" aria-labelledby="pmt-community" data-pmap-panel="community" data-inactive>
+          <h3 class="visually-hidden">Community & counselling pathway</h3>
+          <ol class="pmap__route" role="list" style="--stops:3">
+            <li class="pmap__stop" data-step="0" data-rpl="1">
+    <span class="pmap__node" aria-hidden="true"><span>1</span></span>
+    <div class="pmap__card">
+      <p class="pmap__you" data-you hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> You start here</p>
+      <p class="pmap__level">Certificate III</p>
+      <h3 class="pmap__title"><a href="course/chc33021-certificate-iii-individual-support.html">Individual Support</a></h3>
+      <p class="pmap__roles">Personal care worker · Aged care worker</p>
+      <dl class="pmap__facts">
+        <div><dt>Study</dt><dd>6–12 months</dd></div>
+        <div><dt>Typical price</dt><dd>$3,000–$12,450</dd></div>
+      </dl>
+      <p class="pmap__rpl" data-rpl-note hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></svg><span><strong>Your experience may count.</strong> RPL often 4–12 weeks, typically $1,400–$2,500.</span></p>
+      <p class="pmap__done" data-done hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Already done</p>
+    </div>
+  </li><li class="pmap__stop" data-step="1" data-rpl="1">
+    <span class="pmap__node" aria-hidden="true"><span>2</span></span>
+    <div class="pmap__card">
+      <p class="pmap__you" data-you hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> You start here</p>
+      <p class="pmap__level">Diploma</p>
+      <h3 class="pmap__title"><a href="course/chc52025-diploma-of-community-services.html">Community Services</a><span class="pmap__or"> or </span><a href="course/chc51015-diploma-of-counselling.html">Counselling</a></h3>
+      <p class="pmap__roles">Case manager · Community services coordinator</p>
+      <dl class="pmap__facts">
+        <div><dt>Study</dt><dd>12–18 months</dd></div>
+        <div><dt>Typical price</dt><dd>$4,200–$22,850</dd></div>
+      </dl>
+      <p class="pmap__rpl" data-rpl-note hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></svg><span><strong>Your experience may count.</strong> RPL often 6–12 weeks, typically $3,500–$4,000.</span></p>
+      <p class="pmap__done" data-done hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Already done</p>
+    </div>
+  </li><li class="pmap__stop" data-step="2" data-rpl="1">
+    <span class="pmap__node" aria-hidden="true"><span>3</span></span>
+    <div class="pmap__card">
+      <p class="pmap__you" data-you hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> You start here</p>
+      <p class="pmap__level">Advanced Diploma</p>
+      <h3 class="pmap__title"><a href="course/chc62015-advanced-diploma-community-sector-management.html">Community Sector Management</a></h3>
+      <p class="pmap__roles">Service manager · Operations or program manager</p>
+      <dl class="pmap__facts">
+        <div><dt>Study</dt><dd>12–18 months</dd></div>
+        <div><dt>Typical price</dt><dd>$5,000–$6,000</dd></div>
+      </dl>
+      <p class="pmap__rpl" data-rpl-note hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></svg><span><strong>Your experience may count.</strong> RPL often 6–12 weeks.</span></p>
+      <p class="pmap__done" data-done hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Already done</p>
+    </div>
+  </li>
+          </ol>
+        </div><div class="pmap__panel" role="tabpanel" id="pm-lead" aria-labelledby="pmt-lead" data-pmap-panel="lead" data-inactive>
+          <h3 class="visually-hidden">Training & leadership pathway</h3>
+          <ol class="pmap__route" role="list" style="--stops:2">
+            <li class="pmap__stop" data-step="0" data-rpl="1">
+    <span class="pmap__node" aria-hidden="true"><span>1</span></span>
+    <div class="pmap__card">
+      <p class="pmap__you" data-you hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> You start here</p>
+      <p class="pmap__level">Certificate IV</p>
+      <h3 class="pmap__title"><a href="course/tae40122-certificate-iv-training-assessment.html">Training and Assessment</a><span class="pmap__or"> or </span><a href="course/bsb41419-certificate-iv-work-health-safety.html">Work Health and Safety</a></h3>
+      <p class="pmap__roles">Trainer and assessor (VET) · Workplace trainer</p>
+      <dl class="pmap__facts">
+        <div><dt>Study</dt><dd>6–12 months</dd></div>
+        <div><dt>Typical price</dt><dd>$2,500–$7,850</dd></div>
+      </dl>
+      <p class="pmap__rpl" data-rpl-note hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></svg><span><strong>Your experience may count.</strong> RPL often 4–12 weeks, typically $1,100–$3,950.</span></p>
+      <p class="pmap__done" data-done hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Already done</p>
+    </div>
+  </li><li class="pmap__stop" data-step="1" data-rpl="1">
+    <span class="pmap__node" aria-hidden="true"><span>2</span></span>
+    <div class="pmap__card">
+      <p class="pmap__you" data-you hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> You start here</p>
+      <p class="pmap__level">Diploma</p>
+      <h3 class="pmap__title"><a href="course/bsb50420-diploma-leadership-management.html">Leadership and Management</a></h3>
+      <p class="pmap__roles">Team leader or supervisor · Operations manager</p>
+      <dl class="pmap__facts">
+        <div><dt>Study</dt><dd>12–18 months</dd></div>
+        <div><dt>Typical price</dt><dd>$3,500–$9,000</dd></div>
+      </dl>
+      <p class="pmap__rpl" data-rpl-note hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></svg><span><strong>Your experience may count.</strong> RPL often 6–12 weeks, typically $1,750–$2,750.</span></p>
+      <p class="pmap__done" data-done hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Already done</p>
+    </div>
+  </li>
+          </ol>
+        </div>
+
+      <div class="pmap__foot">
+        <p>Prices are typical full-fee ranges across Australian providers (October 2026). Whether RPL fits is decided by the training provider. <span class="tbc" title="Poonam to check the routes on the Pathway Map"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: Poonam to check the routes on the Pathway Map</span></span></p>
+        <div class="pmap__finder">
+          <span id="finder-q1">Not sure where you fit? Start the 4-question finder:</span>
+          <ul class="pmap__pills" role="list" aria-labelledby="finder-q1">
+            <li><a class="pill-option" href="course-finder.html?interest=aged-disability">Aged care or disability support</a></li><li><a class="pill-option" href="course-finder.html?interest=early-childhood">Childcare and early learning</a></li><li><a class="pill-option" href="course-finder.html?interest=school">Schools and after-school care</a></li><li><a class="pill-option" href="course-finder.html?interest=community">Community services or counselling</a></li>
+            <li><a class="pill-option pill-option--more" href="course-finder.html">More options <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -267,6 +498,24 @@
     </div>
   </section>
   
+  <section class="section how" aria-labelledby="how-title">
+    <div class="container">
+      <div class="how__head">
+        <div>
+          <p class="eyebrow">How it works</p>
+          <h2 id="how-title">Your path to a qualification</h2>
+        </div>
+        <a class="link-arrow" href="ways-to-study.html">Compare RPL, online study and short courses <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <ol class="route" role="list">
+        <li class="route__stop"><span class="route__num" aria-hidden="true">01</span><span class="route__dot"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg></span><h3>Have a chat</h3><p>Share your experience and goals with Poonam.</p></li>
+        <li class="route__stop"><span class="route__num" aria-hidden="true">02</span><span class="route__dot"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg></span><h3>Choose your course</h3><p>Agree the right course and the best way to get it.</p></li>
+        <li class="route__stop"><span class="route__num" aria-hidden="true">03</span><span class="route__dot"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span><h3>Show or build your skills</h3><p>Gather evidence for RPL, or study the course online.</p></li>
+        <li class="route__stop route__stop--end"><span class="route__num" aria-hidden="true">04</span><span class="route__dot"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></svg></span><h3>Get qualified</h3><p>Your training organisation issues your qualification.</p></li>
+      </ol>
+    </div>
+  </section>
+  
   <section class="section section--navy why-matters" aria-labelledby="matters-title">
     <div class="container">
       <div class="section-head section-head--center">
@@ -305,26 +554,8 @@
           </div>
     </div>
   </section>
-  
-  <section class="section how" aria-labelledby="how-title">
-    <div class="container">
-      <div class="how__head">
-        <div>
-          <p class="eyebrow">How it works</p>
-          <h2 id="how-title">Your path to a qualification</h2>
-        </div>
-        <a class="link-arrow" href="ways-to-study.html">Compare RPL, online study and short courses <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-      <ol class="route" role="list">
-        <li class="route__stop"><span class="route__num" aria-hidden="true">01</span><span class="route__dot"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg></span><h3>Have a chat</h3><p>Share your experience and goals with Poonam.</p></li>
-        <li class="route__stop"><span class="route__num" aria-hidden="true">02</span><span class="route__dot"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg></span><h3>Choose your course</h3><p>Agree the right course and the best way to get it.</p></li>
-        <li class="route__stop"><span class="route__num" aria-hidden="true">03</span><span class="route__dot"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span><h3>Show or build your skills</h3><p>Gather evidence for RPL, or study the course online.</p></li>
-        <li class="route__stop route__stop--end"><span class="route__num" aria-hidden="true">04</span><span class="route__dot"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></svg></span><h3>Get qualified</h3><p>Your training organisation issues your qualification.</p></li>
-      </ol>
-    </div>
-  </section>
 
-  <section class="section section--soft" aria-labelledby="faq-title">
+  <section class="section" aria-labelledby="faq-title">
     <div class="container faq-split">
       <div class="faq-split__intro">
         <p class="eyebrow">Questions</p>
