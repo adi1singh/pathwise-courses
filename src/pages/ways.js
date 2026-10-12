@@ -52,7 +52,7 @@ export default function ways() {
   <nav class="subnav" aria-label="On this page">
     <div class="container">
       <ul role="list">
-        ${PATHS.map((p) => `<li><a href="#${p.id}">${icon(p.icon)}${p.short}</a></li>`)}
+        ${PATHS.map((p) => `<li><a href="${p.id === 'short' ? 'short-courses.html' : `#${p.id}`}">${icon(p.icon)}${p.short}</a></li>`)}
         <li><a href="#evidence-title">${icon('check')}RPL checklist</a></li>
         <li><a href="#compare">${icon('compare')}Compare</a></li>
       </ul>
