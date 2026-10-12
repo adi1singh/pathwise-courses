@@ -86,7 +86,8 @@ line. A hidden `_gotcha` field catches simple spam bots.
 The built site is in `docs/`, and it works from any folder or sub-path.
 
 - **GitHub Pages:** repository Settings → Pages → Deploy from a branch → `main` / `/docs`.
-- **Netlify / Vercel:** build command `npm run build`, publish directory `docs`.
+- **Vercel:** `vercel.json` already sets the build command (`npm run build`) and output directory (`docs`).
+- **Netlify:** build command `npm run build`, publish directory `docs`.
 
 Before launch, set `url` in `src/data/site.js` to the real domain. Canonical links, the sitemap
 and the social sharing image use it.
