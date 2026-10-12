@@ -41,6 +41,7 @@
       toggle.querySelector('.nav-toggle__label').textContent = open ? 'Close' : 'Menu';
       menu.classList.toggle('is-open', open);
       document.body.style.overflow = open ? 'hidden' : '';
+      document.body.classList.toggle('menu-open', open);
       if (!open && focusToggle) toggle.focus();
     };
     toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
