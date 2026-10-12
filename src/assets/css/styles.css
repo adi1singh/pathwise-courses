@@ -1765,10 +1765,10 @@ html:not(.js) .pmap__panel + .pmap__panel { margin-top: 2.5rem; }
 /* ── Calmer hero ────────────────────────────────────────────────────────── */
 .hero::before {
   background:
-    linear-gradient(90deg, rgba(6, 20, 48, 0.96) 0%, rgba(6, 20, 48, 0.9) 45%, rgba(6, 20, 48, 0.72) 75%, rgba(6, 20, 48, 0.78) 100%),
+    linear-gradient(90deg, rgba(6, 20, 48, 0.97) 0%, rgba(6, 20, 48, 0.92) 45%, rgba(6, 20, 48, 0.8) 75%, rgba(6, 20, 48, 0.85) 100%),
     linear-gradient(0deg, rgba(6, 20, 48, 0.9) 0%, rgba(6, 20, 48, 0) 40%);
 }
-.hero__video.is-playing { opacity: 0.55; }
+.hero__video.is-playing { opacity: 1; }
 .hero h1 { margin-bottom: 0.5em; }
 .hero__lead { font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); max-width: 30rem; }
 .hero-search { margin-top: 2.25rem; }
@@ -1779,7 +1779,6 @@ html:not(.js) .pmap__panel + .pmap__panel { margin-top: 2.5rem; }
 .hero__finder-link a { display: inline-flex; align-items: center; gap: 0.3rem; color: var(--gold); font-weight: 650; text-decoration: none; }
 .hero__finder-link a:hover { text-decoration: underline; }
 .hero__finder-link .icon { width: 1em; height: 1em; }
-.hero-guide__photo { transform: scaleX(-1); }
 .hero-guide__card { left: auto; right: -2%; bottom: 10%; padding: 0.7rem 1.1rem; }
 .hero-guide::after { border-color: rgba(246, 185, 59, 0.35); }
 @media (min-width: 900px) { .hero__text { padding-bottom: clamp(3.5rem, 2rem + 5vw, 6.5rem); } }
