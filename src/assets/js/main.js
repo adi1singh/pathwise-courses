@@ -88,6 +88,7 @@
       if (levelOnly && (field === 'roles' || field === 'text')) continue;
       const text = card.dataset[`s${field[0].toUpperCase()}${field.slice(1)}`] || '';
       for (const v of variants) {
+        if (v !== term && field === 'text') continue; // synonyms only count in titles, keywords and job titles
         const at = text.indexOf(v);
         if (at === -1) continue;
         const wholeWord = (at === 0 || /\W/.test(text[at - 1])) && !/\w/.test(text[at + v.length] || '');
