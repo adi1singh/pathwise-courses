@@ -20,9 +20,47 @@ Poonam may prefer photos of her own work or students (with their consent).
 To swap one, replace both `-480.webp` and `-800.webp` files, keep the 4:3
 shape, and update the `alt` text in `src/data/courses.js`.
 
-No image on the site shows or stands in for Poonam. Her portrait slot shows a
-designed placeholder until `advisorPhoto` is set in `src/data/site.js`.
+### Course and page photos (Pexels)
+
+From [Pexels](https://www.pexels.com), used under the [Pexels License](https://www.pexels.com/license/):
+free for commercial use and may be modified; attribution is not required. Not allowed: showing
+identifiable people in a bad light or implying they endorse the business. Saved in
+`src/assets/img/courses/` and `src/assets/img/ways/`.
+
+| Used for | Pexels photo | Photographer |
+| --- | --- | --- |
+| CHC33021, short courses hero | [18429308](https://www.pexels.com/photo/18429308/) | Jsme MILA |
+| CHC43121 | [8127496](https://www.pexels.com/photo/8127496/) | Ivan S |
+| CHC52025 | [9870141](https://www.pexels.com/photo/9870141/) | Ron Lach |
+| CHC62015 | [7640816](https://www.pexels.com/photo/7640816/) | Yan Krukau |
+| CHC51015 | [3958423](https://www.pexels.com/photo/3958423/) | Polina Zimmerman |
+| CHC30125 | [8613089](https://www.pexels.com/photo/8613089/) | Yan Krukau |
+| CHC40225 | [5905486](https://www.pexels.com/photo/5905486/) | Katerina Holmes |
+| CHC50125 | [8535169](https://www.pexels.com/photo/8535169/) | Ksenia Chernaya |
+| CHC50225 | [8612993](https://www.pexels.com/photo/8612993/) | Yan Krukau |
+| BSB41419 | [8293666](https://www.pexels.com/photo/8293666/) | RDNE Stock project |
+| HLTAID011, short course route | [6519905](https://www.pexels.com/photo/6519905/) | RDNE Stock project |
+| Online study (Ways to study) | [6001377](https://www.pexels.com/photo/6001377/) | Sam Lion |
+
+The other courses reuse the area photo for their area (Unsplash, above).
+
+### Home page video (Pexels)
+
+`src/assets/video/hero.mp4` and `hero.webm` are a 12-second silent montage, re-edited (cropped,
+colour-graded, cross-faded) from these Pexels videos under the Pexels License:
+[8612321](https://www.pexels.com/video/8612321/) (teacher with children),
+[7522215](https://www.pexels.com/video/7522215/) (carer with an older man),
+[5763905](https://www.pexels.com/video/5763905/) (trainer with a class),
+[8964796](https://www.pexels.com/video/8964796/) (construction site).
+
+### Poonam's photo
+
+Supplied by Poonam's team. Edited for the site: background removed with an AI model
+(rembg / BiRefNet) and replaced with a blue gradient, colour and light balanced, and cropped
+into a portrait, a cut-out and a small avatar. **Her face and features were not altered.**
+Files: `src/assets/img/poonam/`. Poonam should approve the edited versions before launch.
 
 ## Fonts
 
-Fraunces and Figtree, self-hosted under the SIL Open Font License.
+Plus Jakarta Sans (headings), Figtree (text) and Fraunces italic (accent words), self-hosted
+under the SIL Open Font License.

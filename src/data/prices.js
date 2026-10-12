@@ -12,7 +12,24 @@
 export const pricesCheckedOn = 'October 2026';
 
 // [low, high] in AUD. `rpl` is only set where providers publish an RPL price.
-export const typicalPrices = {};
+export const typicalPrices = {
+  CHC33021: { study: [3000, 12450], rpl: [1400, 2500], note: 'Most private providers charge $3,000–$7,000; university and TAFE full fees are higher.' },
+  CHC43121: { study: [3000, 9300] },
+  CHC43015: { study: [4200, 10650], rpl: [2000, 2550] },
+  CHC52025: { study: [6500, 22850], rpl: [3500, 4000], note: 'Private providers charge about $6,500–$9,000; Victorian TAFE full fees are about $20,000 or more.' },
+  CHC62015: { study: [5000, 6000] },
+  CHC51015: { study: [4200, 13300] },
+  CHC30125: { study: [3000, 3400], rpl: [2000, 2700], note: 'Based mostly on prices for the previous version of this qualification (CHC30121).' },
+  CHC40225: { study: [3250, 5900] },
+  CHC50125: { study: [3300, 7500], rpl: [2100, 2700] },
+  CHC50225: { study: [3500, 7900], note: 'Based mostly on prices for the previous version of this qualification (CHC50221).' },
+  TAE40122: { study: [2800, 7850], rpl: [1800, 3950] },
+  BSB41419: { study: [2500, 4800], rpl: [1100, 2750] },
+  BSB50420: { study: [3500, 9000], rpl: [1750, 2750] },
+  CPC50220: { study: [6500, 38400], rpl: [2550, 5500], note: 'Private and online providers charge about $6,500–$16,500; Victorian TAFE full fees are about $20,000–$38,000.' },
+  HLTAID009: { study: [45, 100] },
+  HLTAID011: { study: [95, 190] },
+};
 
 export const money = (n) => `$${n.toLocaleString('en-AU')}`;
 

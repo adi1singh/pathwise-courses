@@ -197,7 +197,7 @@ const whyMatters = () => html`
       <div class="section-head section-head--center">
         <p class="eyebrow eyebrow--on-dark">Why these courses matter</p>
         <h2 id="matters-title">In-demand work that makes a difference</h2>
-        <p class="lead">Care, early childhood and education roles are among the fastest-growing areas of work in Australia. Here’s what official sources say.</p>
+        <p class="lead">Care, early childhood and education roles keep growing. Here’s what official Victorian Government workforce projections show.</p>
       </div>
       <ul class="facts-grid" role="list">
         ${facts.map(

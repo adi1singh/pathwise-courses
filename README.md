@@ -10,7 +10,7 @@ short course), and make an enquiry or talk to Poonam.
 
 | Page | File | Purpose |
 | --- | --- | --- |
-| Home | `index.html` | Poonam's introduction, course finder entry, course areas, why Poonam, how it works, FAQs, enquiry invitation |
+| Home | `index.html` | Video hero with course search suggestions and Poonam, course finder entry, course areas (bento), About Poonam, student stories (samples in preview only), why these courses matter, how it works, FAQs, enquiry invitation |
 | Find my course | `course-finder.html` | Four questions, one at a time, then suggested courses and pathways with reasons; answers can be edited |
 | Courses | `courses.html` | Ranked search (everyday words and job titles), area chips, a folding filter panel on mobile, removable filter chips, compare up to 3 |
 | Course pages (16) | `course/*.html` | At a glance (suits, study options, placement, entry, provider, fees), section links, full detail, FAQs |
@@ -59,9 +59,10 @@ away. To find what's outstanding, search for `confirm` in `src/data/` and `tbc(`
 
 - **Phone, WhatsApp, email:** `null` until supplied. The site shows "coming soon" and leaves the
   link out.
-- **Poonam's photo** (`advisorPhoto`): until set, the hero shows a designed placeholder with her
-  name. No stand-in face is used.
-- **Fees** (`fees` on each course): until set, course pages explain how to get a written quote.
+- **Poonam's photo** (`advisorPhoto`): set to null and the site falls back to a designed placeholder.
+- **Prices:** typical market ranges from `src/data/prices.js` (sources in `PRICING.md`) until
+  Poonam's own `fees` are set on each course.
+- **Testimonials:** sample reviews show only in preview (`draft: true`) and are labelled as samples.
 - **Training provider** (`partnerRtos` + `rto` on each course): until set, pages say the provider
   is confirmed before enrolment.
 - **Response time** and **testimonials:** hidden until supplied.
@@ -141,7 +142,8 @@ SEO shows 66 only because draft mode adds `noindex`; it scores 100 with `draft: 
 
 ## Notes
 
-- Fonts: Fraunces (headings) and Figtree (text), self-hosted. Photo credits: [CREDITS.md](CREDITS.md).
+- Fonts: Plus Jakarta Sans (headings), Figtree (text), Fraunces italic (accents), self-hosted.
+- The home page video plays only on screens 900px and wider, never with reduced motion or data saver, and has a pause button. Photo credits: [CREDITS.md](CREDITS.md).
 - `scripts/make-images.mjs` regenerates the social sharing image and the Apple touch icon.
 - No cookies or tracking. The compare list and evidence checklist use the visitor's own browser
   storage.

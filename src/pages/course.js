@@ -196,6 +196,7 @@ export default function coursePage(c) {
                       <div><dt>Full course</dt><dd>${esc(price.study)}</dd></div>
                       ${price.rpl ? `<div><dt>RPL</dt><dd>${esc(price.rpl)}</dd></div>` : ''}
                     </dl>
+                    ${price.note ? `<p class="small"><strong>${esc(price.note)}</strong></p>` : ''}
                     <p class="small muted">Typical full-fee prices published by Australian training providers, checked ${pricesCheckedOn}. Government funding can lower the cost in some states. These are not ${site.advisor}’s prices.</p>`
                   : ''}
                 <p>Your price depends on the training provider and on whether you use RPL or study the full course. ${site.advisor} will get you a written quote that shows the full cost, including any extra fees, before you decide. ${tbc('Add agreed fees once set with the partner RTO')}</p>

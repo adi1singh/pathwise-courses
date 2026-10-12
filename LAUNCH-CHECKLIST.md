@@ -5,8 +5,9 @@ While `draft: true` is set in `src/data/site.js`, each of these shows on the sit
 amber **To confirm** marker, and the site asks search engines not to index it.
 
 Nothing on the site claims accreditations, partnerships, awards, review scores, student
-numbers, guarantees, prices or funding. Add any of these only once they're verified, and
-only if they belong to Poonam's business.
+numbers, guarantees or funding. Prices shown are clearly labelled **typical market ranges**
+from other providers (see `PRICING.md`), not Poonam's prices. Add claims only once they're
+verified, and only if they belong to Poonam's business.
 
 ## 1. Business model and compliance (must do)
 
@@ -34,8 +35,10 @@ only if they belong to Poonam's business.
       - **BSB41419** Certificate IV in Work Health and Safety
       - **CHC43015** Certificate IV in Ageing Support
       - The new 2025 releases **CHC30125, CHC40225, CHC50125, CHC50225, CHC52025**
-- [ ] **Fees:** add a verified fee to `fees` on each course, or leave it empty. Course pages
-      then explain how to get a written quote; no price is ever invented.
+- [ ] **Prices:** the site shows typical full-fee ranges published by other providers
+      (checked October 2026, sources in `PRICING.md`). Once Poonam's fees are agreed with her
+      partner RTO(s), add them to `fees` on each course; that replaces the range. If ranges stay,
+      re-check them every 6 months.
 - [ ] **Confirm the details on each course page.** These are typical figures only and must match
       what the delivering RTO says:
       - online study duration
@@ -50,9 +53,9 @@ only if they belong to Poonam's business.
 
 - [ ] **Contact details:** phone, WhatsApp number, email address, contact hours, and where
       she's based / which states she helps. Add these to `contact` in `src/data/site.js`.
-- [ ] **Portrait of Poonam:** a friendly, recent photo she's happy to use, at least 800px wide,
-      in a 4:5 or square shape. Save it as `src/assets/img/poonam.jpg` and set `advisorPhoto`.
-      Until then the hero shows a designed placeholder, never a stand-in face.
+- [ ] **Poonam's photo:** approve the edited versions (background replaced, colour balanced;
+      face unchanged) in `src/assets/img/poonam/`. A higher-resolution original would make the
+      large hero cut-out sharper.
 - [ ] **Approved introduction and background:** check the homepage greeting and quote ("I'll
       listen to your experience and goals…") and write her own story for the About page. The
       About text is placeholder copy. Cover her relevant background, how long she's been
@@ -71,9 +74,13 @@ only if they belong to Poonam's business.
 - [ ] **Business name:** check "Pathwise Courses" is available on the ASIC business names register
       and at IP Australia (trade marks), and that a suitable domain is free. Add the legal name
       and ABN to `business` in `src/data/site.js`.
-- [ ] **Testimonials (optional):** add only genuine, approved stories to `testimonials`, with the
-      person's permission. The section stays hidden while the list is empty.
-- [ ] **Imagery:** the six course-area photos are licensed from Unsplash (see `CREDITS.md`).
+- [ ] **Testimonials:** the preview shows three **sample** reviews, clearly labelled "Sample".
+      They are fake and are never published: they disappear automatically when `draft` is
+      `false`. Add only genuine, approved stories to `testimonials`, with the person's permission
+      (fake or edited reviews breach Australian Consumer Law). With none, the section is hidden.
+- [ ] **"Why these courses matter":** the figures are Victorian Government workforce projections.
+      If Poonam mainly helps students in other states, swap in national or state figures.
+- [ ] **Imagery:** course photos and the home page video are from Unsplash and Pexels (see `CREDITS.md`).
       Confirm Poonam is happy with them, or supply her own photos (with consent from anyone shown).
 - [ ] **Course finder rules:** check `src/data/finder.js`. Each interest suggests a set of
       courses; adjust if Poonam would steer people differently.

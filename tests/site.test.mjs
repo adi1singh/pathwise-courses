@@ -331,7 +331,8 @@ test('course page brings the key decision details together', async () => {
   await page.goto(BASE + 'course/chc50125-diploma-early-childhood-education-care.html');
   const glance = await page.locator('.glance').textContent();
   for (const label of ['Who it suits', 'Study options', 'Work placement', 'Entry requirements', 'Training provider', 'price|fees']) assert.match(glance, new RegExp(label, 'i'));
-  assert.match(glance, /written quote/i, 'no invented fee');
+  assert.match(glance, /\$[\d,]+–\$[\d,]+/, 'typical price range shown');
+  assert.match(glance, /Typical across providers\. Ask Poonam for an exact quote/i, 'range labelled as typical, not Poonam’s price');
   assert.ok((await page.locator('.on-page a').count()) >= 7, 'section links');
   await page.locator('.on-page a', { hasText: 'Entry requirements' }).click();
   await page.waitForTimeout(500);
