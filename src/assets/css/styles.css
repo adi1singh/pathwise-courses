@@ -1761,3 +1761,26 @@ html:not(.js) .pmap__panel + .pmap__panel { margin-top: 2.5rem; }
 @media (max-width: 899.98px) { .contact-hero { display: none; } }
 .page-hero .portrait { box-shadow: 0 30px 60px -25px rgba(0, 0, 0, 0.6); }
 .route-strip__step--before { opacity: 1; background: var(--bg); border-style: dashed; }
+
+/* ── Calmer hero ────────────────────────────────────────────────────────── */
+.hero::before {
+  background:
+    linear-gradient(90deg, rgba(6, 20, 48, 0.96) 0%, rgba(6, 20, 48, 0.9) 45%, rgba(6, 20, 48, 0.72) 75%, rgba(6, 20, 48, 0.78) 100%),
+    linear-gradient(0deg, rgba(6, 20, 48, 0.9) 0%, rgba(6, 20, 48, 0) 40%);
+}
+.hero__video.is-playing { opacity: 0.55; }
+.hero h1 { margin-bottom: 0.5em; }
+.hero__lead { font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); max-width: 30rem; }
+.hero-search { margin-top: 2.25rem; }
+.hero__popular { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.6rem; margin: 1.25rem 0 0; font-size: 0.9375rem; font-weight: 500; color: var(--on-dark-muted); }
+.hero__popular a { display: inline; min-height: 0; padding: 0.15rem 0; border: 0; border-radius: 0; background: none; color: #fff; font-weight: 600; text-decoration: underline; text-decoration-color: rgba(255, 255, 255, 0.35); text-underline-offset: 0.25em; }
+.hero__popular a:hover { background: none; color: var(--gold); text-decoration-color: var(--gold); }
+.hero__finder-link { margin: 0.6rem 0 0; font-size: 0.9375rem; color: var(--on-dark-muted); }
+.hero__finder-link a { display: inline-flex; align-items: center; gap: 0.3rem; color: var(--gold); font-weight: 650; text-decoration: none; }
+.hero__finder-link a:hover { text-decoration: underline; }
+.hero__finder-link .icon { width: 1em; height: 1em; }
+.hero-guide__photo { transform: scaleX(-1); }
+.hero-guide__card { left: auto; right: -2%; bottom: 10%; padding: 0.7rem 1.1rem; }
+.hero-guide::after { border-color: rgba(246, 185, 59, 0.35); }
+@media (min-width: 900px) { .hero__text { padding-bottom: clamp(3.5rem, 2rem + 5vw, 6.5rem); } }
+.hero__popular { column-gap: 0.95rem; }

@@ -11,8 +11,8 @@ import { faqList, ctaBand, areaCard, advisorAvatar, advisorPortrait, searchField
 const POPULAR = [
   ['Aged care', 'aged care'],
   ['Childcare', 'childcare'],
-  ['Disability (NDIS)', 'disability'],
   ['Teacher aide', 'teacher aide'],
+  ['Disability (NDIS)', 'disability'],
   ['Trainer (TAE)', 'tae'],
   ['First aid', 'first aid'],
 ];
@@ -42,9 +42,8 @@ const hero = (d) => html`
     </div>
     <div class="container hero__inner">
       <div class="hero__text">
-        <p class="hero__eyebrow"><span class="hero__pulse" aria-hidden="true"></span>Personal course guidance with ${site.advisor}</p>
         <h1 id="hero-title">Find the course that <em>moves your career forward</em></h1>
-        <p class="hero__lead">Search ${courses.length} nationally recognised courses in care, early childhood, training, leadership and building, then talk it through with ${site.advisor}.</p>
+        <p class="hero__lead">Search ${courses.length} nationally recognised courses, then talk it through with ${site.advisor}.</p>
 
         <form class="hero-search" action="courses.html" method="get" role="search" aria-label="Search courses" data-hero-search>
           <div class="hero-search__box">
@@ -62,13 +61,11 @@ const hero = (d) => html`
           <script type="application/json" data-hero-data>${searchData(d)}</script>
         </form>
 
-        <div class="hero__popular">
-          <span id="popular-label">Popular:</span>
-          <ul role="list" aria-labelledby="popular-label">
-            ${POPULAR.map(([label, q]) => `<li><a href="courses.html?q=${encodeURIComponent(q)}">${label}</a></li>`)}
-          </ul>
-        </div>
-        <a class="hero__finder" href="course-finder.html">${icon('compass')}<span><strong>Not sure what to search for?</strong> Answer 4 quick questions</span>${icon('arrow-right')}</a>
+        <p class="hero__popular">
+          <span>Popular:</span>
+          ${POPULAR.slice(0, 4).map(([label, q]) => `<a href="courses.html?q=${encodeURIComponent(q)}">${label}</a>`).join('')}
+        </p>
+        <p class="hero__finder-link">Not sure what to search for? <a href="course-finder.html">Answer 4 quick questions ${icon('arrow-right')}</a></p>
       </div>
 
       <figure class="hero-guide">
@@ -78,7 +75,6 @@ const hero = (d) => html`
         <figcaption class="hero-guide__card">
           <span class="hero-guide__name">${site.advisor}</span>
           <span class="hero-guide__role">Your course guide</span>
-          <a class="hero-guide__link" href="contact.html">${icon('chat')} Talk to ${site.advisor}</a>
         </figcaption>
       </figure>
     </div>
