@@ -1,6 +1,6 @@
 import { site } from '../data/site.js';
 import { html, icon, tbc } from '../templates/helpers.js';
-import { pageHero, sectionHead, ctaBand, checklist, advisorPortrait } from '../templates/components.js';
+import { pageHero, sectionHead, ctaBand, checklist, advisorPortrait, advisorAvatar } from '../templates/components.js';
 
 export default function about() {
   const d = 0;
@@ -22,18 +22,26 @@ export default function about() {
     aside: portrait,
   })}
 
-  <section class="section section--tight" aria-labelledby="story-title">
-    <div class="container narrow prose">
-      <h2 id="story-title">Why I do this ${tbc('Poonam to write her own story – this is placeholder text')}</h2>
-      <p>Choosing a course can feel overwhelming. There are hundreds of providers, unfamiliar codes and plenty of sales pressure. I started ${site.name} to be the person I would have wanted: someone who listens first, explains things simply, and gives an honest opinion.</p>
-      <p>Many of the people I speak with already do skilled work in aged care, disability support, childcare and other fields, but don’t yet hold the qualification to prove it. Others are starting fresh and want to know the quickest sensible route into a new career. Either way, my job is to help you make a good decision – and then make the process as smooth as possible.</p>
-      <p class="placeholder-note">[Placeholder – replace with Poonam’s background: her own work or study experience, how long she has been helping students, languages she speaks, and where she is based.]</p>
+  <section class="section" aria-labelledby="story-title">
+    <div class="container story">
+      <figure class="story__quote">
+        <svg class="story__mark" viewBox="0 0 48 36" aria-hidden="true" focusable="false"><path d="M0 36V22C0 9 7 2 19 0l2 6c-7 2-10 6-10 12h9v18zm27 0V22C27 9 34 2 46 0l2 6c-7 2-10 6-10 12h9v18z" fill="currentColor"/></svg>
+        <blockquote><p>I wanted to be the person I would have wanted: someone who listens first, explains things simply, and gives an honest opinion.</p></blockquote>
+        <figcaption><span class="avatar" aria-hidden="true">${advisorAvatar(d)}</span><span><strong>${p}</strong><span>Founder, ${site.name}</span></span></figcaption>
+      </figure>
+      <div class="story__text prose">
+        <p class="eyebrow">My story</p>
+        <h2 id="story-title">Why I do this ${tbc('Poonam to write her own story – this is placeholder text')}</h2>
+        <p>Choosing a course can feel overwhelming. There are hundreds of providers, unfamiliar codes and plenty of sales pressure. I started ${site.name} to make that simpler.</p>
+        <p>Many of the people I speak with already do skilled work in aged care, disability support, childcare and other fields, but don’t yet hold the qualification to prove it. Others are starting fresh and want to know the quickest sensible route into a new career. Either way, my job is to help you make a good decision – and then make the process as smooth as possible.</p>
+        <p class="placeholder-note">[Placeholder – replace with Poonam’s background: her own work or study experience, how long she has been helping students, languages she speaks, and where she is based.]</p>
+      </div>
     </div>
   </section>
 
-  <section class="section section--sand" aria-labelledby="help-title">
+  <section class="section section--navy" aria-labelledby="help-title">
     <div class="container">
-      ${sectionHead({ eyebrow: 'What I do', title: 'How I can help', id: 'help-title' })}
+      <div class="section-head"><p class="eyebrow eyebrow--on-dark">What I do</p><h2 id="help-title">How I can <em>help</em></h2></div>
       <ul class="service-grid" role="list">
         <li class="service">
           <span class="service__icon">${icon('compass')}</span>
@@ -97,7 +105,7 @@ export default function about() {
     </div>
   </section>
 
-  <section class="section section--sand" aria-labelledby="honest-title">
+  <section class="section section--soft" aria-labelledby="honest-title">
     <div class="container narrow">
       ${sectionHead({ eyebrow: 'Being upfront', title: 'What I am – and what I’m not', id: 'honest-title', align: 'center' })}
       <div class="table-wrap">

@@ -1,6 +1,6 @@
 import { site } from '../data/site.js';
 import { html, icon, esc, tbc } from '../templates/helpers.js';
-import { pageHero, contactOptions, formUnavailable, courseOptions, STATES, nextSteps } from '../templates/components.js';
+import { pageHero, contactOptions, formUnavailable, courseOptions, STATES, nextSteps, advisorPortrait } from '../templates/components.js';
 
 // ── Field helpers ───────────────────────────────────────────────────────────
 // Each field gets a hint and an error slot linked by aria-describedby. The
@@ -88,6 +88,10 @@ export function contact() {
     lead: 'Ask a question, request a call back or tell us about your team’s training needs. You’ll hear back from Poonam herself.',
     crumbs: [{ label: 'Contact' }],
     depth: d,
+    aside: html`<figure class="contact-hero">
+      <div class="portrait portrait--lg">${advisorPortrait(d, { sizes: '300px', lazy: false })}</div>
+      <figcaption>${icon('chat')} You’ll hear back from me</figcaption>
+    </figure>`,
   })}
 
   <section class="section section--tight">

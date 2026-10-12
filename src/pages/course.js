@@ -2,7 +2,8 @@ import { site } from '../data/site.js';
 import { courses, courseByCode, sectorById, levelById, pathways } from '../data/courses.js';
 import { html, link, icon, esc, tbc, tgaUrl } from '../templates/helpers.js';
 import { breadcrumbs, sectorChip, courseCard, checklist, faqList, contactOptions, advisorAvatar, photo } from '../templates/components.js';
-import { priceDetail, pricesCheckedOn } from '../data/prices.js';
+import { priceDetail, pricesCheckedOn, priceRange } from '../data/prices.js';
+import { routes } from '../data/pathway-map.js';
 
 const rtoBlock = (c) => {
   const rto = c.rto && site.partnerRtos.find((r) => r.id === c.rto);
@@ -45,6 +46,32 @@ const courseFaqs = (c) => {
   return items;
 };
 
+
+// Where this course sits on its Pathway Map route(s): earlier and later steps.
+const routeStrip = (c, d) => {
+  const route = routes.find((r) => r.steps.some((s) => s.includes(c.code)));
+  if (!route) return '';
+  const here = route.steps.findIndex((s) => s.includes(c.code));
+  return html`
+      <section class="prose-section" aria-labelledby="route">
+        <h2 id="route">Your route</h2>
+        <p class="muted">Where this course sits on the ${esc(route.label.toLowerCase())} pathway. Each step builds on the one before.</p>
+        <ol class="route-strip" role="list">
+          ${route.steps.map((codes, i) => {
+            const list = codes.map((k) => courseByCode[k]);
+            const state = i < here ? 'before' : i === here ? 'here' : 'after';
+            return html`<li class="route-strip__step route-strip__step--${state}"${state === 'here' ? ' aria-current="step"' : ''}>
+              <span class="route-strip__dot" aria-hidden="true">${i + 1}</span>
+              <span class="route-strip__level">${levelById[list[0].level].name}</span>
+              <span class="route-strip__names">${list.map((x) => (x.code === c.code ? `<strong>${esc(x.short ?? x.title)}</strong>` : `<a href="${link(d, `course/${x.slug}.html`)}">${esc(x.short ?? x.title)}</a>`)).join(' <em>or</em> ')}</span>
+              ${state === 'here' ? '<span class="route-strip__tag">This course</span>' : `<span class="route-strip__price">${esc(priceRange(list[0]))}</span>`}
+            </li>`;
+          })}
+        </ol>
+        <a class="link-arrow" href="${link(d, 'index.html#pathway-map')}">Explore the full Pathway Map ${icon('arrow-right')}</a>
+      </section>`;
+};
+
 export default function coursePage(c) {
   const d = 1;
   const sector = sectorById[c.sector];
@@ -75,6 +102,7 @@ export default function coursePage(c) {
   const sections = [
     ['about', 'About'],
     ['suits', 'Who it suits'],
+    ...(routes.some((r) => r.steps.some((st) => st.includes(c.code))) ? [['route', 'Your route']] : []),
     ['study', 'Study options'],
     ['placement', c.unit ? 'Practical' : 'Placement'],
     ['entry', 'Entry requirements'],
@@ -143,6 +171,8 @@ export default function coursePage(c) {
         <ul class="tag-list" role="list">${c.roles.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>
         ${!c.unit ? '<p class="small muted">Job titles vary between employers and states. Some roles also need experience or extra checks.</p>' : ''}
       </section>
+
+      ${routeStrip(c, d)}
 
       <section class="prose-section" aria-labelledby="study">
         <h2 id="study">Study options and commitment ${confirm('duration')}</h2>
