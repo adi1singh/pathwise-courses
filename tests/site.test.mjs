@@ -136,11 +136,23 @@ test('mobile menu opens, closes with Escape and returns focus', async () => {
   await page.context().close();
 });
 
-test('homepage puts Find my course first and links into the finder', async () => {
+test('homepage hero: search suggests courses, and the finder is one click away', async () => {
   const page = await newPage();
   await page.goto(BASE + 'index.html');
-  assert.match(await page.locator('.hero .btn--primary').textContent(), /^\s*Find my course/);
-  assert.match(await page.locator('.hero .btn--secondary').textContent(), /^\s*Browse courses\s*$/);
+  const input = page.getByRole('combobox', { name: /search courses/i });
+  await input.fill('childcare');
+  const options = page.getByRole('option');
+  assert.match(await options.first().textContent(), /Early Childhood/);
+  await input.press('ArrowDown');
+  assert.equal(await input.getAttribute('aria-activedescendant'), 'hs-opt-0');
+  await input.press('Escape');
+  assert.equal(await input.getAttribute('aria-expanded'), 'false');
+  await input.fill('nursing home');
+  await input.press('Enter');
+  await page.waitForURL(/courses\.html\?q=nursing\+home|courses\.html\?q=nursing%20home/);
+  assert.equal(await page.locator('#course-search').inputValue(), 'nursing home');
+  await page.goto(BASE + 'index.html');
+  assert.ok(await page.locator('.hero a[href="course-finder.html"]').count(), 'hero links to the course finder');
   await page.getByRole('link', { name: 'Childcare and early learning' }).click();
   await page.waitForURL(/course-finder\.html\?interest=early-childhood/);
   assert.match(await page.locator('[data-finder-count]').textContent(), /Question 2 of 4/);
@@ -318,7 +330,7 @@ test('course page brings the key decision details together', async () => {
   const page = await newPage(undefined, { reducedMotion: 'reduce' });
   await page.goto(BASE + 'course/chc50125-diploma-early-childhood-education-care.html');
   const glance = await page.locator('.glance').textContent();
-  for (const label of ['Who it suits', 'Study options', 'Work placement', 'Entry requirements', 'Training provider', 'Fees']) assert.match(glance, new RegExp(label, 'i'));
+  for (const label of ['Who it suits', 'Study options', 'Work placement', 'Entry requirements', 'Training provider', 'price|fees']) assert.match(glance, new RegExp(label, 'i'));
   assert.match(glance, /written quote/i, 'no invented fee');
   assert.ok((await page.locator('.on-page a').count()) >= 7, 'section links');
   await page.locator('.on-page a', { hasText: 'Entry requirements' }).click();

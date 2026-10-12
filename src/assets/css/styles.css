@@ -1147,7 +1147,7 @@ html:not(.js) .form-step + .form-step { padding-top: 1.5rem; border-top: 1px sol
 .how__head h2 { margin: 0; }
 .route { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
 .route__stop { position: relative; padding: 1.4rem 1.25rem 1.3rem; border-radius: 20px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
-.route__num { position: absolute; top: 1rem; right: 1.15rem; font-family: var(--font-display); font-weight: 800; font-size: 1.9rem; line-height: 1; letter-spacing: -0.04em; color: var(--primary-100); }
+.route__num { position: absolute; top: 1rem; right: 1.15rem; font-family: var(--font-display); font-weight: 800; font-size: 1.9rem; line-height: 1; letter-spacing: -0.04em; color: #6f8bd8; }
 .route__dot { display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 1rem; border-radius: 14px; background: var(--primary); color: #fff; box-shadow: 0 8px 18px -10px rgba(31, 79, 209, 0.8); }
 .route__stop--end .route__dot { background: var(--gold); color: var(--navy-950); box-shadow: 0 8px 18px -10px rgba(246, 185, 59, 0.9); }
 .route__stop h3 { font-size: 1.1rem; margin-bottom: 0.3rem; }
