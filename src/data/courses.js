@@ -9,7 +9,7 @@
 export const sectors = [
   {
     id: 'care',
-    image: { file: 'care', alt: 'A support worker helping two older people with an activity', credit: 'Age Cymru', url: 'https://unsplash.com/photos/caregiver-assisting-elderly-couple-with-coloring-bSXk1lOp8T0' },
+    image: { file: 'areas/care', source: 'Unsplash', alt: 'A support worker helping two older people with an activity', credit: 'Age Cymru', url: 'https://unsplash.com/photos/caregiver-assisting-elderly-couple-with-coloring-bSXk1lOp8T0' },
     name: 'Community & care',
     short: 'Care',
     blurb: 'Aged care, disability support, community services and counselling.',
@@ -17,7 +17,7 @@ export const sectors = [
   },
   {
     id: 'education',
-    image: { file: 'education', alt: 'Educators and young children playing in a bright room', credit: 'Rewired Digital', url: 'https://unsplash.com/photos/children-playing-with-toys-in-a-bright-room-4UFIg9htJgE' },
+    image: { file: 'areas/education', source: 'Unsplash', alt: 'Educators and young children playing in a bright room', credit: 'Rewired Digital', url: 'https://unsplash.com/photos/children-playing-with-toys-in-a-bright-room-4UFIg9htJgE' },
     name: 'Early childhood & education',
     short: 'Education',
     blurb: 'Childcare, school support and outside-school-hours care.',
@@ -25,7 +25,7 @@ export const sectors = [
   },
   {
     id: 'training',
-    image: { file: 'training', alt: 'A trainer leading a session at a whiteboard', credit: 'Vitaly Gariev', url: 'https://unsplash.com/photos/team-collaborating-around-a-whiteboard-in-a-modern-office-K0aM-ztA76Q' },
+    image: { file: 'areas/training', source: 'Unsplash', alt: 'A trainer leading a session at a whiteboard', credit: 'Vitaly Gariev', url: 'https://unsplash.com/photos/team-collaborating-around-a-whiteboard-in-a-modern-office-K0aM-ztA76Q' },
     name: 'Training & assessment',
     short: 'Training',
     blurb: 'Become a qualified trainer and assessor in your industry.',
@@ -33,7 +33,7 @@ export const sectors = [
   },
   {
     id: 'business',
-    image: { file: 'business', alt: 'A team meeting around an office table', credit: 'Vitaly Gariev', url: 'https://unsplash.com/photos/diverse-business-team-collaborating-in-a-modern-office-_4tpElFQemQ' },
+    image: { file: 'areas/business', source: 'Unsplash', alt: 'A team meeting around an office table', credit: 'Vitaly Gariev', url: 'https://unsplash.com/photos/diverse-business-team-collaborating-in-a-modern-office-_4tpElFQemQ' },
     name: 'Leadership & safety',
     short: 'Leadership',
     blurb: 'Lead teams and manage health and safety at work.',
@@ -41,7 +41,7 @@ export const sectors = [
   },
   {
     id: 'construction',
-    image: { file: 'construction', alt: 'Two people in hard hats reviewing a building site', credit: 'Mark Potterton', url: 'https://unsplash.com/photos/sNVkn3507Oo' },
+    image: { file: 'areas/construction', source: 'Unsplash', alt: 'Two people in hard hats reviewing a building site', credit: 'Mark Potterton', url: 'https://unsplash.com/photos/sNVkn3507Oo' },
     name: 'Building & construction',
     short: 'Building',
     blurb: 'Step up to site, project and building management roles.',
@@ -49,7 +49,7 @@ export const sectors = [
   },
   {
     id: 'firstaid',
-    image: { file: 'firstaid', alt: 'Hands practising CPR on a training manikin', credit: 'Frederick Shaw', url: 'https://unsplash.com/photos/person-practicing-cpr-on-a-training-dummy-E2JjBMyxBVw' },
+    image: { file: 'areas/firstaid', source: 'Unsplash', alt: 'Hands practising CPR on a training manikin', credit: 'Frederick Shaw', url: 'https://unsplash.com/photos/person-practicing-cpr-on-a-training-dummy-E2JjBMyxBVw' },
     name: 'First aid & CPR',
     short: 'First aid',
     blurb: 'Short, practical certificates many jobs ask for.',
@@ -713,6 +713,31 @@ export const courses = [
     confirm: ['duration', 'entry'],
   },
 ];
+
+// Course card photos (4:3, saved at 480 and 800px wide in assets/img/).
+// Pexels photos are used under the Pexels License; where an area photo
+// (Unsplash) suits the course it is reused. Credits are listed in CREDITS.md.
+const pexels = (file, id, alt, credit) => ({ file: `courses/${file}`, alt, credit, source: 'Pexels', url: `https://www.pexels.com/photo/${id}/` });
+const area = (id) => sectors.find((s) => s.id === id).image;
+const PHOTOS = {
+  CHC33021: pexels('chc33021', 18429308, 'A care worker chatting with older people around a table', 'Jsme MILA'),
+  CHC43121: pexels('chc43121', 8127496, 'A support worker kneeling beside a woman to help her', 'Ivan S'),
+  CHC43015: area('care'),
+  CHC52025: pexels('chc52025', 9870141, 'A community worker meeting with a couple at a kitchen table', 'Ron Lach'),
+  CHC62015: pexels('chc62015', 7640816, 'A manager with a clipboard checking in with her team', 'Yan Krukau'),
+  CHC51015: pexels('chc51015', 3958423, 'A counsellor listening to a client in a calm room', 'Polina Zimmerman'),
+  CHC30125: pexels('chc30125', 8613089, 'An educator reading a story to a group of young children', 'Yan Krukau'),
+  CHC40225: pexels('chc40225', 5905486, 'An education support worker helping a pupil with his work', 'Katerina Holmes'),
+  CHC50125: pexels('chc50125', 8535169, 'An early childhood educator sharing a book with children', 'Ksenia Chernaya'),
+  CHC50225: pexels('chc50225', 8612993, 'An educator painting with school-age children', 'Yan Krukau'),
+  TAE40122: area('training'),
+  BSB41419: pexels('bsb41419', 8293666, 'A safety officer in a hard hat and hi-vis vest holding a clipboard', 'RDNE Stock project'),
+  BSB50420: area('business'),
+  CPC50220: area('construction'),
+  HLTAID009: area('firstaid'),
+  HLTAID011: pexels('hltaid011', 6519905, 'A first aider bandaging someone’s hand', 'RDNE Stock project'),
+};
+for (const c of courses) c.image = PHOTOS[c.code];
 
 export const courseByCode = Object.fromEntries(courses.map((c) => [c.code, c]));
 export const sectorById = Object.fromEntries(sectors.map((s) => [s.id, s]));

@@ -22,10 +22,15 @@ export const site = {
     hours: null, // e.g. 'Mon–Fri 9am–6pm, Sat 10am–2pm (AEST)'
   },
 
-  // Poonam's portrait, e.g. 'assets/img/poonam.jpg' (a square or 4:5 photo,
-  // at least 800px wide). Until one is supplied the site shows a designed
-  // placeholder composition instead – never a stand-in face.
-  advisorPhoto: null,
+  // Poonam's photos, edited from the picture she supplied (background replaced,
+  // colour and light balanced; her face is unchanged). Each path is a base
+  // name: the site adds the size, e.g. portrait-480.webp and portrait-800.webp.
+  // Set to null to fall back to a designed placeholder with her initial.
+  advisorPhoto: {
+    portrait: 'assets/img/poonam/portrait', // 4:5, -480 / -800
+    cutout: 'assets/img/poonam/cutout', // transparent background, 4:5, -520 / -900
+    avatar: 'assets/img/poonam/avatar', // square, -96 / -192
+  },
 
   // How quickly Poonam replies to enquiries, e.g. 'within one business day'.
   // Only shown once she confirms she can meet it.
@@ -33,8 +38,15 @@ export const site = {
 
   // Approved testimonials only, with the person's permission, e.g.
   // { quote: '…', name: 'Priya', detail: 'Certificate III in Individual Support, 2026' }
-  // The testimonials section stays hidden while this list is empty.
+  // While this list is empty, preview builds (draft: true) show clearly labelled
+  // SAMPLE reviews so the layout can be judged; they never appear once draft is
+  // false. With no real testimonials at launch, the section is hidden.
   testimonials: [],
+  sampleTestimonials: [
+    { quote: 'I’d worked in aged care for years without the certificate. Poonam explained RPL in plain English and helped me put my evidence together.', name: 'Priya S.', detail: 'Certificate III in Individual Support' },
+    { quote: 'I couldn’t decide between studying online and RPL for the TAE. One conversation and I knew which suited my situation.', name: 'Daniel M.', detail: 'Certificate IV in Training and Assessment' },
+    { quote: 'She was upfront that the diploma fitted my goals better than the course I’d been looking at, and walked me through what that meant.', name: 'Mei L.', detail: 'Diploma of Early Childhood Education and Care' },
+  ],
 
   business: {
     legalName: null, // e.g. 'Pathwise Courses Pty Ltd'

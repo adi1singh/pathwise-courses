@@ -1,5 +1,6 @@
 import { site } from '../data/site.js';
 import { sectorById, levelById, pathways, courses } from '../data/courses.js';
+import { money, priceRange, priceFrom } from '../data/prices.js';
 import { esc, html, link, icon, tbc, contactLinks, placeholder } from './helpers.js';
 
 export const sectorChip = (sectorId) => {
@@ -19,16 +20,22 @@ const pathwayBadges = (c) =>
     .join('');
 
 // Separate fields so the browser can rank results: a title or keyword match
-// counts for more than a word buried in the description.
+// counts for more than a word buried in the description. The hero search on
+// the home page uses the same fields.
+export const searchFields = (c) => ({
+  title: `${c.title} ${c.short ?? ''}`.toLowerCase(),
+  keywords: `${c.keywords ?? ''} ${sectorById[c.sector].name}`.toLowerCase(),
+  roles: c.roles.join(' | ').toLowerCase(),
+  text: `${c.summary} ${c.topics.join(' ')} ${c.suits.join(' ')}`.toLowerCase(),
+});
 const searchAttrs = (c) =>
-  [
-    ['title', `${c.title} ${c.short ?? ''}`],
-    ['keywords', `${c.keywords ?? ''} ${sectorById[c.sector].name}`],
-    ['roles', c.roles.join(' | ')],
-    ['text', `${c.summary} ${c.topics.join(' ')} ${c.suits.join(' ')}`],
-  ]
-    .map(([k, v]) => `data-s-${k}="${esc(v.toLowerCase())}"`)
+  Object.entries(searchFields(c))
+    .map(([k, v]) => `data-s-${k}="${esc(v)}"`)
     .join(' ');
+
+// Responsive <img> for a 4:3 photo saved at 480 and 800px wide.
+export const photo = (file, depth, { alt = '', sizes = '(min-width: 1000px) 380px, (min-width: 640px) 45vw, 92vw', lazy = true, cls = '' } = {}) =>
+  `<img${cls ? ` class="${cls}"` : ''} src="${link(depth, `assets/img/${file}-480.webp`)}" srcset="${link(depth, `assets/img/${file}-480.webp`)} 480w, ${link(depth, `assets/img/${file}-800.webp`)} 800w" sizes="${sizes}" width="480" height="360" alt="${esc(alt)}"${lazy ? ' loading="lazy" decoding="async"' : ''}>`;
 
 export const courseCard = (c, depth, { compare = false } = {}) => {
   const level = levelById[c.level].name;
@@ -36,25 +43,28 @@ export const courseCard = (c, depth, { compare = false } = {}) => {
   const titleId = `t-${c.code.toLowerCase()}`;
   return html`
   <article class="course-card" data-course-card data-code="${c.code}" data-sector="${c.sector}" data-level="${c.level}" data-pathways="${c.pathways.join(' ')}" ${searchAttrs(c)} aria-labelledby="${titleId}">
-    <div class="course-card__top">
+    <div class="course-card__media">
+      ${photo(c.image.file, depth)}
       ${sectorChip(c.sector)}
-      <span class="course-card__code">${c.code}</span>
     </div>
-    <h3 class="course-card__title" id="${titleId}"><a href="${href}">${esc(c.title)}</a></h3>
-    <p class="course-card__summary">${esc(c.summary)}</p>
-    <dl class="course-card__meta">
-      <div><dt>Level</dt><dd>${level}</dd></div>
-      <div><dt>${c.unit ? 'Format' : 'Typical study time'}</dt><dd>${esc(c.unit ? 'Online + practical' : c.duration.study)}</dd></div>
-    </dl>
-    <ul class="badge-list" role="list" aria-label="Ways to study">${pathwayBadges(c)}</ul>
-    <div class="course-card__actions">
-      <a class="link-arrow" href="${href}" aria-describedby="${titleId}">View course ${icon('arrow-right')}</a>
-      ${compare
-        ? html`<label class="compare-toggle">
-            <input type="checkbox" data-compare value="${c.code}" aria-describedby="${titleId}">
-            <span>Compare</span>
-          </label>`
-        : ''}
+    <div class="course-card__body">
+      <p class="course-card__kicker"><span>${level}</span><span class="course-card__code">${c.code}</span></p>
+      <h3 class="course-card__title" id="${titleId}"><a href="${href}">${esc(c.title)}</a></h3>
+      <p class="course-card__summary">${esc(c.summary)}</p>
+      <dl class="course-card__meta">
+        <div><dt>${c.unit ? 'Format' : 'Study time'}</dt><dd>${esc(c.unit ? 'Online + practical' : c.duration.study)}</dd></div>
+        <div><dt>Typical price</dt><dd>${priceRange(c)}</dd></div>
+      </dl>
+      <ul class="badge-list" role="list" aria-label="Ways to study">${pathwayBadges(c)}</ul>
+      <div class="course-card__actions">
+        <a class="link-arrow" href="${href}" aria-describedby="${titleId}">View course ${icon('arrow-right')}</a>
+        ${compare
+          ? html`<label class="compare-toggle">
+              <input type="checkbox" data-compare value="${c.code}" aria-describedby="${titleId}">
+              <span>Compare</span>
+            </label>`
+          : ''}
+      </div>
     </div>
   </article>`;
 };
@@ -156,25 +166,33 @@ export const ctaBand = (depth, { title = 'Ready to talk it through?', text = `Te
 // Small round avatar: Poonam's photo when supplied, otherwise her initial.
 export const advisorAvatar = (depth) =>
   site.advisorPhoto
-    ? `<img src="${link(depth, site.advisorPhoto)}" alt="" width="96" height="96" loading="lazy">`
+    ? `<img src="${link(depth, `${site.advisorPhoto.avatar}-96.webp`)}" srcset="${link(depth, `${site.advisorPhoto.avatar}-96.webp`)} 1x, ${link(depth, `${site.advisorPhoto.avatar}-192.webp`)} 2x" alt="" width="96" height="96" loading="lazy" decoding="async">`
     : `<span class="avatar__initial">${site.advisor[0]}</span>`;
+
+// Poonam's 4:5 portrait (or her initial on a designed background).
+export const advisorPortrait = (depth, { sizes = '(min-width: 900px) 420px, 80vw', lazy = true } = {}) =>
+  site.advisorPhoto
+    ? `<img src="${link(depth, `${site.advisorPhoto.portrait}-480.webp`)}" srcset="${link(depth, `${site.advisorPhoto.portrait}-480.webp`)} 480w, ${link(depth, `${site.advisorPhoto.portrait}-800.webp`)} 800w" sizes="${sizes}" width="480" height="600" alt="${esc(site.advisor)}, course guide at ${esc(site.name)}"${lazy ? ' loading="lazy" decoding="async"' : ''}>`
+    : `<span class="portrait__initial">${site.advisor[0]}</span>`;
 
 // Decorative winding path used as the Pathwise journey motif.
 export const journeyPath = (cls = '') =>
   `<svg class="journey-path ${cls}" viewBox="0 0 600 220" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 196C120 196 132 108 236 108S352 30 456 30 560 18 596 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="2 9"/></svg>`;
 
-// Photo card for a course area. Images are Unsplash-licensed; see CREDITS.md.
-export const areaCard = (s, count, depth) => html`
-  <a class="area-card" href="${link(depth, `courses.html?sector=${s.id}`)}">
-    <span class="area-card__media">
-      <img src="${link(depth, `assets/img/areas/${s.image.file}-480.webp`)}" srcset="${link(depth, `assets/img/areas/${s.image.file}-480.webp`)} 480w, ${link(depth, `assets/img/areas/${s.image.file}-800.webp`)} 800w" sizes="(min-width: 1000px) 360px, (min-width: 640px) 45vw, 48vw" width="480" height="360" alt="${esc(s.image.alt)}" loading="lazy" decoding="async">
-    </span>
-    <span class="area-card__body">
-      <span class="area-card__name">${esc(s.name)}</span>
-      <span class="area-card__blurb">${esc(s.blurb)}</span>
-      <span class="area-card__count">${count} ${count === 1 ? 'course' : 'courses'} ${icon('arrow-right')}</span>
+// Photo tile for a course area (bento grid on the home page).
+export const areaCard = (s, list, depth) => {
+  const from = Math.min(...list.map((c) => priceFrom(c)).filter(Boolean));
+  return html`
+  <a class="area-tile area-tile--${s.id}" href="${link(depth, `courses.html?sector=${s.id}`)}">
+    ${photo(s.image.file, depth, { sizes: '(min-width: 960px) 40vw, 50vw' })}
+    <span class="area-tile__body">
+      <span class="area-tile__icon">${icon(s.icon)}</span>
+      <span class="area-tile__name">${esc(s.name)}</span>
+      <span class="area-tile__blurb">${esc(s.blurb)}</span>
+      <span class="area-tile__meta">${list.length} ${list.length === 1 ? 'course' : 'courses'}${Number.isFinite(from) ? ` · from ${money(from)}` : ''} ${icon('arrow-right')}</span>
     </span>
   </a>`;
+};
 
 // Phone / WhatsApp / email tiles. Missing details show a placeholder.
 export const contactOptions = () => {
