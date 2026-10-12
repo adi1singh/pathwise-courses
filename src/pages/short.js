@@ -1,7 +1,9 @@
 import { shortCourses, shortCategories, formats } from '../data/short-courses.js';
 import { courses } from '../data/courses.js';
 import { html, icon, esc, tbc } from '../templates/helpers.js';
-import { pageHero, courseCard, ctaBand } from '../templates/components.js';
+import { pageHero, courseCard, ctaBand, photo } from '../templates/components.js';
+
+const TOPIC_ICON = { clinical: 'heart', ndis: 'users', mental: 'chat', safety: 'shield', workplace: 'briefcase' };
 
 export default function shortPage() {
   const d = 0;
@@ -15,6 +17,8 @@ export default function shortPage() {
     lead: 'Focused online courses to build a specific skill, refresh your knowledge or meet a workplace training requirement – completed at your own pace.',
     crumbs: [{ label: 'Short courses' }],
     depth: d,
+    media: { file: 'courses/chc33021', alt: 'A care worker chatting with older people around a table', badge: `${icon('zap')} Learn one skill, fast` },
+    stats: [[shortCourses.length, 'short courses'], [shortCategories.length, 'topic areas'], ['1–20 h', 'to complete']],
   })}
 
   <section class="section section--tight">
@@ -34,7 +38,7 @@ export default function shortPage() {
           <legend class="filters__legend">Topic</legend>
           <div class="chip-row" data-filter-chips="category">
             <button type="button" class="filter-chip" aria-pressed="true" data-value="">All topics</button>
-            ${shortCategories.map((c) => `<button type="button" class="filter-chip" aria-pressed="false" data-value="${c.id}">${esc(c.name)}</button>`)}
+            ${shortCategories.map((c) => `<button type="button" class="filter-chip filter-chip--topic" aria-pressed="false" data-value="${c.id}" data-label="${esc(c.name)}">${icon(TOPIC_ICON[c.id])}${esc(c.name)}<span class="filter-chip__count">${shortCourses.filter((x) => x.category === c.id).length}</span></button>`)}
           </div>
         </fieldset>
         <div class="filters__row">
@@ -54,8 +58,8 @@ export default function shortPage() {
 
       <div class="short-grid" data-results>
         ${shortCourses.map(
-          (s) => html`<article class="short-card" data-course-card data-category="${s.category}" data-format="${s.format}" data-search="${esc(`${s.title} ${s.summary} ${catName[s.category]}`.toLowerCase())}" aria-labelledby="s-${s.id}">
-            <p class="short-card__cat">${esc(catName[s.category])}</p>
+          (s) => html`<article class="short-card short-card--${s.category}" data-course-card data-category="${s.category}" data-format="${s.format}" data-search="${esc(`${s.title} ${s.summary} ${catName[s.category]}`.toLowerCase())}" aria-labelledby="s-${s.id}">
+            <p class="short-card__cat"><span class="short-card__icon">${icon(TOPIC_ICON[s.category])}</span>${esc(catName[s.category])}</p>
             <h3 id="s-${s.id}">${esc(s.title)}</h3>
             <p>${esc(s.summary)}</p>
             <div class="short-card__foot">
@@ -78,16 +82,21 @@ export default function shortPage() {
     </div>
   </section>
 
-  <section class="section section--sand" aria-labelledby="teams-title">
+  <section class="section" aria-labelledby="teams-title">
     <div class="container">
-      <div class="teams">
-        <div class="teams__icon">${icon('users')}</div>
-        <div>
-          <p class="eyebrow">For employers</p>
-          <h2 id="teams-title">Training a team?</h2>
-          <p class="lead">Whether you need induction training for new support workers, refreshers for your whole team, or RPL for experienced staff, Poonam can put together a plan that fits your roster.</p>
+      <div class="teams-band">
+        <div class="teams-band__text">
+          <p class="eyebrow eyebrow--on-dark">For employers</p>
+          <h2 id="teams-title">Training a <em>whole team?</em></h2>
+          <p class="lead">Induction training for new support workers, refreshers for everyone, or RPL for experienced staff: ${'Poonam'} can put together a plan that fits your roster.</p>
+          <ul class="teams-band__list" role="list">
+            <li>${icon('check')} Bundles across topics</li>
+            <li>${icon('check')} Online, at each person’s pace</li>
+            <li>${icon('check')} RPL for experienced staff</li>
+          </ul>
+          <div class="btn-row"><a class="btn btn--sun btn--lg" href="contact.html?topic=team">Enquire about team training ${icon('arrow-right')}</a></div>
         </div>
-        <a class="btn btn--primary" href="contact.html?topic=team">Enquire about team training ${icon('arrow-right')}</a>
+        <div class="teams-band__media">${photo('areas/business', d, { sizes: '(min-width: 900px) 480px, 92vw' })}</div>
       </div>
     </div>
   </section>
