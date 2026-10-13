@@ -181,6 +181,29 @@ test('Pathway Map: tabs switch routes and the starting point follows experience'
   await page.context().close();
 });
 
+test('Pathway Map: an area can be dragged onto the board with a mouse', async () => {
+  const page = await newPage({ width: 1440, height: 900 });
+  await page.goto(BASE + 'index.html');
+  const map = page.locator('#pathway-map');
+  await map.scrollIntoViewIfNeeded();
+  const tab = map.getByRole('tab', { name: 'Training & leadership' });
+  const from = await tab.boundingBox();
+  const zone = await map.locator('[data-pmap-zone]').boundingBox();
+  await page.mouse.move(from.x + 30, from.y + 20);
+  await page.mouse.down();
+  await page.mouse.move(from.x + 90, from.y + 30, { steps: 4 });
+  await page.mouse.move(zone.x + zone.width / 2, zone.y + zone.height / 2, { steps: 10 });
+  assert.equal(await map.locator('[data-pmap-zone]').evaluate((el) => el.classList.contains('is-over')), true, 'the board lights up under the card');
+  await page.mouse.up();
+  assert.equal(await tab.getAttribute('aria-selected'), 'true', 'dropping picks the area');
+  assert.ok(await map.getByRole('tabpanel', { name: /Training & leadership/ }).isVisible());
+  assert.ok(await map.getByText('Where are you now?').isVisible());
+  assert.equal(await page.locator('.pmap__ghost').count(), 0, 'the dragged copy is cleaned up');
+  await map.getByRole('button', { name: 'Change area' }).click();
+  assert.equal(await map.locator('[role="tabpanel"]:visible').count(), 0, 'Change area clears the board');
+  await page.context().close();
+});
+
 test('chat assistant answers from site content and closes with Escape', async () => {
   const page = await newPage(undefined, { reducedMotion: 'reduce' });
   await page.goto(BASE + 'courses.html');
@@ -206,6 +229,12 @@ test('student stories: a moving wall that can be paused, samples are labelled', 
   const sec = page.locator('[data-wall]');
   assert.ok(await sec.locator('h2 .tbc').count(), 'placeholder stories are marked To confirm in preview');
   assert.ok((await sec.locator('.wall-card:not([aria-hidden])').count()) >= 4, 'each story is listed once for screen readers');
+  const rows = await sec.locator('.wall__rows').boundingBox();
+  await page.mouse.move(rows.x + rows.width / 2, rows.y + rows.height / 2); // the cards keep moving, so hover a point
+  assert.equal(await sec.evaluate((el) => getComputedStyle(el.querySelector('.wall__row')).animationPlayState), 'running', 'stories keep moving under the mouse');
+  await sec.locator('.wall__rows').click();
+  assert.equal(await sec.evaluate((el) => getComputedStyle(el.querySelector('.wall__row')).animationPlayState), 'paused', 'a click on the stories pauses them');
+  await sec.locator('.wall__rows').click();
   await sec.getByRole('button', { name: 'Pause stories' }).click();
   assert.equal(await sec.locator('[data-wall-pause]').getAttribute('aria-pressed'), 'true');
   assert.ok(await sec.getByRole('button', { name: 'Play stories' }).isVisible(), 'label changes to Play');

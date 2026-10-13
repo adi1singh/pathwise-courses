@@ -141,25 +141,61 @@
           <p class="eyebrow">The Pathway Map</p>
           <h2 id="pmap-title">See where your next step <em>could take you</em></h2>
         </div>
-        <p class="lead">Pick the work you love. Then tell us where you are now: we’ll show your starting point, the jobs each step opens up, the time it takes and typical prices. If you’ve already got experience, see where it could count.</p>
+        <p class="lead">Drag the work you love onto the map. You’ll see each step from your first certificate upwards, the jobs it opens up, the time it takes and typical prices.</p>
       </div>
 
-      <div class="pmap__controls">
-        <div class="pmap__tabs" role="tablist" aria-label="Choose an area of work">
-          <button type="button" role="tab" id="pmt-care" aria-controls="pm-care" aria-selected="false" tabindex="0" data-pmap-tab="care" style="--acc:var(--c-care);--acc-ink:var(--c-care-ink);--acc-50:var(--c-care-50)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a4.8 4.8 0 0 1 9-3 4.8 4.8 0 0 1 9 3c-2 4.6-9 9-9 9z"/></svg>Aged care & disability</button><button type="button" role="tab" id="pmt-early" aria-controls="pm-early" aria-selected="false" tabindex="-1" data-pmap-tab="early" style="--acc:var(--c-education);--acc-ink:var(--c-education-ink);--acc-50:var(--c-education-50)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/><rect x="8" y="3" width="8" height="8" rx="1.5"/></svg>Early childhood</button><button type="button" role="tab" id="pmt-school" aria-controls="pm-school" aria-selected="false" tabindex="-1" data-pmap-tab="school" style="--acc:var(--c-education);--acc-ink:var(--c-education-ink);--acc-50:var(--c-education-50)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2zM21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/></svg>Schools & OSHC</button><button type="button" role="tab" id="pmt-community" aria-controls="pm-community" aria-selected="false" tabindex="-1" data-pmap-tab="community" style="--acc:var(--c-care);--acc-ink:var(--c-care-ink);--acc-50:var(--c-care-50)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6.5 6.5 0 0 1 3.5 6"/></svg>Community & counselling</button><button type="button" role="tab" id="pmt-lead" aria-controls="pm-lead" aria-selected="false" tabindex="-1" data-pmap-tab="lead" style="--acc:var(--c-business);--acc-ink:var(--c-business-ink);--acc-50:var(--c-business-50)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg>Training & leadership</button>
-        </div>
-        <fieldset class="pmap__exp" data-pmap-exp hidden>
-          <legend>Where are you now?</legend>
-          <div>
-            <label><input type="radio" name="pmap-exp" value="new" checked><span>I’m new to this work</span></label><label><input type="radio" name="pmap-exp" value="some"><span>Under 2 years’ experience</span></label><label><input type="radio" name="pmap-exp" value="exp"><span>2+ years in the field</span></label><label><input type="radio" name="pmap-exp" value="qual"><span>I hold the first qualification</span></label>
+      <div class="pmap__board">
+        <div class="pmap__tray">
+          <p class="pmap__label"><span class="pmap__num">1</span><span class="pmap__label-drag">Drag the area you want to study</span><span class="pmap__label-tap">Tap the area you want to study</span></p>
+          <div class="pmap__tabs" role="tablist" aria-label="Choose an area of work">
+            <button type="button" class="pmap__token" role="tab" id="pmt-care" aria-controls="pm-care" aria-selected="false" tabindex="0" data-pmap-tab="care" style="--acc:var(--c-care);--acc-ink:var(--c-care-ink);--acc-50:var(--c-care-50)">
+              <span class="pmap__token-photo"><img draggable="false" src="assets/img/areas/care-480.webp" srcset="assets/img/areas/care-480.webp 480w, assets/img/areas/care-800.webp 800w" sizes="96px" width="480" height="360" alt="" loading="lazy" decoding="async"></span>
+              <span class="pmap__token-text"><strong>Aged care & disability</strong><small>4 steps · from $1,400</small></span>
+              <span class="pmap__grip" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+            </button><button type="button" class="pmap__token" role="tab" id="pmt-early" aria-controls="pm-early" aria-selected="false" tabindex="-1" data-pmap-tab="early" style="--acc:var(--c-education);--acc-ink:var(--c-education-ink);--acc-50:var(--c-education-50)">
+              <span class="pmap__token-photo"><img draggable="false" src="assets/img/courses/chc30125-480.webp" srcset="assets/img/courses/chc30125-480.webp 480w, assets/img/courses/chc30125-800.webp 800w" sizes="96px" width="480" height="360" alt="" loading="lazy" decoding="async"></span>
+              <span class="pmap__token-text"><strong>Early childhood</strong><small>2 steps · from $2,000</small></span>
+              <span class="pmap__grip" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+            </button><button type="button" class="pmap__token" role="tab" id="pmt-school" aria-controls="pm-school" aria-selected="false" tabindex="-1" data-pmap-tab="school" style="--acc:var(--c-education);--acc-ink:var(--c-education-ink);--acc-50:var(--c-education-50)">
+              <span class="pmap__token-photo"><img draggable="false" src="assets/img/courses/chc40225-480.webp" srcset="assets/img/courses/chc40225-480.webp 480w, assets/img/courses/chc40225-800.webp 800w" sizes="96px" width="480" height="360" alt="" loading="lazy" decoding="async"></span>
+              <span class="pmap__token-text"><strong>Schools & OSHC</strong><small>2 steps · from $3,250</small></span>
+              <span class="pmap__grip" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+            </button><button type="button" class="pmap__token" role="tab" id="pmt-community" aria-controls="pm-community" aria-selected="false" tabindex="-1" data-pmap-tab="community" style="--acc:var(--c-care);--acc-ink:var(--c-care-ink);--acc-50:var(--c-care-50)">
+              <span class="pmap__token-photo"><img draggable="false" src="assets/img/courses/chc52025-480.webp" srcset="assets/img/courses/chc52025-480.webp 480w, assets/img/courses/chc52025-800.webp 800w" sizes="96px" width="480" height="360" alt="" loading="lazy" decoding="async"></span>
+              <span class="pmap__token-text"><strong>Community & counselling</strong><small>3 steps · from $1,400</small></span>
+              <span class="pmap__grip" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+            </button><button type="button" class="pmap__token" role="tab" id="pmt-lead" aria-controls="pm-lead" aria-selected="false" tabindex="-1" data-pmap-tab="lead" style="--acc:var(--c-business);--acc-ink:var(--c-business-ink);--acc-50:var(--c-business-50)">
+              <span class="pmap__token-photo"><img draggable="false" src="assets/img/areas/training-480.webp" srcset="assets/img/areas/training-480.webp 480w, assets/img/areas/training-800.webp 800w" sizes="96px" width="480" height="360" alt="" loading="lazy" decoding="async"></span>
+              <span class="pmap__token-text"><strong>Training & leadership</strong><small>2 steps · from $1,100</small></span>
+              <span class="pmap__grip" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+            </button>
           </div>
-        </fieldset>
-      </div>
+        </div>
 
-      <div class="pmap__panel" role="tabpanel" id="pm-care" aria-labelledby="pmt-care" data-pmap-panel="care" data-inactive style="--acc:var(--c-care);--acc-ink:var(--c-care-ink);--acc-50:var(--c-care-50)">
-          <h3 class="visually-hidden">Aged care & disability pathway</h3>
-          <ol class="pmap__route" role="list" style="--stops:4">
-            <li class="pmap__stop" data-step="0" data-rpl="1">
+        <div class="pmap__zone" data-pmap-zone>
+          <div class="pmap__drop" data-pmap-prompt>
+            <svg class="pmap__map" viewBox="0 0 600 260" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M30 220C140 220 150 150 240 150S330 70 420 70 530 40 570 30" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 12"/><circle cx="30" cy="220" r="9"/><circle cx="240" cy="150" r="9"/><circle cx="420" cy="70" r="9"/><circle cx="570" cy="30" r="9"/></svg>
+            <div class="pmap__target" aria-hidden="true"><span></span><span></span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="2.5"/><circle cx="18" cy="5" r="2.5"/><path d="M8.5 19H17a3.5 3.5 0 0 0 0-7H7a3.5 3.5 0 0 1 0-7h8.5"/></svg></div>
+            <p class="pmap__drop-title"><span class="pmap__label-drag">Drop an area here</span><span class="pmap__label-tap">Tap an area to see your route</span></p>
+            <p class="pmap__drop-sub">Your route appears here, from your first certificate upwards.<span class="pmap__label-drag"> Or just click an area.</span></p>
+            <span class="pmap__demo" aria-hidden="true"><span class="pmap__demo-chip"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a4.8 4.8 0 0 1 9-3 4.8 4.8 0 0 1 9 3c-2 4.6-9 9-9 9z"/></svg> Aged care</span><svg class="pmap__demo-cursor" viewBox="0 0 24 24"><path d="M5 3l14 8-6 1.5L10 19z" fill="#15201b" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+          </div>
+
+          <div class="pmap__result" data-pmap-result>
+            <div class="pmap__result-head">
+              <p class="pmap__result-title">Your route in <strong data-pmap-name>Aged care & disability</strong></p>
+              <button type="button" class="pmap__reset" data-pmap-reset><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg> Change area</button>
+            </div>
+            <fieldset class="pmap__exp" data-pmap-exp>
+              <legend><span class="pmap__num">2</span> Where are you now?</legend>
+              <div>
+                <label><input type="radio" name="pmap-exp" value="new" checked><span>I’m new to this work</span></label><label><input type="radio" name="pmap-exp" value="some"><span>Under 2 years’ experience</span></label><label><input type="radio" name="pmap-exp" value="exp"><span>2+ years in the field</span></label><label><input type="radio" name="pmap-exp" value="qual"><span>I hold the first qualification</span></label>
+              </div>
+            </fieldset>
+            <div class="pmap__panel" role="tabpanel" id="pm-care" aria-labelledby="pmt-care" data-pmap-panel="care" data-inactive style="--acc:var(--c-care);--acc-ink:var(--c-care-ink);--acc-50:var(--c-care-50)">
+                <h3 class="visually-hidden">Aged care & disability pathway</h3>
+                <ol class="pmap__route" role="list" style="--stops:4">
+                  <li class="pmap__stop" data-step="0" data-rpl="1">
     <span class="pmap__node" aria-hidden="true"><span>1</span></span>
     <div class="pmap__card">
       <p class="pmap__you" data-you hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> You start here</p>
@@ -216,11 +252,11 @@
       <p class="pmap__done" data-done hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Already done</p>
     </div>
   </li>
-          </ol>
-        </div><div class="pmap__panel" role="tabpanel" id="pm-early" aria-labelledby="pmt-early" data-pmap-panel="early" data-inactive style="--acc:var(--c-education);--acc-ink:var(--c-education-ink);--acc-50:var(--c-education-50)">
-          <h3 class="visually-hidden">Early childhood pathway</h3>
-          <ol class="pmap__route" role="list" style="--stops:2">
-            <li class="pmap__stop" data-step="0" data-rpl="1">
+                </ol>
+              </div><div class="pmap__panel" role="tabpanel" id="pm-early" aria-labelledby="pmt-early" data-pmap-panel="early" data-inactive style="--acc:var(--c-education);--acc-ink:var(--c-education-ink);--acc-50:var(--c-education-50)">
+                <h3 class="visually-hidden">Early childhood pathway</h3>
+                <ol class="pmap__route" role="list" style="--stops:2">
+                  <li class="pmap__stop" data-step="0" data-rpl="1">
     <span class="pmap__node" aria-hidden="true"><span>1</span></span>
     <div class="pmap__card">
       <p class="pmap__you" data-you hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> You start here</p>
@@ -249,11 +285,11 @@
       <p class="pmap__done" data-done hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Already done</p>
     </div>
   </li>
-          </ol>
-        </div><div class="pmap__panel" role="tabpanel" id="pm-school" aria-labelledby="pmt-school" data-pmap-panel="school" data-inactive style="--acc:var(--c-education);--acc-ink:var(--c-education-ink);--acc-50:var(--c-education-50)">
-          <h3 class="visually-hidden">Schools & OSHC pathway</h3>
-          <ol class="pmap__route" role="list" style="--stops:2">
-            <li class="pmap__stop" data-step="0" data-rpl="1">
+                </ol>
+              </div><div class="pmap__panel" role="tabpanel" id="pm-school" aria-labelledby="pmt-school" data-pmap-panel="school" data-inactive style="--acc:var(--c-education);--acc-ink:var(--c-education-ink);--acc-50:var(--c-education-50)">
+                <h3 class="visually-hidden">Schools & OSHC pathway</h3>
+                <ol class="pmap__route" role="list" style="--stops:2">
+                  <li class="pmap__stop" data-step="0" data-rpl="1">
     <span class="pmap__node" aria-hidden="true"><span>1</span></span>
     <div class="pmap__card">
       <p class="pmap__you" data-you hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> You start here</p>
@@ -282,11 +318,11 @@
       <p class="pmap__done" data-done hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Already done</p>
     </div>
   </li>
-          </ol>
-        </div><div class="pmap__panel" role="tabpanel" id="pm-community" aria-labelledby="pmt-community" data-pmap-panel="community" data-inactive style="--acc:var(--c-care);--acc-ink:var(--c-care-ink);--acc-50:var(--c-care-50)">
-          <h3 class="visually-hidden">Community & counselling pathway</h3>
-          <ol class="pmap__route" role="list" style="--stops:3">
-            <li class="pmap__stop" data-step="0" data-rpl="1">
+                </ol>
+              </div><div class="pmap__panel" role="tabpanel" id="pm-community" aria-labelledby="pmt-community" data-pmap-panel="community" data-inactive style="--acc:var(--c-care);--acc-ink:var(--c-care-ink);--acc-50:var(--c-care-50)">
+                <h3 class="visually-hidden">Community & counselling pathway</h3>
+                <ol class="pmap__route" role="list" style="--stops:3">
+                  <li class="pmap__stop" data-step="0" data-rpl="1">
     <span class="pmap__node" aria-hidden="true"><span>1</span></span>
     <div class="pmap__card">
       <p class="pmap__you" data-you hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> You start here</p>
@@ -329,11 +365,11 @@
       <p class="pmap__done" data-done hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Already done</p>
     </div>
   </li>
-          </ol>
-        </div><div class="pmap__panel" role="tabpanel" id="pm-lead" aria-labelledby="pmt-lead" data-pmap-panel="lead" data-inactive style="--acc:var(--c-business);--acc-ink:var(--c-business-ink);--acc-50:var(--c-business-50)">
-          <h3 class="visually-hidden">Training & leadership pathway</h3>
-          <ol class="pmap__route" role="list" style="--stops:2">
-            <li class="pmap__stop" data-step="0" data-rpl="1">
+                </ol>
+              </div><div class="pmap__panel" role="tabpanel" id="pm-lead" aria-labelledby="pmt-lead" data-pmap-panel="lead" data-inactive style="--acc:var(--c-business);--acc-ink:var(--c-business-ink);--acc-50:var(--c-business-50)">
+                <h3 class="visually-hidden">Training & leadership pathway</h3>
+                <ol class="pmap__route" role="list" style="--stops:2">
+                  <li class="pmap__stop" data-step="0" data-rpl="1">
     <span class="pmap__node" aria-hidden="true"><span>1</span></span>
     <div class="pmap__card">
       <p class="pmap__you" data-you hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> You start here</p>
@@ -362,10 +398,11 @@
       <p class="pmap__done" data-done hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Already done</p>
     </div>
   </li>
-          </ol>
+                </ol>
+              </div>
+          </div>
         </div>
-
-      <p class="pmap__prompt" data-pmap-prompt><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> Pick an area to see your route, from your first certificate upwards.</p>
+      </div>
 
       <div class="pmap__foot">
         <p>Prices are typical full-fee ranges across Australian providers (October 2026). Whether RPL fits is decided by the training provider. <span class="tbc" title="Poonam to check the routes on the Pathway Map"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: Poonam to check the routes on the Pathway Map</span></span></p>

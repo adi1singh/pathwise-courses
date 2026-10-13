@@ -224,7 +224,7 @@ export default function ways() {
     </div>
   </section>
 
-  <section class="section" id="online" aria-labelledby="online-title">
+  <section class="section section--butter" id="online" aria-labelledby="online-title">
     <div class="container">
       <div class="split">
         <figure class="photo-stack">

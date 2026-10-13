@@ -111,7 +111,7 @@ export default function shortPage() {
     </div>
   </section>
 
-  <section class="section" aria-labelledby="teams-title">
+  <section class="section section--navy" aria-labelledby="teams-title">
     <div class="container">
       <div class="teams-band">
         <div class="teams-band__text">
@@ -130,7 +130,7 @@ export default function shortPage() {
     </div>
   </section>
 
-  <section class="section" aria-labelledby="fa-title">
+  <section class="section section--blush" aria-labelledby="fa-title">
     <div class="container">
       <div class="section-head section-head--row">
         <div>

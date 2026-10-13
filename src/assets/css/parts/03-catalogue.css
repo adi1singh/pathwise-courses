@@ -145,22 +145,35 @@ html:not(.js) .filters-dock { margin-top: 0; min-height: 0 !important; }
 .switch input:checked + .switch__track::after { transform: translateX(18px); }
 .switch input:focus-visible + .switch__track { box-shadow: var(--focus); }
 
-/* Stuck: the bar pins under the header and slims down */
+/* Pinned: a slim, dark glass bar under the header */
 .filters-dock.is-stuck .filters-dock__bar {
   position: fixed; left: 0; right: 0; top: var(--header-h); z-index: 45;
-  background: rgba(246, 241, 231, 0.92); backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px);
-  border-bottom: 1px solid var(--line); box-shadow: 0 18px 30px -24px rgba(14, 21, 18, 0.5);
+  background: rgba(14, 21, 18, 0.72); backdrop-filter: blur(18px) saturate(1.6); -webkit-backdrop-filter: blur(18px) saturate(1.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 24px 40px -26px rgba(0, 0, 0, 0.7);
   animation: dock-in 0.25s var(--ease);
 }
 @keyframes dock-in { from { transform: translateY(-12px); opacity: 0.4; } }
-.filters-dock.is-stuck .filters { padding: 0.6rem 0; gap: 0.5rem; background: transparent; border: 0; box-shadow: none; border-radius: 0; }
-.filters-dock.is-stuck .filters__search input { min-height: 52px; font-size: 1.05rem; }
-.filters-dock.is-stuck .chip-row { flex-wrap: nowrap; overflow-x: auto; padding: 0.15rem; margin: -0.15rem; }
-.filters-dock.is-stuck .filter-chip { flex: none; min-height: 38px; font-size: 0.875rem; }
+.filters-dock.is-stuck .filters { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; background: transparent; border: 0; box-shadow: none; border-radius: 0; }
+.filters-dock.is-stuck .filters__top { flex: 0 1 380px; min-width: 0; }
+.filters-dock.is-stuck .filters__group { flex: 1; min-width: 0; }
+.filters-dock.is-stuck .filters__search input { min-height: 42px; padding: 0.45rem 1rem 0.45rem 2.7rem; font-size: 0.975rem; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.22); color: #fff; }
+.filters-dock.is-stuck .filters__search input::placeholder { color: rgba(255, 255, 255, 0.72); }
+.filters-dock.is-stuck .filters__search input:focus { background: rgba(255, 255, 255, 0.16); border-color: var(--saffron); box-shadow: 0 0 0 3px rgba(255, 178, 63, 0.3); }
+.filters-dock.is-stuck .filters__search > .icon { left: 0.95rem; width: 1.15rem; height: 1.15rem; color: var(--saffron); }
+.filters-dock.is-stuck .chip-row { flex-wrap: nowrap; overflow-x: auto; padding: 0.15rem; margin: -0.15rem; -webkit-mask-image: linear-gradient(90deg, #000 92%, transparent); mask-image: linear-gradient(90deg, #000 92%, transparent); }
+.filters-dock.is-stuck .filter-chip { flex: none; min-height: 34px; padding: 0.25rem 0.45rem 0.25rem 0.75rem; font-size: 0.8125rem; background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.16); color: #fff; }
+.filters-dock.is-stuck .filter-chip .icon { color: var(--acc-50); }
+.filters-dock.is-stuck .filter-chip:hover { background: rgba(255, 255, 255, 0.16); border-color: rgba(255, 255, 255, 0.4); }
+.filters-dock.is-stuck .filter-chip__count { min-width: 20px; height: 20px; background: rgba(255, 255, 255, 0.14); color: #fff; }
+.filters-dock.is-stuck .filter-chip[aria-pressed='true'] { background: var(--acc-50); border-color: var(--acc-50); color: var(--acc-ink); }
+.filters-dock.is-stuck .filter-chip[aria-pressed='true'] .icon { color: var(--acc-ink); }
+.filters-dock.is-stuck .filter-chip[aria-pressed='true'] .filter-chip__count { background: var(--card); color: var(--acc-ink); }
+.filters-dock.is-stuck .filters__toggle { min-height: 42px; --btn-fg: #fff; --btn-border: rgba(255, 255, 255, 0.35); }
+.filters-dock.is-stuck :focus-visible { box-shadow: 0 0 0 3px var(--night), 0 0 0 5px var(--saffron); }
+@media (min-width: 760px) { .filters-dock.is-stuck .filters__more { display: none; } }
 @media (max-width: 759.98px) {
   .filters-dock.is-stuck .filters__group { display: none; }
-  .filters-dock.is-stuck .filters__search input { min-height: 48px; }
-  .filters-dock.is-stuck .filters__toggle { min-height: 48px; }
+  .filters-dock.is-stuck .filters__top { flex: 1; }
 }
 
 /* Results bar and active filters */

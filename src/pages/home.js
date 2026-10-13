@@ -6,7 +6,7 @@ import { routes, experience } from '../data/pathway-map.js';
 import { facts, careerLinks } from '../data/why.js';
 import { priceFrom, pricesCheckedOn, typicalPrices, money } from '../data/prices.js';
 import { html, link, icon, tbc, esc } from '../templates/helpers.js';
-import { faqList, areaCard, advisorAvatar, advisorPortrait, searchFields } from '../templates/components.js';
+import { faqList, areaCard, advisorAvatar, advisorPortrait, searchFields, photo } from '../templates/components.js';
 
 const POPULAR = [
   ['Aged care', 'aged care'],
@@ -134,7 +134,15 @@ const mapStop = (codes, i, d) => {
   </li>`;
 };
 
-// Signature feature: pick an area, see the route from entry level upwards.
+// Lowest typical price on a route, for the area cards.
+const routeFrom = (r) => {
+  const prices = r.steps.flat().map((c) => priceFrom(courseByCode[c])).filter(Boolean);
+  return prices.length ? Math.min(...prices) : null;
+};
+const accStyle = (r) => `--acc:var(--c-${r.color});--acc-ink:var(--c-${r.color}-ink);--acc-50:var(--c-${r.color}-50)`;
+
+// Signature feature: drag (or tap) an area onto the board to see the route
+// from entry level upwards, then say where you are now.
 const pathwayMap = (d) => html`
   <section class="section pmap" id="pathway-map" aria-labelledby="pmap-title" data-pmap>
     <div class="container">
@@ -143,31 +151,52 @@ const pathwayMap = (d) => html`
           <p class="eyebrow">The Pathway Map</p>
           <h2 id="pmap-title">See where your next step <em>could take you</em></h2>
         </div>
-        <p class="lead">Pick the work you love. Then tell us where you are now: we’ll show your starting point, the jobs each step opens up, the time it takes and typical prices. If you’ve already got experience, see where it could count.</p>
+        <p class="lead">Drag the work you love onto the map. You’ll see each step from your first certificate upwards, the jobs it opens up, the time it takes and typical prices.</p>
       </div>
 
-      <div class="pmap__controls">
-        <div class="pmap__tabs" role="tablist" aria-label="Choose an area of work">
-          ${routes.map((r, i) => `<button type="button" role="tab" id="pmt-${r.id}" aria-controls="pm-${r.id}" aria-selected="false" tabindex="${i === 0 ? 0 : -1}" data-pmap-tab="${r.id}" style="--acc:var(--c-${r.color});--acc-ink:var(--c-${r.color}-ink);--acc-50:var(--c-${r.color}-50)">${icon(r.icon)}${r.label}</button>`)}
-        </div>
-        <fieldset class="pmap__exp" data-pmap-exp hidden>
-          <legend>Where are you now?</legend>
-          <div>
-            ${experience.map((e, i) => `<label><input type="radio" name="pmap-exp" value="${e.id}"${i === 0 ? ' checked' : ''}><span>${e.label}</span></label>`)}
+      <div class="pmap__board">
+        <div class="pmap__tray">
+          <p class="pmap__label"><span class="pmap__num">1</span><span class="pmap__label-drag">Drag the area you want to study</span><span class="pmap__label-tap">Tap the area you want to study</span></p>
+          <div class="pmap__tabs" role="tablist" aria-label="Choose an area of work">
+            ${routes.map((r, i) => html`<button type="button" class="pmap__token" role="tab" id="pmt-${r.id}" aria-controls="pm-${r.id}" aria-selected="false" tabindex="${i === 0 ? 0 : -1}" data-pmap-tab="${r.id}" style="${accStyle(r)}">
+              <span class="pmap__token-photo">${photo(r.img, d, { sizes: '96px' }).replace('<img', '<img draggable="false"')}</span>
+              <span class="pmap__token-text"><strong>${r.label}</strong><small>${r.steps.length} steps${routeFrom(r) ? ` · from ${money(routeFrom(r))}` : ''}</small></span>
+              <span class="pmap__grip" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+            </button>`)}
           </div>
-        </fieldset>
+        </div>
+
+        <div class="pmap__zone" data-pmap-zone>
+          <div class="pmap__drop" data-pmap-prompt>
+            <svg class="pmap__map" viewBox="0 0 600 260" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M30 220C140 220 150 150 240 150S330 70 420 70 530 40 570 30" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 12"/><circle cx="30" cy="220" r="9"/><circle cx="240" cy="150" r="9"/><circle cx="420" cy="70" r="9"/><circle cx="570" cy="30" r="9"/></svg>
+            <div class="pmap__target" aria-hidden="true"><span></span><span></span>${icon('route')}</div>
+            <p class="pmap__drop-title"><span class="pmap__label-drag">Drop an area here</span><span class="pmap__label-tap">Tap an area to see your route</span></p>
+            <p class="pmap__drop-sub">Your route appears here, from your first certificate upwards.<span class="pmap__label-drag"> Or just click an area.</span></p>
+            <span class="pmap__demo" aria-hidden="true"><span class="pmap__demo-chip">${icon('heart')} Aged care</span><svg class="pmap__demo-cursor" viewBox="0 0 24 24"><path d="M5 3l14 8-6 1.5L10 19z" fill="#15201b" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+          </div>
+
+          <div class="pmap__result" data-pmap-result>
+            <div class="pmap__result-head">
+              <p class="pmap__result-title">Your route in <strong data-pmap-name>${routes[0].label}</strong></p>
+              <button type="button" class="pmap__reset" data-pmap-reset>${icon('x')} Change area</button>
+            </div>
+            <fieldset class="pmap__exp" data-pmap-exp>
+              <legend><span class="pmap__num">2</span> Where are you now?</legend>
+              <div>
+                ${experience.map((e, i) => `<label><input type="radio" name="pmap-exp" value="${e.id}"${i === 0 ? ' checked' : ''}><span>${e.label}</span></label>`)}
+              </div>
+            </fieldset>
+            ${routes.map(
+              (r) => html`<div class="pmap__panel" role="tabpanel" id="pm-${r.id}" aria-labelledby="pmt-${r.id}" data-pmap-panel="${r.id}" data-inactive style="${accStyle(r)}">
+                <h3 class="visually-hidden">${r.label} pathway</h3>
+                <ol class="pmap__route" role="list" style="--stops:${r.steps.length}">
+                  ${r.steps.map((codes, n) => mapStop(codes, n, d))}
+                </ol>
+              </div>`
+            )}
+          </div>
+        </div>
       </div>
-
-      ${routes.map(
-        (r) => html`<div class="pmap__panel" role="tabpanel" id="pm-${r.id}" aria-labelledby="pmt-${r.id}" data-pmap-panel="${r.id}" data-inactive style="--acc:var(--c-${r.color});--acc-ink:var(--c-${r.color}-ink);--acc-50:var(--c-${r.color}-50)">
-          <h3 class="visually-hidden">${r.label} pathway</h3>
-          <ol class="pmap__route" role="list" style="--stops:${r.steps.length}">
-            ${r.steps.map((codes, n) => mapStop(codes, n, d))}
-          </ol>
-        </div>`
-      )}
-
-      <p class="pmap__prompt" data-pmap-prompt>${icon('arrow-left')} Pick an area to see your route, from your first certificate upwards.</p>
 
       <div class="pmap__foot">
         <p>Prices are typical full-fee ranges across Australian providers (${pricesCheckedOn}). Whether RPL fits is decided by the training provider. ${tbc('Poonam to check the routes on the Pathway Map')}</p>

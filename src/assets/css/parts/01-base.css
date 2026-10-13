@@ -34,6 +34,11 @@
   --saffron: #ffb23f;
   --saffron-50: #fff1d6;
   --logo-bg: var(--ink);
+  /* Section colours, so each major section reads as a change of scene */
+  --lilac: #ece6ff; --lilac-ink: #4a33b8;
+  --butter: #fff0cc;
+  --blush: #ffe3d8;
+  --mint: #d9efe6;
 
   /* Course areas: every page uses the same colour for the same area */
   --c-care: #c4469b; --c-care-ink: #96296f; --c-care-50: #fbe8f3;
@@ -139,7 +144,10 @@ main:focus { outline: none; }
 .narrow { max-width: 860px; }
 .section { padding-block: var(--space-section); }
 .section--tight { padding-block: clamp(2rem, 1.4rem + 2vw, 3.5rem); }
-.section--soft, .section--sand { background: var(--paper-2); }
+.section--soft, .section--sand, .section--butter { background: var(--butter); }
+.section--lilac { background: var(--lilac); }
+.section--mint { background: var(--mint); }
+.section--blush { background: var(--blush); }
 .section--navy, .section--ink { position: relative; overflow: hidden; background: var(--night); color: var(--on-night); }
 .section--navy h2, .section--navy h3, .section--ink h2, .section--ink h3 { color: #fff; }
 .section--navy h2 em, .section--ink h2 em { color: var(--saffron); }

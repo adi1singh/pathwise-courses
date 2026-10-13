@@ -102,7 +102,7 @@
 .compare-next { text-align: center; margin-top: 2rem; }
 
 /* The three routes in detail */
-.ways-paths { background: var(--paper-2); }
+.ways-paths { background: var(--mint); }
 .paths { list-style: none; padding: 0; margin: 0; display: grid; gap: clamp(1rem, 0.6rem + 1.2vw, 1.5rem); grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
 .path { display: flex; flex-direction: column; border-radius: var(--radius-xl); background: var(--card); border: 1px solid var(--line); border-top: 6px solid var(--route); transition: transform 0.3s var(--ease), box-shadow 0.3s; }
 .path:hover { transform: translateY(-5px); box-shadow: 0 30px 50px -30px rgba(14, 21, 18, 0.45); }

@@ -499,13 +499,14 @@
     else window.addEventListener('load', check, { once: true });
   }
 
-  /* ── Pathway Map: nothing chosen until the visitor picks an area ─────── */
+  /* ── Pathway Map: drag (or click) an area onto the board ──────────────── */
   const pmap = $('[data-pmap]');
   if (pmap) {
     const tabs = $$('[data-pmap-tab]', pmap);
     const panels = $$('[data-pmap-panel]', pmap);
-    const expBox = $('[data-pmap-exp]', pmap);
-    const prompt = $('[data-pmap-prompt]', pmap);
+    const zone = $('[data-pmap-zone]', pmap);
+    const nameEl = $('[data-pmap-name]', pmap);
+    const resetBtn = $('[data-pmap-reset]', pmap);
     let exp = 'new';
     let current = null;
 
@@ -533,11 +534,11 @@
       draw(panel);
     };
 
-    const select = (tab, focus) => {
+    const select = (tab, { focus = false, dropped = false } = {}) => {
       current = tab.dataset.pmapTab;
       pmap.classList.add('has-choice');
-      expBox.hidden = false;
-      prompt.hidden = true;
+      zone.style.cssText = tab.getAttribute('style');
+      nameEl.textContent = tab.querySelector('strong').textContent;
       tabs.forEach((t) => {
         const on = t === tab;
         t.setAttribute('aria-selected', String(on));
@@ -545,20 +546,90 @@
       });
       panels.forEach((p) => { p.toggleAttribute('data-inactive', p.dataset.pmapPanel !== current); });
       if (focus) tab.focus();
-      tab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      if (dropped) { zone.classList.remove('is-landed'); void zone.offsetWidth; zone.classList.add('is-landed'); }
       apply();
     };
 
+    const clear = () => {
+      current = null;
+      pmap.classList.remove('has-choice');
+      zone.style.cssText = '';
+      tabs.forEach((t, i) => { t.setAttribute('aria-selected', 'false'); t.tabIndex = i === 0 ? 0 : -1; });
+      panels.forEach((p) => p.setAttribute('data-inactive', ''));
+      tabs[0].focus();
+    };
+
+    let skipClick = false;
     tabs.forEach((tab, i) => {
-      tab.addEventListener('click', () => select(tab));
+      tab.addEventListener('click', () => { if (skipClick) { skipClick = false; return; } select(tab); });
       tab.addEventListener('keydown', (e) => {
-        const step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
-        if (e.key === 'Home') { e.preventDefault(); select(tabs[0], true); }
-        else if (e.key === 'End') { e.preventDefault(); select(tabs[tabs.length - 1], true); }
-        else if (step) { e.preventDefault(); select(tabs[(i + step + tabs.length) % tabs.length], true); }
+        const step = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+        if (e.key === 'Home') { e.preventDefault(); select(tabs[0], { focus: true }); }
+        else if (e.key === 'End') { e.preventDefault(); select(tabs[tabs.length - 1], { focus: true }); }
+        else if (step) { e.preventDefault(); select(tabs[(i + step + tabs.length) % tabs.length], { focus: true }); }
       });
+      tab.addEventListener('dragstart', (e) => e.preventDefault());
     });
     $$('input[name="pmap-exp"]', pmap).forEach((r) => r.addEventListener('change', () => { exp = r.value; apply(); }));
+    resetBtn.addEventListener('click', clear);
+
+    // Dragging with a mouse or pen. Touch keeps a simple tap, so the page
+    // still scrolls normally on phones.
+    let drag = null;
+    const overZone = (x, y) => {
+      const r = zone.getBoundingClientRect();
+      return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+    };
+    const endDrag = (dropped) => {
+      const { tab, ghost } = drag;
+      pmap.classList.remove('is-dragging');
+      zone.classList.remove('is-over');
+      tab.classList.remove('is-lifted');
+      if (dropped) {
+        ghost.remove();
+      } else {
+        const r = tab.getBoundingClientRect();
+        ghost.classList.add('is-returning');
+        ghost.style.transform = `translate(${r.left}px, ${r.top}px)`;
+        setTimeout(() => ghost.remove(), 260);
+      }
+      drag = null;
+    };
+    pmap.addEventListener('pointerdown', (e) => {
+      const tab = e.target.closest('[data-pmap-tab]');
+      if (!tab || e.pointerType === 'touch' || e.button !== 0) return;
+      const r = tab.getBoundingClientRect();
+      drag = { tab, id: e.pointerId, x: e.clientX, y: e.clientY, dx: e.clientX - r.left, dy: e.clientY - r.top, w: r.width, ghost: null };
+    });
+    window.addEventListener('pointermove', (e) => {
+      if (!drag || e.pointerId !== drag.id) return;
+      if (!drag.ghost) {
+        if (Math.hypot(e.clientX - drag.x, e.clientY - drag.y) < 6) return;
+        const ghost = drag.tab.cloneNode(true);
+        ['id', 'role', 'aria-controls', 'aria-selected', 'tabindex', 'data-pmap-tab'].forEach((a) => ghost.removeAttribute(a));
+        ghost.setAttribute('aria-hidden', 'true');
+        ghost.className = 'pmap__token pmap__ghost';
+        ghost.style.width = `${drag.w}px`;
+        document.body.append(ghost);
+        drag.ghost = ghost;
+        drag.tab.classList.add('is-lifted');
+        pmap.classList.add('is-dragging');
+        zone.style.setProperty('--drag-acc', getComputedStyle(drag.tab).getPropertyValue('--acc'));
+      }
+      drag.ghost.style.transform = `translate(${e.clientX - drag.dx}px, ${e.clientY - drag.dy}px) rotate(-4deg)`;
+      zone.classList.toggle('is-over', overZone(e.clientX, e.clientY));
+    });
+    window.addEventListener('pointerup', (e) => {
+      if (!drag || e.pointerId !== drag.id) return;
+      if (!drag.ghost) { drag = null; return; } // a plain click: handled by the click event
+      skipClick = true;
+      setTimeout(() => { skipClick = false; }, 0);
+      const tab = drag.tab;
+      const dropped = overZone(e.clientX, e.clientY);
+      endDrag(dropped);
+      if (dropped) select(tab, { dropped: true });
+    });
+    window.addEventListener('pointercancel', () => { if (drag?.ghost) endDrag(false); drag = null; });
   }
 
   /* ── Student stories: moving wall with a pause button ─────────────────── */
@@ -573,6 +644,8 @@
       label.textContent = p ? 'Play stories' : 'Pause stories';
     };
     btn.addEventListener('click', () => setPaused(!wall.classList.contains('is-paused')));
+    // The stories keep moving under the mouse; a click on them pauses or plays.
+    $('.wall__rows', wall)?.addEventListener('click', () => setPaused(!wall.classList.contains('is-paused')));
     const sync = () => { btn.hidden = still.matches; };
     still.addEventListener('change', sync);
     sync();
