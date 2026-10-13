@@ -37,15 +37,17 @@ export const site = {
   responseTime: null,
 
   // Approved testimonials only, with the person's permission, e.g.
-  // { quote: '…', name: 'Priya', detail: 'Certificate III in Individual Support, 2026' }
+  // { quote: '…', name: 'Priya', detail: 'Certificate III in Individual Support, 2026',
+  //   from: 'Aged care worker, no certificate', to: 'Certificate III through RPL' } – from/to optional
   // While this list is empty, preview builds (draft: true) show clearly labelled
   // SAMPLE reviews so the layout can be judged; they never appear once draft is
   // false. With no real testimonials at launch, the section is hidden.
   testimonials: [],
   sampleTestimonials: [
-    { quote: 'I’d worked in aged care for years without the certificate. Poonam explained RPL in plain English and helped me put my evidence together.', name: 'Priya S.', detail: 'Certificate III in Individual Support' },
-    { quote: 'I couldn’t decide between studying online and RPL for the TAE. One conversation and I knew which suited my situation.', name: 'Daniel M.', detail: 'Certificate IV in Training and Assessment' },
-    { quote: 'She was upfront that the diploma fitted my goals better than the course I’d been looking at, and walked me through what that meant.', name: 'Mei L.', detail: 'Diploma of Early Childhood Education and Care' },
+    { quote: 'I’d worked in aged care for years without the certificate. Poonam explained RPL in plain English and helped me put my evidence together.', name: 'Priya S.', detail: 'Certificate III in Individual Support', from: 'Aged care worker, no certificate', to: 'Certificate III through RPL' },
+    { quote: 'I couldn’t decide between studying online and RPL for the TAE. One conversation and I knew which suited my situation.', name: 'Daniel M.', detail: 'Certificate IV in Training and Assessment', from: 'Workplace trainer without the TAE', to: 'Qualified trainer and assessor' },
+    { quote: 'She was upfront that the diploma fitted my goals better than the course I’d been looking at, and walked me through what that meant.', name: 'Mei L.', detail: 'Diploma of Early Childhood Education and Care', from: 'Certificate III educator', to: 'Diploma, ready to lead a room' },
+    { quote: 'I wanted to work in schools but didn’t know where to start. Poonam explained the course, the placement and the likely cost before I committed to anything.', name: 'Sam R.', detail: 'Certificate IV in School Based Education Support', from: 'Parent volunteer at a primary school', to: 'Studying to become a teacher aide' },
   ],
 
   business: {

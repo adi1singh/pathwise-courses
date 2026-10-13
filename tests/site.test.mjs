@@ -197,6 +197,21 @@ test('chat assistant answers from site content and closes with Escape', async ()
   await page.context().close();
 });
 
+test('student stories: tabs and arrows switch stories, samples are labelled', async () => {
+  const page = await newPage(undefined, { reducedMotion: 'reduce' });
+  await page.goto(BASE + 'index.html');
+  const sec = page.locator('[data-stories]');
+  assert.match(await sec.textContent(), /Sample stories/);
+  await sec.getByRole('tab', { name: /Mei L\./ }).click();
+  assert.ok(await sec.getByRole('tabpanel', { name: /Mei L\./ }).isVisible());
+  assert.equal(await sec.locator('[data-story-slide]:visible').count(), 1, 'one story at a time');
+  await sec.getByRole('tab', { name: /Mei L\./ }).press('ArrowDown');
+  assert.equal(await sec.getByRole('tab', { name: /Sam R\./ }).getAttribute('aria-selected'), 'true');
+  await sec.getByRole('button', { name: 'Next story' }).click();
+  assert.equal(await sec.getByRole('tab', { name: /Priya S\./ }).getAttribute('aria-selected'), 'true', 'wraps around');
+  await page.context().close();
+});
+
 /* ── Search, filters and comparison ────────────────────────────────────── */
 
 test('search understands everyday words and ranks the best matches first', async () => {

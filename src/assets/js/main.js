@@ -523,6 +523,78 @@
     } else { seen = true; apply(); }
   }
 
+  /* ── Student stories: tabs, arrows and gentle auto-advance ───────────── */
+  const storiesEl = $('[data-stories]');
+  if (storiesEl) {
+    const tabs = $$('[data-story-tab]', storiesEl);
+    const slides = $$('[data-story-slide]', storiesEl);
+    const bar = $('[data-story-progress]', storiesEl);
+    const pauseBtn = $('[data-story-pause]', storiesEl);
+    const pauseLabel = $('[data-story-pause-label]', storiesEl);
+    const DELAY = 7000;
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let current = 0;
+    let timer = null;
+    let userPaused = still;
+    let hovering = false;
+    let inView = false;
+
+    const show = (i, { focusTab = false } = {}) => {
+      current = (i + slides.length) % slides.length;
+      tabs.forEach((t, n) => {
+        const on = n === current;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+      });
+      slides.forEach((s, n) => {
+        s.toggleAttribute('data-hidden', n !== current);
+        if (n === current) { s.classList.remove('is-entering'); void s.offsetWidth; s.classList.add('is-entering'); }
+      });
+      if (focusTab) tabs[current].focus();
+      restart();
+    };
+
+    const running = () => !userPaused && !hovering && inView && slides.length > 1;
+    const restart = () => {
+      clearTimeout(timer);
+      bar.classList.remove('is-running');
+      void bar.offsetWidth;
+      if (!running()) return;
+      bar.style.animationDuration = `${DELAY}ms`;
+      bar.classList.add('is-running');
+      timer = setTimeout(() => show(current + 1), DELAY);
+    };
+    const setPaused = (p) => {
+      userPaused = p;
+      pauseBtn.setAttribute('aria-pressed', String(p));
+      pauseLabel.textContent = p ? 'Play stories' : 'Pause stories';
+      storiesEl.classList.toggle('is-paused', p);
+      restart();
+    };
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => show(i));
+      tab.addEventListener('keydown', (e) => {
+        const step = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
+        if (step) { e.preventDefault(); show(i + step, { focusTab: true }); }
+        if (e.key === 'Home') { e.preventDefault(); show(0, { focusTab: true }); }
+        if (e.key === 'End') { e.preventDefault(); show(slides.length - 1, { focusTab: true }); }
+      });
+    });
+    $('[data-story-prev]', storiesEl).addEventListener('click', () => show(current - 1));
+    $('[data-story-next]', storiesEl).addEventListener('click', () => show(current + 1));
+    pauseBtn.addEventListener('click', () => setPaused(!userPaused));
+    storiesEl.addEventListener('mouseenter', () => { hovering = true; restart(); });
+    storiesEl.addEventListener('mouseleave', () => { hovering = false; restart(); });
+    storiesEl.addEventListener('focusin', () => { hovering = true; restart(); });
+    storiesEl.addEventListener('focusout', (e) => { if (!storiesEl.contains(e.relatedTarget)) { hovering = false; restart(); } });
+    if (still) { pauseBtn.hidden = true; storiesEl.classList.add('is-paused'); }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => { inView = e.isIntersecting; restart(); }, { threshold: 0.35 }).observe(storiesEl);
+    }
+    storiesEl.classList.add('is-ready');
+  }
+
   /* ── Video previews: load the YouTube player only when asked ─────────── */
   $$('[data-yt]').forEach((btn) => {
     btn.addEventListener('click', () => {

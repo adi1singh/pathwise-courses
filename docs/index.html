@@ -461,23 +461,48 @@
     </div>
   </section>
   
-  <section class="section stories" aria-labelledby="reviews-title">
-    <div class="container">
-      <div class="stories__head">
+  <section class="section stories" aria-labelledby="reviews-title" data-stories>
+    <div class="container stories__grid">
+      <div class="stories__intro">
         <p class="eyebrow eyebrow--on-dark">Student stories</p>
         <h2 id="reviews-title">Real people. <em>Real next steps.</em></h2>
-        <p class="stories__note"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg> <span><strong>Sample reviews</strong> to show the layout. They are not real and are hidden automatically at launch.</span></p>
+        <p class="stories__note"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg> <span><strong>Sample stories</strong> to show the layout. They are not real and are hidden automatically at launch.</span></p>
+        <div class="stories__tabs" role="tablist" aria-label="Choose a story">
+          <button type="button" role="tab" id="story-tab-0" aria-controls="story-0" aria-selected="true" tabindex="0" data-story-tab><span class="stories__tab-avatar" aria-hidden="true">P</span><span><strong>Priya S.</strong><span>Certificate III in Individual Support</span></span></button><button type="button" role="tab" id="story-tab-1" aria-controls="story-1" aria-selected="false" tabindex="-1" data-story-tab><span class="stories__tab-avatar" aria-hidden="true">D</span><span><strong>Daniel M.</strong><span>Certificate IV in Training and Assessment</span></span></button><button type="button" role="tab" id="story-tab-2" aria-controls="story-2" aria-selected="false" tabindex="-1" data-story-tab><span class="stories__tab-avatar" aria-hidden="true">M</span><span><strong>Mei L.</strong><span>Diploma of Early Childhood Education and Care</span></span></button><button type="button" role="tab" id="story-tab-3" aria-controls="story-3" aria-selected="false" tabindex="-1" data-story-tab><span class="stories__tab-avatar" aria-hidden="true">S</span><span><strong>Sam R.</strong><span>Certificate IV in School Based Education Support</span></span></button>
+        </div>
       </div>
-      <div class="stories__layout">
-        <figure class="story-lead">
-          <span class="review__flag">Sample</span>
-          <svg class="story-lead__mark" viewBox="0 0 48 36" aria-hidden="true" focusable="false"><path d="M0 36V22C0 9 7 2 19 0l2 6c-7 2-10 6-10 12h9v18zm27 0V22C27 9 34 2 46 0l2 6c-7 2-10 6-10 12h9v18z" fill="currentColor"/></svg>
-          <blockquote><p>I’d worked in aged care for years without the certificate. Poonam explained RPL in plain English and helped me put my evidence together.</p></blockquote>
-          <figcaption><span class="review__avatar" aria-hidden="true">P</span><span><strong>Priya S.</strong><span>Certificate III in Individual Support</span></span></figcaption>
-        </figure>
-        <ul class="stories__side" role="list">
-          <li><figure class="story-card"><span class="review__flag">Sample</span><blockquote><p>I couldn’t decide between studying online and RPL for the TAE. One conversation and I knew which suited my situation.</p></blockquote><figcaption><span class="review__avatar" aria-hidden="true">D</span><span><strong>Daniel M.</strong><span>Certificate IV in Training and Assessment</span></span></figcaption></figure></li><li><figure class="story-card"><span class="review__flag">Sample</span><blockquote><p>She was upfront that the diploma fitted my goals better than the course I’d been looking at, and walked me through what that meant.</p></blockquote><figcaption><span class="review__avatar" aria-hidden="true">M</span><span><strong>Mei L.</strong><span>Diploma of Early Childhood Education and Care</span></span></figcaption></figure></li>
-        </ul>
+      <div class="stories__stage">
+        <figure class="story-slide" role="tabpanel" id="story-0" aria-labelledby="story-tab-0" data-story-slide>
+            <span class="review__flag">Sample</span>
+            <svg class="story-slide__mark" viewBox="0 0 48 36" aria-hidden="true" focusable="false"><path d="M0 36V22C0 9 7 2 19 0l2 6c-7 2-10 6-10 12h9v18zm27 0V22C27 9 34 2 46 0l2 6c-7 2-10 6-10 12h9v18z" fill="currentColor"/></svg>
+            <blockquote><p>I’d worked in aged care for years without the certificate. Poonam explained RPL in plain English and helped me put my evidence together.</p></blockquote>
+            <p class="story-slide__journey"><span class="story-slide__from"><small>Before</small>Aged care worker, no certificate</span><span class="story-slide__arrow" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="story-slide__to"><small>After</small>Certificate III through RPL</span></p>
+            <figcaption><span class="review__avatar" aria-hidden="true">P</span><span><strong>Priya S.</strong><span>Certificate III in Individual Support</span></span><span class="story-slide__count" aria-hidden="true">01 / 04</span></figcaption>
+          </figure><figure class="story-slide" role="tabpanel" id="story-1" aria-labelledby="story-tab-1" data-story-slide data-hidden>
+            <span class="review__flag">Sample</span>
+            <svg class="story-slide__mark" viewBox="0 0 48 36" aria-hidden="true" focusable="false"><path d="M0 36V22C0 9 7 2 19 0l2 6c-7 2-10 6-10 12h9v18zm27 0V22C27 9 34 2 46 0l2 6c-7 2-10 6-10 12h9v18z" fill="currentColor"/></svg>
+            <blockquote><p>I couldn’t decide between studying online and RPL for the TAE. One conversation and I knew which suited my situation.</p></blockquote>
+            <p class="story-slide__journey"><span class="story-slide__from"><small>Before</small>Workplace trainer without the TAE</span><span class="story-slide__arrow" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="story-slide__to"><small>After</small>Qualified trainer and assessor</span></p>
+            <figcaption><span class="review__avatar" aria-hidden="true">D</span><span><strong>Daniel M.</strong><span>Certificate IV in Training and Assessment</span></span><span class="story-slide__count" aria-hidden="true">02 / 04</span></figcaption>
+          </figure><figure class="story-slide" role="tabpanel" id="story-2" aria-labelledby="story-tab-2" data-story-slide data-hidden>
+            <span class="review__flag">Sample</span>
+            <svg class="story-slide__mark" viewBox="0 0 48 36" aria-hidden="true" focusable="false"><path d="M0 36V22C0 9 7 2 19 0l2 6c-7 2-10 6-10 12h9v18zm27 0V22C27 9 34 2 46 0l2 6c-7 2-10 6-10 12h9v18z" fill="currentColor"/></svg>
+            <blockquote><p>She was upfront that the diploma fitted my goals better than the course I’d been looking at, and walked me through what that meant.</p></blockquote>
+            <p class="story-slide__journey"><span class="story-slide__from"><small>Before</small>Certificate III educator</span><span class="story-slide__arrow" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="story-slide__to"><small>After</small>Diploma, ready to lead a room</span></p>
+            <figcaption><span class="review__avatar" aria-hidden="true">M</span><span><strong>Mei L.</strong><span>Diploma of Early Childhood Education and Care</span></span><span class="story-slide__count" aria-hidden="true">03 / 04</span></figcaption>
+          </figure><figure class="story-slide" role="tabpanel" id="story-3" aria-labelledby="story-tab-3" data-story-slide data-hidden>
+            <span class="review__flag">Sample</span>
+            <svg class="story-slide__mark" viewBox="0 0 48 36" aria-hidden="true" focusable="false"><path d="M0 36V22C0 9 7 2 19 0l2 6c-7 2-10 6-10 12h9v18zm27 0V22C27 9 34 2 46 0l2 6c-7 2-10 6-10 12h9v18z" fill="currentColor"/></svg>
+            <blockquote><p>I wanted to work in schools but didn’t know where to start. Poonam explained the course, the placement and the likely cost before I committed to anything.</p></blockquote>
+            <p class="story-slide__journey"><span class="story-slide__from"><small>Before</small>Parent volunteer at a primary school</span><span class="story-slide__arrow" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="story-slide__to"><small>After</small>Studying to become a teacher aide</span></p>
+            <figcaption><span class="review__avatar" aria-hidden="true">S</span><span><strong>Sam R.</strong><span>Certificate IV in School Based Education Support</span></span><span class="story-slide__count" aria-hidden="true">04 / 04</span></figcaption>
+          </figure>
+        <div class="stories__controls">
+          <button type="button" class="stories__btn" data-story-prev aria-label="Previous story"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+          <span class="stories__progress" aria-hidden="true"><span data-story-progress></span></span>
+          <button type="button" class="stories__btn" data-story-pause aria-pressed="false"><span class="visually-hidden" data-story-pause-label>Pause stories</span><span class="stories__pause-icon" aria-hidden="true"></span></button>
+          <button type="button" class="stories__btn" data-story-next aria-label="Next story"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
       </div>
     </div>
   </section>

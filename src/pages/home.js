@@ -231,27 +231,34 @@ const testimonials = () => {
   const real = site.testimonials.length > 0;
   const list = real ? site.testimonials : site.draft ? site.sampleTestimonials : [];
   if (!list.length) return '';
-  const [lead, ...rest] = list;
-  const flag = real ? '' : '<span class="review__flag">Sample</span>';
-  const who = (t) => `<figcaption><span class="review__avatar" aria-hidden="true">${esc(t.name[0])}</span><span><strong>${esc(t.name)}</strong>${t.detail ? `<span>${esc(t.detail)}</span>` : ''}</span></figcaption>`;
+  const pad = (n) => String(n).padStart(2, '0');
   return html`
-  <section class="section stories" aria-labelledby="reviews-title">
-    <div class="container">
-      <div class="stories__head">
+  <section class="section stories" aria-labelledby="reviews-title" data-stories>
+    <div class="container stories__grid">
+      <div class="stories__intro">
         <p class="eyebrow eyebrow--on-dark">Student stories</p>
         <h2 id="reviews-title">Real people. <em>Real next steps.</em></h2>
-        ${real ? '' : `<p class="stories__note">${icon('info')} <span><strong>Sample reviews</strong> to show the layout. They are not real and are hidden automatically at launch.</span></p>`}
+        ${real ? '' : `<p class="stories__note">${icon('info')} <span><strong>Sample stories</strong> to show the layout. They are not real and are hidden automatically at launch.</span></p>`}
+        <div class="stories__tabs" role="tablist" aria-label="Choose a story">
+          ${list.map((t, i) => `<button type="button" role="tab" id="story-tab-${i}" aria-controls="story-${i}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}" data-story-tab><span class="stories__tab-avatar" aria-hidden="true">${esc(t.name[0])}</span><span><strong>${esc(t.name)}</strong><span>${esc(t.detail ?? '')}</span></span></button>`)}
+        </div>
       </div>
-      <div class="stories__layout">
-        <figure class="story-lead">
-          ${flag}
-          <svg class="story-lead__mark" viewBox="0 0 48 36" aria-hidden="true" focusable="false"><path d="M0 36V22C0 9 7 2 19 0l2 6c-7 2-10 6-10 12h9v18zm27 0V22C27 9 34 2 46 0l2 6c-7 2-10 6-10 12h9v18z" fill="currentColor"/></svg>
-          <blockquote><p>${esc(lead.quote)}</p></blockquote>
-          ${who(lead)}
-        </figure>
-        <ul class="stories__side" role="list">
-          ${rest.map((t) => `<li><figure class="story-card">${flag}<blockquote><p>${esc(t.quote)}</p></blockquote>${who(t)}</figure></li>`)}
-        </ul>
+      <div class="stories__stage">
+        ${list.map(
+          (t, i) => html`<figure class="story-slide" role="tabpanel" id="story-${i}" aria-labelledby="story-tab-${i}" data-story-slide${i === 0 ? '' : ' data-hidden'}>
+            ${real ? '' : '<span class="review__flag">Sample</span>'}
+            <svg class="story-slide__mark" viewBox="0 0 48 36" aria-hidden="true" focusable="false"><path d="M0 36V22C0 9 7 2 19 0l2 6c-7 2-10 6-10 12h9v18zm27 0V22C27 9 34 2 46 0l2 6c-7 2-10 6-10 12h9v18z" fill="currentColor"/></svg>
+            <blockquote><p>${esc(t.quote)}</p></blockquote>
+            ${t.from && t.to ? `<p class="story-slide__journey"><span class="story-slide__from"><small>Before</small>${esc(t.from)}</span><span class="story-slide__arrow" aria-hidden="true">${icon('arrow-right')}</span><span class="story-slide__to"><small>After</small>${esc(t.to)}</span></p>` : ''}
+            <figcaption><span class="review__avatar" aria-hidden="true">${esc(t.name[0])}</span><span><strong>${esc(t.name)}</strong>${t.detail ? `<span>${esc(t.detail)}</span>` : ''}</span><span class="story-slide__count" aria-hidden="true">${pad(i + 1)} / ${pad(list.length)}</span></figcaption>
+          </figure>`
+        )}
+        <div class="stories__controls">
+          <button type="button" class="stories__btn" data-story-prev aria-label="Previous story">${icon('arrow-left')}</button>
+          <span class="stories__progress" aria-hidden="true"><span data-story-progress></span></span>
+          <button type="button" class="stories__btn" data-story-pause aria-pressed="false"><span class="visually-hidden" data-story-pause-label>Pause stories</span><span class="stories__pause-icon" aria-hidden="true"></span></button>
+          <button type="button" class="stories__btn" data-story-next aria-label="Next story">${icon('arrow-right')}</button>
+        </div>
       </div>
     </div>
   </section>`;
