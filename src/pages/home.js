@@ -50,7 +50,8 @@ const hero = (d) => html`
             ${icon('search', 'hero-search__icon')}
             <label class="visually-hidden" for="hero-q">Search courses by job, topic or course name</label>
             <input class="hero-search__input" id="hero-q" name="q" type="search" autocomplete="off" spellcheck="false" enterkeyhint="search"
-              placeholder="Try “aged care” or “teacher aide”" data-hero-input>
+              placeholder="Try “aged care” or “teacher aide”" data-hero-input
+              data-typing-hints="aged care|childcare|teacher aide|NDIS disability support|Cert IV in Training and Assessment|first aid|counselling|team leader">
             <span class="hero-search__ghost" aria-hidden="true" data-hero-ghost></span>
             <button class="btn btn--sun hero-search__go" type="submit">Find courses</button>
           </div>
@@ -81,8 +82,9 @@ const hero = (d) => html`
     <button class="hero__pause" type="button" aria-pressed="false" hidden data-hero-pause>
       <span class="hero__pause-icon" aria-hidden="true"></span><span data-hero-pause-label>Pause video</span>
     </button>
-  </section>
+  </section>`;
 
+const guideStrip = (d) => html`
   <aside class="guide-strip" aria-label="Your course guide">
     <div class="container guide-strip__inner">
       <span class="avatar avatar--lg" aria-hidden="true">${advisorAvatar(d)}</span>
@@ -146,9 +148,9 @@ const pathwayMap = (d) => html`
 
       <div class="pmap__controls">
         <div class="pmap__tabs" role="tablist" aria-label="Choose an area of work">
-          ${routes.map((r, i) => `<button type="button" role="tab" id="pmt-${r.id}" aria-controls="pm-${r.id}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}" data-pmap-tab="${r.id}">${icon(r.icon)}${r.label}</button>`)}
+          ${routes.map((r, i) => `<button type="button" role="tab" id="pmt-${r.id}" aria-controls="pm-${r.id}" aria-selected="false" tabindex="${i === 0 ? 0 : -1}" data-pmap-tab="${r.id}" style="--acc:var(--c-${r.color});--acc-ink:var(--c-${r.color}-ink);--acc-50:var(--c-${r.color}-50)">${icon(r.icon)}${r.label}</button>`)}
         </div>
-        <fieldset class="pmap__exp" data-pmap-exp>
+        <fieldset class="pmap__exp" data-pmap-exp hidden>
           <legend>Where are you now?</legend>
           <div>
             ${experience.map((e, i) => `<label><input type="radio" name="pmap-exp" value="${e.id}"${i === 0 ? ' checked' : ''}><span>${e.label}</span></label>`)}
@@ -157,13 +159,15 @@ const pathwayMap = (d) => html`
       </div>
 
       ${routes.map(
-        (r, i) => html`<div class="pmap__panel" role="tabpanel" id="pm-${r.id}" aria-labelledby="pmt-${r.id}" data-pmap-panel="${r.id}"${i === 0 ? '' : ' data-inactive'}>
+        (r) => html`<div class="pmap__panel" role="tabpanel" id="pm-${r.id}" aria-labelledby="pmt-${r.id}" data-pmap-panel="${r.id}" data-inactive style="--acc:var(--c-${r.color});--acc-ink:var(--c-${r.color}-ink);--acc-50:var(--c-${r.color}-50)">
           <h3 class="visually-hidden">${r.label} pathway</h3>
           <ol class="pmap__route" role="list" style="--stops:${r.steps.length}">
             ${r.steps.map((codes, n) => mapStop(codes, n, d))}
           </ol>
         </div>`
       )}
+
+      <p class="pmap__prompt" data-pmap-prompt>${icon('arrow-left')} Pick an area to see your route, from your first certificate upwards.</p>
 
       <div class="pmap__foot">
         <p>Prices are typical full-fee ranges across Australian providers (${pricesCheckedOn}). Whether RPL fits is decided by the training provider. ${tbc('Poonam to check the routes on the Pathway Map')}</p>
@@ -227,62 +231,60 @@ const aboutPoonam = (d) => html`
 
 // Real, approved testimonials when supplied. In preview builds only, clearly
 // labelled samples show the layout; they are never published at launch.
+// Story colour follows the course area it relates to.
+const storyArea = (t) => {
+  const c = courses.find((x) => x.title === t.detail);
+  return c ? c.sector : 'care';
+};
+
+const storyCard = (t, hidden) => html`<li class="wall-card" style="--acc:var(--c-${storyArea(t)});--acc-ink:var(--c-${storyArea(t)}-ink);--acc-50:var(--c-${storyArea(t)}-50)"${hidden ? ' aria-hidden="true"' : ''}>
+    <svg class="wall-card__mark" viewBox="0 0 48 36" aria-hidden="true" focusable="false"><path d="M0 36V22C0 9 7 2 19 0l2 6c-7 2-10 6-10 12h9v18zm27 0V22C27 9 34 2 46 0l2 6c-7 2-10 6-10 12h9v18z" fill="currentColor"/></svg>
+    <p class="wall-card__quote">${esc(t.quote)}</p>
+    ${t.from && t.to ? `<p class="wall-card__journey"><span>${esc(t.from)}</span>${icon('arrow-right')}<strong>${esc(t.to)}</strong></p>` : ''}
+    <p class="wall-card__who"><span class="wall-card__avatar" aria-hidden="true">${esc(t.name[0])}</span><span><strong>${esc(t.name)}</strong><span>${esc(t.detail ?? '')}</span></span></p>
+  </li>`;
+
+// Student stories: two rows of story cards drifting in opposite directions.
 const testimonials = () => {
   const real = site.testimonials.length > 0;
   const list = real ? site.testimonials : site.draft ? site.sampleTestimonials : [];
   if (!list.length) return '';
-  const pad = (n) => String(n).padStart(2, '0');
+  const rowB = [...list].reverse();
   return html`
-  <section class="section stories" aria-labelledby="reviews-title" data-stories>
-    <div class="container stories__grid">
-      <div class="stories__intro">
-        <p class="eyebrow eyebrow--on-dark">Student stories</p>
-        <h2 id="reviews-title">Real people. <em>Real next steps.</em>${real ? '' : tbc('Placeholder stories: replace with genuine, approved reviews. They are hidden automatically at launch.')}</h2>
-        <div class="stories__tabs" role="tablist" aria-label="Choose a story">
-          ${list.map((t, i) => `<button type="button" role="tab" id="story-tab-${i}" aria-controls="story-${i}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}" data-story-tab><span class="stories__tab-avatar" aria-hidden="true">${esc(t.name[0])}</span><span><strong>${esc(t.name)}</strong><span>${esc(t.detail ?? '')}</span></span></button>`)}
-        </div>
-      </div>
-      <div class="stories__stage">
-        ${list.map(
-          (t, i) => html`<figure class="story-slide" role="tabpanel" id="story-${i}" aria-labelledby="story-tab-${i}" data-story-slide${i === 0 ? '' : ' data-hidden'}>
-            <svg class="story-slide__mark" viewBox="0 0 48 36" aria-hidden="true" focusable="false"><path d="M0 36V22C0 9 7 2 19 0l2 6c-7 2-10 6-10 12h9v18zm27 0V22C27 9 34 2 46 0l2 6c-7 2-10 6-10 12h9v18z" fill="currentColor"/></svg>
-            <blockquote><p>${esc(t.quote)}</p></blockquote>
-            ${t.from && t.to ? `<p class="story-slide__journey"><span class="story-slide__from"><small>Before</small>${esc(t.from)}</span><span class="story-slide__arrow" aria-hidden="true">${icon('arrow-right')}</span><span class="story-slide__to"><small>After</small>${esc(t.to)}</span></p>` : ''}
-            <figcaption><span class="review__avatar" aria-hidden="true">${esc(t.name[0])}</span><span><strong>${esc(t.name)}</strong>${t.detail ? `<span>${esc(t.detail)}</span>` : ''}</span><span class="story-slide__count" aria-hidden="true">${pad(i + 1)} / ${pad(list.length)}</span></figcaption>
-          </figure>`
-        )}
-        <div class="stories__controls">
-          <button type="button" class="stories__btn" data-story-prev aria-label="Previous story">${icon('arrow-left')}</button>
-          <span class="stories__progress" aria-hidden="true"><span data-story-progress></span></span>
-          <button type="button" class="stories__btn" data-story-pause aria-pressed="false"><span class="visually-hidden" data-story-pause-label>Pause stories</span><span class="stories__pause-icon" aria-hidden="true"></span></button>
-          <button type="button" class="stories__btn" data-story-next aria-label="Next story">${icon('arrow-right')}</button>
-        </div>
-      </div>
+  <section class="section wall" aria-labelledby="reviews-title" data-wall>
+    <div class="container wall__head">
+      <h2 id="reviews-title" class="wall__title">Student <em>stories</em>${real ? '' : tbc('Placeholder stories: replace with genuine, approved reviews. They are hidden automatically at launch.')}</h2>
+      <p class="wall__lead">From “I’ve done this work for years” to qualified. From “I don’t know where to start” to enrolled.</p>
+      <button type="button" class="wall__pause" data-wall-pause aria-pressed="false"><span class="wall__pause-icon" aria-hidden="true"></span><span data-wall-pause-label>Pause stories</span></button>
+    </div>
+    <div class="wall__rows">
+      <ul class="wall__row" role="list">${list.map((t) => storyCard(t, false))}${list.map((t) => storyCard(t, true))}</ul>
+      <ul class="wall__row wall__row--reverse" role="list" aria-hidden="true">${rowB.map((t) => storyCard(t, true))}${rowB.map((t) => storyCard(t, true))}</ul>
     </div>
   </section>`;
 };
 
+// Why these courses matter, said simply: the jobs are growing.
 const whyMatters = () => html`
-  <section class="section section--navy why-matters" aria-labelledby="matters-title">
+  <section class="section demand" aria-labelledby="matters-title">
     <div class="container">
-      <div class="section-head section-head--center">
-        <p class="eyebrow eyebrow--on-dark">Why these courses matter</p>
-        <h2 id="matters-title">In-demand work that makes a difference</h2>
-        <p class="lead">Care, early childhood and education roles keep growing. Here’s what official Victorian Government workforce projections show.</p>
+      <div class="demand__head">
+        <p class="eyebrow eyebrow--on-dark">Why these courses</p>
+        <h2 id="matters-title">These jobs need <em>more people.</em></h2>
+        <p class="lead">Thousands more qualified carers, educators and teacher aides will be needed in the next ten years. A qualification now puts you in line for that work.</p>
       </div>
-      <ul class="facts-grid" role="list">
+      <ul class="demand__grid" role="list">
         ${facts.map(
-          (f) => html`<li class="fact-card">
-            <span class="fact-card__icon">${icon(f.icon)}</span>
-            <p class="fact-card__stat">${f.stat}</p>
-            <p class="fact-card__text">${f.text}</p>
-            <p class="fact-card__source">Source: <a href="${f.url}" rel="noopener">${esc(f.source)}</a></p>
+          (f) => html`<li class="demand__item" style="--acc:var(--c-${f.area})">
+            <p class="demand__stat">${f.stat}</p>
+            <p class="demand__label">${f.label}</p>
+            <p class="demand__source">Source: <a href="${f.url}" rel="noopener">${esc(f.source)}</a></p>
           </li>`
         )}
       </ul>
       ${careerLinks.length
         ? html`<div class="watch">
-            <h3 class="watch__title">${icon('play')} See what the work is like</h3>
+            <h3 class="watch__title">See what the work is like</h3>
             <ul class="watch__grid" role="list">
               ${careerLinks.map((v) => html`<li><figure class="video-card">
                 <div class="video-card__frame" data-yt-frame>
@@ -305,8 +307,11 @@ export default function home() {
   const faqs = [faqGroups[0].items[0], faqGroups[1].items[1], faqGroups[0].items[2], faqGroups[3].items[0]];
 
   const body = html`
+  <div class="first-screen">
   ${hero(d)}
   ${jobBand()}
+  </div>
+  ${guideStrip(d)}
   ${pathwayMap(d)}
   ${areas(d)}
   ${aboutPoonam(d)}

@@ -2,7 +2,7 @@ import { site } from '../data/site.js';
 import { courses, sectors, levels, levelById, sectorById, pathways } from '../data/courses.js';
 import { priceDetail, pricesCheckedOn } from '../data/prices.js';
 import { html, icon, esc } from '../templates/helpers.js';
-import { courseCard, breadcrumbs, ctaBand } from '../templates/components.js';
+import { courseCard, breadcrumbs, ctaBand, photo } from '../templates/components.js';
 
 // Data the compare dialog needs, embedded so the page works without extra requests.
 const compareData = () =>
@@ -35,52 +35,64 @@ export default function coursesPage() {
   const unitCount = courses.length - qualCount;
 
   const body = html`
-  <section class="page-hero page-hero--compact">
-    <div class="container">
-      ${breadcrumbs([{ label: 'Courses' }], d)}
-      <h1>Courses</h1>
-      <p class="lead">${qualCount} qualifications and ${unitCount} first aid units. Search, filter, then compare up to three side by side.</p>
+  <section class="cat-hero">
+    <div class="container cat-hero__inner">
+      <div class="cat-hero__text">
+        ${breadcrumbs([{ label: 'Courses' }], d)}
+        <p class="eyebrow eyebrow--on-dark">${qualCount} qualifications · ${unitCount} first aid units · ${sectors.length} areas</p>
+        <h1>Every course, <em>one search away.</em></h1>
+        <p class="lead">Search by job, topic or course name. Filter by area, then compare up to three side by side.</p>
+      </div>
+      <div class="cat-hero__fan" aria-hidden="true">
+        ${[['courses/chc30125', 'education'], ['courses/chc43121', 'care'], ['areas/training', 'training']].map(([f, a], i) => `<figure class="cat-hero__card cat-hero__card--${i + 1} acc-${a}">${photo(f, d, { sizes: '260px', lazy: false })}<figcaption>${esc(sectorById[a].short)}</figcaption></figure>`)}
+      </div>
     </div>
   </section>
 
   <section class="section section--catalogue">
+    <div class="filters-dock" data-filters-dock>
+      <div class="filters-dock__bar" data-filters-bar>
+        <div class="container">
+          <form class="filters" data-filters="courses" role="search" aria-label="Search and filter courses" onsubmit="return false">
+            <div class="filters__top">
+              <div class="filters__search">
+                <label for="course-search" class="visually-hidden">Search courses</label>
+                ${icon('search')}
+                <input id="course-search" type="search" name="q" placeholder="Search by job, topic or course" autocomplete="off" enterkeyhint="search" data-filter-search
+                  data-typing-hints="childcare|aged care|teacher aide|disability support|trainer and assessor|first aid|counselling|team leader">
+              </div>
+              <button type="button" class="btn btn--secondary filters__toggle" aria-expanded="false" aria-controls="more-filters" data-filters-toggle>
+                ${icon('sliders')} Filters <span class="filters__badge" data-filters-badge hidden></span>
+              </button>
+              <div class="filters__more" id="more-filters" data-filters-more>
+                <div class="filters__field">
+                  <label for="level-filter" class="filters__legend">Level</label>
+                  <select id="level-filter" data-filter-select="level">
+                    <option value="">Any level</option>
+                    ${levels.map((l) => `<option value="${l.id}">${l.name}</option>`)}
+                  </select>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" data-filter-toggle="rpl" data-label="RPL available">
+                  <span class="switch__track" aria-hidden="true"></span>
+                  <span>Only courses with RPL</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="filters__group" role="group" aria-labelledby="area-label">
+              <p class="filters__legend visually-hidden" id="area-label">Area</p>
+              <div class="chip-row chip-row--scroll" data-filter-chips="sector">
+                <button type="button" class="filter-chip" aria-pressed="true" data-value="">All <span class="filter-chip__count">${courses.length}</span></button>
+                ${sectors.map((s) => `<button type="button" class="filter-chip filter-chip--${s.id} acc-${s.id}" aria-pressed="false" data-value="${s.id}" data-label="${esc(s.name)}">${icon(s.icon)}${esc(s.short)}<span class="filter-chip__count">${courses.filter((c) => c.sector === s.id).length}</span></button>`)}
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <div class="container">
-      <form class="filters" data-filters="courses" role="search" aria-label="Search and filter courses" onsubmit="return false">
-        <div class="filters__top">
-          <div class="filters__search">
-            <label for="course-search" class="visually-hidden">Search courses</label>
-            ${icon('search')}
-            <input id="course-search" type="search" name="q" placeholder="Search, e.g. childcare" autocomplete="off" enterkeyhint="search" data-filter-search>
-          </div>
-          <button type="button" class="btn btn--secondary filters__toggle" aria-expanded="false" aria-controls="more-filters" data-filters-toggle>
-            ${icon('sliders')} Filters <span class="filters__badge" data-filters-badge hidden></span>
-          </button>
-        </div>
-
-        <div class="filters__group" role="group" aria-labelledby="area-label">
-          <p class="filters__legend" id="area-label">Area</p>
-          <div class="chip-row chip-row--scroll" data-filter-chips="sector">
-            <button type="button" class="filter-chip" aria-pressed="true" data-value="">All</button>
-            ${sectors.map((s) => `<button type="button" class="filter-chip filter-chip--${s.id}" aria-pressed="false" data-value="${s.id}" data-label="${esc(s.name)}">${icon(s.icon)}${esc(s.short)}</button>`)}
-          </div>
-        </div>
-
-        <div class="filters__more" id="more-filters" data-filters-more>
-          <div class="filters__field">
-            <label for="level-filter" class="filters__legend">Level</label>
-            <select id="level-filter" data-filter-select="level">
-              <option value="">Any level</option>
-              ${levels.map((l) => `<option value="${l.id}">${l.name}</option>`)}
-            </select>
-          </div>
-          <label class="switch">
-            <input type="checkbox" data-filter-toggle="rpl" data-label="RPL available">
-            <span class="switch__track" aria-hidden="true"></span>
-            <span>Only show courses with RPL</span>
-          </label>
-        </div>
-      </form>
-
       <div class="results-bar">
         <p class="results-count" data-results-count aria-live="polite">Showing all ${courses.length} courses</p>
         <div class="active-filters" data-active-filters hidden>

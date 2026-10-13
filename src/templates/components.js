@@ -184,12 +184,11 @@ export const journeyPath = (cls = '') =>
 export const areaCard = (s, list, depth) => {
   const from = Math.min(...list.map((c) => priceFrom(c)).filter(Boolean));
   return html`
-  <a class="area-tile area-tile--${s.id}" href="${link(depth, `courses.html?sector=${s.id}`)}">
+  <a class="area-tile area-tile--${s.id}" style="--acc:var(--c-${s.id});--acc-ink:var(--c-${s.id}-ink)" href="${link(depth, `courses.html?sector=${s.id}`)}">
     ${photo(s.image.file, depth, { sizes: '(min-width: 960px) 40vw, 50vw' })}
     <span class="area-tile__body">
       <span class="area-tile__icon">${icon(s.icon)}</span>
       <span class="area-tile__name">${esc(s.name)}</span>
-      <span class="area-tile__blurb">${esc(s.blurb)}</span>
       <span class="area-tile__meta">${list.length} ${list.length === 1 ? 'course' : 'courses'}${Number.isFinite(from) ? ` · from ${money(from)}` : ''} ${icon('arrow-right')}</span>
     </span>
   </a>`;

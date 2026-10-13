@@ -283,6 +283,42 @@
     apply();
   });
 
+  /* ── Search bar that stays in view while scrolling the results ──────── */
+  $$('[data-filters-dock]').forEach((dock) => {
+    const bar = $('[data-filters-bar]', dock);
+    const section = dock.closest('section');
+    const form = $('[data-filters]', dock);
+    const header = $('.site-header');
+    const firstResult = $('.results-bar, [data-results-count]', section);
+    let stuck = false;
+    let ticking = false;
+    const measure = () => { if (!stuck) dock.style.minHeight = `${bar.offsetHeight}px`; };
+    const headerBottom = () => (header ? Math.max(0, header.getBoundingClientRect().bottom) : 0);
+    const update = () => {
+      ticking = false;
+      const top = headerBottom();
+      const should = dock.getBoundingClientRect().top < top && section.getBoundingClientRect().bottom > top + bar.offsetHeight + 80;
+      if (should === stuck) return;
+      if (should) measure();
+      stuck = should;
+      dock.classList.toggle('is-stuck', stuck);
+    };
+    // After a filter change while pinned, bring the first results into view.
+    const settle = () => {
+      if (!stuck || !firstResult) return;
+      const want = headerBottom() + bar.offsetHeight + 16;
+      const at = firstResult.getBoundingClientRect().top;
+      if (at < want) window.scrollBy(0, at - want);
+    };
+    window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    window.addEventListener('resize', () => { measure(); update(); });
+    form.addEventListener('input', () => setTimeout(settle, 180));
+    form.addEventListener('change', () => setTimeout(settle, 30));
+    form.addEventListener('click', (e) => { if (e.target.closest('.filter-chip')) setTimeout(settle, 30); });
+    measure();
+    update();
+  });
+
   /* ── Home hero: search suggestions, typing hints, background video ───── */
   const heroForm = $('[data-hero-search]');
   if (heroForm) {
@@ -389,27 +425,28 @@
     heroForm.addEventListener('submit', (e) => {
       if (!input.value.trim()) { e.preventDefault(); location.href = 'courses.html'; }
     });
-
-    // Typing hints in the empty search box (skipped for reduced motion).
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (!reduceMotion.matches) {
-      const hints = ['aged care', 'childcare', 'teacher aide', 'NDIS disability support', 'Cert IV in Training and Assessment', 'first aid', 'counselling', 'team leader'];
-      const resting = input.getAttribute('placeholder');
-      let h = 0; let c = 0; let deleting = false; let timer;
-      const tick = () => {
-        if (document.activeElement === input || input.value) { input.setAttribute('placeholder', resting); timer = setTimeout(tick, 1200); return; }
-        const word = hints[h];
-        c += deleting ? -1 : 1;
-        input.setAttribute('placeholder', `Try “${word.slice(0, c)}”`);
-        let wait = deleting ? 35 : 75;
-        if (!deleting && c === word.length) { deleting = true; wait = 1700; }
-        else if (deleting && c === 0) { deleting = false; h = (h + 1) % hints.length; wait = 350; }
-        timer = setTimeout(tick, wait);
-      };
-      timer = setTimeout(tick, 1800);
-      reduceMotion.addEventListener('change', (e) => { if (e.matches) { clearTimeout(timer); input.setAttribute('placeholder', resting); } });
-    }
   }
+
+  /* ── Typing hints: search boxes show example searches while empty ─────── */
+  const reduceHints = window.matchMedia('(prefers-reduced-motion: reduce)');
+  $$('[data-typing-hints]').forEach((input) => {
+    if (reduceHints.matches) return;
+    const hints = input.dataset.typingHints.split('|');
+    const resting = input.getAttribute('placeholder');
+    let h = 0; let c = 0; let deleting = false; let timer;
+    const tick = () => {
+      if (document.activeElement === input || input.value) { input.setAttribute('placeholder', resting); timer = setTimeout(tick, 1200); return; }
+      const word = hints[h];
+      c += deleting ? -1 : 1;
+      input.setAttribute('placeholder', `Try “${word.slice(0, c)}”`);
+      let wait = deleting ? 35 : 75;
+      if (!deleting && c === word.length) { deleting = true; wait = 1700; }
+      else if (deleting && c === 0) { deleting = false; h = (h + 1) % hints.length; wait = 350; }
+      timer = setTimeout(tick, wait);
+    };
+    timer = setTimeout(tick, 1500);
+    reduceHints.addEventListener('change', (e) => { if (e.matches) { clearTimeout(timer); input.setAttribute('placeholder', resting); } });
+  });
 
   // Background video: larger screens only, never with reduced motion or data saver.
   const video = $('[data-hero-video]');
@@ -458,23 +495,25 @@
     else window.addEventListener('load', check, { once: true });
   }
 
-  /* ── Pathway Map: pick an area and a starting point ──────────────────── */
+  /* ── Pathway Map: nothing chosen until the visitor picks an area ─────── */
   const pmap = $('[data-pmap]');
   if (pmap) {
     const tabs = $$('[data-pmap-tab]', pmap);
     const panels = $$('[data-pmap-panel]', pmap);
+    const expBox = $('[data-pmap-exp]', pmap);
+    const prompt = $('[data-pmap-prompt]', pmap);
     let exp = 'new';
-    let current = tabs[0]?.dataset.pmapTab;
-    let seen = false;
+    let current = null;
 
     const draw = (panel) => {
       panel.classList.remove('is-drawn');
       void panel.offsetWidth; // restart the route animation
-      if (seen) panel.classList.add('is-drawn');
+      panel.classList.add('is-drawn');
     };
 
     const apply = () => {
       const panel = panels.find((p) => p.dataset.pmapPanel === current);
+      if (!panel) return;
       const stops = $$('.pmap__stop', panel);
       const start = exp === 'qual' ? Math.min(1, stops.length - 1) : 0;
       stops.forEach((st, i) => {
@@ -485,13 +524,16 @@
         $('[data-you]', st).hidden = i !== start;
         $('[data-done]', st).hidden = i >= start;
         const note = $('[data-rpl-note]', st);
-        if (note) note.hidden = !((exp === 'some' && i === start) || (exp === 'exp' && (i === start || i === start + 1)) );
+        if (note) note.hidden = !((exp === 'some' && i === start) || (exp === 'exp' && (i === start || i === start + 1)));
       });
       draw(panel);
     };
 
     const select = (tab, focus) => {
       current = tab.dataset.pmapTab;
+      pmap.classList.add('has-choice');
+      expBox.hidden = false;
+      prompt.hidden = true;
       tabs.forEach((t) => {
         const on = t === tab;
         t.setAttribute('aria-selected', String(on));
@@ -513,86 +555,23 @@
       });
     });
     $$('input[name="pmap-exp"]', pmap).forEach((r) => r.addEventListener('change', () => { exp = r.value; apply(); }));
-
-    apply();
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver(([e]) => {
-        if (e.isIntersecting) { seen = true; apply(); io.disconnect(); }
-      }, { threshold: 0.25 });
-      io.observe(pmap);
-    } else { seen = true; apply(); }
   }
 
-  /* ── Student stories: tabs, arrows and gentle auto-advance ───────────── */
-  const storiesEl = $('[data-stories]');
-  if (storiesEl) {
-    const tabs = $$('[data-story-tab]', storiesEl);
-    const slides = $$('[data-story-slide]', storiesEl);
-    const bar = $('[data-story-progress]', storiesEl);
-    const pauseBtn = $('[data-story-pause]', storiesEl);
-    const pauseLabel = $('[data-story-pause-label]', storiesEl);
-    const DELAY = 7000;
-    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let current = 0;
-    let timer = null;
-    let userPaused = still;
-    let hovering = false;
-    let inView = false;
-
-    const show = (i, { focusTab = false } = {}) => {
-      current = (i + slides.length) % slides.length;
-      tabs.forEach((t, n) => {
-        const on = n === current;
-        t.setAttribute('aria-selected', String(on));
-        t.tabIndex = on ? 0 : -1;
-      });
-      slides.forEach((s, n) => {
-        s.toggleAttribute('data-hidden', n !== current);
-        if (n === current) { s.classList.remove('is-entering'); void s.offsetWidth; s.classList.add('is-entering'); }
-      });
-      if (focusTab) tabs[current].focus();
-      restart();
-    };
-
-    const running = () => !userPaused && !hovering && inView && slides.length > 1;
-    const restart = () => {
-      clearTimeout(timer);
-      bar.classList.remove('is-running');
-      void bar.offsetWidth;
-      if (!running()) return;
-      bar.style.animationDuration = `${DELAY}ms`;
-      bar.classList.add('is-running');
-      timer = setTimeout(() => show(current + 1), DELAY);
-    };
+  /* ── Student stories: moving wall with a pause button ─────────────────── */
+  const wall = $('[data-wall]');
+  if (wall) {
+    const btn = $('[data-wall-pause]', wall);
+    const label = $('[data-wall-pause-label]', wall);
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)');
     const setPaused = (p) => {
-      userPaused = p;
-      pauseBtn.setAttribute('aria-pressed', String(p));
-      pauseLabel.textContent = p ? 'Play stories' : 'Pause stories';
-      storiesEl.classList.toggle('is-paused', p);
-      restart();
+      wall.classList.toggle('is-paused', p);
+      btn.setAttribute('aria-pressed', String(p));
+      label.textContent = p ? 'Play stories' : 'Pause stories';
     };
-
-    tabs.forEach((tab, i) => {
-      tab.addEventListener('click', () => show(i));
-      tab.addEventListener('keydown', (e) => {
-        const step = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
-        if (step) { e.preventDefault(); show(i + step, { focusTab: true }); }
-        if (e.key === 'Home') { e.preventDefault(); show(0, { focusTab: true }); }
-        if (e.key === 'End') { e.preventDefault(); show(slides.length - 1, { focusTab: true }); }
-      });
-    });
-    $('[data-story-prev]', storiesEl).addEventListener('click', () => show(current - 1));
-    $('[data-story-next]', storiesEl).addEventListener('click', () => show(current + 1));
-    pauseBtn.addEventListener('click', () => setPaused(!userPaused));
-    storiesEl.addEventListener('mouseenter', () => { hovering = true; restart(); });
-    storiesEl.addEventListener('mouseleave', () => { hovering = false; restart(); });
-    storiesEl.addEventListener('focusin', () => { hovering = true; restart(); });
-    storiesEl.addEventListener('focusout', (e) => { if (!storiesEl.contains(e.relatedTarget)) { hovering = false; restart(); } });
-    if (still) { pauseBtn.hidden = true; storiesEl.classList.add('is-paused'); }
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(([e]) => { inView = e.isIntersecting; restart(); }, { threshold: 0.35 }).observe(storiesEl);
-    }
-    storiesEl.classList.add('is-ready');
+    btn.addEventListener('click', () => setPaused(!wall.classList.contains('is-paused')));
+    const sync = () => { btn.hidden = still.matches; };
+    still.addEventListener('change', sync);
+    sync();
   }
 
   /* ── Video previews: load the YouTube player only when asked ─────────── */
@@ -612,8 +591,8 @@
   /* ── Gentle reveal as sections scroll into view ─────────────────────── */
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const targets = $$([
-      '.section-head', '.how__head', '.area-tile', '.about-poonam__photo', '.about-poonam__text', '.reviews__grid > li',
-      '.fact-card', '.watch', '.route__stop', '.faq-split > *', '.invite', '.finder-entry__inner > *',
+      '.section-head', '.area-tile', '.about-poonam__photo', '.about-poonam__text', '.wall__head',
+      '.demand__item', '.watch', '.route__stop', '.faq-split > *', '.invite', '.finder-entry__inner > *',
       '.path', '.timeline li', '.split > *', '.subhead', '.teams-band', '.compare-table', '.hint-card',
       '.prose-section', '.glance', '.service', '.why-matters .facts-grid > li',
     ].join(','));

@@ -12,12 +12,12 @@ export const NAV = [
 
 const logo = (depth) => html`
   <a class="logo" href="${link(depth, 'index.html')}" aria-label="${site.name} – home">
-    <svg class="logo__mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
-      <rect width="40" height="40" rx="12" fill="var(--primary)"/>
-      <path d="M14 29V11h7.5a6 6 0 0 1 0 12H19" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-      <circle cx="14" cy="29.5" r="3.2" fill="var(--gold)"/>
+    <svg class="logo__mark" viewBox="0 0 44 44" aria-hidden="true" focusable="false">
+      <rect width="44" height="44" rx="13" fill="var(--logo-bg)"/>
+      <path d="M12.5 35c0-4.5 3.5-6 3.5-10.5V12h7a7 7 0 0 1 0 14h-3.5" fill="none" stroke="var(--coral)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M33 7.5l1.2 2.8 2.8 1.2-2.8 1.2L33 15.5l-1.2-2.8-2.8-1.2 2.8-1.2z" fill="var(--saffron)"/>
     </svg>
-    <span class="logo__text">Pathwise<span class="logo__sub">Courses</span></span>
+    <span class="logo__text"><span>Path<em>wise</em></span><span class="logo__sub">Courses</span></span>
   </a>`;
 
 const advisorFace = (depth) =>
@@ -154,7 +154,7 @@ export const layout = ({ title, description, path, depth = 0, active = '', body,
   <title>${esc(fullTitle)}</title>
   <meta name="description" content="${esc(description)}">
   <link rel="canonical" href="${esc(canonical)}">
-  <meta name="theme-color" content="#0a1f46">
+  <meta name="theme-color" content="#0e1512">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="${esc(site.name)}">
   <meta property="og:title" content="${esc(fullTitle)}">
@@ -165,8 +165,8 @@ export const layout = ({ title, description, path, depth = 0, active = '', body,
   ${site.draft ? '<meta name="robots" content="noindex">' : ''}
   <link rel="icon" href="${link(depth, 'assets/img/favicon.svg')}" type="image/svg+xml">
   <link rel="apple-touch-icon" href="${link(depth, 'assets/img/apple-touch-icon.png')}">
-  <link rel="preload" href="${link(depth, 'assets/fonts/figtree-var-latin.woff2')}" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="${link(depth, 'assets/fonts/jakarta-var-latin.woff2')}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="${link(depth, 'assets/fonts/geist-var-latin.woff2')}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="${link(depth, 'assets/fonts/instrument-serif-italic-latin.woff2')}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="${link(depth, 'assets/css/styles.css')}">
   <script>document.documentElement.classList.add('js')</script>
   <script id="site-config" type="application/json">${clientConfig()}</script>
@@ -174,7 +174,7 @@ export const layout = ({ title, description, path, depth = 0, active = '', body,
   <script src="${link(depth, 'assets/js/assistant.js')}" defer></script>
   ${head}
 </head>
-<body class="${bodyClass}">
+<body class="${[bodyClass, site.draft ? 'has-draft' : ''].filter(Boolean).join(' ')}">
   <a class="skip-link" href="#main">Skip to main content</a>
   ${draftBanner()}
   ${header(depth, active)}

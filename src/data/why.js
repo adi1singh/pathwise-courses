@@ -3,10 +3,10 @@
 // projections published on vic.gov.au (checked October 2026). National Jobs and
 // Skills Australia figures could not be verified at the time, so none are used.
 export const facts = [
-  { icon: 'heart', stat: '47,962', text: 'new aged and disabled carers expected to be needed in Victoria by 2034, on top of about 69,900 working in 2024.', source: 'Victorian Government, “Aged carer”', url: 'https://www.vic.gov.au/aged-carer' },
-  { icon: 'blocks', stat: '17,183', text: 'new child carers expected to be needed in Victoria by 2034, including early childhood and outside-school-hours care.', source: 'Victorian Government, “Out of school hours care worker”', url: 'https://www.vic.gov.au/out-of-school-hours-care-worker' },
-  { icon: 'book', stat: '8,413', text: 'new education aides (teacher aides) expected to be needed in Victoria by 2034.', source: 'Victorian Government, “Education aide”', url: 'https://www.vic.gov.au/education-aide' },
-  { icon: 'trending', stat: '335,500', text: 'new workers expected to enter Victoria’s health care and social assistance industry by 2034, which includes community services.', source: 'Victorian Government, “Working with children and young people”', url: 'https://www.vic.gov.au/skills-working-children-young-people' },
+  { icon: 'heart', area: 'care', stat: '47,962', label: 'more aged care and disability carers needed in Victoria by 2034', text: 'new aged and disabled carers expected to be needed in Victoria by 2034, on top of about 69,900 working in 2024.', source: 'Victorian Government, “Aged carer”', url: 'https://www.vic.gov.au/aged-carer' },
+  { icon: 'blocks', area: 'education', stat: '17,183', label: 'more childcare and OSHC workers needed in Victoria by 2034', text: 'new child carers expected to be needed in Victoria by 2034, including early childhood and outside-school-hours care.', source: 'Victorian Government, “Out of school hours care worker”', url: 'https://www.vic.gov.au/out-of-school-hours-care-worker' },
+  { icon: 'book', area: 'training', stat: '8,413', label: 'more teacher aides needed in Victoria by 2034', text: 'new education aides (teacher aides) expected to be needed in Victoria by 2034.', source: 'Victorian Government, “Education aide”', url: 'https://www.vic.gov.au/education-aide' },
+  { icon: 'trending', area: 'business', stat: '335,500', label: 'new workers joining Victoria’s health and community services by 2034', text: 'new workers expected to enter Victoria’s health care and social assistance industry by 2034, which includes community services.', source: 'Victorian Government, “Working with children and young people”', url: 'https://www.vic.gov.au/skills-working-children-young-people' },
 ];
 
 // Official videos. The page shows a self-hosted preview image; the YouTube

@@ -76,11 +76,14 @@ await writeFile(
   })
 );
 
-// Light CSS minification: drop comments and collapse whitespace.
-const cssFile = join(out, 'assets/css/styles.css');
-const css = await readFile(cssFile, 'utf8');
+// Join the stylesheet parts (src/assets/css/parts, in name order) into one
+// file, then minify lightly: drop comments and collapse whitespace.
+const partsDir = join(root, 'src/assets/css/parts');
+const parts = (await readdir(partsDir)).filter((f) => f.endsWith('.css')).sort();
+const css = (await Promise.all(parts.map((f) => readFile(join(partsDir, f), 'utf8')))).join('\n');
+await rm(join(out, 'assets/css/parts'), { recursive: true, force: true });
 await writeFile(
-  cssFile,
+  join(out, 'assets/css/styles.css'),
   css
     .replace(/\/\*[\s\S]*?\*\//g, '')
     .replace(/\s+/g, ' ')
