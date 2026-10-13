@@ -520,6 +520,20 @@
     } else { seen = true; apply(); }
   }
 
+  /* ── Video previews: load the YouTube player only when asked ─────────── */
+  $$('[data-yt]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const frame = document.createElement('iframe');
+      frame.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(btn.dataset.yt)}?autoplay=1&rel=0`;
+      frame.title = btn.dataset.ytTitle;
+      frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      frame.allowFullscreen = true;
+      frame.loading = 'lazy';
+      btn.closest('[data-yt-frame]').replaceChildren(frame);
+      frame.focus();
+    });
+  });
+
   /* ── Gentle reveal as sections scroll into view ─────────────────────── */
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const targets = $$([

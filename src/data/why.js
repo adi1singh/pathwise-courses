@@ -9,8 +9,9 @@ export const facts = [
   { icon: 'trending', stat: '335,500', text: 'new workers expected to enter Victoria’s health care and social assistance industry by 2034, which includes community services.', source: 'Victorian Government, “Working with children and young people”', url: 'https://www.vic.gov.au/skills-working-children-young-people' },
 ];
 
-// Official videos, linked (not embedded) so no third-party player loads.
+// Official videos. The page shows a self-hosted preview image; the YouTube
+// player (privacy-enhanced mode) only loads when someone presses play.
 export const careerLinks = [
-  { title: 'Working in aged care', publisher: 'Australian Government Department of Health, Disability and Ageing · YouTube', url: 'https://www.youtube.com/watch?v=45PGLa_HUIE' },
-  { title: 'Shape the future in early childhood', publisher: 'Queensland Department of Education · YouTube', url: 'https://www.youtube.com/watch?v=IbIVCcyAorg' },
+  { id: '45PGLa_HUIE', title: 'Working in aged care', publisher: 'Australian Government Department of Health, Disability and Ageing · YouTube', url: 'https://www.youtube.com/watch?v=45PGLa_HUIE' },
+  { id: 'IbIVCcyAorg', title: 'Shape the future in early childhood', publisher: 'Queensland Department of Education · YouTube', url: 'https://www.youtube.com/watch?v=IbIVCcyAorg' },
 ];

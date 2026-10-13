@@ -6,7 +6,7 @@ import { routes, experience } from '../data/pathway-map.js';
 import { facts, careerLinks } from '../data/why.js';
 import { priceFrom, pricesCheckedOn, typicalPrices, money } from '../data/prices.js';
 import { html, link, icon, tbc, esc } from '../templates/helpers.js';
-import { faqList, ctaBand, areaCard, advisorAvatar, advisorPortrait, searchFields } from '../templates/components.js';
+import { faqList, areaCard, advisorAvatar, advisorPortrait, searchFields } from '../templates/components.js';
 
 const POPULAR = [
   ['Aged care', 'aged care'],
@@ -231,26 +231,28 @@ const testimonials = () => {
   const real = site.testimonials.length > 0;
   const list = real ? site.testimonials : site.draft ? site.sampleTestimonials : [];
   if (!list.length) return '';
+  const [lead, ...rest] = list;
+  const flag = real ? '' : '<span class="review__flag">Sample</span>';
+  const who = (t) => `<figcaption><span class="review__avatar" aria-hidden="true">${esc(t.name[0])}</span><span><strong>${esc(t.name)}</strong>${t.detail ? `<span>${esc(t.detail)}</span>` : ''}</span></figcaption>`;
   return html`
-  <section class="section section--soft reviews" aria-labelledby="reviews-title">
+  <section class="section stories" aria-labelledby="reviews-title">
     <div class="container">
-      <div class="section-head section-head--center">
-        <p class="eyebrow">Student stories</p>
-        <h2 id="reviews-title">What students say</h2>
-        ${real ? '' : `<p class="reviews__sample-note">${icon('info')} <span><strong>Sample reviews.</strong> These show the layout only. They are not real reviews and are hidden automatically at launch. Replace them with genuine, approved stories.</span></p>`}
+      <div class="stories__head">
+        <p class="eyebrow eyebrow--on-dark">Student stories</p>
+        <h2 id="reviews-title">Real people. <em>Real next steps.</em></h2>
+        ${real ? '' : `<p class="stories__note">${icon('info')} <span><strong>Sample reviews</strong> to show the layout. They are not real and are hidden automatically at launch.</span></p>`}
       </div>
-      <ul class="reviews__grid" role="list">
-        ${list.map(
-          (t) => html`<li>
-            <figure class="review${real ? '' : ' review--sample'}">
-              ${real ? '' : '<span class="review__flag">Sample</span>'}
-              <svg class="review__mark" viewBox="0 0 48 36" aria-hidden="true" focusable="false"><path d="M0 36V22C0 9 7 2 19 0l2 6c-7 2-10 6-10 12h9v18zm27 0V22C27 9 34 2 46 0l2 6c-7 2-10 6-10 12h9v18z" fill="currentColor"/></svg>
-              <blockquote><p>${esc(t.quote)}</p></blockquote>
-              <figcaption><span class="review__avatar" aria-hidden="true">${esc(t.name[0])}</span><span><strong>${esc(t.name)}</strong>${t.detail ? `<span>${esc(t.detail)}</span>` : ''}</span></figcaption>
-            </figure>
-          </li>`
-        )}
-      </ul>
+      <div class="stories__layout">
+        <figure class="story-lead">
+          ${flag}
+          <svg class="story-lead__mark" viewBox="0 0 48 36" aria-hidden="true" focusable="false"><path d="M0 36V22C0 9 7 2 19 0l2 6c-7 2-10 6-10 12h9v18zm27 0V22C27 9 34 2 46 0l2 6c-7 2-10 6-10 12h9v18z" fill="currentColor"/></svg>
+          <blockquote><p>${esc(lead.quote)}</p></blockquote>
+          ${who(lead)}
+        </figure>
+        <ul class="stories__side" role="list">
+          ${rest.map((t) => `<li><figure class="story-card">${flag}<blockquote><p>${esc(t.quote)}</p></blockquote>${who(t)}</figure></li>`)}
+        </ul>
+      </div>
     </div>
   </section>`;
 };
@@ -276,30 +278,20 @@ const whyMatters = () => html`
       ${careerLinks.length
         ? html`<div class="watch">
             <h3 class="watch__title">${icon('play')} See what the work is like</h3>
-            <ul class="watch__list" role="list">
-              ${careerLinks.map((v) => `<li><a class="watch__link" href="${v.url}" rel="noopener"><span class="watch__play" aria-hidden="true">${icon('play')}</span><span><strong>${esc(v.title)}</strong><span>${esc(v.publisher)}</span></span></a></li>`)}
+            <ul class="watch__grid" role="list">
+              ${careerLinks.map((v) => html`<li><figure class="video-card">
+                <div class="video-card__frame" data-yt-frame>
+                  <button class="video-card__play" type="button" data-yt="${v.id}" data-yt-title="${esc(v.title)}" aria-label="Play video: ${esc(v.title)}">
+                    <img src="assets/img/videos/${v.id}.webp" alt="" width="640" height="360" loading="lazy" decoding="async">
+                    <span class="video-card__btn" aria-hidden="true">${icon('play')}</span>
+                  </button>
+                </div>
+                <figcaption><strong>${esc(v.title)}</strong><span>${esc(v.publisher)}</span></figcaption>
+              </figure></li>`)}
             </ul>
+            <p class="watch__note">Videos play from YouTube in privacy-enhanced mode, only when you press play.</p>
           </div>`
         : ''}
-    </div>
-  </section>`;
-
-const howItWorks = () => html`
-  <section class="section how" aria-labelledby="how-title">
-    <div class="container">
-      <div class="how__head">
-        <div>
-          <p class="eyebrow">How it works</p>
-          <h2 id="how-title">Your path to a qualification</h2>
-        </div>
-        <a class="link-arrow" href="ways-to-study.html">Compare RPL, online study and short courses ${icon('arrow-right')}</a>
-      </div>
-      <ol class="route" role="list">
-        <li class="route__stop"><span class="route__num" aria-hidden="true">01</span><span class="route__dot">${icon('chat')}</span><h3>Have a chat</h3><p>Share your experience and goals with ${site.advisor}.</p></li>
-        <li class="route__stop"><span class="route__num" aria-hidden="true">02</span><span class="route__dot">${icon('compass')}</span><h3>Choose your course</h3><p>Agree the right course and the best way to get it.</p></li>
-        <li class="route__stop"><span class="route__num" aria-hidden="true">03</span><span class="route__dot">${icon('file')}</span><h3>Show or build your skills</h3><p>Gather evidence for RPL, or study the course online.</p></li>
-        <li class="route__stop route__stop--end"><span class="route__num" aria-hidden="true">04</span><span class="route__dot">${icon('award')}</span><h3>Get qualified</h3><p>Your training organisation issues your qualification.</p></li>
-      </ol>
     </div>
   </section>`;
 
@@ -314,7 +306,6 @@ export default function home() {
   ${areas(d)}
   ${aboutPoonam(d)}
   ${testimonials()}
-  ${howItWorks()}
   ${whyMatters()}
 
   <section class="section" aria-labelledby="faq-title">
@@ -329,7 +320,6 @@ export default function home() {
     </div>
   </section>
 
-  ${ctaBand(d)}
   `;
 
   return {

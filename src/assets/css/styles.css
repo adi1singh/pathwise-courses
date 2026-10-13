@@ -1811,3 +1811,67 @@ html:not(.js) .pmap__panel + .pmap__panel { margin-top: 2.5rem; }
 .pmap__rpl { margin-bottom: 0.25rem; }
 .pmap__facts { grid-template-columns: 1fr; row-gap: 0.55rem; }
 .pmap__facts dd { white-space: nowrap; }
+
+/* ── Course areas: even 3 × 2 grid, tiles lift on hover ─────────────────── */
+.bento { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: auto; gap: clamp(1rem, 0.6rem + 1.2vw, 1.75rem); }
+.bento .area-tile { grid-column: auto !important; grid-row: auto !important; min-height: 0; aspect-ratio: 4 / 3.4; }
+.bento .area-tile--care .area-tile__name { font-size: clamp(1.1rem, 0.95rem + 0.6vw, 1.45rem); }
+.area-tile { transition: transform 0.35s var(--ease), box-shadow 0.35s; }
+.area-tile:hover, .area-tile:focus-visible { transform: translateY(-8px) scale(1.025); box-shadow: 0 30px 60px -25px rgba(6, 20, 48, 0.55); z-index: 1; }
+.area-tile__blurb { display: block !important; }
+@media (max-width: 899.98px) { .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 559.98px) { .bento { grid-template-columns: 1fr; } .bento .area-tile { aspect-ratio: 16 / 10; } }
+
+/* ── Student stories: the boldest section ───────────────────────────────── */
+.stories {
+  position: relative; overflow: hidden; color: #fff;
+  background: radial-gradient(70% 90% at 0% 0%, #3b6cf0 0%, transparent 60%), radial-gradient(60% 90% at 100% 100%, #6a3fd6 0%, transparent 65%), linear-gradient(135deg, #1f4fd1 0%, #102b5e 100%);
+}
+.stories::before { content: '“'; position: absolute; right: -2rem; top: -6rem; font-family: var(--font-accent); font-style: italic; font-size: 34rem; line-height: 1; color: rgba(255, 255, 255, 0.06); pointer-events: none; }
+.stories > .container { position: relative; }
+.stories__head { max-width: 46rem; margin-bottom: clamp(2rem, 1.5rem + 2vw, 3rem); }
+.stories__head h2 { color: #fff; font-size: clamp(2.2rem, 1.4rem + 3.2vw, 4rem); line-height: 1.02; margin: 0; }
+.stories__head h2 em { color: var(--gold); }
+.stories__note { display: inline-flex; gap: 0.5rem; align-items: start; margin: 1.25rem 0 0; padding: 0.55rem 0.9rem; border-radius: 12px; background: rgba(255, 255, 255, 0.12); color: rgba(255, 255, 255, 0.88); font-size: 0.875rem; }
+.stories__note strong { color: #fff; }
+.stories__note .icon { margin-top: 0.1em; }
+.stories__layout { display: grid; gap: clamp(1rem, 0.6rem + 1.2vw, 1.75rem); }
+@media (min-width: 960px) { .stories__layout { grid-template-columns: 1.25fr 1fr; } }
+.story-lead { position: relative; margin: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem; padding: clamp(1.75rem, 1.2rem + 2vw, 3rem); border-radius: var(--radius-xl); background: #fff; color: var(--ink); box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.5); }
+.story-lead__mark { width: 64px; height: 48px; color: var(--gold); }
+.story-lead blockquote { margin: 0; }
+.story-lead blockquote p { font-family: var(--font-accent); font-style: italic; font-weight: 600; font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.35rem); line-height: 1.25; color: var(--ink); }
+.stories__side { list-style: none; padding: 0; margin: 0; display: grid; gap: clamp(1rem, 0.6rem + 1.2vw, 1.75rem); }
+.story-card { position: relative; height: 100%; margin: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; padding: 1.6rem; border-radius: var(--radius-xl); background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: transform 0.3s var(--ease), background 0.3s; }
+.story-card:hover { transform: translateY(-4px); background: rgba(255, 255, 255, 0.15); }
+.story-card blockquote { margin: 0; }
+.story-card blockquote p { font-size: 1.1rem; line-height: 1.55; color: #fff; font-weight: 500; }
+.stories figcaption { display: flex; gap: 0.75rem; align-items: center; }
+.stories figcaption > span:last-child { display: grid; line-height: 1.35; }
+.story-lead figcaption strong { color: var(--ink); }
+.story-lead figcaption > span:last-child > span { font-size: 0.9rem; color: var(--muted); }
+.story-card figcaption strong { color: #fff; }
+.story-card figcaption > span:last-child > span { font-size: 0.875rem; color: rgba(255, 255, 255, 0.78); }
+.stories .review__avatar { width: 48px; height: 48px; background: linear-gradient(135deg, var(--gold), #ff9f43); color: var(--navy-950); }
+.stories .review__flag { top: 1.1rem; right: 1.1rem; }
+.story-card .review__flag { background: rgba(255, 255, 255, 0.15); color: #fff; border-color: rgba(255, 255, 255, 0.3); }
+.stories :focus-visible { box-shadow: 0 0 0 3px #1f4fd1, 0 0 0 6px var(--gold); }
+
+/* ── Video previews ─────────────────────────────────────────────────────── */
+.watch__grid { list-style: none; padding: 0; margin: 0; display: grid; gap: clamp(1rem, 0.6rem + 1.2vw, 1.5rem); grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+.video-card { margin: 0; display: grid; gap: 0.85rem; }
+.video-card__frame { position: relative; aspect-ratio: 16 / 9; border-radius: 20px; overflow: hidden; background: #000; box-shadow: 0 24px 50px -24px rgba(0, 0, 0, 0.7); }
+.video-card__frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-card__play { position: absolute; inset: 0; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; display: block; }
+.video-card__play img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease), filter 0.3s; }
+.video-card__play::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(6, 20, 48, 0.45)); }
+.video-card__play:hover img { transform: scale(1.04); filter: brightness(1.05); }
+.video-card__btn { position: absolute; z-index: 1; left: 50%; top: 50%; display: grid; place-items: center; width: 74px; height: 74px; margin: -37px 0 0 -37px; border-radius: 50%; background: var(--gold); color: var(--navy-950); box-shadow: 0 0 0 10px rgba(246, 185, 59, 0.25), 0 16px 30px -10px rgba(0, 0, 0, 0.6); transition: transform 0.25s var(--ease); }
+.video-card__btn .icon { width: 30px; height: 30px; fill: currentColor; margin-left: 4px; }
+.video-card__play:hover .video-card__btn { transform: scale(1.08); }
+.video-card__play:focus-visible { box-shadow: inset 0 0 0 4px var(--gold); }
+.video-card figcaption { display: grid; gap: 0.1rem; }
+.video-card figcaption strong { color: #fff; font-size: 1.05rem; }
+.video-card figcaption span { font-size: 0.85rem; color: var(--on-dark-muted); }
+.watch__note { margin: 1rem 0 0; font-size: 0.8125rem; color: var(--on-dark-muted); }
+.story-card { padding-top: 2.75rem; }
