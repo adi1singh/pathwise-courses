@@ -44,6 +44,38 @@ identifiable people in a bad light or implying they endorse the business. Saved 
 
 The other courses reuse the area photo for their area (Unsplash, above).
 
+### Short course photos (Pexels)
+
+One photo per short course, from [Pexels](https://www.pexels.com) under the [Pexels License](https://www.pexels.com/license/)
+(attribution not required; no implied endorsement). Cropped to 4:3 and saved in `src/assets/img/short/`.
+
+| Short course | Pexels photo | Shows |
+| --- | --- | --- |
+| medication | [7551634](https://www.pexels.com/photo/7551634/) | Hands sorting tablets in a pill organiser |
+| epilepsy | [7345460](https://www.pexels.com/photo/7345460/) | Support worker talking with a man at home |
+| diabetes | [12326657](https://www.pexels.com/photo/12326657/) | Blood glucose meter and test strip |
+| mealtime | [7551594](https://www.pexels.com/photo/7551594/) | Carer helping an older man at a meal |
+| peg | [6129233](https://www.pexels.com/photo/6129233/) | Drip stand with a nurse in the background |
+| catheter | [6627717](https://www.pexels.com/photo/6627717/) | Gloved hand reaching for clinical supplies |
+| palliative | [8088598](https://www.pexels.com/photo/8088598/) | Carer comforting an older man in bed |
+| pbs | [6288114](https://www.pexels.com/photo/6288114/) | Support worker and girl painting together |
+| restrictive | [7888817](https://www.pexels.com/photo/7888817/) | Team meeting around a table |
+| active-support | [7446641](https://www.pexels.com/photo/7446641/) | Young man cooking with a support worker |
+| choice | [19882232](https://www.pexels.com/photo/19882232/) | Woman in a wheelchair choosing food at a shop |
+| safeguarding | [4058053](https://www.pexels.com/photo/4058053/) | Two women talking over lunch at home |
+| deescalation | [9489792](https://www.pexels.com/photo/9489792/) | Calm one-to-one conversation |
+| mental-health | [7176296](https://www.pexels.com/photo/7176296/) | Woman talking in a counselling session |
+| autism | [8923374](https://www.pexels.com/photo/8923374/) | Boy doing a hands-on activity with a supporter |
+| dementia | [39811571](https://www.pexels.com/photo/39811571/) | Carer helping an older woman with a puzzle |
+| trauma | [6255881](https://www.pexels.com/photo/6255881/) | Supportive conversation on a sofa |
+| suicide | [5875284](https://www.pexels.com/photo/5875284/) | Hand resting on a person’s shoulder |
+| infection | [7492916](https://www.pexels.com/photo/7492916/) | Hand washing at a sink |
+| manual-handling | [7551686](https://www.pexels.com/photo/7551686/) | Two carers helping an older man stand |
+| incidents | [5888170](https://www.pexels.com/photo/5888170/) | Gloved hand writing a report |
+| whs-care | [8293642](https://www.pexels.com/photo/8293642/) | Worker in a hard hat and hi-vis checking a room |
+| emergency | [36731054](https://www.pexels.com/photo/36731054/) | Emergency exit sign and fire alarm |
+| ai | [20955063](https://www.pexels.com/photo/20955063/) | Woman working on a laptop |
+
 ### Home page video (Pexels)
 
 `src/assets/video/hero.mp4` and `hero.webm` are a 12-second silent montage, re-edited (cropped,
@@ -56,11 +88,11 @@ colour-graded, cross-faded) from these Pexels videos under the Pexels License:
 ### Poonam's photo
 
 Supplied by Poonam's team. Edited for the site: background removed with an AI model
-(rembg / BiRefNet) and replaced with a blue gradient, colour and light balanced, and cropped
+(rembg / BiRefNet) and replaced with a soft studio background, colour and light balanced, and cropped
 into a portrait, a cut-out and a small avatar. **Her face and features were not altered.**
 Files: `src/assets/img/poonam/`. Poonam should approve the edited versions before launch.
 
 ## Fonts
 
-Plus Jakarta Sans (headings), Figtree (text) and Fraunces italic (accent words), self-hosted
+Geist (text and headings), Geist Mono (labels) and Instrument Serif (accent words), self-hosted
 under the SIL Open Font License.

@@ -1,13 +1,5 @@
 /* ── 03 Catalogue: courses page, course cards, filters, compare ─────────── */
 
-/* Area colour sets: every page uses the same colour for the same area */
-.acc-care, .course-card--care, .filter-chip--care { --acc: var(--c-care); --acc-ink: var(--c-care-ink); --acc-50: var(--c-care-50); }
-.acc-education, .course-card--education, .filter-chip--education { --acc: var(--c-education); --acc-ink: var(--c-education-ink); --acc-50: var(--c-education-50); }
-.acc-training, .course-card--training, .filter-chip--training { --acc: var(--c-training); --acc-ink: var(--c-training-ink); --acc-50: var(--c-training-50); }
-.acc-business, .course-card--business, .filter-chip--business { --acc: var(--c-business); --acc-ink: var(--c-business-ink); --acc-50: var(--c-business-50); }
-.acc-construction, .course-card--construction, .filter-chip--construction { --acc: var(--c-construction); --acc-ink: var(--c-construction-ink); --acc-50: var(--c-construction-50); }
-.acc-firstaid, .course-card--firstaid, .filter-chip--firstaid { --acc: var(--c-firstaid); --acc-ink: var(--c-firstaid-ink); --acc-50: var(--c-firstaid-50); }
-
 .areas__note { max-width: 62rem; margin: 1.75rem 0 0; font-size: 0.875rem; color: var(--muted); }
 
 /* ── Catalogue hero ─────────────────────────────────────────────────────── */
@@ -28,6 +20,11 @@
   background-size: 56px 56px; mask-image: linear-gradient(180deg, #000, transparent 85%);
 }
 .cat-hero__inner { position: relative; z-index: 1; display: grid; gap: 2rem; align-items: center; }
+/* Hero plus the search panel end together at the bottom of the first screen */
+@media (min-width: 900px) and (min-height: 640px) {
+  .cat-hero { display: flex; align-items: center; min-height: calc(100svh - var(--header-h) - var(--banner-h) - 6.5rem); }
+  .cat-hero > .container { width: 100%; }
+}
 @media (min-width: 980px) { .cat-hero__inner { grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); } }
 .cat-hero h1 { color: #fff; font-size: clamp(2.5rem, 1.4rem + 4.4vw, 5.2rem); line-height: 0.96; letter-spacing: -0.055em; margin-bottom: 0.35em; max-width: 13ch; }
 .cat-hero h1 em { color: var(--saffron); display: inline-block; }

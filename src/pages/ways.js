@@ -1,6 +1,6 @@
 import { site } from '../data/site.js';
 import { html, icon, tbc } from '../templates/helpers.js';
-import { pageHero, ctaBand, photo } from '../templates/components.js';
+import { breadcrumbs, ctaBand, photo } from '../templates/components.js';
 
 const EVIDENCE = [
   ['resume', 'An up-to-date resume', 'List every relevant role, with dates and main duties.'],
@@ -39,29 +39,105 @@ const timeline = (items) => html`
 export default function ways() {
   const d = 0;
   const body = html`
-  ${pageHero({
-    eyebrow: 'Ways to study',
-    title: 'Three ways to get <em>qualified</em>',
-    lead: 'The right route depends on what you already know. Your experience might count towards a qualification, you might study it from scratch, or you might only need one skill.',
-    crumbs: [{ label: 'Ways to study' }],
-    depth: d,
-    actions: `<a class="btn btn--primary" href="course-finder.html">Find my course ${icon('arrow-right')}</a><a class="btn btn--secondary" href="#compare">Compare side by side</a>`,
-    media: { file: 'areas/training', alt: 'A trainer leading a small group session', badge: `${icon('route')} Your route, your pace` },
-  })}
+  <section class="ways-hero">
+    <div class="container ways-hero__inner">
+      <div class="ways-hero__text">
+        ${breadcrumbs([{ label: 'Ways to study' }], d)}
+        <p class="eyebrow eyebrow--on-dark">Ways to study</p>
+        <h1>Three ways to get <em>qualified</em></h1>
+        <p class="lead">The right route depends on what you already know. Your experience might count towards a qualification, you might study it from scratch, or you might only need one skill.</p>
+        <div class="btn-row">
+          <a class="btn btn--sun btn--lg" href="#compare">Compare the routes ${icon('arrow-right')}</a>
+          <a class="btn btn--secondary btn--lg" href="course-finder.html">Find my course</a>
+        </div>
+      </div>
+      <ol class="tickets" role="list" aria-label="The three routes">
+        ${PATHS.map((p, i) => html`<li class="ticket ticket--${p.id}">
+          <span class="ticket__media">${photo(p.img, d, { sizes: '160px', lazy: false })}</span>
+          <span class="ticket__body">
+            <span class="ticket__num">Route ${i + 1}</span>
+            <span class="ticket__name">${p.name}</span>
+            <span class="ticket__time">${icon('clock')} ${p.time}</span>
+          </span>
+          <span class="ticket__icon">${icon(p.icon)}</span>
+        </li>`)}
+      </ol>
+    </div>
+  </section>
 
   <nav class="subnav" aria-label="On this page">
     <div class="container">
       <ul role="list">
+        <li><a href="#compare">${icon('compare')}Compare</a></li>
         ${PATHS.map((p) => `<li><a href="${p.id === 'short' ? 'short-courses.html' : `#${p.id}`}">${icon(p.icon)}${p.short}</a></li>`)}
         <li><a href="#evidence-title">${icon('check')}RPL checklist</a></li>
-        <li><a href="#compare">${icon('compare')}Compare</a></li>
       </ul>
     </div>
   </nav>
 
-  <section class="section section--tight" aria-labelledby="paths-title">
+  <section class="section ways-compare" id="compare" aria-labelledby="compare-title">
     <div class="container">
-      <h2 class="visually-hidden" id="paths-title">The three routes</h2>
+      <div class="section-head section-head--center">
+        <p class="eyebrow">Start here</p>
+        <h2 id="compare-title">Compare the three routes</h2>
+        <p class="lead">The basics, side by side. Then read about each route in detail below.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="compare-table">
+          <caption class="visually-hidden">Recognition of prior learning, full online study and short courses compared</caption>
+          <thead>
+            <tr>
+              <td></td>
+              <th scope="col"><span class="compare-table__icon compare-table__icon--teal">${icon('award')}</span>Recognition of prior learning</th>
+              <th scope="col"><span class="compare-table__icon compare-table__icon--sun">${icon('laptop')}</span>Full course online</th>
+              <th scope="col"><span class="compare-table__icon compare-table__icon--coral">${icon('zap')}</span>Short course</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Best for</th>
+              <td data-label="Recognition of prior learning">People with solid experience in the field</td>
+              <td data-label="Full course online">People new to the field, or wanting to learn it all</td>
+              <td data-label="Short course">Workers needing one skill or a refresher</td>
+            </tr>
+            <tr>
+              <th scope="row">What you do</th>
+              <td data-label="Recognition of prior learning">Gather evidence, talk with an assessor, fill any gaps</td>
+              <td data-label="Full course online">Work through learning and assessments online</td>
+              <td data-label="Short course">Complete a focused online module</td>
+            </tr>
+            <tr>
+              <th scope="row">Typical time ${tbc('Typical timeframes – confirm with partner RTOs')}</th>
+              <td data-label="Recognition of prior learning">Often 4–12 weeks</td>
+              <td data-label="Full course online">6–18 months</td>
+              <td data-label="Short course">About 1 to 20 hours</td>
+            </tr>
+            <tr>
+              <th scope="row">Work placement</th>
+              <td data-label="Recognition of prior learning">Your existing work experience is assessed</td>
+              <td data-label="Full course online">Required for many care and education courses</td>
+              <td data-label="Short course">Not required</td>
+            </tr>
+            <tr>
+              <th scope="row">You receive</th>
+              <td data-label="Recognition of prior learning">The full nationally recognised qualification</td>
+              <td data-label="Full course online">The full nationally recognised qualification</td>
+              <td data-label="Short course">A certificate of completion (not a qualification)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="compare-next"><a class="link-arrow" href="#paths-title">See each route in detail ${icon('arrow-down')}</a></p>
+    </div>
+  </section>
+
+
+  <section class="section ways-paths" aria-labelledby="paths-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">In detail</p>
+        <h2 id="paths-title">Each route, <em>up close</em></h2>
+      </div>
       <ul class="paths" role="list">
         ${PATHS.map(
           (p) => html`<li class="path path--${p.id}">
@@ -178,57 +254,8 @@ export default function ways() {
     </div>
   </section>
 
-  <section class="section section--soft" id="compare" aria-labelledby="compare-title">
+  <section class="section section--tight" aria-label="Course finder">
     <div class="container">
-      <div class="section-head section-head--center">
-        <p class="eyebrow">Side by side</p>
-        <h2 id="compare-title">Compare the three routes</h2>
-      </div>
-      <div class="table-wrap">
-        <table class="compare-table">
-          <caption class="visually-hidden">Recognition of prior learning, full online study and short courses compared</caption>
-          <thead>
-            <tr>
-              <td></td>
-              <th scope="col"><span class="compare-table__icon compare-table__icon--teal">${icon('award')}</span>Recognition of prior learning</th>
-              <th scope="col"><span class="compare-table__icon compare-table__icon--sun">${icon('laptop')}</span>Full course online</th>
-              <th scope="col"><span class="compare-table__icon compare-table__icon--coral">${icon('zap')}</span>Short course</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Best for</th>
-              <td data-label="Recognition of prior learning">People with solid experience in the field</td>
-              <td data-label="Full course online">People new to the field, or wanting to learn it all</td>
-              <td data-label="Short course">Workers needing one skill or a refresher</td>
-            </tr>
-            <tr>
-              <th scope="row">What you do</th>
-              <td data-label="Recognition of prior learning">Gather evidence, talk with an assessor, fill any gaps</td>
-              <td data-label="Full course online">Work through learning and assessments online</td>
-              <td data-label="Short course">Complete a focused online module</td>
-            </tr>
-            <tr>
-              <th scope="row">Typical time ${tbc('Typical timeframes – confirm with partner RTOs')}</th>
-              <td data-label="Recognition of prior learning">Often 4–12 weeks</td>
-              <td data-label="Full course online">6–18 months</td>
-              <td data-label="Short course">About 1 to 20 hours</td>
-            </tr>
-            <tr>
-              <th scope="row">Work placement</th>
-              <td data-label="Recognition of prior learning">Your existing work experience is assessed</td>
-              <td data-label="Full course online">Required for many care and education courses</td>
-              <td data-label="Short course">Not required</td>
-            </tr>
-            <tr>
-              <th scope="row">You receive</th>
-              <td data-label="Recognition of prior learning">The full nationally recognised qualification</td>
-              <td data-label="Full course online">The full nationally recognised qualification</td>
-              <td data-label="Short course">A certificate of completion (not a qualification)</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
       <div class="hint-card" id="quiz">
         ${icon('compass')}
         <div>

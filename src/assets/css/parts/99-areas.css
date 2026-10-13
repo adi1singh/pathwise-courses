@@ -1,0 +1,10 @@
+/* ── 99 Area colours ─────────────────────────────────────────────────────
+   Last in the stylesheet so an area class always wins over a component's
+   default accent. */
+.acc-care, .course-card--care, .filter-chip--care { --acc: var(--c-care); --acc-ink: var(--c-care-ink); --acc-50: var(--c-care-50); }
+.acc-education, .course-card--education, .filter-chip--education { --acc: var(--c-education); --acc-ink: var(--c-education-ink); --acc-50: var(--c-education-50); }
+.acc-training, .course-card--training, .filter-chip--training { --acc: var(--c-training); --acc-ink: var(--c-training-ink); --acc-50: var(--c-training-50); }
+.acc-business, .course-card--business, .filter-chip--business { --acc: var(--c-business); --acc-ink: var(--c-business-ink); --acc-50: var(--c-business-50); }
+.acc-construction, .course-card--construction, .filter-chip--construction { --acc: var(--c-construction); --acc-ink: var(--c-construction-ink); --acc-50: var(--c-construction-50); }
+.acc-firstaid, .course-card--firstaid, .filter-chip--firstaid { --acc: var(--c-firstaid); --acc-ink: var(--c-firstaid-ink); --acc-50: var(--c-firstaid-50); }
+

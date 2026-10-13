@@ -112,7 +112,7 @@ export default function coursePage(c) {
   ];
 
   const body = html`
-  <section class="page-hero page-hero--course">
+  <section class="page-hero page-hero--course acc-${c.sector}">
     <div class="container course-hero">
       <div class="course-hero__text">
         ${breadcrumbs([{ label: 'Courses', href: 'courses.html' }, { label: c.title }], d)}

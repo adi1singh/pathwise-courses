@@ -29,7 +29,7 @@
   --line-night: rgba(233, 227, 214, 0.14);
   /* Brand */
   --coral: #ff6a3d;
-  --coral-ink: #b8401a;
+  --coral-ink: #ad3b16;
   --coral-50: #ffe9e0;
   --saffron: #ffb23f;
   --saffron-50: #fff1d6;
@@ -254,7 +254,8 @@ h1 .tbc, h2 .tbc { font-size: 0.75rem; letter-spacing: 0; vertical-align: middle
 .logo:hover { color: var(--ink); }
 .logo__mark { width: 42px; height: 42px; }
 .logo__text { display: flex; flex-direction: column; align-items: flex-start; font-weight: 640; font-size: 1.5rem; letter-spacing: -0.045em; line-height: 1; }
-.logo__text em { font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: 1.12em; letter-spacing: -0.01em; color: var(--coral); }
+.logo__text em { font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: 1.12em; letter-spacing: -0.01em; color: var(--coral-ink); }
+.site-footer .logo__text em, .page-home:not(.menu-open) .site-header:not(.is-scrolled) .logo__text em { color: var(--coral); }
 .logo__sub { font-family: var(--font-mono); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-top: 0.35rem; }
 .nav-toggle { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; padding: 0.5rem 0.95rem; border: 1.5px solid var(--line-strong); border-radius: 999px; background: var(--card); color: var(--ink); font: inherit; font-weight: 560; font-size: 0.9375rem; cursor: pointer; }
 .nav-toggle__close { display: none; }

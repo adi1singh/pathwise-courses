@@ -46,7 +46,7 @@ generated from data, so most edits are in `src/data/`:
 | FAQs | `src/data/faqs.js` |
 | Page wording and layout | `src/pages/*.js` |
 | Header, footer and shared pieces | `src/templates/*.js` |
-| Styles / behaviour | `src/assets/css/styles.css`, `src/assets/js/main.js`, `src/assets/js/finder.js` |
+| Styles / behaviour | `src/assets/css/parts/*.css` (joined into one `styles.css` at build time, in file-name order), `src/assets/js/main.js`, `src/assets/js/finder.js` |
 
 Run `npm run build` after any change and commit the updated `docs/` folder along with your edits.
 
@@ -143,7 +143,10 @@ SEO shows 66 only because draft mode adds `noindex`; it scores 100 with `draft: 
 
 ## Notes
 
-- Fonts: Plus Jakarta Sans (headings), Figtree (text), Fraunces italic (accents), self-hosted.
+- Colours: paper, ink, coral and saffron, with one colour per course area (care, education,
+  training, leadership, building, first aid) set in `01-base.css` and applied by `acc-<area>`
+  classes in `99-areas.css`. The same area always uses the same colour on every page.
+- Fonts: Geist (text and headings), Geist Mono (labels) and Instrument Serif italic (accent words), self-hosted.
 - The home page video plays only on screens 900px and wider, never with reduced motion or data saver, and has a pause button. Photo credits: [CREDITS.md](CREDITS.md).
 - `scripts/make-images.mjs` regenerates the social sharing image and the Apple touch icon.
 - No cookies or tracking. The compare list and evidence checklist use the visitor's own browser

@@ -163,7 +163,10 @@ test('Pathway Map: tabs switch routes and the starting point follows experience'
   const page = await newPage(undefined, { reducedMotion: 'reduce' });
   await page.goto(BASE + 'index.html');
   const map = page.locator('#pathway-map');
+  assert.equal(await map.getByText('Where are you now?').isVisible(), false, 'no starting-point question before an area is picked');
+  assert.equal(await map.locator('[role="tabpanel"]:visible').count(), 0, 'no route shows until an area is picked');
   await map.getByRole('tab', { name: 'Early childhood' }).click();
+  assert.ok(await map.getByText('Where are you now?').isVisible(), 'starting-point question appears after picking an area');
   const panel = map.getByRole('tabpanel', { name: /Early childhood/ });
   assert.ok(await panel.isVisible(), 'chosen route shows');
   assert.equal(await map.locator('[role="tabpanel"]:visible').count(), 1, 'one route at a time');
@@ -197,18 +200,16 @@ test('chat assistant answers from site content and closes with Escape', async ()
   await page.context().close();
 });
 
-test('student stories: tabs and arrows switch stories, samples are labelled', async () => {
-  const page = await newPage(undefined, { reducedMotion: 'reduce' });
+test('student stories: a moving wall that can be paused, samples are labelled', async () => {
+  const page = await newPage();
   await page.goto(BASE + 'index.html');
-  const sec = page.locator('[data-stories]');
+  const sec = page.locator('[data-wall]');
   assert.ok(await sec.locator('h2 .tbc').count(), 'placeholder stories are marked To confirm in preview');
-  await sec.getByRole('tab', { name: /Mei L\./ }).click();
-  assert.ok(await sec.getByRole('tabpanel', { name: /Mei L\./ }).isVisible());
-  assert.equal(await sec.locator('[data-story-slide]:visible').count(), 1, 'one story at a time');
-  await sec.getByRole('tab', { name: /Mei L\./ }).press('ArrowDown');
-  assert.equal(await sec.getByRole('tab', { name: /Sam R\./ }).getAttribute('aria-selected'), 'true');
-  await sec.getByRole('button', { name: 'Next story' }).click();
-  assert.equal(await sec.getByRole('tab', { name: /Priya S\./ }).getAttribute('aria-selected'), 'true', 'wraps around');
+  assert.ok((await sec.locator('.wall-card:not([aria-hidden])').count()) >= 4, 'each story is listed once for screen readers');
+  await sec.getByRole('button', { name: 'Pause stories' }).click();
+  assert.equal(await sec.locator('[data-wall-pause]').getAttribute('aria-pressed'), 'true');
+  assert.ok(await sec.getByRole('button', { name: 'Play stories' }).isVisible(), 'label changes to Play');
+  assert.equal(await sec.evaluate((el) => getComputedStyle(el.querySelector('.wall__row')).animationPlayState), 'paused');
   await page.context().close();
 });
 
@@ -277,6 +278,25 @@ test('on mobile, search comes first, extra filters fold away and results start o
   await page.context().close();
 });
 
+test('the course search stays in view while scrolling the results', async () => {
+  const page = await newPage({ width: 1280, height: 800 });
+  await page.goto(BASE + 'courses.html');
+  await page.evaluate(() => window.scrollTo({ top: 1600, behavior: 'instant' }));
+  await page.waitForTimeout(300);
+  const search = page.getByLabel('Search courses');
+  const top = await search.evaluate((el) => el.getBoundingClientRect().top);
+  assert.ok(top > 0 && top < 200, `search sits under the header after scrolling (top ${top}px)`);
+  await search.fill('childcare');
+  // The page scrolls (smoothly) so the first match sits just under the pinned search.
+  await page.waitForFunction(() => {
+    const card = [...document.querySelectorAll('[data-course-card]')].find((c) => !c.hidden);
+    const top = card?.getBoundingClientRect().top;
+    return top > 0 && top < 800;
+  }, null, { timeout: 3000 });
+  assert.ok(await search.isVisible(), 'search is still in view');
+  await page.context().close();
+});
+
 test('compare up to three courses, with names in the tray, on desktop and mobile', async () => {
   for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 }]) {
     const page = await newPage(viewport);
@@ -317,7 +337,7 @@ test('course finder: one question at a time, Back, results with reasons, edit wi
   await page.getByRole('button', { name: /Next/ }).click();
   assert.equal(await page.locator('[data-finder-error]').isVisible(), true, 'asks for an answer');
 
-  await page.locator('label.option', { hasText: 'Aged care or disability support' }).click(); // a pointer click moves on
+  await page.locator('label.choice', { hasText: 'Aged care or disability support' }).click(); // a pointer click moves on
   await page.waitForTimeout(400);
   assert.match(await count.textContent(), /Question 2 of 4/);
   await page.getByRole('button', { name: 'Back' }).click();
@@ -325,7 +345,7 @@ test('course finder: one question at a time, Back, results with reasons, edit wi
   await page.getByRole('button', { name: /Next/ }).click();
 
   for (const answer of ['3–5 years', 'None yet', 'Get qualified for work I already do']) {
-    await page.locator('fieldset:not([hidden]) label.option', { hasText: answer }).click();
+    await page.locator('fieldset:not([hidden]) label.choice', { hasText: answer }).click();
     await page.waitForTimeout(400);
   }
   const results = page.locator('[data-finder-results]');
@@ -340,7 +360,7 @@ test('course finder: one question at a time, Back, results with reasons, edit wi
   // Change one answer: it opens that question, then goes straight back to the results.
   await page.getByRole('button', { name: /Change your answer about experience/ }).click();
   assert.match(await count.textContent(), /Question 2 of 4/);
-  await page.locator('fieldset:not([hidden]) label.option', { hasText: 'None yet' }).click();
+  await page.locator('fieldset:not([hidden]) label.choice', { hasText: 'None yet' }).click();
   await results.waitFor({ state: 'visible' });
   assert.match(await page.locator('.suggestion').first().textContent(), /Full course, studied online/);
 

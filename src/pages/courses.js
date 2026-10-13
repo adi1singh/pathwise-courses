@@ -58,7 +58,7 @@ export default function coursesPage() {
               <div class="filters__search">
                 <label for="course-search" class="visually-hidden">Search courses</label>
                 ${icon('search')}
-                <input id="course-search" type="search" name="q" placeholder="Search by job, topic or course" autocomplete="off" enterkeyhint="search" data-filter-search
+                <input id="course-search" type="search" name="q" placeholder="Search courses" autocomplete="off" enterkeyhint="search" data-filter-search
                   data-typing-hints="childcare|aged care|teacher aide|disability support|trainer and assessor|first aid|counselling|team leader">
               </div>
               <button type="button" class="btn btn--secondary filters__toggle" aria-expanded="false" aria-controls="more-filters" data-filters-toggle>
@@ -83,8 +83,8 @@ export default function coursesPage() {
             <div class="filters__group" role="group" aria-labelledby="area-label">
               <p class="filters__legend visually-hidden" id="area-label">Area</p>
               <div class="chip-row chip-row--scroll" data-filter-chips="sector">
-                <button type="button" class="filter-chip" aria-pressed="true" data-value="">All <span class="filter-chip__count">${courses.length}</span></button>
-                ${sectors.map((s) => `<button type="button" class="filter-chip filter-chip--${s.id} acc-${s.id}" aria-pressed="false" data-value="${s.id}" data-label="${esc(s.name)}">${icon(s.icon)}${esc(s.short)}<span class="filter-chip__count">${courses.filter((c) => c.sector === s.id).length}</span></button>`)}
+                <button type="button" class="filter-chip" aria-pressed="true" data-value="">All <span class="filter-chip__count" aria-hidden="true">${courses.length}</span></button>
+                ${sectors.map((s) => `<button type="button" class="filter-chip filter-chip--${s.id} acc-${s.id}" aria-pressed="false" data-value="${s.id}" data-label="${esc(s.name)}">${icon(s.icon)}${esc(s.short)}<span class="filter-chip__count" aria-hidden="true">${courses.filter((c) => c.sector === s.id).length}</span></button>`)}
               </div>
             </div>
           </form>

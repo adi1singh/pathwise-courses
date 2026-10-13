@@ -6,11 +6,11 @@
 // says "Price on enquiry" and the format is described as approximate.
 
 export const shortCategories = [
-  { id: 'clinical', name: 'Clinical & complex care' },
-  { id: 'ndis', name: 'NDIS & supported living' },
-  { id: 'mental', name: 'Mental health & wellbeing' },
-  { id: 'safety', name: 'Safety & compliance' },
-  { id: 'workplace', name: 'Workplace skills' },
+  { id: 'clinical', name: 'Clinical & complex care', short: 'Clinical care' },
+  { id: 'ndis', name: 'NDIS & supported living', short: 'NDIS' },
+  { id: 'mental', name: 'Mental health & wellbeing', short: 'Mental health' },
+  { id: 'safety', name: 'Safety & compliance', short: 'Safety' },
+  { id: 'workplace', name: 'Workplace skills', short: 'Workplace' },
 ];
 
 export const formats = {

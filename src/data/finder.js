@@ -6,15 +6,15 @@
 // the training provider.
 
 export const interests = [
-  { id: 'aged-disability', label: 'Aged care or disability support', hint: 'Personal care, NDIS, home care', phrase: 'aged care and disability support', courses: ['CHC33021', 'CHC43121', 'CHC43015'] },
-  { id: 'early-childhood', label: 'Childcare and early learning', hint: 'Long day care, kindy, family day care', phrase: 'childcare and early learning', courses: ['CHC30125', 'CHC50125'] },
-  { id: 'school', label: 'Schools and after-school care', hint: 'Teacher aide, OSHC, vacation care', phrase: 'supporting school-age children', courses: ['CHC40225', 'CHC50225'] },
-  { id: 'community', label: 'Community services or counselling', hint: 'Case work, family support, counselling', phrase: 'community services and counselling', courses: ['CHC52025', 'CHC51015', 'CHC62015'] },
-  { id: 'training', label: 'Training and assessing others', hint: 'Trainer & assessor, workplace trainer', phrase: 'training and assessing others', courses: ['TAE40122'] },
-  { id: 'leadership', label: 'Leading teams or workplace safety', hint: 'Team leader, manager, WHS officer', phrase: 'leadership and workplace safety', courses: ['BSB50420', 'BSB41419', 'CHC62015'] },
-  { id: 'building', label: 'Building and construction', hint: 'Site supervisor, builder, estimator', phrase: 'building and construction', courses: ['CPC50220'] },
-  { id: 'firstaid', label: 'A first aid or CPR certificate', hint: 'For work or for peace of mind', phrase: 'first aid and CPR', courses: ['HLTAID011', 'HLTAID009'] },
-  { id: 'unsure', label: 'I’m not sure yet', hint: 'Show me common starting points', phrase: 'exploring your options', courses: ['CHC33021', 'CHC30125', 'CHC40225', 'CHC52025', 'TAE40122', 'BSB50420'] },
+  { id: 'aged-disability', img: 'courses/chc43121', area: 'care', label: 'Aged care or disability support', hint: 'Personal care, NDIS, home care', phrase: 'aged care and disability support', courses: ['CHC33021', 'CHC43121', 'CHC43015'] },
+  { id: 'early-childhood', img: 'courses/chc30125', area: 'education', label: 'Childcare and early learning', hint: 'Long day care, kindy, family day care', phrase: 'childcare and early learning', courses: ['CHC30125', 'CHC50125'] },
+  { id: 'school', img: 'courses/chc40225', area: 'education', label: 'Schools and after-school care', hint: 'Teacher aide, OSHC, vacation care', phrase: 'supporting school-age children', courses: ['CHC40225', 'CHC50225'] },
+  { id: 'community', img: 'courses/chc52025', area: 'care', label: 'Community services or counselling', hint: 'Case work, family support, counselling', phrase: 'community services and counselling', courses: ['CHC52025', 'CHC51015', 'CHC62015'] },
+  { id: 'training', img: 'areas/training', area: 'training', label: 'Training and assessing others', hint: 'Trainer & assessor, workplace trainer', phrase: 'training and assessing others', courses: ['TAE40122'] },
+  { id: 'leadership', img: 'areas/business', area: 'business', label: 'Leading teams or workplace safety', hint: 'Team leader, manager, WHS officer', phrase: 'leadership and workplace safety', courses: ['BSB50420', 'BSB41419', 'CHC62015'] },
+  { id: 'building', img: 'areas/construction', area: 'construction', label: 'Building and construction', hint: 'Site supervisor, builder, estimator', phrase: 'building and construction', courses: ['CPC50220'] },
+  { id: 'firstaid', img: 'courses/hltaid011', area: 'firstaid', label: 'A first aid or CPR certificate', hint: 'For work or for peace of mind', phrase: 'first aid and CPR', courses: ['HLTAID011', 'HLTAID009'] },
+  { id: 'unsure', img: 'ways/online', area: '', label: 'I’m not sure yet', hint: 'Show me common starting points', phrase: 'exploring your options', courses: ['CHC33021', 'CHC30125', 'CHC40225', 'CHC52025', 'TAE40122', 'BSB50420'] },
 ];
 
 export const questions = [
@@ -22,7 +22,7 @@ export const questions = [
     id: 'interest',
     title: 'What kind of work interests you?',
     hint: 'Choose the area that fits best. You can change it later.',
-    options: interests.map(({ id, label, hint }) => ({ id, label, hint })),
+    options: interests.map(({ id, label, hint, img, area }) => ({ id, label, hint, img, area })),
   },
   {
     id: 'exp',

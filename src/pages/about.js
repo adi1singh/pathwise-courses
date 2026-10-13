@@ -20,6 +20,8 @@ export default function about() {
     crumbs: [{ label: `About ${p}` }],
     depth: d,
     aside: portrait,
+    fill: true,
+    actions: `<a class="btn btn--primary btn--lg" href="contact.html">${icon('chat')} Talk to ${p}</a><a class="btn btn--secondary btn--lg" href="#help-title">How I can help</a>`,
   })}
 
   <section class="section" aria-labelledby="story-title">
@@ -131,6 +133,7 @@ export default function about() {
     path: 'about.html',
     title: `About ${p}`,
     active: 'about',
+    bodyClass: 'page-about',
     description: `Meet ${p}, the course advisor behind ${site.name}. Honest, plain-language help choosing a course, checking eligibility and preparing for RPL.`,
     body,
   };

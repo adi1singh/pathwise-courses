@@ -76,8 +76,8 @@ export const sectionHead = ({ eyebrow, title, lead, id, align = '' }) => html`
     ${lead && `<p class="lead">${lead}</p>`}
   </div>`;
 
-export const pageHero = ({ eyebrow, title, lead, crumbs = [], depth = 0, aside = '', actions = '', media = null, stats = [] }) => html`
-  <section class="page-hero${media ? ' page-hero--media' : ''}">
+export const pageHero = ({ eyebrow, title, lead, crumbs = [], depth = 0, aside = '', actions = '', media = null, stats = [], fill = false }) => html`
+  <section class="page-hero${media ? ' page-hero--media' : ''}${fill ? ' page-hero--fill' : ''}">
     <div class="container page-hero__inner${aside || media ? ' page-hero__inner--split' : ''}">
       <div class="page-hero__text">
         ${crumbs.length ? breadcrumbs(crumbs, depth) : ''}

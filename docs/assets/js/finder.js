@@ -81,6 +81,9 @@
     const last = index === qs.length - 1 || (editing && qs.every((x) => x === q || answers[x.id]));
     next.innerHTML = last ? `See my suggestions ${ARROW}` : `Next ${ARROW}`;
     syncUrl(false);
+    layout?.classList.remove('has-results');
+    resting();
+    renderAnswers();
     if (focus) $('[data-q-title]', fs).focus({ preventScroll: true });
     if (focus) root.scrollIntoView({ block: 'start', behavior: reduceMotion ? 'auto' : 'smooth' });
   };
@@ -110,6 +113,30 @@
     const input = e.target.closest('input[type="radio"]');
     if (input && e.detail > 0) setTimeout(advance, reduceMotion ? 0 : 160);
   });
+
+  /* ── Photo preview beside the questions ────────────────────────────── */
+  const layout = root.closest('[data-finder-layout]');
+  const preview = $('[data-finder-preview]');
+  const slides = preview ? $$('[data-preview]', preview) : [];
+  const answerList = preview && $('[data-preview-answers]', preview);
+  const showSlide = (id) => slides.forEach((sl) => sl.classList.toggle('is-shown', sl.dataset.preview === (id || '')));
+  const resting = () => showSlide(answers.interest || $('input[name="interest"]:checked', form)?.value);
+  const renderAnswers = () => {
+    if (!answerList) return;
+    const done = active().filter((q) => answers[q.id]);
+    answerList.hidden = !done.length;
+    answerList.innerHTML = done.map((q) => `<li><span>${SHORT_Q[q.id]}</span><strong>${esc(label(q.id, answers[q.id]))}</strong></li>`).join('');
+  };
+  if (preview) {
+    const pick = (e) => {
+      const opt = e.target.closest('[data-preview-for]');
+      if (opt) showSlide(opt.dataset.previewFor);
+    };
+    form.addEventListener('mouseover', pick);
+    form.addEventListener('focusin', pick);
+    form.addEventListener('mouseleave', resting);
+    form.addEventListener('change', resting);
+  }
 
   /* ── Suggestions ───────────────────────────────────────────────────── */
   const recommend = () => {
@@ -274,6 +301,7 @@
 
     form.hidden = true;
     results.hidden = false;
+    layout?.classList.add('has-results');
     if (!reduceMotion) {
       results.classList.remove('is-entering');
       void results.offsetWidth;

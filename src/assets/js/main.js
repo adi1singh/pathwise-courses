@@ -221,7 +221,7 @@
         emptyEl.hidden = shown.length > 0;
         if (emptyQuery) emptyQuery.textContent = query ? `“${query}”` : 'those filters';
       }
-      resets.forEach((r) => { if (r.closest('[data-filters]')) r.hidden = !active; });
+      resets.forEach((r) => { if (r.closest('[data-filters], .results-bar')) r.hidden = !active; });
       renderActive();
       writeParams();
     };
@@ -302,19 +302,23 @@
       if (should) measure();
       stuck = should;
       dock.classList.toggle('is-stuck', stuck);
+      if (stuck) pinnedH = bar.offsetHeight;
     };
-    // After a filter change while pinned, bring the first results into view.
-    const settle = () => {
-      if (!stuck || !firstResult) return;
-      const want = headerBottom() + bar.offsetHeight + 16;
+    // After a filter change made while pinned, bring the first results into
+    // view under the pinned bar (the list may have got much shorter).
+    let pinnedH = 0;
+    const settle = (wasStuck) => {
+      if (!wasStuck || !firstResult) return;
+      const want = headerBottom() + pinnedH + 16;
       const at = firstResult.getBoundingClientRect().top;
-      if (at < want) window.scrollBy(0, at - want);
+      if (Math.abs(at - want) > 4) window.scrollBy(0, at - want);
+      update();
     };
     window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
     window.addEventListener('resize', () => { measure(); update(); });
-    form.addEventListener('input', () => setTimeout(settle, 180));
-    form.addEventListener('change', () => setTimeout(settle, 30));
-    form.addEventListener('click', (e) => { if (e.target.closest('.filter-chip')) setTimeout(settle, 30); });
+    form.addEventListener('input', () => { const was = stuck; setTimeout(() => settle(was), 180); });
+    form.addEventListener('change', () => { const was = stuck; setTimeout(() => settle(was), 30); });
+    form.addEventListener('click', (e) => { const was = stuck; if (e.target.closest('.filter-chip')) setTimeout(() => settle(was), 30); });
     measure();
     update();
   });

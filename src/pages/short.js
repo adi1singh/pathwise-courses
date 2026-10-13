@@ -1,7 +1,7 @@
 import { shortCourses, shortCategories, formats } from '../data/short-courses.js';
 import { courses } from '../data/courses.js';
 import { html, icon, esc, tbc } from '../templates/helpers.js';
-import { pageHero, courseCard, ctaBand, photo } from '../templates/components.js';
+import { breadcrumbs, courseCard, ctaBand, photo } from '../templates/components.js';
 
 const TOPIC_ICON = { clinical: 'heart', ndis: 'users', mental: 'chat', safety: 'shield', workplace: 'briefcase' };
 
@@ -10,63 +10,87 @@ export default function shortPage() {
   const catName = Object.fromEntries(shortCategories.map((c) => [c.id, c.name]));
   const firstAid = courses.filter((c) => c.sector === 'firstaid');
 
+  const CAT_AREA = { clinical: 'firstaid', ndis: 'care', mental: 'training', safety: 'education', workplace: 'business' };
+  const mosaic = ['dementia', 'infection', 'active-support', 'medication'];
   const body = html`
-  ${pageHero({
-    eyebrow: 'Short courses',
-    title: 'Short courses for care and support workers',
-    lead: 'Focused online courses to build a specific skill, refresh your knowledge or meet a workplace training requirement – completed at your own pace.',
-    crumbs: [{ label: 'Short courses' }],
-    depth: d,
-    media: { file: 'courses/chc33021', alt: 'A care worker chatting with older people around a table', badge: `${icon('zap')} Learn one skill, fast` },
-    stats: [[shortCourses.length, 'short courses'], [shortCategories.length, 'topic areas'], ['1–20 h', 'to complete']],
-  })}
+  <section class="short-hero">
+    <div class="container short-hero__inner">
+      <div class="short-hero__text">
+        ${breadcrumbs([{ label: 'Short courses' }], d)}
+        <p class="eyebrow eyebrow--on-dark">${shortCourses.length} short courses · ${shortCategories.length} topics · 1 to 20 hours</p>
+        <h1>Learn one skill. <em>Fast.</em></h1>
+        <p class="lead">Focused online courses for care and support workers: build a specific skill, refresh what you know or meet a workplace training requirement, at your own pace.</p>
+        <div class="btn-row">
+          <a class="btn btn--sun btn--lg" href="#short-list">Browse short courses ${icon('arrow-right')}</a>
+          <a class="btn btn--secondary btn--lg" href="contact.html?topic=team">Training a team?</a>
+        </div>
+      </div>
+      <div class="mosaic" aria-hidden="true">
+        ${mosaic.map((id) => { const c = shortCourses.find((x) => x.id === id); return `<figure class="mosaic__tile acc-${CAT_AREA[c.category]}">${photo(`short/${id}`, d, { sizes: '260px', lazy: false })}<figcaption>${esc(c.title)}</figcaption></figure>`; })}
+      </div>
+    </div>
+  </section>
 
-  <section class="section section--tight">
+  <section class="section section--catalogue short-catalogue" id="short-list">
+    <div class="filters-dock" data-filters-dock>
+      <div class="filters-dock__bar" data-filters-bar>
+        <div class="container">
+          <form class="filters" data-filters="short" role="search" aria-label="Search and filter short courses" onsubmit="return false">
+            <div class="filters__top">
+              <div class="filters__search">
+                <label for="short-search" class="visually-hidden">Search short courses</label>
+                ${icon('search')}
+                <input id="short-search" type="search" name="q" placeholder="Search short courses" autocomplete="off" enterkeyhint="search" data-filter-search
+                  data-typing-hints="dementia|medication|manual handling|mental health|infection control|autism|behaviour support|using AI">
+              </div>
+              <button type="button" class="btn btn--secondary filters__toggle" aria-expanded="false" aria-controls="short-more" data-filters-toggle>
+                ${icon('sliders')} Filters <span class="filters__badge" data-filters-badge hidden></span>
+              </button>
+              <div class="filters__more" id="short-more" data-filters-more>
+                <div class="filters__field">
+                  <label for="format-filter" class="filters__legend">Length</label>
+                  <select id="format-filter" data-filter-select="format">
+                    <option value="">Any length</option>
+                    ${Object.entries(formats).map(([id, f]) => `<option value="${id}">${f.name} (${f.time.toLowerCase()})</option>`)}
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="filters__group" role="group" aria-labelledby="topic-label">
+              <p class="filters__legend visually-hidden" id="topic-label">Topic</p>
+              <div class="chip-row chip-row--scroll" data-filter-chips="category">
+                <button type="button" class="filter-chip" aria-pressed="true" data-value="">All topics <span class="filter-chip__count" aria-hidden="true">${shortCourses.length}</span></button>
+                ${shortCategories.map((c) => `<button type="button" class="filter-chip acc-${CAT_AREA[c.id]}" aria-pressed="false" data-value="${c.id}" data-label="${esc(c.name)}" title="${esc(c.name)}">${icon(TOPIC_ICON[c.id])}${esc(c.short)}<span class="filter-chip__count" aria-hidden="true">${shortCourses.filter((x) => x.category === c.id).length}</span></button>`)}
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <div class="container">
-      <div class="notice notice--info notice--wide">
-        ${icon('info')}
-        <p><strong>Good to know:</strong> short courses are professional development (CPD). You receive a certificate of completion, but they are not nationally recognised qualifications. Course list, formats and prices are being finalised. ${tbc('Confirm which short courses Poonam offers, who delivers them, prices and durations')}</p>
+      <div class="results-bar">
+        <p class="results-count" data-results-count aria-live="polite">Showing all ${shortCourses.length} short courses</p>
+        <button type="button" class="btn btn--text btn--sm" data-filter-reset hidden>${icon('x')} Clear filters</button>
       </div>
 
-      <form class="filters" data-filters="short" role="search" aria-label="Filter short courses" onsubmit="return false">
-        <div class="filters__search">
-          <label for="short-search" class="visually-hidden">Search short courses</label>
-          ${icon('search')}
-          <input id="short-search" type="search" placeholder="Search topics, e.g. dementia" autocomplete="off" data-filter-search>
-        </div>
-        <fieldset class="filters__group">
-          <legend class="filters__legend">Topic</legend>
-          <div class="chip-row" data-filter-chips="category">
-            <button type="button" class="filter-chip" aria-pressed="true" data-value="">All topics</button>
-            ${shortCategories.map((c) => `<button type="button" class="filter-chip filter-chip--topic" aria-pressed="false" data-value="${c.id}" data-label="${esc(c.name)}">${icon(TOPIC_ICON[c.id])}${esc(c.name)}<span class="filter-chip__count">${shortCourses.filter((x) => x.category === c.id).length}</span></button>`)}
-          </div>
-        </fieldset>
-        <div class="filters__row">
-          <div class="filters__field">
-            <label for="format-filter" class="filters__legend">Length</label>
-            <select id="format-filter" data-filter-select="format">
-              <option value="">Any length</option>
-              ${Object.entries(formats).map(([id, f]) => `<option value="${id}">${f.name} (${f.time.toLowerCase()})</option>`)}
-            </select>
-          </div>
-          <button type="button" class="btn btn--text" data-filter-reset hidden>${icon('x')} Clear filters</button>
-        </div>
-      </form>
-
       <h2 class="visually-hidden">Short course list</h2>
-      <p class="results-count" data-results-count aria-live="polite">Showing all ${shortCourses.length} short courses</p>
-
       <div class="short-grid" data-results>
         ${shortCourses.map(
-          (s) => html`<article class="short-card short-card--${s.category}" data-course-card data-category="${s.category}" data-format="${s.format}" data-search="${esc(`${s.title} ${s.summary} ${catName[s.category]}`.toLowerCase())}" aria-labelledby="s-${s.id}">
-            <p class="short-card__cat"><span class="short-card__icon">${icon(TOPIC_ICON[s.category])}</span>${esc(catName[s.category])}</p>
-            <h3 id="s-${s.id}">${esc(s.title)}</h3>
-            <p>${esc(s.summary)}</p>
-            <div class="short-card__foot">
-              <span class="short-card__format">${icon(s.format === 'quick' ? 'zap' : 'book')}${formats[s.format].name} · ${formats[s.format].time.toLowerCase()}</span>
-              <span class="short-card__price">Price on enquiry</span>
+          (s) => html`<article class="short-card acc-${CAT_AREA[s.category]}" data-course-card data-category="${s.category}" data-format="${s.format}" data-search="${esc(`${s.title} ${s.summary} ${catName[s.category]}`.toLowerCase())}" aria-labelledby="s-${s.id}">
+            <div class="short-card__media">
+              ${photo(`short/${s.id}`, d, { sizes: '(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw' })}
+              <span class="short-card__cat">${icon(TOPIC_ICON[s.category])}${esc(catName[s.category])}</span>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=${encodeURIComponent(s.title)}" aria-describedby="s-${s.id}">Enquire ${icon('arrow-right')}</a>
+            <div class="short-card__body">
+              <h3 id="s-${s.id}">${esc(s.title)}</h3>
+              <p>${esc(s.summary)}</p>
+              <div class="short-card__foot">
+                <span class="short-card__format">${icon(s.format === 'quick' ? 'zap' : 'book')}${formats[s.format].name} · ${formats[s.format].time.toLowerCase()}</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=${encodeURIComponent(s.title)}" aria-describedby="s-${s.id}">Enquire ${icon('arrow-right')}</a>
+            </div>
           </article>`
         )}
       </div>
@@ -78,6 +102,11 @@ export default function shortPage() {
           <button type="button" class="btn btn--secondary" data-filter-reset>Clear filters</button>
           <a class="btn btn--primary" href="contact.html?topic=short-course">Ask Poonam</a>
         </div>
+      </div>
+
+      <div class="notice notice--info short-note">
+        ${icon('info')}
+        <p><strong>Good to know:</strong> short courses are professional development (CPD). You receive a certificate of completion, but they are not nationally recognised qualifications. Course list, formats and prices are being finalised. ${tbc('Confirm which short courses Poonam offers, who delivers them, prices and durations')}</p>
       </div>
     </div>
   </section>

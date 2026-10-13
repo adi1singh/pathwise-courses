@@ -70,10 +70,9 @@
   </header>
   <main id="main" tabindex="-1">
 
-  
-  <section class="page-hero page-hero--media">
-    <div class="container page-hero__inner page-hero__inner--split">
-      <div class="page-hero__text">
+  <section class="short-hero">
+    <div class="container short-hero__inner">
+      <div class="short-hero__text">
         
   <nav class="breadcrumbs" aria-label="Breadcrumb">
     <ol role="list">
@@ -81,268 +80,401 @@
       <li><span aria-current="page">Short courses</span></li>
     </ol>
   </nav>
-        <p class="eyebrow eyebrow--on-dark">Short courses</p>
-        <h1>Short courses for care and support workers</h1>
-        <p class="lead">Focused online courses to build a specific skill, refresh your knowledge or meet a workplace training requirement – completed at your own pace.</p>
-        
-        <ul class="hero-stats" role="list"><li><strong>24</strong><span>short courses</span></li><li><strong>5</strong><span>topic areas</span></li><li><strong>1–20 h</strong><span>to complete</span></li></ul>
+        <p class="eyebrow eyebrow--on-dark">24 short courses · 5 topics · 1 to 20 hours</p>
+        <h1>Learn one skill. <em>Fast.</em></h1>
+        <p class="lead">Focused online courses for care and support workers: build a specific skill, refresh what you know or meet a workplace training requirement, at your own pace.</p>
+        <div class="btn-row">
+          <a class="btn btn--sun btn--lg" href="#short-list">Browse short courses <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn--secondary btn--lg" href="contact.html?topic=team">Training a team?</a>
+        </div>
       </div>
-      <figure class="page-hero__media"><img src="assets/img/courses/chc33021-480.webp" srcset="assets/img/courses/chc33021-480.webp 480w, assets/img/courses/chc33021-800.webp 800w" sizes="(min-width: 900px) 440px, 92vw" width="480" height="360" alt="A care worker chatting with older people around a table"><figcaption class="page-hero__badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg> Learn one skill, fast</figcaption></figure>
+      <div class="mosaic" aria-hidden="true">
+        <figure class="mosaic__tile acc-training"><img src="assets/img/short/dementia-480.webp" srcset="assets/img/short/dementia-480.webp 480w, assets/img/short/dementia-800.webp 800w" sizes="260px" width="480" height="360" alt=""><figcaption>Supporting people living with dementia</figcaption></figure><figure class="mosaic__tile acc-education"><img src="assets/img/short/infection-480.webp" srcset="assets/img/short/infection-480.webp 480w, assets/img/short/infection-800.webp 800w" sizes="260px" width="480" height="360" alt=""><figcaption>Infection prevention and control</figcaption></figure><figure class="mosaic__tile acc-care"><img src="assets/img/short/active-support-480.webp" srcset="assets/img/short/active-support-480.webp 480w, assets/img/short/active-support-800.webp 800w" sizes="260px" width="480" height="360" alt=""><figcaption>Person-centred active support</figcaption></figure><figure class="mosaic__tile acc-firstaid"><img src="assets/img/short/medication-480.webp" srcset="assets/img/short/medication-480.webp 480w, assets/img/short/medication-800.webp 800w" sizes="260px" width="480" height="360" alt=""><figcaption>Medication support for disability workers</figcaption></figure>
+      </div>
     </div>
   </section>
 
-  <section class="section section--tight">
+  <section class="section section--catalogue short-catalogue" id="short-list">
+    <div class="filters-dock" data-filters-dock>
+      <div class="filters-dock__bar" data-filters-bar>
+        <div class="container">
+          <form class="filters" data-filters="short" role="search" aria-label="Search and filter short courses" onsubmit="return false">
+            <div class="filters__top">
+              <div class="filters__search">
+                <label for="short-search" class="visually-hidden">Search short courses</label>
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+                <input id="short-search" type="search" name="q" placeholder="Search short courses" autocomplete="off" enterkeyhint="search" data-filter-search
+                  data-typing-hints="dementia|medication|manual handling|mental health|infection control|autism|behaviour support|using AI">
+              </div>
+              <button type="button" class="btn btn--secondary filters__toggle" aria-expanded="false" aria-controls="short-more" data-filters-toggle>
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg> Filters <span class="filters__badge" data-filters-badge hidden></span>
+              </button>
+              <div class="filters__more" id="short-more" data-filters-more>
+                <div class="filters__field">
+                  <label for="format-filter" class="filters__legend">Length</label>
+                  <select id="format-filter" data-filter-select="format">
+                    <option value="">Any length</option>
+                    <option value="quick">Quick refresher (about 1 hour)</option><option value="indepth">In-depth (about 20 hours)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="filters__group" role="group" aria-labelledby="topic-label">
+              <p class="filters__legend visually-hidden" id="topic-label">Topic</p>
+              <div class="chip-row chip-row--scroll" data-filter-chips="category">
+                <button type="button" class="filter-chip" aria-pressed="true" data-value="">All topics <span class="filter-chip__count" aria-hidden="true">24</span></button>
+                <button type="button" class="filter-chip acc-firstaid" aria-pressed="false" data-value="clinical" data-label="Clinical &amp; complex care" title="Clinical &amp; complex care"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a4.8 4.8 0 0 1 9-3 4.8 4.8 0 0 1 9 3c-2 4.6-9 9-9 9z"/></svg>Clinical care<span class="filter-chip__count" aria-hidden="true">7</span></button><button type="button" class="filter-chip acc-care" aria-pressed="false" data-value="ndis" data-label="NDIS &amp; supported living" title="NDIS &amp; supported living"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6.5 6.5 0 0 1 3.5 6"/></svg>NDIS<span class="filter-chip__count" aria-hidden="true">6</span></button><button type="button" class="filter-chip acc-training" aria-pressed="false" data-value="mental" data-label="Mental health &amp; wellbeing" title="Mental health &amp; wellbeing"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg>Mental health<span class="filter-chip__count" aria-hidden="true">5</span></button><button type="button" class="filter-chip acc-education" aria-pressed="false" data-value="safety" data-label="Safety &amp; compliance" title="Safety &amp; compliance"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>Safety<span class="filter-chip__count" aria-hidden="true">5</span></button><button type="button" class="filter-chip acc-business" aria-pressed="false" data-value="workplace" data-label="Workplace skills" title="Workplace skills"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg>Workplace<span class="filter-chip__count" aria-hidden="true">1</span></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <div class="container">
-      <div class="notice notice--info notice--wide">
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg>
-        <p><strong>Good to know:</strong> short courses are professional development (CPD). You receive a certificate of completion, but they are not nationally recognised qualifications. Course list, formats and prices are being finalised. <span class="tbc" title="Confirm which short courses Poonam offers, who delivers them, prices and durations"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: Confirm which short courses Poonam offers, who delivers them, prices and durations</span></span></p>
+      <div class="results-bar">
+        <p class="results-count" data-results-count aria-live="polite">Showing all 24 short courses</p>
+        <button type="button" class="btn btn--text btn--sm" data-filter-reset hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg> Clear filters</button>
       </div>
 
-      <form class="filters" data-filters="short" role="search" aria-label="Filter short courses" onsubmit="return false">
-        <div class="filters__search">
-          <label for="short-search" class="visually-hidden">Search short courses</label>
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-          <input id="short-search" type="search" placeholder="Search topics, e.g. dementia" autocomplete="off" data-filter-search>
-        </div>
-        <fieldset class="filters__group">
-          <legend class="filters__legend">Topic</legend>
-          <div class="chip-row" data-filter-chips="category">
-            <button type="button" class="filter-chip" aria-pressed="true" data-value="">All topics</button>
-            <button type="button" class="filter-chip filter-chip--topic" aria-pressed="false" data-value="clinical" data-label="Clinical &amp; complex care"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a4.8 4.8 0 0 1 9-3 4.8 4.8 0 0 1 9 3c-2 4.6-9 9-9 9z"/></svg>Clinical &amp; complex care<span class="filter-chip__count">7</span></button><button type="button" class="filter-chip filter-chip--topic" aria-pressed="false" data-value="ndis" data-label="NDIS &amp; supported living"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6.5 6.5 0 0 1 3.5 6"/></svg>NDIS &amp; supported living<span class="filter-chip__count">6</span></button><button type="button" class="filter-chip filter-chip--topic" aria-pressed="false" data-value="mental" data-label="Mental health &amp; wellbeing"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg>Mental health &amp; wellbeing<span class="filter-chip__count">5</span></button><button type="button" class="filter-chip filter-chip--topic" aria-pressed="false" data-value="safety" data-label="Safety &amp; compliance"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>Safety &amp; compliance<span class="filter-chip__count">5</span></button><button type="button" class="filter-chip filter-chip--topic" aria-pressed="false" data-value="workplace" data-label="Workplace skills"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg>Workplace skills<span class="filter-chip__count">1</span></button>
-          </div>
-        </fieldset>
-        <div class="filters__row">
-          <div class="filters__field">
-            <label for="format-filter" class="filters__legend">Length</label>
-            <select id="format-filter" data-filter-select="format">
-              <option value="">Any length</option>
-              <option value="quick">Quick refresher (about 1 hour)</option><option value="indepth">In-depth (about 20 hours)</option>
-            </select>
-          </div>
-          <button type="button" class="btn btn--text" data-filter-reset hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg> Clear filters</button>
-        </div>
-      </form>
-
       <h2 class="visually-hidden">Short course list</h2>
-      <p class="results-count" data-results-count aria-live="polite">Showing all 24 short courses</p>
-
       <div class="short-grid" data-results>
-        <article class="short-card short-card--clinical" data-course-card data-category="clinical" data-format="indepth" data-search="medication support for disability workers safe medication assistance, the “rights” of medication, recording and what to do when something goes wrong. clinical &amp; complex care" aria-labelledby="s-medication">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a4.8 4.8 0 0 1 9-3 4.8 4.8 0 0 1 9 3c-2 4.6-9 9-9 9z"/></svg></span>Clinical &amp; complex care</p>
-            <h3 id="s-medication">Medication support for disability workers</h3>
-            <p>Safe medication assistance, the “rights” of medication, recording and what to do when something goes wrong.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2zM21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/></svg>In-depth · about 20 hours</span>
-              <span class="short-card__price">Price on enquiry</span>
+        <article class="short-card acc-firstaid" data-course-card data-category="clinical" data-format="indepth" data-search="medication support for disability workers safe medication assistance, the “rights” of medication, recording and what to do when something goes wrong. clinical &amp; complex care" aria-labelledby="s-medication">
+            <div class="short-card__media">
+              <img src="assets/img/short/medication-480.webp" srcset="assets/img/short/medication-480.webp 480w, assets/img/short/medication-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a4.8 4.8 0 0 1 9-3 4.8 4.8 0 0 1 9 3c-2 4.6-9 9-9 9z"/></svg>Clinical &amp; complex care</span>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Medication%20support%20for%20disability%20workers" aria-describedby="s-medication">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--clinical" data-course-card data-category="clinical" data-format="indepth" data-search="epilepsy and seizure support recognise seizure types, follow a seizure management plan and respond safely, including emergency medication awareness. clinical &amp; complex care" aria-labelledby="s-epilepsy">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a4.8 4.8 0 0 1 9-3 4.8 4.8 0 0 1 9 3c-2 4.6-9 9-9 9z"/></svg></span>Clinical &amp; complex care</p>
-            <h3 id="s-epilepsy">Epilepsy and seizure support</h3>
-            <p>Recognise seizure types, follow a seizure management plan and respond safely, including emergency medication awareness.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2zM21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/></svg>In-depth · about 20 hours</span>
-              <span class="short-card__price">Price on enquiry</span>
+            <div class="short-card__body">
+              <h3 id="s-medication">Medication support for disability workers</h3>
+              <p>Safe medication assistance, the “rights” of medication, recording and what to do when something goes wrong.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2zM21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/></svg>In-depth · about 20 hours</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Medication%20support%20for%20disability%20workers" aria-describedby="s-medication">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Epilepsy%20and%20seizure%20support" aria-describedby="s-epilepsy">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--clinical" data-course-card data-category="clinical" data-format="quick" data-search="diabetes support understand diabetes, spot high and low blood sugar, and support people with diet, monitoring and routines. clinical &amp; complex care" aria-labelledby="s-diabetes">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a4.8 4.8 0 0 1 9-3 4.8 4.8 0 0 1 9 3c-2 4.6-9 9-9 9z"/></svg></span>Clinical &amp; complex care</p>
-            <h3 id="s-diabetes">Diabetes support</h3>
-            <p>Understand diabetes, spot high and low blood sugar, and support people with diet, monitoring and routines.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
-              <span class="short-card__price">Price on enquiry</span>
+          </article><article class="short-card acc-firstaid" data-course-card data-category="clinical" data-format="indepth" data-search="epilepsy and seizure support recognise seizure types, follow a seizure management plan and respond safely, including emergency medication awareness. clinical &amp; complex care" aria-labelledby="s-epilepsy">
+            <div class="short-card__media">
+              <img src="assets/img/short/epilepsy-480.webp" srcset="assets/img/short/epilepsy-480.webp 480w, assets/img/short/epilepsy-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a4.8 4.8 0 0 1 9-3 4.8 4.8 0 0 1 9 3c-2 4.6-9 9-9 9z"/></svg>Clinical &amp; complex care</span>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Diabetes%20support" aria-describedby="s-diabetes">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--clinical" data-course-card data-category="clinical" data-format="quick" data-search="mealtime and swallowing support support safe eating and drinking, follow mealtime plans and recognise signs of choking risk. clinical &amp; complex care" aria-labelledby="s-mealtime">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a4.8 4.8 0 0 1 9-3 4.8 4.8 0 0 1 9 3c-2 4.6-9 9-9 9z"/></svg></span>Clinical &amp; complex care</p>
-            <h3 id="s-mealtime">Mealtime and swallowing support</h3>
-            <p>Support safe eating and drinking, follow mealtime plans and recognise signs of choking risk.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
-              <span class="short-card__price">Price on enquiry</span>
+            <div class="short-card__body">
+              <h3 id="s-epilepsy">Epilepsy and seizure support</h3>
+              <p>Recognise seizure types, follow a seizure management plan and respond safely, including emergency medication awareness.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2zM21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/></svg>In-depth · about 20 hours</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Epilepsy%20and%20seizure%20support" aria-describedby="s-epilepsy">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Mealtime%20and%20swallowing%20support" aria-describedby="s-mealtime">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--clinical" data-course-card data-category="clinical" data-format="indepth" data-search="enteral feeding (peg) support hygiene, positioning and care routines for people who receive nutrition through a feeding tube. clinical &amp; complex care" aria-labelledby="s-peg">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a4.8 4.8 0 0 1 9-3 4.8 4.8 0 0 1 9 3c-2 4.6-9 9-9 9z"/></svg></span>Clinical &amp; complex care</p>
-            <h3 id="s-peg">Enteral feeding (PEG) support</h3>
-            <p>Hygiene, positioning and care routines for people who receive nutrition through a feeding tube.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2zM21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/></svg>In-depth · about 20 hours</span>
-              <span class="short-card__price">Price on enquiry</span>
+          </article><article class="short-card acc-firstaid" data-course-card data-category="clinical" data-format="quick" data-search="diabetes support understand diabetes, spot high and low blood sugar, and support people with diet, monitoring and routines. clinical &amp; complex care" aria-labelledby="s-diabetes">
+            <div class="short-card__media">
+              <img src="assets/img/short/diabetes-480.webp" srcset="assets/img/short/diabetes-480.webp 480w, assets/img/short/diabetes-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a4.8 4.8 0 0 1 9-3 4.8 4.8 0 0 1 9 3c-2 4.6-9 9-9 9z"/></svg>Clinical &amp; complex care</span>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Enteral%20feeding%20(PEG)%20support" aria-describedby="s-peg">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--clinical" data-course-card data-category="clinical" data-format="quick" data-search="catheter and stoma care dignified, hygienic support for people with catheters or stomas, and when to escalate concerns. clinical &amp; complex care" aria-labelledby="s-catheter">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a4.8 4.8 0 0 1 9-3 4.8 4.8 0 0 1 9 3c-2 4.6-9 9-9 9z"/></svg></span>Clinical &amp; complex care</p>
-            <h3 id="s-catheter">Catheter and stoma care</h3>
-            <p>Dignified, hygienic support for people with catheters or stomas, and when to escalate concerns.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
-              <span class="short-card__price">Price on enquiry</span>
+            <div class="short-card__body">
+              <h3 id="s-diabetes">Diabetes support</h3>
+              <p>Understand diabetes, spot high and low blood sugar, and support people with diet, monitoring and routines.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Diabetes%20support" aria-describedby="s-diabetes">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Catheter%20and%20stoma%20care" aria-describedby="s-catheter">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--clinical" data-course-card data-category="clinical" data-format="quick" data-search="palliative and end-of-life care compassionate support for people at the end of life and their families, including comfort care. clinical &amp; complex care" aria-labelledby="s-palliative">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a4.8 4.8 0 0 1 9-3 4.8 4.8 0 0 1 9 3c-2 4.6-9 9-9 9z"/></svg></span>Clinical &amp; complex care</p>
-            <h3 id="s-palliative">Palliative and end-of-life care</h3>
-            <p>Compassionate support for people at the end of life and their families, including comfort care.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
-              <span class="short-card__price">Price on enquiry</span>
+          </article><article class="short-card acc-firstaid" data-course-card data-category="clinical" data-format="quick" data-search="mealtime and swallowing support support safe eating and drinking, follow mealtime plans and recognise signs of choking risk. clinical &amp; complex care" aria-labelledby="s-mealtime">
+            <div class="short-card__media">
+              <img src="assets/img/short/mealtime-480.webp" srcset="assets/img/short/mealtime-480.webp 480w, assets/img/short/mealtime-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a4.8 4.8 0 0 1 9-3 4.8 4.8 0 0 1 9 3c-2 4.6-9 9-9 9z"/></svg>Clinical &amp; complex care</span>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Palliative%20and%20end-of-life%20care" aria-describedby="s-palliative">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--ndis" data-course-card data-category="ndis" data-format="quick" data-search="positive behaviour support understand why behaviours happen and use proactive, respectful strategies that follow a behaviour support plan. ndis &amp; supported living" aria-labelledby="s-pbs">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6.5 6.5 0 0 1 3.5 6"/></svg></span>NDIS &amp; supported living</p>
-            <h3 id="s-pbs">Positive behaviour support</h3>
-            <p>Understand why behaviours happen and use proactive, respectful strategies that follow a behaviour support plan.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
-              <span class="short-card__price">Price on enquiry</span>
+            <div class="short-card__body">
+              <h3 id="s-mealtime">Mealtime and swallowing support</h3>
+              <p>Support safe eating and drinking, follow mealtime plans and recognise signs of choking risk.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Mealtime%20and%20swallowing%20support" aria-describedby="s-mealtime">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Positive%20behaviour%20support" aria-describedby="s-pbs">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--ndis" data-course-card data-category="ndis" data-format="indepth" data-search="behaviour support and restrictive practices what counts as a restrictive practice, the rules around them and how to reduce their use. ndis &amp; supported living" aria-labelledby="s-restrictive">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6.5 6.5 0 0 1 3.5 6"/></svg></span>NDIS &amp; supported living</p>
-            <h3 id="s-restrictive">Behaviour support and restrictive practices</h3>
-            <p>What counts as a restrictive practice, the rules around them and how to reduce their use.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2zM21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/></svg>In-depth · about 20 hours</span>
-              <span class="short-card__price">Price on enquiry</span>
+          </article><article class="short-card acc-firstaid" data-course-card data-category="clinical" data-format="indepth" data-search="enteral feeding (peg) support hygiene, positioning and care routines for people who receive nutrition through a feeding tube. clinical &amp; complex care" aria-labelledby="s-peg">
+            <div class="short-card__media">
+              <img src="assets/img/short/peg-480.webp" srcset="assets/img/short/peg-480.webp 480w, assets/img/short/peg-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a4.8 4.8 0 0 1 9-3 4.8 4.8 0 0 1 9 3c-2 4.6-9 9-9 9z"/></svg>Clinical &amp; complex care</span>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Behaviour%20support%20and%20restrictive%20practices" aria-describedby="s-restrictive">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--ndis" data-course-card data-category="ndis" data-format="quick" data-search="person-centred active support help people take part in everyday activities at home and in the community, at their own pace. ndis &amp; supported living" aria-labelledby="s-active-support">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6.5 6.5 0 0 1 3.5 6"/></svg></span>NDIS &amp; supported living</p>
-            <h3 id="s-active-support">Person-centred active support</h3>
-            <p>Help people take part in everyday activities at home and in the community, at their own pace.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
-              <span class="short-card__price">Price on enquiry</span>
+            <div class="short-card__body">
+              <h3 id="s-peg">Enteral feeding (PEG) support</h3>
+              <p>Hygiene, positioning and care routines for people who receive nutrition through a feeding tube.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2zM21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/></svg>In-depth · about 20 hours</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Enteral%20feeding%20(PEG)%20support" aria-describedby="s-peg">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Person-centred%20active%20support" aria-describedby="s-active-support">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--ndis" data-course-card data-category="ndis" data-format="quick" data-search="supporting choice and decision-making practical ways to support people to make their own decisions and have them respected. ndis &amp; supported living" aria-labelledby="s-choice">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6.5 6.5 0 0 1 3.5 6"/></svg></span>NDIS &amp; supported living</p>
-            <h3 id="s-choice">Supporting choice and decision-making</h3>
-            <p>Practical ways to support people to make their own decisions and have them respected.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
-              <span class="short-card__price">Price on enquiry</span>
+          </article><article class="short-card acc-firstaid" data-course-card data-category="clinical" data-format="quick" data-search="catheter and stoma care dignified, hygienic support for people with catheters or stomas, and when to escalate concerns. clinical &amp; complex care" aria-labelledby="s-catheter">
+            <div class="short-card__media">
+              <img src="assets/img/short/catheter-480.webp" srcset="assets/img/short/catheter-480.webp 480w, assets/img/short/catheter-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a4.8 4.8 0 0 1 9-3 4.8 4.8 0 0 1 9 3c-2 4.6-9 9-9 9z"/></svg>Clinical &amp; complex care</span>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Supporting%20choice%20and%20decision-making" aria-describedby="s-choice">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--ndis" data-course-card data-category="ndis" data-format="quick" data-search="safeguarding in shared living recognise abuse, neglect and exploitation in shared homes, and know how to report it. ndis &amp; supported living" aria-labelledby="s-safeguarding">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6.5 6.5 0 0 1 3.5 6"/></svg></span>NDIS &amp; supported living</p>
-            <h3 id="s-safeguarding">Safeguarding in shared living</h3>
-            <p>Recognise abuse, neglect and exploitation in shared homes, and know how to report it.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
-              <span class="short-card__price">Price on enquiry</span>
+            <div class="short-card__body">
+              <h3 id="s-catheter">Catheter and stoma care</h3>
+              <p>Dignified, hygienic support for people with catheters or stomas, and when to escalate concerns.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Catheter%20and%20stoma%20care" aria-describedby="s-catheter">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Safeguarding%20in%20shared%20living" aria-describedby="s-safeguarding">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--ndis" data-course-card data-category="ndis" data-format="quick" data-search="de-escalation skills for support workers calm, safe responses when a situation becomes tense, for you and the people you support. ndis &amp; supported living" aria-labelledby="s-deescalation">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6.5 6.5 0 0 1 3.5 6"/></svg></span>NDIS &amp; supported living</p>
-            <h3 id="s-deescalation">De-escalation skills for support workers</h3>
-            <p>Calm, safe responses when a situation becomes tense, for you and the people you support.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
-              <span class="short-card__price">Price on enquiry</span>
+          </article><article class="short-card acc-firstaid" data-course-card data-category="clinical" data-format="quick" data-search="palliative and end-of-life care compassionate support for people at the end of life and their families, including comfort care. clinical &amp; complex care" aria-labelledby="s-palliative">
+            <div class="short-card__media">
+              <img src="assets/img/short/palliative-480.webp" srcset="assets/img/short/palliative-480.webp 480w, assets/img/short/palliative-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a4.8 4.8 0 0 1 9-3 4.8 4.8 0 0 1 9 3c-2 4.6-9 9-9 9z"/></svg>Clinical &amp; complex care</span>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=De-escalation%20skills%20for%20support%20workers" aria-describedby="s-deescalation">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--mental" data-course-card data-category="mental" data-format="indepth" data-search="introduction to mental health common mental health conditions, reducing stigma and supporting recovery in everyday work. mental health &amp; wellbeing" aria-labelledby="s-mental-health">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg></span>Mental health &amp; wellbeing</p>
-            <h3 id="s-mental-health">Introduction to mental health</h3>
-            <p>Common mental health conditions, reducing stigma and supporting recovery in everyday work.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2zM21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/></svg>In-depth · about 20 hours</span>
-              <span class="short-card__price">Price on enquiry</span>
+            <div class="short-card__body">
+              <h3 id="s-palliative">Palliative and end-of-life care</h3>
+              <p>Compassionate support for people at the end of life and their families, including comfort care.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Palliative%20and%20end-of-life%20care" aria-describedby="s-palliative">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Introduction%20to%20mental%20health" aria-describedby="s-mental-health">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--mental" data-course-card data-category="mental" data-format="indepth" data-search="autism awareness and understanding understand autism from a strengths-based view and adapt communication and environments. mental health &amp; wellbeing" aria-labelledby="s-autism">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg></span>Mental health &amp; wellbeing</p>
-            <h3 id="s-autism">Autism awareness and understanding</h3>
-            <p>Understand autism from a strengths-based view and adapt communication and environments.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2zM21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/></svg>In-depth · about 20 hours</span>
-              <span class="short-card__price">Price on enquiry</span>
+          </article><article class="short-card acc-care" data-course-card data-category="ndis" data-format="quick" data-search="positive behaviour support understand why behaviours happen and use proactive, respectful strategies that follow a behaviour support plan. ndis &amp; supported living" aria-labelledby="s-pbs">
+            <div class="short-card__media">
+              <img src="assets/img/short/pbs-480.webp" srcset="assets/img/short/pbs-480.webp 480w, assets/img/short/pbs-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6.5 6.5 0 0 1 3.5 6"/></svg>NDIS &amp; supported living</span>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Autism%20awareness%20and%20understanding" aria-describedby="s-autism">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--mental" data-course-card data-category="mental" data-format="indepth" data-search="supporting people living with dementia how dementia affects people, communication tips and responding to changed behaviours with care. mental health &amp; wellbeing" aria-labelledby="s-dementia">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg></span>Mental health &amp; wellbeing</p>
-            <h3 id="s-dementia">Supporting people living with dementia</h3>
-            <p>How dementia affects people, communication tips and responding to changed behaviours with care.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2zM21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/></svg>In-depth · about 20 hours</span>
-              <span class="short-card__price">Price on enquiry</span>
+            <div class="short-card__body">
+              <h3 id="s-pbs">Positive behaviour support</h3>
+              <p>Understand why behaviours happen and use proactive, respectful strategies that follow a behaviour support plan.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Positive%20behaviour%20support" aria-describedby="s-pbs">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Supporting%20people%20living%20with%20dementia" aria-describedby="s-dementia">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--mental" data-course-card data-category="mental" data-format="quick" data-search="trauma-informed care how trauma affects people and how to offer support that feels safe, consistent and empowering. mental health &amp; wellbeing" aria-labelledby="s-trauma">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg></span>Mental health &amp; wellbeing</p>
-            <h3 id="s-trauma">Trauma-informed care</h3>
-            <p>How trauma affects people and how to offer support that feels safe, consistent and empowering.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
-              <span class="short-card__price">Price on enquiry</span>
+          </article><article class="short-card acc-care" data-course-card data-category="ndis" data-format="indepth" data-search="behaviour support and restrictive practices what counts as a restrictive practice, the rules around them and how to reduce their use. ndis &amp; supported living" aria-labelledby="s-restrictive">
+            <div class="short-card__media">
+              <img src="assets/img/short/restrictive-480.webp" srcset="assets/img/short/restrictive-480.webp 480w, assets/img/short/restrictive-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6.5 6.5 0 0 1 3.5 6"/></svg>NDIS &amp; supported living</span>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Trauma-informed%20care" aria-describedby="s-trauma">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--mental" data-course-card data-category="mental" data-format="quick" data-search="suicide prevention awareness recognise warning signs, ask directly and connect people with the right help. mental health &amp; wellbeing" aria-labelledby="s-suicide">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg></span>Mental health &amp; wellbeing</p>
-            <h3 id="s-suicide">Suicide prevention awareness</h3>
-            <p>Recognise warning signs, ask directly and connect people with the right help.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
-              <span class="short-card__price">Price on enquiry</span>
+            <div class="short-card__body">
+              <h3 id="s-restrictive">Behaviour support and restrictive practices</h3>
+              <p>What counts as a restrictive practice, the rules around them and how to reduce their use.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2zM21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/></svg>In-depth · about 20 hours</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Behaviour%20support%20and%20restrictive%20practices" aria-describedby="s-restrictive">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Suicide%20prevention%20awareness" aria-describedby="s-suicide">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--safety" data-course-card data-category="safety" data-format="indepth" data-search="infection prevention and control hand hygiene, ppe, cleaning and the standard precautions every care worker needs. safety &amp; compliance" aria-labelledby="s-infection">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span>Safety &amp; compliance</p>
-            <h3 id="s-infection">Infection prevention and control</h3>
-            <p>Hand hygiene, PPE, cleaning and the standard precautions every care worker needs.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2zM21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/></svg>In-depth · about 20 hours</span>
-              <span class="short-card__price">Price on enquiry</span>
+          </article><article class="short-card acc-care" data-course-card data-category="ndis" data-format="quick" data-search="person-centred active support help people take part in everyday activities at home and in the community, at their own pace. ndis &amp; supported living" aria-labelledby="s-active-support">
+            <div class="short-card__media">
+              <img src="assets/img/short/active-support-480.webp" srcset="assets/img/short/active-support-480.webp 480w, assets/img/short/active-support-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6.5 6.5 0 0 1 3.5 6"/></svg>NDIS &amp; supported living</span>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Infection%20prevention%20and%20control" aria-describedby="s-infection">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--safety" data-course-card data-category="safety" data-format="quick" data-search="manual handling safe lifting, moving and transfers to protect both you and the people you support. safety &amp; compliance" aria-labelledby="s-manual-handling">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span>Safety &amp; compliance</p>
-            <h3 id="s-manual-handling">Manual handling</h3>
-            <p>Safe lifting, moving and transfers to protect both you and the people you support.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
-              <span class="short-card__price">Price on enquiry</span>
+            <div class="short-card__body">
+              <h3 id="s-active-support">Person-centred active support</h3>
+              <p>Help people take part in everyday activities at home and in the community, at their own pace.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Person-centred%20active%20support" aria-describedby="s-active-support">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Manual%20handling" aria-describedby="s-manual-handling">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--safety" data-course-card data-category="safety" data-format="quick" data-search="incident management and reporting what counts as an incident, what to record and how to report it clearly and on time. safety &amp; compliance" aria-labelledby="s-incidents">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span>Safety &amp; compliance</p>
-            <h3 id="s-incidents">Incident management and reporting</h3>
-            <p>What counts as an incident, what to record and how to report it clearly and on time.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
-              <span class="short-card__price">Price on enquiry</span>
+          </article><article class="short-card acc-care" data-course-card data-category="ndis" data-format="quick" data-search="supporting choice and decision-making practical ways to support people to make their own decisions and have them respected. ndis &amp; supported living" aria-labelledby="s-choice">
+            <div class="short-card__media">
+              <img src="assets/img/short/choice-480.webp" srcset="assets/img/short/choice-480.webp 480w, assets/img/short/choice-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6.5 6.5 0 0 1 3.5 6"/></svg>NDIS &amp; supported living</span>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Incident%20management%20and%20reporting" aria-describedby="s-incidents">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--safety" data-course-card data-category="safety" data-format="quick" data-search="work health and safety in care services your whs rights and responsibilities, and how to spot and report hazards in care settings. safety &amp; compliance" aria-labelledby="s-whs-care">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span>Safety &amp; compliance</p>
-            <h3 id="s-whs-care">Work health and safety in care services</h3>
-            <p>Your WHS rights and responsibilities, and how to spot and report hazards in care settings.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
-              <span class="short-card__price">Price on enquiry</span>
+            <div class="short-card__body">
+              <h3 id="s-choice">Supporting choice and decision-making</h3>
+              <p>Practical ways to support people to make their own decisions and have them respected.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Supporting%20choice%20and%20decision-making" aria-describedby="s-choice">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Work%20health%20and%20safety%20in%20care%20services" aria-describedby="s-whs-care">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--safety" data-course-card data-category="safety" data-format="quick" data-search="emergency and disaster planning prepare for fires, floods and outages so the people you support stay safe. safety &amp; compliance" aria-labelledby="s-emergency">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span>Safety &amp; compliance</p>
-            <h3 id="s-emergency">Emergency and disaster planning</h3>
-            <p>Prepare for fires, floods and outages so the people you support stay safe.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
-              <span class="short-card__price">Price on enquiry</span>
+          </article><article class="short-card acc-care" data-course-card data-category="ndis" data-format="quick" data-search="safeguarding in shared living recognise abuse, neglect and exploitation in shared homes, and know how to report it. ndis &amp; supported living" aria-labelledby="s-safeguarding">
+            <div class="short-card__media">
+              <img src="assets/img/short/safeguarding-480.webp" srcset="assets/img/short/safeguarding-480.webp 480w, assets/img/short/safeguarding-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6.5 6.5 0 0 1 3.5 6"/></svg>NDIS &amp; supported living</span>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Emergency%20and%20disaster%20planning" aria-describedby="s-emergency">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </article><article class="short-card short-card--workplace" data-course-card data-category="workplace" data-format="indepth" data-search="using ai tools at work practical, responsible ways to use ai tools for everyday tasks, with privacy and accuracy in mind. workplace skills" aria-labelledby="s-ai">
-            <p class="short-card__cat"><span class="short-card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg></span>Workplace skills</p>
-            <h3 id="s-ai">Using AI tools at work</h3>
-            <p>Practical, responsible ways to use AI tools for everyday tasks, with privacy and accuracy in mind.</p>
-            <div class="short-card__foot">
-              <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2zM21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/></svg>In-depth · about 20 hours</span>
-              <span class="short-card__price">Price on enquiry</span>
+            <div class="short-card__body">
+              <h3 id="s-safeguarding">Safeguarding in shared living</h3>
+              <p>Recognise abuse, neglect and exploitation in shared homes, and know how to report it.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Safeguarding%20in%20shared%20living" aria-describedby="s-safeguarding">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             </div>
-            <a class="link-arrow" href="contact.html?topic=short-course&amp;course=Using%20AI%20tools%20at%20work" aria-describedby="s-ai">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </article><article class="short-card acc-care" data-course-card data-category="ndis" data-format="quick" data-search="de-escalation skills for support workers calm, safe responses when a situation becomes tense, for you and the people you support. ndis &amp; supported living" aria-labelledby="s-deescalation">
+            <div class="short-card__media">
+              <img src="assets/img/short/deescalation-480.webp" srcset="assets/img/short/deescalation-480.webp 480w, assets/img/short/deescalation-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6.5 6.5 0 0 1 3.5 6"/></svg>NDIS &amp; supported living</span>
+            </div>
+            <div class="short-card__body">
+              <h3 id="s-deescalation">De-escalation skills for support workers</h3>
+              <p>Calm, safe responses when a situation becomes tense, for you and the people you support.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=De-escalation%20skills%20for%20support%20workers" aria-describedby="s-deescalation">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </article><article class="short-card acc-training" data-course-card data-category="mental" data-format="indepth" data-search="introduction to mental health common mental health conditions, reducing stigma and supporting recovery in everyday work. mental health &amp; wellbeing" aria-labelledby="s-mental-health">
+            <div class="short-card__media">
+              <img src="assets/img/short/mental-health-480.webp" srcset="assets/img/short/mental-health-480.webp 480w, assets/img/short/mental-health-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg>Mental health &amp; wellbeing</span>
+            </div>
+            <div class="short-card__body">
+              <h3 id="s-mental-health">Introduction to mental health</h3>
+              <p>Common mental health conditions, reducing stigma and supporting recovery in everyday work.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2zM21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/></svg>In-depth · about 20 hours</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Introduction%20to%20mental%20health" aria-describedby="s-mental-health">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </article><article class="short-card acc-training" data-course-card data-category="mental" data-format="indepth" data-search="autism awareness and understanding understand autism from a strengths-based view and adapt communication and environments. mental health &amp; wellbeing" aria-labelledby="s-autism">
+            <div class="short-card__media">
+              <img src="assets/img/short/autism-480.webp" srcset="assets/img/short/autism-480.webp 480w, assets/img/short/autism-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg>Mental health &amp; wellbeing</span>
+            </div>
+            <div class="short-card__body">
+              <h3 id="s-autism">Autism awareness and understanding</h3>
+              <p>Understand autism from a strengths-based view and adapt communication and environments.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2zM21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/></svg>In-depth · about 20 hours</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Autism%20awareness%20and%20understanding" aria-describedby="s-autism">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </article><article class="short-card acc-training" data-course-card data-category="mental" data-format="indepth" data-search="supporting people living with dementia how dementia affects people, communication tips and responding to changed behaviours with care. mental health &amp; wellbeing" aria-labelledby="s-dementia">
+            <div class="short-card__media">
+              <img src="assets/img/short/dementia-480.webp" srcset="assets/img/short/dementia-480.webp 480w, assets/img/short/dementia-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg>Mental health &amp; wellbeing</span>
+            </div>
+            <div class="short-card__body">
+              <h3 id="s-dementia">Supporting people living with dementia</h3>
+              <p>How dementia affects people, communication tips and responding to changed behaviours with care.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2zM21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/></svg>In-depth · about 20 hours</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Supporting%20people%20living%20with%20dementia" aria-describedby="s-dementia">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </article><article class="short-card acc-training" data-course-card data-category="mental" data-format="quick" data-search="trauma-informed care how trauma affects people and how to offer support that feels safe, consistent and empowering. mental health &amp; wellbeing" aria-labelledby="s-trauma">
+            <div class="short-card__media">
+              <img src="assets/img/short/trauma-480.webp" srcset="assets/img/short/trauma-480.webp 480w, assets/img/short/trauma-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg>Mental health &amp; wellbeing</span>
+            </div>
+            <div class="short-card__body">
+              <h3 id="s-trauma">Trauma-informed care</h3>
+              <p>How trauma affects people and how to offer support that feels safe, consistent and empowering.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Trauma-informed%20care" aria-describedby="s-trauma">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </article><article class="short-card acc-training" data-course-card data-category="mental" data-format="quick" data-search="suicide prevention awareness recognise warning signs, ask directly and connect people with the right help. mental health &amp; wellbeing" aria-labelledby="s-suicide">
+            <div class="short-card__media">
+              <img src="assets/img/short/suicide-480.webp" srcset="assets/img/short/suicide-480.webp 480w, assets/img/short/suicide-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg>Mental health &amp; wellbeing</span>
+            </div>
+            <div class="short-card__body">
+              <h3 id="s-suicide">Suicide prevention awareness</h3>
+              <p>Recognise warning signs, ask directly and connect people with the right help.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Suicide%20prevention%20awareness" aria-describedby="s-suicide">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </article><article class="short-card acc-education" data-course-card data-category="safety" data-format="indepth" data-search="infection prevention and control hand hygiene, ppe, cleaning and the standard precautions every care worker needs. safety &amp; compliance" aria-labelledby="s-infection">
+            <div class="short-card__media">
+              <img src="assets/img/short/infection-480.webp" srcset="assets/img/short/infection-480.webp 480w, assets/img/short/infection-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>Safety &amp; compliance</span>
+            </div>
+            <div class="short-card__body">
+              <h3 id="s-infection">Infection prevention and control</h3>
+              <p>Hand hygiene, PPE, cleaning and the standard precautions every care worker needs.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2zM21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/></svg>In-depth · about 20 hours</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Infection%20prevention%20and%20control" aria-describedby="s-infection">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </article><article class="short-card acc-education" data-course-card data-category="safety" data-format="quick" data-search="manual handling safe lifting, moving and transfers to protect both you and the people you support. safety &amp; compliance" aria-labelledby="s-manual-handling">
+            <div class="short-card__media">
+              <img src="assets/img/short/manual-handling-480.webp" srcset="assets/img/short/manual-handling-480.webp 480w, assets/img/short/manual-handling-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>Safety &amp; compliance</span>
+            </div>
+            <div class="short-card__body">
+              <h3 id="s-manual-handling">Manual handling</h3>
+              <p>Safe lifting, moving and transfers to protect both you and the people you support.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Manual%20handling" aria-describedby="s-manual-handling">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </article><article class="short-card acc-education" data-course-card data-category="safety" data-format="quick" data-search="incident management and reporting what counts as an incident, what to record and how to report it clearly and on time. safety &amp; compliance" aria-labelledby="s-incidents">
+            <div class="short-card__media">
+              <img src="assets/img/short/incidents-480.webp" srcset="assets/img/short/incidents-480.webp 480w, assets/img/short/incidents-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>Safety &amp; compliance</span>
+            </div>
+            <div class="short-card__body">
+              <h3 id="s-incidents">Incident management and reporting</h3>
+              <p>What counts as an incident, what to record and how to report it clearly and on time.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Incident%20management%20and%20reporting" aria-describedby="s-incidents">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </article><article class="short-card acc-education" data-course-card data-category="safety" data-format="quick" data-search="work health and safety in care services your whs rights and responsibilities, and how to spot and report hazards in care settings. safety &amp; compliance" aria-labelledby="s-whs-care">
+            <div class="short-card__media">
+              <img src="assets/img/short/whs-care-480.webp" srcset="assets/img/short/whs-care-480.webp 480w, assets/img/short/whs-care-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>Safety &amp; compliance</span>
+            </div>
+            <div class="short-card__body">
+              <h3 id="s-whs-care">Work health and safety in care services</h3>
+              <p>Your WHS rights and responsibilities, and how to spot and report hazards in care settings.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Work%20health%20and%20safety%20in%20care%20services" aria-describedby="s-whs-care">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </article><article class="short-card acc-education" data-course-card data-category="safety" data-format="quick" data-search="emergency and disaster planning prepare for fires, floods and outages so the people you support stay safe. safety &amp; compliance" aria-labelledby="s-emergency">
+            <div class="short-card__media">
+              <img src="assets/img/short/emergency-480.webp" srcset="assets/img/short/emergency-480.webp 480w, assets/img/short/emergency-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>Safety &amp; compliance</span>
+            </div>
+            <div class="short-card__body">
+              <h3 id="s-emergency">Emergency and disaster planning</h3>
+              <p>Prepare for fires, floods and outages so the people you support stay safe.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Quick refresher · about 1 hour</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Emergency%20and%20disaster%20planning" aria-describedby="s-emergency">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </article><article class="short-card acc-business" data-course-card data-category="workplace" data-format="indepth" data-search="using ai tools at work practical, responsible ways to use ai tools for everyday tasks, with privacy and accuracy in mind. workplace skills" aria-labelledby="s-ai">
+            <div class="short-card__media">
+              <img src="assets/img/short/ai-480.webp" srcset="assets/img/short/ai-480.webp 480w, assets/img/short/ai-800.webp 800w" sizes="(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="short-card__cat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg>Workplace skills</span>
+            </div>
+            <div class="short-card__body">
+              <h3 id="s-ai">Using AI tools at work</h3>
+              <p>Practical, responsible ways to use AI tools for everyday tasks, with privacy and accuracy in mind.</p>
+              <div class="short-card__foot">
+                <span class="short-card__format"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 1-2-2zM21 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2z"/></svg>In-depth · about 20 hours</span>
+                <span class="short-card__price">Price on enquiry</span>
+              </div>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=Using%20AI%20tools%20at%20work" aria-describedby="s-ai">Enquire <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
           </article>
       </div>
 
@@ -353,6 +485,11 @@
           <button type="button" class="btn btn--secondary" data-filter-reset>Clear filters</button>
           <a class="btn btn--primary" href="contact.html?topic=short-course">Ask Poonam</a>
         </div>
+      </div>
+
+      <div class="notice notice--info short-note">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg>
+        <p><strong>Good to know:</strong> short courses are professional development (CPD). You receive a certificate of completion, but they are not nationally recognised qualifications. Course list, formats and prices are being finalised. <span class="tbc" title="Confirm which short courses Poonam offers, who delivers them, prices and durations"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: Confirm which short courses Poonam offers, who delivers them, prices and durations</span></span></p>
       </div>
     </div>
   </section>
