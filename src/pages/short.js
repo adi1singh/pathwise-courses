@@ -121,6 +121,7 @@ export default function shortPage() {
     path: 'short-courses.html',
     title: 'Short courses for care and support workers',
     active: 'short',
+    bodyClass: 'page-short',
     description: 'Online short courses for care and disability support workers: medication support, dementia, infection control, behaviour support, mental health and more. Plus first aid and CPR.',
     body,
   };

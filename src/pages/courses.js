@@ -61,7 +61,7 @@ export default function coursesPage() {
           <p class="filters__legend" id="area-label">Area</p>
           <div class="chip-row chip-row--scroll" data-filter-chips="sector">
             <button type="button" class="filter-chip" aria-pressed="true" data-value="">All</button>
-            ${sectors.map((s) => `<button type="button" class="filter-chip" aria-pressed="false" data-value="${s.id}" data-label="${esc(s.name)}">${icon(s.icon)}${esc(s.short)}</button>`)}
+            ${sectors.map((s) => `<button type="button" class="filter-chip filter-chip--${s.id}" aria-pressed="false" data-value="${s.id}" data-label="${esc(s.name)}">${icon(s.icon)}${esc(s.short)}</button>`)}
           </div>
         </div>
 

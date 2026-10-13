@@ -247,6 +247,7 @@ export default function ways() {
     path: 'ways-to-study.html',
     title: 'Ways to study: RPL, online study and short courses',
     active: 'ways',
+    bodyClass: 'page-ways',
     description: 'Compare recognition of prior learning (RPL), full online study and short courses. See how each works, how long it takes and which suits you.',
     body,
   };

@@ -1933,3 +1933,82 @@ body:has(.mobile-cta.is-visible) .assistant, body.tray-open .assistant { bottom:
 .assistant__typing span:nth-child(3) { animation-delay: 0.3s; }
 @keyframes typing { 50% { opacity: 1; transform: translateY(-3px); } }
 @media print { .assistant { display: none; } }
+
+/* ════════════════════════════════════════════════════════════════════════
+   Colour: each course area has its own accent
+   ════════════════════════════════════════════════════════════════════════ */
+:root {
+  --c-care: #0b6aa8; --c-care-50: #e0f0ff;
+  --c-education: #b45309; --c-education-50: #fff1d6;
+  --c-training: #6d3fc0; --c-training-50: #f1ebff;
+  --c-business: #3443b4; --c-business-50: #e8ebff;
+  --c-construction: #c2410c; --c-construction-50: #ffeadb;
+  --c-firstaid: #c2255c; --c-firstaid-50: #ffe8f0;
+}
+.course-card--care, .filter-chip--care { --acc: var(--c-care); --acc-50: var(--c-care-50); }
+.course-card--education, .filter-chip--education { --acc: var(--c-education); --acc-50: var(--c-education-50); }
+.course-card--training, .filter-chip--training { --acc: var(--c-training); --acc-50: var(--c-training-50); }
+.course-card--business, .filter-chip--business { --acc: var(--c-business); --acc-50: var(--c-business-50); }
+.course-card--construction, .filter-chip--construction { --acc: var(--c-construction); --acc-50: var(--c-construction-50); }
+.course-card--firstaid, .filter-chip--firstaid { --acc: var(--c-firstaid); --acc-50: var(--c-firstaid-50); }
+
+/* Course cards: colour bar, tinted price panel, coloured hover glow */
+.course-card[class*='course-card--'] { border-top: 0; }
+.course-card[class*='course-card--']::before { content: ''; position: absolute; z-index: 2; left: 0; right: 0; top: 0; height: 5px; background: var(--acc); }
+.course-card[class*='course-card--'] .course-card__kicker > span:first-child { color: var(--acc); }
+.course-card[class*='course-card--'] .course-card__meta { background: var(--acc-50); }
+.course-card[class*='course-card--'] .course-card__meta div + div dd { color: var(--acc); }
+.course-card[class*='course-card--']:hover { border-color: var(--acc); box-shadow: 0 24px 50px -24px color-mix(in srgb, var(--acc) 60%, transparent); }
+.course-card[class*='course-card--'] .link-arrow { color: var(--acc); }
+
+/* Area filter chips in their area colour */
+.filter-chip[class*='filter-chip--'] .icon { color: var(--acc); }
+.filter-chip[class*='filter-chip--']:hover { border-color: var(--acc); color: var(--acc); background: var(--acc-50); }
+.filter-chip[class*='filter-chip--'][aria-pressed='true'] { background: var(--acc); border-color: var(--acc); color: #fff; }
+.filter-chip[class*='filter-chip--'][aria-pressed='true'] .icon { color: #fff; }
+
+/* Soft colour wash behind the catalogue, short courses and ways to study */
+.section--catalogue, .page-short .section--tight:first-of-type, .page-ways .section--tight {
+  background:
+    radial-gradient(40% 30% at 0% 0%, rgba(11, 106, 168, 0.08), transparent 70%),
+    radial-gradient(35% 30% at 100% 20%, rgba(109, 63, 192, 0.08), transparent 70%),
+    radial-gradient(40% 30% at 30% 100%, rgba(180, 83, 9, 0.07), transparent 70%);
+}
+
+/* Ways to study: each route has its own colour */
+.path--rpl { --acc: var(--primary); --acc-50: var(--primary-50); }
+.path--online { --acc: #6d3fc0; --acc-50: #f1ebff; }
+.path--short { --acc: #c2255c; --acc-50: #ffe8f0; }
+.path { border-top: 5px solid var(--acc); }
+.path__icon { background: var(--acc) !important; color: #fff !important; }
+.path__tag { color: var(--acc); }
+.path__body { background: linear-gradient(180deg, var(--acc-50), var(--surface) 55%); }
+.path .link-arrow { color: var(--acc); }
+.path:hover { box-shadow: 0 30px 60px -28px color-mix(in srgb, var(--acc) 70%, transparent); }
+.page-ways #online .timeline__num { background: #6d3fc0; box-shadow: 0 0 0 5px #f1ebff; }
+.page-ways #online .timeline li:not(:last-child)::before { border-color: #d9ccf5; }
+.page-ways #online .eyebrow { color: #6d3fc0; }
+.page-ways #online .mini-features li > .icon { background: #f1ebff; color: #6d3fc0; }
+.page-ways #online h2 em { color: #6d3fc0; }
+.compare-table__icon--teal { background: var(--primary-50); color: var(--primary); }
+.compare-table__icon--sun { background: #f1ebff; color: #6d3fc0; }
+.compare-table__icon--coral { background: #ffe8f0; color: #c2255c; }
+.compare-table thead th:nth-of-type(1) { box-shadow: inset 0 4px 0 var(--primary); }
+.compare-table thead th:nth-of-type(2) { box-shadow: inset 0 4px 0 #6d3fc0; }
+.compare-table thead th:nth-of-type(3) { box-shadow: inset 0 4px 0 #c2255c; }
+
+/* Short courses: topic chips and a colourful count */
+.filter-chip--topic[data-value='clinical'] { --acc: #c2255c; --acc-50: #ffe8f0; }
+.filter-chip--topic[data-value='ndis'] { --acc: #1f4fd1; --acc-50: #edf2ff; }
+.filter-chip--topic[data-value='mental'] { --acc: #6d3fc0; --acc-50: #f1ebff; }
+.filter-chip--topic[data-value='safety'] { --acc: #b4520d; --acc-50: #fff0e3; }
+.filter-chip--topic[data-value='workplace'] { --acc: #0b6aa8; --acc-50: #e3f3ff; }
+.filter-chip--topic .icon { color: var(--acc); }
+.filter-chip--topic .filter-chip__count { background: var(--acc-50); color: var(--acc); }
+.filter-chip--topic:hover { border-color: var(--acc); color: var(--acc); background: var(--acc-50); }
+.filter-chip--topic[aria-pressed='true'] { background: var(--acc); border-color: var(--acc); color: #fff; }
+.filter-chip--topic[aria-pressed='true'] .icon { color: #fff; }
+.filter-chip--topic[aria-pressed='true'] .filter-chip__count { background: rgba(255, 255, 255, 0.25); color: #fff; }
+.short-card { background: linear-gradient(180deg, var(--cat-50) 0%, var(--surface) 38%); }
+.short-card:hover { border-color: var(--cat); box-shadow: 0 22px 44px -24px color-mix(in srgb, var(--cat) 60%, transparent); }
+.short-card .link-arrow { color: var(--cat); }

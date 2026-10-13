@@ -42,7 +42,7 @@ export const courseCard = (c, depth, { compare = false } = {}) => {
   const href = link(depth, `course/${c.slug}.html`);
   const titleId = `t-${c.code.toLowerCase()}`;
   return html`
-  <article class="course-card" data-course-card data-code="${c.code}" data-sector="${c.sector}" data-level="${c.level}" data-pathways="${c.pathways.join(' ')}" ${searchAttrs(c)} aria-labelledby="${titleId}">
+  <article class="course-card course-card--${c.sector}" data-course-card data-code="${c.code}" data-sector="${c.sector}" data-level="${c.level}" data-pathways="${c.pathways.join(' ')}" ${searchAttrs(c)} aria-labelledby="${titleId}">
     <div class="course-card__media">
       ${photo(c.image.file, depth)}
       ${sectorChip(c.sector)}
