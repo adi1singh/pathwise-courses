@@ -2096,3 +2096,49 @@ html:not(.js) .story-slide + .story-slide { margin-top: 1rem; }
 .stories__grid { grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 1000px) { .stories__grid { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); } }
 .stories__grid > * { min-width: 0; }
+
+/* ── Story quotes in the clean text font ────────────────────────────────── */
+.story-slide blockquote p { font-family: var(--font-body); font-style: normal; font-weight: 500; font-size: clamp(1.2rem, 1rem + 0.8vw, 1.6rem); line-height: 1.55; letter-spacing: -0.005em; color: var(--ink); }
+.story-slide__mark { width: 48px; height: 36px; }
+.stories__intro h2 .tbc { vertical-align: middle; font-size: 0.75rem; }
+
+/* ── Ask button in the header; floating launcher only in wide side margins ─ */
+.site-header__end { display: flex; align-items: center; gap: 0.6rem; }
+.ask-head {
+  order: -1; display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; padding: 0.2rem 0.85rem 0.2rem 0.2rem; border-radius: 999px;
+  border: 1.5px solid var(--line-strong); background: var(--surface); color: var(--ink); font: inherit; font-weight: 650; font-size: 0.9375rem; cursor: pointer;
+}
+.ask-head .assistant__face { width: 36px; height: 36px; box-shadow: 0 0 0 2px var(--gold); }
+.ask-head:hover { border-color: var(--primary); color: var(--primary); }
+.page-home:not(.menu-open) .site-header:not(.is-scrolled) .ask-head { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.45); color: #fff; }
+@media (min-width: 1080px) {
+  .ask-head { order: 2; padding: 0.2rem; }
+  .ask-head__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+@media (min-width: 1360px) { .ask-head { display: none; } }
+.assistant__launcher { display: none; }
+@media (min-width: 1360px) {
+  .assistant__launcher { display: inline-flex; padding: 0.35rem; }
+  .assistant__launcher .assistant__face { width: 52px; height: 52px; }
+  .assistant__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+/* Panel: bottom sheet on phones, floating card elsewhere */
+@media (max-width: 559.98px) {
+  .assistant { left: 0; right: 0; bottom: 0; align-items: stretch; }
+  .assistant__panel { width: 100%; height: min(78dvh, 620px); border-radius: 24px 24px 0 0; }
+  body.assistant-open::after { content: ''; position: fixed; inset: 0; z-index: 55; background: rgba(6, 20, 48, 0.45); }
+}
+body:has(.mobile-cta.is-visible) .assistant { bottom: max(1rem, env(safe-area-inset-bottom)); }
+@media (max-width: 559.98px) { body:has(.mobile-cta.is-visible) .assistant { bottom: 0; } }
+.site-menu__list a { white-space: nowrap; }
+@media (min-width: 1080px) and (max-width: 1279.98px) {
+  .site-nav, .site-menu { gap: 0.6rem; }
+  .site-menu__list a { padding: 0.5rem 0.55rem; font-size: 0.9rem; }
+  .site-menu__cta .btn { padding-inline: 0.95rem; font-size: 0.925rem; }
+  .logo__text { font-size: 1.2rem; }
+}
+@media (max-width: 399.98px) {
+  .ask-head { padding: 0.2rem; }
+  .ask-head__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .site-header__end { gap: 0.4rem; }
+}

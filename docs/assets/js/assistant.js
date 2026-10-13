@@ -7,7 +7,8 @@
 
   const root = document.querySelector('[data-assistant]');
   if (!root) return;
-  const toggle = root.querySelector('[data-assistant-toggle]');
+  const toggles = [...document.querySelectorAll('[data-assistant-toggle]')];
+  let opener = toggles[0];
   const panel = root.querySelector('[data-assistant-panel]');
   const base = root.dataset.root || '';
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -159,7 +160,7 @@
   const build = async () => {
     panel.innerHTML = `
       <header class="assistant__head">
-        <span class="assistant__face" aria-hidden="true">${toggle.querySelector('.assistant__face').innerHTML}</span>
+        <span class="assistant__face" aria-hidden="true">${toggles[0].querySelector('.assistant__face').innerHTML}</span>
         <div><h2 class="assistant__title">Course questions</h2><p class="assistant__sub">Automated helper · answers from this site</p></div>
         <button type="button" class="assistant__close" aria-label="Close" data-assistant-close>${ICON.x}</button>
       </header>
@@ -190,20 +191,22 @@
     built = true;
   };
 
+  const isOpen = () => !panel.hidden;
   const setOpen = async (open) => {
-    toggle.setAttribute('aria-expanded', String(open));
+    toggles.forEach((t) => t.setAttribute('aria-expanded', String(open)));
+    document.body.classList.toggle('assistant-open', open);
     root.classList.toggle('is-open', open);
     panel.hidden = !open;
     if (open) {
       if (!built) await build();
       input.focus();
     } else {
-      toggle.focus();
+      opener.focus();
     }
   };
 
-  toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  toggles.forEach((t) => t.addEventListener('click', () => { opener = t; setOpen(!isOpen()); }));
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') setOpen(false);
+    if (e.key === 'Escape' && isOpen()) setOpen(false);
   });
 })();

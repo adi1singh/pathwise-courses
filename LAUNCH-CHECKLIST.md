@@ -74,9 +74,9 @@ verified, and only if they belong to Poonam's business.
 - [ ] **Business name:** check "Pathwise Courses" is available on the ASIC business names register
       and at IP Australia (trade marks), and that a suitable domain is free. Add the legal name
       and ABN to `business` in `src/data/site.js`.
-- [ ] **Testimonials:** the preview shows three **sample** reviews, clearly labelled "Sample".
-      They are fake and are never published: they disappear automatically when `draft` is
-      `false`. Add only genuine, approved stories to `testimonials`, with the person's permission
+- [ ] **Testimonials:** the preview shows four **placeholder** stories (marked "To confirm" by the
+      heading). They are not real and are never published: they disappear automatically when
+      `draft` is `false`. Add only genuine, approved stories to `testimonials`, with the person's permission
       (fake or edited reviews breach Australian Consumer Law). With none, the section is hidden.
 - [ ] **"Why these courses matter":** the figures are Victorian Government workforce projections.
       If Poonam mainly helps students in other states, swap in national or state figures.

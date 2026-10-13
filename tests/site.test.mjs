@@ -181,7 +181,7 @@ test('Pathway Map: tabs switch routes and the starting point follows experience'
 test('chat assistant answers from site content and closes with Escape', async () => {
   const page = await newPage(undefined, { reducedMotion: 'reduce' });
   await page.goto(BASE + 'courses.html');
-  const toggle = page.getByRole('button', { name: /ask here/i });
+  const toggle = page.getByRole('button', { name: /ask a question about courses/i });
   await toggle.click();
   const dialog = page.getByRole('dialog', { name: 'Course questions assistant' });
   await dialog.getByText(/automated helper/i).first().waitFor();
@@ -201,7 +201,7 @@ test('student stories: tabs and arrows switch stories, samples are labelled', as
   const page = await newPage(undefined, { reducedMotion: 'reduce' });
   await page.goto(BASE + 'index.html');
   const sec = page.locator('[data-stories]');
-  assert.match(await sec.textContent(), /Sample stories/);
+  assert.ok(await sec.locator('h2 .tbc').count(), 'placeholder stories are marked To confirm in preview');
   await sec.getByRole('tab', { name: /Mei L\./ }).click();
   assert.ok(await sec.getByRole('tabpanel', { name: /Mei L\./ }).isVisible());
   assert.equal(await sec.locator('[data-story-slide]:visible').count(), 1, 'one story at a time');

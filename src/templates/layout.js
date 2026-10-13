@@ -20,10 +20,18 @@ const logo = (depth) => html`
     <span class="logo__text">Pathwise<span class="logo__sub">Courses</span></span>
   </a>`;
 
+const advisorFace = (depth) =>
+  site.advisorPhoto ? `<img src="${link(depth, `${site.advisorPhoto.avatar}-96.webp`)}" alt="" width="48" height="48" loading="lazy">` : site.advisor[0];
+
 const header = (depth, active) => html`
   <header class="site-header" data-header>
     <div class="container site-header__inner">
       ${logo(depth)}
+      <div class="site-header__end">
+      <button class="ask-head" type="button" aria-expanded="false" aria-controls="assistant-panel" data-assistant-toggle>
+        <span class="assistant__face" aria-hidden="true">${advisorFace(depth)}</span>
+        <span class="ask-head__label">Ask<span class="visually-hidden"> a question about courses</span></span>
+      </button>
       <nav class="site-nav" aria-label="Main">
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu" data-nav-toggle>
           <span class="nav-toggle__open">${icon('menu')}</span>
@@ -41,6 +49,7 @@ const header = (depth, active) => html`
           </div>
         </div>
       </nav>
+      </div>
     </div>
   </header>`;
 
@@ -116,8 +125,8 @@ const footer = (depth) => {
 const assistant = (depth) => html`
   <div class="assistant" data-assistant data-root="${link(depth, '')}">
     <button class="assistant__launcher" type="button" aria-expanded="false" aria-controls="assistant-panel" data-assistant-toggle>
-      <span class="assistant__face" aria-hidden="true">${site.advisorPhoto ? `<img src="${link(depth, `${site.advisorPhoto.avatar}-96.webp`)}" alt="" width="48" height="48" loading="lazy">` : site.advisor[0]}</span>
-      <span class="assistant__label">Questions? <strong>Ask here</strong></span>
+      <span class="assistant__face" aria-hidden="true">${advisorFace(depth)}</span>
+      <span class="assistant__label">Ask a question about courses</span>
     </button>
     <section class="assistant__panel" id="assistant-panel" role="dialog" aria-label="Course questions assistant" hidden data-assistant-panel></section>
   </div>`;

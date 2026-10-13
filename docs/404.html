@@ -45,6 +45,11 @@
     </svg>
     <span class="logo__text">Pathwise<span class="logo__sub">Courses</span></span>
   </a>
+      <div class="site-header__end">
+      <button class="ask-head" type="button" aria-expanded="false" aria-controls="assistant-panel" data-assistant-toggle>
+        <span class="assistant__face" aria-hidden="true"><img src="assets/img/poonam/avatar-96.webp" alt="" width="48" height="48" loading="lazy"></span>
+        <span class="ask-head__label">Ask<span class="visually-hidden"> a question about courses</span></span>
+      </button>
       <nav class="site-nav" aria-label="Main">
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu" data-nav-toggle>
           <span class="nav-toggle__open"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span>
@@ -60,6 +65,7 @@
           </div>
         </div>
       </nav>
+      </div>
     </div>
   </header>
   <main id="main" tabindex="-1">
@@ -142,7 +148,7 @@
   <div class="assistant" data-assistant data-root="">
     <button class="assistant__launcher" type="button" aria-expanded="false" aria-controls="assistant-panel" data-assistant-toggle>
       <span class="assistant__face" aria-hidden="true"><img src="assets/img/poonam/avatar-96.webp" alt="" width="48" height="48" loading="lazy"></span>
-      <span class="assistant__label">Questions? <strong>Ask here</strong></span>
+      <span class="assistant__label">Ask a question about courses</span>
     </button>
     <section class="assistant__panel" id="assistant-panel" role="dialog" aria-label="Course questions assistant" hidden data-assistant-panel></section>
   </div>

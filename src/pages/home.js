@@ -237,8 +237,7 @@ const testimonials = () => {
     <div class="container stories__grid">
       <div class="stories__intro">
         <p class="eyebrow eyebrow--on-dark">Student stories</p>
-        <h2 id="reviews-title">Real people. <em>Real next steps.</em></h2>
-        ${real ? '' : `<p class="stories__note">${icon('info')} <span><strong>Sample stories</strong> to show the layout. They are not real and are hidden automatically at launch.</span></p>`}
+        <h2 id="reviews-title">Real people. <em>Real next steps.</em>${real ? '' : tbc('Placeholder stories: replace with genuine, approved reviews. They are hidden automatically at launch.')}</h2>
         <div class="stories__tabs" role="tablist" aria-label="Choose a story">
           ${list.map((t, i) => `<button type="button" role="tab" id="story-tab-${i}" aria-controls="story-${i}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}" data-story-tab><span class="stories__tab-avatar" aria-hidden="true">${esc(t.name[0])}</span><span><strong>${esc(t.name)}</strong><span>${esc(t.detail ?? '')}</span></span></button>`)}
         </div>
@@ -246,7 +245,6 @@ const testimonials = () => {
       <div class="stories__stage">
         ${list.map(
           (t, i) => html`<figure class="story-slide" role="tabpanel" id="story-${i}" aria-labelledby="story-tab-${i}" data-story-slide${i === 0 ? '' : ' data-hidden'}>
-            ${real ? '' : '<span class="review__flag">Sample</span>'}
             <svg class="story-slide__mark" viewBox="0 0 48 36" aria-hidden="true" focusable="false"><path d="M0 36V22C0 9 7 2 19 0l2 6c-7 2-10 6-10 12h9v18zm27 0V22C27 9 34 2 46 0l2 6c-7 2-10 6-10 12h9v18z" fill="currentColor"/></svg>
             <blockquote><p>${esc(t.quote)}</p></blockquote>
             ${t.from && t.to ? `<p class="story-slide__journey"><span class="story-slide__from"><small>Before</small>${esc(t.from)}</span><span class="story-slide__arrow" aria-hidden="true">${icon('arrow-right')}</span><span class="story-slide__to"><small>After</small>${esc(t.to)}</span></p>` : ''}
