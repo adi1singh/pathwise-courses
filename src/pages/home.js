@@ -122,11 +122,11 @@ const mapStop = (codes, i, d) => {
       <p class="pmap__level">${levelById[first.level].name}</p>
       <h3 class="pmap__title">${list.map((c) => `<a href="${link(d, `course/${c.slug}.html`)}">${esc(c.short ?? c.title)}</a>`).join('<span class="pmap__or"> or </span>')}</h3>
       <p class="pmap__roles">${esc(first.roles.slice(0, 2).join(' · '))}</p>
+      ${canRpl ? `<p class="pmap__rpl" data-rpl-note hidden>${icon('award')}<span><strong>Your experience may count.</strong> RPL ${esc(first.duration.rpl.replace(/^Often /, 'often '))}${rpl ? `, typically ${rpl}` : ''}.</span></p>` : ''}
       <dl class="pmap__facts">
         <div><dt>Study</dt><dd>${esc(first.duration.study)}</dd></div>
         <div><dt>Typical price</dt><dd>${study ?? 'Ask for a quote'}</dd></div>
       </dl>
-      ${canRpl ? `<p class="pmap__rpl" data-rpl-note hidden>${icon('award')}<span><strong>Your experience may count.</strong> RPL ${esc(first.duration.rpl.replace(/^Often /, 'often '))}${rpl ? `, typically ${rpl}` : ''}.</span></p>` : ''}
       <p class="pmap__done" data-done hidden>${icon('check')} Already done</p>
     </div>
   </li>`;

@@ -1783,3 +1783,31 @@ html:not(.js) .pmap__panel + .pmap__panel { margin-top: 2.5rem; }
 .hero-guide::after { border-color: rgba(246, 185, 59, 0.35); }
 @media (min-width: 900px) { .hero__text { padding-bottom: clamp(3.5rem, 2rem + 5vw, 6.5rem); } }
 .hero__popular { column-gap: 0.95rem; }
+
+/* Pathway Map tabs: one line, unselected tabs faded */
+.pmap__tabs { flex-wrap: nowrap; }
+.pmap__tabs button { transition: background 0.2s, border-color 0.2s, color 0.2s, opacity 0.2s; }
+.pmap__tabs button[aria-selected='false'] { opacity: 0.5; }
+.pmap__tabs button[aria-selected='false']:hover, .pmap__tabs button[aria-selected='false']:focus-visible { opacity: 0.9; }
+@media (min-width: 900px) {
+  .pmap__tabs { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); flex-wrap: nowrap; overflow: visible; }
+  .pmap__tabs button { justify-content: center; min-width: 0; padding: 0.55rem 0.7rem; font-size: clamp(0.8rem, 0.55rem + 0.42vw, 0.95rem); white-space: nowrap; gap: 0.45rem; }
+}
+
+/* Pathway Map cards: equal heights, prices always inside the card */
+@media (min-width: 900px) {
+  .pmap__route { align-items: stretch; }
+  .pmap__stop { display: flex; flex-direction: column; }
+  .pmap__card { flex: 1; }
+  .pmap__stop.is-start .pmap__card { transform: none; }
+}
+.pmap__roles { flex: 1; }
+.pmap__facts { grid-template-columns: 1fr; row-gap: 0.45rem; }
+.pmap__facts > div { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.15rem 0.75rem; }
+.pmap__facts dd { margin: 0; white-space: normal; text-align: right; overflow-wrap: anywhere; }
+.pmap__facts { grid-template-columns: 1fr 1fr; column-gap: 1rem; }
+.pmap__facts > div { display: block; }
+.pmap__facts dd { text-align: left; }
+.pmap__rpl { margin-bottom: 0.25rem; }
+.pmap__facts { grid-template-columns: 1fr; row-gap: 0.55rem; }
+.pmap__facts dd { white-space: nowrap; }
