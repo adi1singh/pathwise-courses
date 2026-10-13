@@ -23,6 +23,7 @@
   <script>document.documentElement.classList.add('js')</script>
   <script id="site-config" type="application/json">{"endpoint":"","extraFields":{},"draft":true,"advisor":"Poonam","phone":null,"email":null,"whatsapp":null}</script>
   <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/assistant.js" defer></script>
   
 </head>
 <body class="has-mobile-cta">
@@ -339,5 +340,13 @@
       </div>
     </div>
   </footer>
+  
+  <div class="assistant" data-assistant data-root="../">
+    <button class="assistant__launcher" type="button" aria-expanded="false" aria-controls="assistant-panel" data-assistant-toggle>
+      <span class="assistant__face" aria-hidden="true"><img src="../assets/img/poonam/avatar-96.webp" alt="" width="48" height="48" loading="lazy"></span>
+      <span class="assistant__label">Questions? <strong>Ask here</strong></span>
+    </button>
+    <section class="assistant__panel" id="assistant-panel" role="dialog" aria-label="Course questions assistant" hidden data-assistant-panel></section>
+  </div>
 </body>
 </html>

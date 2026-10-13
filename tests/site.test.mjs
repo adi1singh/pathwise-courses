@@ -178,6 +178,25 @@ test('Pathway Map: tabs switch routes and the starting point follows experience'
   await page.context().close();
 });
 
+test('chat assistant answers from site content and closes with Escape', async () => {
+  const page = await newPage(undefined, { reducedMotion: 'reduce' });
+  await page.goto(BASE + 'courses.html');
+  const toggle = page.getByRole('button', { name: /ask here/i });
+  await toggle.click();
+  const dialog = page.getByRole('dialog', { name: 'Course questions assistant' });
+  await dialog.getByText(/automated helper/i).first().waitFor();
+  await dialog.getByRole('textbox').fill('how much is the TAE');
+  await dialog.getByRole('textbox').press('Enter');
+  await dialog.getByRole('link', { name: /Training and Assessment/ }).waitFor();
+  assert.match(await dialog.locator('.assistant__msg--bot').last().textContent(), /not Poonam’s prices/);
+  await dialog.getByRole('button', { name: 'What is RPL?' }).click();
+  assert.match(await dialog.locator('.assistant__msg--bot').last().textContent(), /RPL is a formal assessment/);
+  await page.keyboard.press('Escape');
+  assert.ok(await dialog.isHidden(), 'closes with Escape');
+  assert.equal(await toggle.getAttribute('aria-expanded'), 'false');
+  await page.context().close();
+});
+
 /* ── Search, filters and comparison ────────────────────────────────────── */
 
 test('search understands everyday words and ranks the best matches first', async () => {

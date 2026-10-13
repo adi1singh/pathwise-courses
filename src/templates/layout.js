@@ -112,6 +112,16 @@ const footer = (depth) => {
   </footer>`;
 };
 
+// Chat assistant launcher; the panel is built by assistant.js when opened.
+const assistant = (depth) => html`
+  <div class="assistant" data-assistant data-root="${link(depth, '')}">
+    <button class="assistant__launcher" type="button" aria-expanded="false" aria-controls="assistant-panel" data-assistant-toggle>
+      <span class="assistant__face" aria-hidden="true">${site.advisorPhoto ? `<img src="${link(depth, `${site.advisorPhoto.avatar}-96.webp`)}" alt="" width="48" height="48" loading="lazy">` : site.advisor[0]}</span>
+      <span class="assistant__label">Questions? <strong>Ask here</strong></span>
+    </button>
+    <section class="assistant__panel" id="assistant-panel" role="dialog" aria-label="Course questions assistant" hidden data-assistant-panel></section>
+  </div>`;
+
 // Settings the browser script needs (form endpoint, fallback contacts).
 const clientConfig = () =>
   JSON.stringify({
@@ -152,6 +162,7 @@ export const layout = ({ title, description, path, depth = 0, active = '', body,
   <script>document.documentElement.classList.add('js')</script>
   <script id="site-config" type="application/json">${clientConfig()}</script>
   <script src="${link(depth, 'assets/js/main.js')}" defer></script>
+  <script src="${link(depth, 'assets/js/assistant.js')}" defer></script>
   ${head}
 </head>
 <body class="${bodyClass}">
@@ -162,6 +173,7 @@ export const layout = ({ title, description, path, depth = 0, active = '', body,
 ${body}
   </main>
   ${footer(depth)}
+  ${assistant(depth)}
 </body>
 </html>
 `;

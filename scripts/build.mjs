@@ -5,7 +5,10 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { site } from '../src/data/site.js';
-import { courses } from '../src/data/courses.js';
+import { courses, levelById } from '../src/data/courses.js';
+import { faqGroups } from '../src/data/faqs.js';
+import { priceDetail } from '../src/data/prices.js';
+import { searchFields } from '../src/templates/components.js';
 import { layout } from '../src/templates/layout.js';
 import home from '../src/pages/home.js';
 import coursesPage from '../src/pages/courses.js';
@@ -49,6 +52,29 @@ for (const page of pages) {
 }
 
 await cp(join(root, 'src/assets'), join(out, 'assets'), { recursive: true });
+
+// Data for the chat assistant, fetched only when someone opens it.
+await mkdir(join(out, 'assets/data'), { recursive: true });
+await writeFile(
+  join(out, 'assets/data/assistant.json'),
+  JSON.stringify({
+    advisor: site.advisor,
+    contact: site.contact,
+    courses: courses.map((c) => ({
+      code: c.code,
+      title: c.title,
+      level: levelById[c.level].name,
+      href: `course/${c.slug}.html`,
+      img: `assets/img/${c.image.file}-480.webp`,
+      study: c.duration.study,
+      rpl: c.pathways.includes('rpl') ? c.duration.rpl : null,
+      price: priceDetail(c),
+      fees: c.fees,
+      s: searchFields(c),
+    })),
+    faqs: faqGroups.flatMap((g) => g.items.map(({ q, a }) => ({ q, a }))),
+  })
+);
 
 // Light CSS minification: drop comments and collapse whitespace.
 const cssFile = join(out, 'assets/css/styles.css');

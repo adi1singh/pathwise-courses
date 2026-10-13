@@ -111,6 +111,9 @@
     return total;
   };
 
+  // Shared with the chat assistant (assistant.js).
+  window.PathwiseSearch = { scoreCard, terms, SYNONYMS };
+
   $$('[data-filters]').forEach((form) => {
     const section = form.closest('section') || document;
     const grid = $('[data-results]', section);
