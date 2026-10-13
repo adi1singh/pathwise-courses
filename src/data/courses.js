@@ -17,7 +17,7 @@ export const sectors = [
   },
   {
     id: 'education',
-    image: { file: 'areas/education', source: 'Unsplash', alt: 'Educators and young children playing in a bright room', credit: 'Rewired Digital', url: 'https://unsplash.com/photos/children-playing-with-toys-in-a-bright-room-4UFIg9htJgE' },
+    image: { file: 'areas/education', source: 'Pexels', alt: 'An educator doing sensory play with two young children', credit: 'Vlada Karpovich', url: 'https://www.pexels.com/photo/7356477/' },
     name: 'Early childhood & education',
     short: 'Education',
     blurb: 'Childcare, school support and outside-school-hours care.',
@@ -33,7 +33,7 @@ export const sectors = [
   },
   {
     id: 'business',
-    image: { file: 'areas/business', source: 'Unsplash', alt: 'A team meeting around an office table', credit: 'Vitaly Gariev', url: 'https://unsplash.com/photos/diverse-business-team-collaborating-in-a-modern-office-_4tpElFQemQ' },
+    image: { file: 'areas/business', source: 'Pexels', alt: 'A team leader presenting to colleagues at a whiteboard', credit: 'cottonbro studio', url: 'https://www.pexels.com/photo/6814345/' },
     name: 'Leadership & safety',
     short: 'Leadership',
     blurb: 'Lead teams and manage health and safety at work.',

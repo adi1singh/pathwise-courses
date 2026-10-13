@@ -10,9 +10,7 @@ are cropped to 4:3 and saved as WebP in `src/assets/img/areas/`.
 | Area | Photo | Photographer |
 | --- | --- | --- |
 | Community & care | [Caregiver assisting an elderly couple](https://unsplash.com/photos/caregiver-assisting-elderly-couple-with-coloring-bSXk1lOp8T0) | Age Cymru |
-| Early childhood & education | [Children playing with toys in a bright room](https://unsplash.com/photos/children-playing-with-toys-in-a-bright-room-4UFIg9htJgE) | Rewired Digital |
 | Training & assessment | [Team collaborating around a whiteboard](https://unsplash.com/photos/team-collaborating-around-a-whiteboard-in-a-modern-office-K0aM-ztA76Q) | Vitaly Gariev |
-| Leadership & safety | [Business team collaborating in an office](https://unsplash.com/photos/diverse-business-team-collaborating-in-a-modern-office-_4tpElFQemQ) | Vitaly Gariev |
 | Building & construction | [Men in hard hats at a construction site](https://unsplash.com/photos/sNVkn3507Oo) | Mark Potterton |
 | First aid & CPR | [Person practising CPR on a training dummy](https://unsplash.com/photos/person-practicing-cpr-on-a-training-dummy-E2JjBMyxBVw) | Frederick Shaw |
 
@@ -41,6 +39,8 @@ identifiable people in a bad light or implying they endorse the business. Saved 
 | BSB41419 | [8293666](https://www.pexels.com/photo/8293666/) | RDNE Stock project |
 | HLTAID011, short course route | [6519905](https://www.pexels.com/photo/6519905/) | RDNE Stock project |
 | Online study (Ways to study) | [6001377](https://www.pexels.com/photo/6001377/) | Sam Lion |
+| Early childhood & education area | [7356477](https://www.pexels.com/photo/7356477/) | Vlada Karpovich |
+| Leadership & safety area, BSB50420, employer band | [6814345](https://www.pexels.com/photo/6814345/) | cottonbro studio |
 
 The other courses reuse the area photo for their area (Unsplash, above).
 
