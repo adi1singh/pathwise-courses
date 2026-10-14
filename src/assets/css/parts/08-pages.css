@@ -193,3 +193,18 @@ html:not(.js) .form-step + .form-step { padding-top: 1.5rem; border-top: 1px sol
 .not-found h1 { max-width: 16ch; margin-inline: auto; }
 
 @media (max-width: 419.98px) { .btn { white-space: normal; text-align: center; } }
+
+/* ── Technical partner (About us) ───────────────────────────────────────── */
+.partner__inner { display: grid; gap: clamp(2rem, 1rem + 4vw, 4.5rem); align-items: center; }
+@media (min-width: 900px) { .partner__inner { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); } .partner__inner--text { grid-template-columns: minmax(0, 1fr); max-width: 48rem; } }
+.partner__photo { position: relative; margin: 0 1.25rem 1.25rem 0; }
+.partner__photo::before { content: ''; position: absolute; z-index: 0; inset: 1.25rem -1.25rem -1.25rem 1.25rem; border-radius: var(--radius-xl); background: var(--coral); }
+.partner__photo img, .partner__initials { position: relative; z-index: 1; width: 100%; aspect-ratio: 4 / 3; border-radius: var(--radius-xl); object-fit: cover; }
+.partner__photo figcaption { position: absolute; z-index: 2; left: 1rem; bottom: 1rem; display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 0.95rem; border-radius: 999px; background: var(--card); color: var(--ink); font-size: 0.875rem; font-weight: 560; box-shadow: var(--shadow); }
+.partner__initials { display: flex; align-items: center; justify-content: center; gap: 1rem; background: var(--night-2); border: 1.5px dashed var(--line-night); font-family: var(--font-serif); font-style: italic; font-size: clamp(4rem, 3rem + 4vw, 7rem); color: var(--saffron); }
+.partner__plus { font-family: var(--font-sans); font-style: normal; font-size: 0.45em; color: var(--on-night-muted); }
+.partner__brand { display: inline-block; padding: 0 0.2em; border-radius: 0.18em; background: var(--saffron); color: var(--ink); letter-spacing: -0.03em; }
+.partner__list { list-style: none; margin: 1.5rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.partner__list li { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.45rem 0.9rem; border-radius: 999px; background: rgba(255, 255, 255, 0.07); border: 1px solid var(--line-night); color: #fff; font-size: 0.925rem; font-weight: 550; }
+.partner__list .icon { width: 1.05em; height: 1.05em; color: var(--saffron); }
+.partner .btn { margin-top: 1.75rem; }

@@ -1,5 +1,5 @@
 import { site } from '../data/site.js';
-import { html, icon, tbc } from '../templates/helpers.js';
+import { html, icon, tbc, esc } from '../templates/helpers.js';
 import { pageHero, sectionHead, ctaBand, checklist, advisorPortrait, advisorAvatar } from '../templates/components.js';
 
 export default function about() {
@@ -14,10 +14,10 @@ export default function about() {
 
   const body = html`
   ${pageHero({
-    eyebrow: `About ${p}`,
+    eyebrow: 'About us',
     title: `Hi, I’m ${p}. Let’s find your path.`,
     lead: 'I help people choose the right course, make the most of the experience they already have, and get through enrolment without the confusion.',
-    crumbs: [{ label: `About ${p}` }],
+    crumbs: [{ label: 'About us' }],
     depth: d,
     aside: portrait,
     fill: true,
@@ -126,12 +126,39 @@ export default function about() {
     </div>
   </section>
 
+  <section class="section section--navy partner" aria-labelledby="partner-title">
+    <div class="container partner__inner${site.partner.photo || site.draft ? '' : ' partner__inner--text'}">
+      ${site.partner.photo
+        ? html`<figure class="partner__photo">
+            <img src="${site.partner.photo}-480.webp" srcset="${site.partner.photo}-480.webp 480w, ${site.partner.photo}-800.webp 800w" sizes="(min-width: 900px) 520px, 92vw" width="480" height="360" alt="${esc(site.partner.photoAlt)}" loading="lazy" decoding="async">
+            <figcaption>${esc(site.partner.photoAlt)}</figcaption>
+          </figure>`
+        : site.draft
+          ? html`<figure class="partner__photo partner__photo--placeholder">
+              <div class="partner__initials" aria-hidden="true"><span>P</span><span class="partner__plus">+</span><span>K</span></div>
+              <figcaption>Photo of Poonam and Khush ${tbc('Add the photo of Poonam and Khush')}</figcaption>
+            </figure>`
+          : ''}
+      <div class="partner__text">
+        <p class="eyebrow">Technical partner</p>
+        <h2 id="partner-title">Built with <span class="partner__brand">${esc(site.partner.name)}</span></h2>
+        <p class="lead">${site.name} works with jobgen.ai, our technical partner. ${p} brings the course knowledge and the personal guidance; jobgen.ai brings the technology behind it.</p>
+        <ul class="partner__list" role="list">
+          <li>${icon('laptop')}<span>This website</span></li>
+          <li>${icon('compass')}<span>The course finder</span></li>
+          <li>${icon('chat')}<span>The course questions assistant</span></li>
+        </ul>
+        <a class="btn btn--sun btn--lg" href="${site.partner.url}" rel="noopener">Visit jobgen.ai ${icon('external')}</a>
+      </div>
+    </div>
+  </section>
+
   ${ctaBand(d, { title: 'Let’s talk about your next step', text: 'Tell me a little about yourself and I’ll come back to you with options – not a sales pitch.' })}
   `;
 
   return {
     path: 'about.html',
-    title: `About ${p}`,
+    title: 'About us',
     active: 'about',
     bodyClass: 'page-about',
     description: `Meet ${p}, the course advisor behind ${site.name}. Honest, plain-language help choosing a course, checking eligibility and preparing for RPL.`,

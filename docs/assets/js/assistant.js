@@ -205,7 +205,38 @@
     }
   };
 
-  toggles.forEach((t) => t.addEventListener('click', () => { opener = t; setOpen(!isOpen()); }));
+  toggles.forEach((t) => t.addEventListener('click', () => { opener = t; hideNudge(); setOpen(!isOpen()); }));
+
+  // A short "How can I help?" bubble beside whichever chat button is showing,
+  // once per visit, a couple of seconds after the page opens.
+  const nudge = root.querySelector('[data-assistant-nudge]');
+  let nudgeTimer;
+  function hideNudge() {
+    if (!nudge || nudge.hidden) return;
+    nudge.classList.remove('is-shown');
+    clearTimeout(nudgeTimer);
+    setTimeout(() => { nudge.hidden = true; }, 250);
+  }
+  const showNudge = () => {
+    const button = toggles.find((t) => t.offsetParent !== null);
+    if (!nudge || !button || isOpen()) return;
+    const r = button.getBoundingClientRect();
+    const below = r.top < window.innerHeight / 2; // header button: bubble hangs below it
+    nudge.classList.toggle('is-below', below);
+    nudge.style.right = `${Math.max(12, window.innerWidth - r.right)}px`;
+    nudge.style.top = below ? `${r.bottom + 12}px` : '';
+    nudge.style.bottom = below ? '' : `${window.innerHeight - r.top + 12}px`;
+    nudge.hidden = false;
+    requestAnimationFrame(() => nudge.classList.add('is-shown'));
+    nudgeTimer = setTimeout(hideNudge, 6000);
+  };
+  if (nudge) {
+    nudge.addEventListener('click', () => { opener = toggles.find((t) => t.offsetParent !== null) || opener; hideNudge(); setOpen(true); });
+    let seen = false;
+    try { seen = sessionStorage.getItem('pathwise-nudge') === '1'; sessionStorage.setItem('pathwise-nudge', '1'); } catch { /* storage unavailable */ }
+    if (!seen) setTimeout(showNudge, 2000);
+    window.addEventListener('scroll', () => { if (nudge.classList.contains('is-below')) hideNudge(); }, { passive: true });
+  }
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && isOpen()) setOpen(false);
   });

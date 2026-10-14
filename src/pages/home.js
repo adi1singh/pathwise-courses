@@ -43,7 +43,7 @@ const hero = (d) => html`
     <div class="container hero__inner">
       <div class="hero__text">
         <h1 id="hero-title">Find the course that <em>moves your career forward</em></h1>
-        <p class="hero__lead">Search ${courses.length} nationally recognised courses, then talk it through with ${site.advisor}.</p>
+        <p class="hero__lead">Search ${courses.length} nationally recognised courses.</p>
 
         <form class="hero-search" action="courses.html" method="get" role="search" aria-label="Search courses" data-hero-search>
           <div class="hero-search__box">
@@ -88,7 +88,7 @@ const guideStrip = (d) => html`
   <aside class="guide-strip" aria-label="Your course guide">
     <div class="container guide-strip__inner">
       <span class="avatar avatar--lg" aria-hidden="true">${advisorAvatar(d)}</span>
-      <p><strong>Hi, I’m ${site.advisor}.</strong> Tell me about your experience and goals, and I’ll suggest courses that fit. ${tbc('Poonam to approve her introduction')}</p>
+      <p><strong>Hi, I’m ${site.advisor}.</strong> Tell me about your experience and goals, and I’ll suggest courses that fit.</p>
       <a class="btn btn--primary" href="contact.html">${icon('chat')} Talk to ${site.advisor}</a>
     </div>
   </aside>`;
@@ -246,7 +246,7 @@ const aboutPoonam = (d) => html`
       <div class="about-poonam__text">
         <p class="eyebrow">Meet your guide</p>
         <h2 id="about-title">Hi, I’m ${site.advisor}. <em>Let’s find your path together.</em></h2>
-        <p class="lead">Choosing a course is a big decision. I take the time to understand your experience, your goals and your week, then give you a straight answer about what fits and the most sensible way to get there. ${tbc('Poonam to approve or rewrite her introduction')}</p>
+        <p class="lead">Tell me about your experience and goals. I’ll give you a straight answer on what fits, and the simplest way to get there.</p>
         <ul class="promises" role="list">
           ${PROMISES.map(([ic, title, text]) => `<li>${icon(ic)}<div><h3>${title}</h3><p>${text}</p></div></li>`)}
         </ul>
@@ -282,7 +282,7 @@ const testimonials = () => {
   return html`
   <section class="section wall" aria-labelledby="reviews-title" data-wall>
     <div class="container wall__head">
-      <h2 id="reviews-title" class="wall__title">Student <em>stories</em>${real ? '' : tbc('Placeholder stories: replace with genuine, approved reviews. They are hidden automatically at launch.')}</h2>
+      <h2 id="reviews-title" class="wall__title">Student <em>stories</em></h2>
       <p class="wall__lead">From “I’ve done this work for years” to qualified. From “I don’t know where to start” to enrolled.</p>
       <button type="button" class="wall__pause" data-wall-pause aria-pressed="false"><span class="wall__pause-icon" aria-hidden="true"></span><span data-wall-pause-label>Pause stories</span></button>
     </div>

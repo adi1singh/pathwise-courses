@@ -87,10 +87,9 @@ colour-graded, cross-faded) from these Pexels videos under the Pexels License:
 
 ### Poonam's photo
 
-Supplied by Poonam's team. Edited for the site: background removed with an AI model
-(rembg / BiRefNet) and replaced with a soft studio background, colour and light balanced, and cropped
-into a portrait, a cut-out and a small avatar. **Her face and features were not altered.**
-Files: `src/assets/img/poonam/`. Poonam should approve the edited versions before launch.
+A studio headshot supplied by Poonam's team (October 2026). Used as supplied for the portrait and
+avatar crops (`src/assets/img/poonam/`). For the home page cut-out only, the plain studio background
+was removed with an AI model (rembg / BiRefNet). **Her face and features were not altered.**
 
 ## Fonts
 

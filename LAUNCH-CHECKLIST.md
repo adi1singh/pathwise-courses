@@ -4,7 +4,8 @@ Everything below needs Poonam's input or confirmation before the site goes publi
 While `draft: true` is set in `src/data/site.js`, each of these shows on the site as an
 amber **To confirm** marker, and the site asks search engines not to index it.
 
-Nothing on the site claims accreditations, partnerships, awards, review scores, student
+Apart from the jobgen.ai technical partnership on the About us page (approved by Poonam), nothing
+on the site claims accreditations, partnerships, awards, review scores, student
 numbers, guarantees or funding. Prices shown are clearly labelled **typical market ranges**
 from other providers (see `PRICING.md`), not Poonam's prices. Add claims only once they're
 verified, and only if they belong to Poonam's business.
@@ -53,9 +54,11 @@ verified, and only if they belong to Poonam's business.
 
 - [ ] **Contact details:** phone, WhatsApp number, email address, contact hours, and where
       she's based / which states she helps. Add these to `contact` in `src/data/site.js`.
-- [ ] **Poonam's photo:** approve the edited versions (background replaced, colour balanced;
-      face unchanged) in `src/assets/img/poonam/`. A higher-resolution original would make the
-      large hero cut-out sharper.
+- [x] **Poonam's photo:** new studio headshot supplied (October 2026), used as supplied; only the home
+      page cut-out has its background removed. Files in `src/assets/img/poonam/`.
+- [ ] **Photo of Poonam and Khush** for the technical partner section on About us: save it as
+      `src/assets/img/partner/poonam-khush-480.webp` and `-800.webp` (4:3) and set `partner.photo` in
+      `src/data/site.js`. Until then the preview shows a placeholder and the live site shows text only.
 - [ ] **Approved introduction and background:** check the homepage greeting and quote ("I'll
       listen to your experience and goals…") and write her own story for the About page. The
       About text is placeholder copy. Cover her relevant background, how long she's been
@@ -74,9 +77,10 @@ verified, and only if they belong to Poonam's business.
 - [ ] **Business name:** check "Pathwise Courses" is available on the ASIC business names register
       and at IP Australia (trade marks), and that a suitable domain is free. Add the legal name
       and ABN to `business` in `src/data/site.js`.
-- [ ] **Testimonials:** the preview shows four **placeholder** stories (marked "To confirm" by the
-      heading). They are not real and are never published: they disappear automatically when
-      `draft` is `false`. Add only genuine, approved stories to `testimonials`, with the person's permission
+- [ ] **Testimonials:** the preview shows four stories using names of Poonam's students, but the
+      **wording is placeholder text** written for the layout. They disappear automatically when
+      `draft` is `false`. To keep them at launch, replace each quote with what the student actually said
+      and move it to `testimonials`. Add only genuine, approved stories to `testimonials`, with the person's permission
       (fake or edited reviews breach Australian Consumer Law). With none, the section is hidden.
 - [ ] **"Why these courses matter":** the figures are Victorian Government workforce projections.
       If Poonam mainly helps students in other states, swap in national or state figures.

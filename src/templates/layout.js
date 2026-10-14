@@ -7,7 +7,7 @@ export const NAV = [
   { id: 'courses', label: 'Courses', href: 'courses.html' },
   { id: 'ways', label: 'Ways to study', href: 'ways-to-study.html' },
   { id: 'short', label: 'Short courses', href: 'short-courses.html' },
-  { id: 'about', label: 'About Poonam', href: 'about.html' },
+  { id: 'about', label: 'About us', href: 'about.html' },
 ];
 
 const logo = (depth) => html`
@@ -20,8 +20,9 @@ const logo = (depth) => html`
     <span class="logo__text"><span>Path<em>wise</em></span><span class="logo__sub">Courses</span></span>
   </a>`;
 
-const advisorFace = (depth) =>
-  site.advisorPhoto ? `<img src="${link(depth, `${site.advisorPhoto.avatar}-96.webp`)}" alt="" width="48" height="48" loading="lazy">` : site.advisor[0];
+// The chat assistant is automated, so it wears the Pathwise mark, not Poonam's photo.
+const botMark = () =>
+  `<svg viewBox="0 0 44 44" focusable="false"><rect width="44" height="44" fill="#15201b"/><path d="M12.5 35c0-4.5 3.5-6 3.5-10.5V12h7a7 7 0 0 1 0 14h-3.5" fill="none" stroke="#ff6a3d" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M33 7.5l1.2 2.8 2.8 1.2-2.8 1.2L33 15.5l-1.2-2.8-2.8-1.2 2.8-1.2z" fill="#ffb23f"/></svg>`;
 
 const header = (depth, active) => html`
   <header class="site-header" data-header>
@@ -29,7 +30,7 @@ const header = (depth, active) => html`
       ${logo(depth)}
       <div class="site-header__end">
       <button class="ask-head" type="button" aria-expanded="false" aria-controls="assistant-panel" data-assistant-toggle>
-        <span class="assistant__face" aria-hidden="true">${advisorFace(depth)}</span>
+        <span class="assistant__face" aria-hidden="true">${botMark()}</span>
         <span class="ask-head__label">Ask<span class="visually-hidden"> a question about courses</span></span>
       </button>
       <nav class="site-nav" aria-label="Main">
@@ -72,7 +73,6 @@ const footer = (depth) => {
       <div class="site-footer__grid">
         <div class="site-footer__brand">
           ${logo(depth)}
-          <p>Friendly, honest course guidance from ${site.advisor}. We help you choose a nationally recognised course and the right way to get it.</p>
         </div>
 
         <div>
@@ -114,7 +114,7 @@ const footer = (depth) => {
             <li><a href="${link(depth, 'privacy.html')}">Privacy</a></li>
             <li><a href="${link(depth, 'contact.html')}">Contact</a></li>
           </ul>
-          <a class="powered" href="https://jobgen.ai" rel="noopener">Powered by <strong>jobgen.ai</strong></a>
+          <a class="powered" href="https://jobgen.ai" rel="noopener">Powered by <strong>JOBGEN.AI</strong></a>
         </div>
       </div>
     </div>
@@ -125,8 +125,11 @@ const footer = (depth) => {
 const assistant = (depth) => html`
   <div class="assistant" data-assistant data-root="${link(depth, '')}">
     <button class="assistant__launcher" type="button" aria-expanded="false" aria-controls="assistant-panel" data-assistant-toggle>
-      <span class="assistant__face" aria-hidden="true">${advisorFace(depth)}</span>
+      <span class="assistant__face" aria-hidden="true">${botMark()}</span>
       <span class="assistant__label">Ask a question about courses</span>
+    </button>
+    <button class="assistant__nudge" type="button" tabindex="-1" aria-hidden="true" data-assistant-nudge hidden>
+      <strong>Hi! How can I help?</strong><span>Ask me about courses, RPL or prices</span>
     </button>
     <section class="assistant__panel" id="assistant-panel" role="dialog" aria-label="Course questions assistant" hidden data-assistant-panel></section>
   </div>`;

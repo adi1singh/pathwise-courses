@@ -18,7 +18,7 @@ export const site = {
     phone: null, // e.g. '0400 123 456'
     whatsapp: null, // international format, digits only, e.g. '61400123456'
     email: null, // e.g. 'hello@pathwisecourses.com.au'
-    serviceArea: null, // e.g. 'Based in Melbourne, helping students Australia-wide'
+    serviceArea: 'Sydney', // e.g. 'Based in Melbourne, helping students Australia-wide'
     hours: null, // e.g. 'Mon–Fri 9am–6pm, Sat 10am–2pm (AEST)'
   },
 
@@ -30,6 +30,16 @@ export const site = {
     portrait: 'assets/img/poonam/portrait', // 4:5, -480 / -800
     cutout: 'assets/img/poonam/cutout', // transparent background, 4:5, -520 / -900
     avatar: 'assets/img/poonam/avatar', // square, -96 / -192
+  },
+
+  // Technical partner shown on the About us page (approved by Poonam).
+  // photo: base name of a 4:3 photo of Poonam and Khush, e.g. 'assets/img/partner/poonam-khush'
+  // (the site adds -480.webp / -800.webp). While null, previews show a placeholder.
+  partner: {
+    name: 'JOBGEN.AI',
+    url: 'https://jobgen.ai',
+    photo: null,
+    photoAlt: 'Poonam with Khush from jobgen.ai',
   },
 
   // How quickly Poonam replies to enquiries, e.g. 'within one business day'.

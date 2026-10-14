@@ -204,6 +204,21 @@ test('Pathway Map: an area can be dragged onto the board with a mouse', async ()
   await page.context().close();
 });
 
+test('chat button wears the Pathwise mark and says hello once a visit', async () => {
+  const page = await newPage({ width: 1440, height: 900 });
+  await page.goto(BASE + 'courses.html');
+  assert.equal(await page.locator('.assistant__launcher .assistant__face img').count(), 0, 'no photo of Poonam on the automated assistant');
+  const nudge = page.locator('[data-assistant-nudge]');
+  await nudge.waitFor({ state: 'visible', timeout: 4000 });
+  assert.match(await nudge.textContent(), /How can I help\?/);
+  await nudge.click();
+  assert.ok(await page.getByRole('dialog', { name: 'Course questions assistant' }).isVisible(), 'the bubble opens the chat');
+  await page.goto(BASE + 'index.html');
+  await page.waitForTimeout(2600);
+  assert.equal(await nudge.isVisible(), false, 'only once per visit');
+  await page.context().close();
+});
+
 test('chat assistant answers from site content and closes with Escape', async () => {
   const page = await newPage(undefined, { reducedMotion: 'reduce' });
   await page.goto(BASE + 'courses.html');
@@ -223,11 +238,10 @@ test('chat assistant answers from site content and closes with Escape', async ()
   await page.context().close();
 });
 
-test('student stories: a moving wall that can be paused, samples are labelled', async () => {
+test('student stories: a moving wall that keeps moving under the mouse and can be paused', async () => {
   const page = await newPage();
   await page.goto(BASE + 'index.html');
   const sec = page.locator('[data-wall]');
-  assert.ok(await sec.locator('h2 .tbc').count(), 'placeholder stories are marked To confirm in preview');
   assert.ok((await sec.locator('.wall-card:not([aria-hidden])').count()) >= 4, 'each story is listed once for screen readers');
   const rows = await sec.locator('.wall__rows').boundingBox();
   await page.mouse.move(rows.x + rows.width / 2, rows.y + rows.height / 2); // the cards keep moving, so hover a point
