@@ -3,13 +3,15 @@
 import { chromium } from 'playwright';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { readFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
+import { rocketMark } from '../src/templates/brand.js';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const font = async (f) => `data:font/woff2;base64,${(await readFile(join(root, 'src/assets/fonts', f))).toString('base64')}`;
 const out = join(root, 'src/assets/img');
-// Same mark as the site logo (src/templates/layout.js): a path-shaped P with a spark.
-const mark = (size, radius = 13) => `<svg width="${size}" height="${size}" viewBox="0 0 44 44"><rect width="44" height="44" rx="${radius}" fill="#15201b"/><path d="M12.5 35c0-4.5 3.5-6 3.5-10.5V12h7a7 7 0 0 1 0 14h-3.5" fill="none" stroke="#ff6a3d" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M33 7.5l1.2 2.8 2.8 1.2-2.8 1.2L33 15.5l-1.2-2.8-2.8-1.2 2.8-1.2z" fill="#ffb23f"/></svg>`;
+// Render every exported brand asset from the same rocket geometry.
+const mark = (size, radius = 13) => rocketMark({ size, radius });
+await writeFile(join(out, 'favicon.svg'), rocketMark());
 const fontCss = `
   @font-face { font-family: Geist; src: url(${await font('geist-var-latin.woff2')}); font-weight: 300 800; }
   @font-face { font-family: 'Geist Mono'; src: url(${await font('geist-mono-latin.woff2')}); font-weight: 400 600; }
