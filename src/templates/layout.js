@@ -1,3 +1,4 @@
+import { rocketMark } from './brand.js';
 import { site } from '../data/site.js';
 import { courses } from '../data/courses.js';
 import { esc, html, link, icon, contactLinks, placeholder, tbc } from './helpers.js';
@@ -11,17 +12,12 @@ export const NAV = [
 
 const logo = (depth) => html`
   <a class="logo" href="${link(depth, 'index.html')}" aria-label="${site.name} – home">
-    <svg class="logo__mark" viewBox="0 0 44 44" aria-hidden="true" focusable="false">
-      <rect width="44" height="44" rx="13" fill="var(--logo-bg)"/>
-      <path d="M12.5 35c0-4.5 3.5-6 3.5-10.5V12h7a7 7 0 0 1 0 14h-3.5" fill="none" stroke="var(--coral)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M33 7.5l1.2 2.8 2.8 1.2-2.8 1.2L33 15.5l-1.2-2.8-2.8-1.2 2.8-1.2z" fill="var(--saffron)"/>
-    </svg>
+    ${rocketMark({ className: 'logo__mark', background: 'var(--logo-bg)' })}
     <span class="logo__text"><span>Path<em>wise</em></span><span class="logo__sub">Courses</span></span>
   </a>`;
 
 // The chat assistant is automated, so it wears the Pathwise mark, not Poonam's photo.
-const botMark = () =>
-  `<svg viewBox="0 0 44 44" focusable="false"><rect width="44" height="44" fill="#15201b"/><path d="M12.5 35c0-4.5 3.5-6 3.5-10.5V12h7a7 7 0 0 1 0 14h-3.5" fill="none" stroke="#ff6a3d" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M33 7.5l1.2 2.8 2.8 1.2-2.8 1.2L33 15.5l-1.2-2.8-2.8-1.2 2.8-1.2z" fill="#ffb23f"/></svg>`;
+const botMark = () => rocketMark({ radius: 0 });
 
 const header = (depth, active) => html`
   <header class="site-header" data-header>
