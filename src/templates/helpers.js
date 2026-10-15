@@ -21,12 +21,8 @@ export const html = (strings, ...values) =>
 // works from any sub-path (GitHub Pages project sites) and from file://.
 export const link = (depth, target) => '../'.repeat(depth) + target;
 
-// Amber marker shown next to details that still need Poonam's confirmation.
-// Renders nothing once site.draft is false.
-export const tbc = (note = 'Needs confirming before launch') =>
-  site.draft
-    ? `<span class="tbc" title="${esc(note)}"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: ${esc(note)}</span></span>`
-    : '';
+// Confirmation notes stay in source data, out of visitor-facing pages.
+export const tbc = () => '';
 
 const ICONS = {
   'arrow-right': '<path d="M5 12h14M13 6l6 6-6 6"/>',

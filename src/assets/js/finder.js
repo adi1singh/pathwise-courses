@@ -17,9 +17,7 @@
   const config = (() => { try { return JSON.parse($('#site-config').textContent); } catch { return {}; } })();
   const data = JSON.parse($('#finder-data').textContent);
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const draftMark = config.draft
-    ? ' <span class="tbc" title="Typical figure – confirm with the delivering RTO"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: typical figure</span></span>'
-    : '';
+  const draftMark = '';
 
   const form = $('[data-finder-form]', root);
   const results = $('[data-finder-results]', root);

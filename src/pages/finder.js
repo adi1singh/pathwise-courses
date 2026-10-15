@@ -47,6 +47,7 @@ export default function finder() {
         <h1>Find the course that <em>fits you.</em></h1>
         <p class="lead">Tell us what interests you and where you’re at. You’ll see suggested courses, and why they may fit, before we ask for any contact details.</p>
         <a class="btn btn--sun btn--lg" href="#finder-start">Start the questions ${icon('arrow-right')}</a>
+        <p><a class="powered" href="https://jobgen.ai" rel="noopener">Powered by <strong>JOBGEN.AI</strong></a></p>
       </div>
       <div class="reel" aria-hidden="true">
         <div class="reel__col">${col(reel.slice(0, 4))}</div>

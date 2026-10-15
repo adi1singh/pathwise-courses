@@ -15,7 +15,6 @@ export function privacy() {
   })}
   <section class="section section--tight">
     <div class="container narrow prose">
-      ${site.draft ? html`<div class="notice notice--warn">${icon('alert')}<p><strong>Draft for review.</strong> This notice is a plain-language starting point, not legal advice. Poonam should check it matches how she actually handles information (including the form provider and any CRM she uses) before launch. ${tbc('Review privacy notice before launch')}</p></div>` : ''}
 
       <h2>What we collect</h2>
       <p>When you send an enquiry or complete the eligibility check, we collect the details you enter – such as your name, email, phone number, state, the course you’re interested in, and information about your work experience and qualifications.</p>

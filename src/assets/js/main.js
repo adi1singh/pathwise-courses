@@ -10,6 +10,24 @@
   const config = (() => {
     try { return JSON.parse($('#site-config')?.textContent || '{}'); } catch { return {}; }
   })();
+  // Animate each workforce total once, leaving the full value for assistive technology.
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const counts = new IntersectionObserver((entries) => {
+      entries.filter((entry) => entry.isIntersecting).forEach(({ target }) => {
+        counts.unobserve(target);
+        const total = Number(target.dataset.count);
+        const start = performance.now();
+        const frame = (now) => {
+          const progress = Math.min(1, (now - start) / 1200);
+          target.textContent = Math.round(total * (1 - (1 - progress) ** 3)).toLocaleString('en-AU');
+          if (progress < 1) requestAnimationFrame(frame);
+        };
+        requestAnimationFrame(frame);
+      });
+    }, { threshold: 0.6 });
+    $$('[data-count]').forEach((number) => counts.observe(number));
+  }
+
   const params = new URLSearchParams(location.search);
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const store = {

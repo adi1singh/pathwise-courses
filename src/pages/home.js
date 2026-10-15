@@ -8,15 +8,6 @@ import { priceFrom, pricesCheckedOn, typicalPrices, money } from '../data/prices
 import { html, link, icon, tbc, esc } from '../templates/helpers.js';
 import { faqList, areaCard, advisorAvatar, advisorPortrait, searchFields, photo } from '../templates/components.js';
 
-const POPULAR = [
-  ['Aged care', 'aged care'],
-  ['Childcare', 'childcare'],
-  ['Teacher aide', 'teacher aide'],
-  ['Disability (NDIS)', 'disability'],
-  ['Trainer (TAE)', 'tae'],
-  ['First aid', 'first aid'],
-];
-
 // Course data for the hero search suggestions (same ranking fields as the
 // course catalogue).
 const searchData = (depth) =>
@@ -32,18 +23,12 @@ const searchData = (depth) =>
     }))
   ).replace(/</g, '\\u003c');
 
-// Full-width video hero. Phones, reduced-motion and data-saver visitors get the
-// still poster; the video is attached by script only on larger screens.
+// A quiet hero centred on course search and Poonam’s portrait.
 const hero = (d) => html`
   <section class="hero" aria-labelledby="hero-title">
-    <div class="hero__media" aria-hidden="true">
-      <img class="hero__poster" src="assets/video/hero-poster-768.webp" srcset="assets/video/hero-poster-768.webp 768w, assets/video/hero-poster.webp 1280w" sizes="100vw" width="1280" height="720" alt="" fetchpriority="high">
-      <video class="hero__video" muted loop playsinline preload="none" data-hero-video data-src="assets/video/hero.mp4" data-src-webm="assets/video/hero.webm"></video>
-    </div>
     <div class="container hero__inner">
       <div class="hero__text">
         <h1 id="hero-title">Find the course that <em>moves your career forward</em></h1>
-        <p class="hero__lead">Search ${courses.length} nationally recognised courses.</p>
 
         <form class="hero-search" action="courses.html" method="get" role="search" aria-label="Search courses" data-hero-search>
           <div class="hero-search__box">
@@ -61,11 +46,8 @@ const hero = (d) => html`
           <p class="visually-hidden" aria-live="polite" data-hero-status></p>
           <script type="application/json" data-hero-data>${searchData(d)}</script>
         </form>
+        <a class="powered powered--hero" href="https://jobgen.ai" rel="noopener">Powered by <strong>JOBGEN.AI</strong></a>
 
-        <p class="hero__popular">
-          <span>Popular:</span>
-          ${POPULAR.slice(0, 4).map(([label, q]) => `<a href="courses.html?q=${encodeURIComponent(q)}">${label}</a>`).join('')}
-        </p>
         <p class="hero__finder-link">Not sure what to search for? <a href="course-finder.html">Answer 4 quick questions ${icon('arrow-right')}</a></p>
       </div>
 
@@ -79,9 +61,6 @@ const hero = (d) => html`
         </figcaption>
       </figure>
     </div>
-    <button class="hero__pause" type="button" aria-pressed="false" hidden data-hero-pause>
-      <span class="hero__pause-icon" aria-hidden="true"></span><span data-hero-pause-label>Pause video</span>
-    </button>
   </section>`;
 
 const guideStrip = (d) => html`
@@ -305,7 +284,8 @@ const whyMatters = () => html`
       <ul class="demand__grid" role="list">
         ${facts.map(
           (f) => html`<li class="demand__item" style="--acc:var(--c-${f.area})">
-            <p class="demand__stat">${f.stat}</p>
+            <p class="demand__intro">Victoria needs</p>
+            <p class="demand__stat"><span class="visually-hidden">${f.stat}</span><span aria-hidden="true" data-count="${f.stat.replaceAll(',', '')}">${f.stat}</span></p>
             <p class="demand__label">${f.label}</p>
             <p class="demand__source">Source: <a href="${f.url}" rel="noopener">${esc(f.source)}</a></p>
           </li>`
@@ -366,7 +346,7 @@ export default function home() {
     title: '',
     bodyClass: 'page-home',
     description: `Personal course guidance from ${site.advisor}. Search nationally recognised courses in care, early childhood, training, leadership and building, see typical prices, and find the best way to get qualified.`,
-    head: `<link rel="preload" as="image" href="assets/video/hero-poster-768.webp" imagesrcset="assets/video/hero-poster-768.webp 768w, assets/video/hero-poster.webp 1280w" imagesizes="100vw" fetchpriority="high">`,
+
     body,
   };
 }
