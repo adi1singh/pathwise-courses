@@ -36,7 +36,6 @@ export default function about() {
         <h2 id="story-title">Why I do this ${tbc('Poonam to write her own story – this is placeholder text')}</h2>
         <p>Choosing a course can feel overwhelming. There are hundreds of providers, unfamiliar codes and plenty of sales pressure. I started ${site.name} to make that simpler.</p>
         <p>Many of the people I speak with already do skilled work in aged care, disability support, childcare and other fields, but don’t yet hold the qualification to prove it. Others are starting fresh and want to know the quickest sensible route into a new career. Either way, my job is to help you make a good decision – and then make the process as smooth as possible.</p>
-        <p class="placeholder-note">[Placeholder – replace with Poonam’s background: her own work or study experience, how long she has been helping students, languages she speaks, and where she is based.]</p>
       </div>
     </div>
   </section>
@@ -127,28 +126,9 @@ export default function about() {
   </section>
 
   <section class="section section--navy partner" aria-labelledby="partner-title">
-    <div class="container partner__inner${site.partner.photo || site.draft ? '' : ' partner__inner--text'}">
-      ${site.partner.photo
-        ? html`<figure class="partner__photo">
-            <img src="${site.partner.photo}-480.webp" srcset="${site.partner.photo}-480.webp 480w, ${site.partner.photo}-800.webp 800w" sizes="(min-width: 900px) 520px, 92vw" width="480" height="360" alt="${esc(site.partner.photoAlt)}" loading="lazy" decoding="async">
-            <figcaption>${esc(site.partner.photoAlt)}</figcaption>
-          </figure>`
-        : site.draft
-          ? html`<figure class="partner__photo partner__photo--placeholder">
-              <div class="partner__initials" aria-hidden="true"><span>P</span><span class="partner__plus">+</span><span>K</span></div>
-              <figcaption>Photo of Poonam and Khush ${tbc('Add the photo of Poonam and Khush')}</figcaption>
-            </figure>`
-          : ''}
+    <div class="container partner__inner partner__inner--text">
       <div class="partner__text">
-        <p class="eyebrow">Technical partner</p>
-        <h2 id="partner-title">Built with <span class="partner__brand">${esc(site.partner.name)}</span></h2>
-        <p class="lead">${site.name} works with jobgen.ai, our technical partner. ${p} brings the course knowledge and the personal guidance; jobgen.ai brings the technology behind it.</p>
-        <ul class="partner__list" role="list">
-          <li>${icon('laptop')}<span>This website</span></li>
-          <li>${icon('compass')}<span>The course finder</span></li>
-          <li>${icon('chat')}<span>The course questions assistant</span></li>
-        </ul>
-        <a class="btn btn--sun btn--lg" href="${site.partner.url}" rel="noopener">Visit jobgen.ai ${icon('external')}</a>
+        <h2 id="partner-title">Built with <a class="partner__brand" href="https://jobgen.ai" rel="noopener">JOBGEN.AI</a></h2>
       </div>
     </div>
   </section>

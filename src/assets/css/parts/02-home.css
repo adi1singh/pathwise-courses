@@ -75,7 +75,7 @@
 .hero__finder-link a:hover { text-decoration: underline; }
 .hero__finder-link .icon { width: 1em; height: 1em; }
 .hero :focus-visible { box-shadow: 0 0 0 3px var(--night), 0 0 0 5px var(--saffron); }
-.hero-guide { position: relative; isolation: isolate; margin: 0; align-self: end; justify-self: center; height: min(54svh, 500px); aspect-ratio: 4 / 5; max-width: 100%; }
+.hero-guide { position: relative; isolation: isolate; margin: 0; align-self: end; justify-self: center; height: min(64svh, 600px); aspect-ratio: 4 / 5; max-width: 100%; }
 .hero-guide::before { content: ''; position: absolute; z-index: -1; left: 50%; bottom: 4%; width: 92%; aspect-ratio: 1; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(circle at 50% 45%, rgba(255, 178, 63, 0.5) 0%, rgba(255, 106, 61, 0.35) 42%, rgba(255, 106, 61, 0) 70%); }
 .hero-guide__photo { display: block; width: 100%; height: 100%; object-fit: contain; object-position: bottom; -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%); }
 .hero-guide__initial { display: grid; place-items: center; height: 100%; font-family: var(--font-serif); font-style: italic; font-size: 12rem; color: var(--saffron); }
@@ -114,7 +114,7 @@
 }
 
 /* Job band: smaller, sits at the bottom of the first screen */
-.job-band { overflow: hidden; background: var(--coral); color: var(--ink); padding-block: 0.7rem; }
+.job-band { overflow: hidden; background: #ffb398; color: var(--ink); padding-block: 0.7rem; }
 .job-band__track { list-style: none; margin: 0; padding: 0; display: flex; width: max-content; }
 .job-band__track li { display: flex; align-items: center; gap: 1.1rem; padding-right: 1.1rem; white-space: nowrap; font-weight: 600; font-size: clamp(1rem, 0.85rem + 0.6vw, 1.35rem); letter-spacing: -0.025em; line-height: 1.2; }
 .job-band__track li:nth-child(even) { font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: clamp(1.1rem, 0.95rem + 0.65vw, 1.5rem); letter-spacing: -0.01em; }
@@ -469,3 +469,10 @@ html:not(.js) .pmap__panel + .pmap__panel { margin-top: 2.5rem; }
 .video-card figcaption strong { color: #fff; }
 .video-card figcaption span { font-size: 0.85rem; color: var(--on-night-muted); }
 .watch__note { margin: 1rem 0 0; font-size: 0.8125rem; color: var(--on-night-muted); }
+
+/* A quieter hero with a warm, diffused search glow. */
+.hero-search__box { box-shadow: 0 0 55px 15px rgba(255, 160, 105, 0.22), 0 18px 45px -18px rgba(0,0,0,0.6); }
+.powered--hero { display: inline-block; margin-top: 1rem; color: var(--on-night-muted); }
+.demand__intro { margin: 0 0 0.4rem; font-size: 0.95rem; color: var(--on-night-muted); }
+.demand__stat { font-variant-numeric: tabular-nums; }
+@media (min-width: 900px) { .hero__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
