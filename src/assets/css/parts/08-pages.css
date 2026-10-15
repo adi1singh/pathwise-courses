@@ -194,17 +194,50 @@ html:not(.js) .form-step + .form-step { padding-top: 1.5rem; border-top: 1px sol
 
 @media (max-width: 419.98px) { .btn { white-space: normal; text-align: center; } }
 
-/* ── Technical partner (About us) ───────────────────────────────────────── */
-.partner__inner { display: grid; gap: clamp(2rem, 1rem + 4vw, 4.5rem); align-items: center; }
-@media (min-width: 900px) { .partner__inner { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); } .partner__inner--text { grid-template-columns: minmax(0, 1fr); max-width: 48rem; } }
-.partner__photo { position: relative; margin: 0 1.25rem 1.25rem 0; }
-.partner__photo::before { content: ''; position: absolute; z-index: 0; inset: 1.25rem -1.25rem -1.25rem 1.25rem; border-radius: var(--radius-xl); background: var(--coral); }
-.partner__photo img, .partner__initials { position: relative; z-index: 1; width: 100%; aspect-ratio: 4 / 3; border-radius: var(--radius-xl); object-fit: cover; }
-.partner__photo figcaption { position: absolute; z-index: 2; left: 1rem; bottom: 1rem; display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 0.95rem; border-radius: 999px; background: var(--card); color: var(--ink); font-size: 0.875rem; font-weight: 560; box-shadow: var(--shadow); }
-.partner__initials { display: flex; align-items: center; justify-content: center; gap: 1rem; background: var(--night-2); border: 1.5px dashed var(--line-night); font-family: var(--font-serif); font-style: italic; font-size: clamp(4rem, 3rem + 4vw, 7rem); color: var(--saffron); }
-.partner__plus { font-family: var(--font-sans); font-style: normal; font-size: 0.45em; color: var(--on-night-muted); }
-.partner__brand { display: inline-block; padding: 0 0.2em; border-radius: 0.18em; background: var(--saffron); color: var(--ink); letter-spacing: -0.03em; }
-.partner__list { list-style: none; margin: 1.5rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-.partner__list li { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.45rem 0.9rem; border-radius: 999px; background: rgba(255, 255, 255, 0.07); border: 1px solid var(--line-night); color: #fff; font-size: 0.925rem; font-weight: 550; }
-.partner__list .icon { width: 1.05em; height: 1.05em; color: var(--saffron); }
-.partner .btn { margin-top: 1.75rem; }
+/* ── JOBGEN signature (About us) ───────────────────────────────────────── */
+.partner { background: var(--paper); }
+.partner-card {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+  padding: clamp(2rem, 5vw, 4.5rem); border: 1px solid rgba(255, 178, 108, 0.2);
+  border-radius: 32px; background: #101c18; color: #fff; text-decoration: none;
+  box-shadow: 0 24px 55px -35px rgba(14, 21, 18, 0.65);
+}
+.partner-card::before {
+  content: ''; position: absolute; z-index: -2; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 95% 75%, rgba(255, 148, 83, 0.3), transparent 58%),
+    radial-gradient(ellipse at 70% 5%, rgba(255, 199, 119, 0.09), transparent 55%);
+}
+.partner-card::after {
+  content: ''; position: absolute; z-index: -1; inset: 0; pointer-events: none; opacity: 0.16;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.5) 0.7px, transparent 0.7px);
+  background-size: 18px 18px; mask-image: linear-gradient(90deg, transparent 25%, #000);
+}
+.partner-card__orbit {
+  position: absolute; z-index: -1; width: 560px; height: 560px; right: -180px; top: -115px;
+  border: 1px solid rgba(255, 192, 143, 0.17); border-radius: 50%; pointer-events: none;
+  box-shadow: 0 0 0 55px rgba(255, 192, 143, 0.035), 0 0 0 110px rgba(255, 192, 143, 0.025);
+}
+.partner-card__content { min-width: 0; }
+.partner-card__spark { display: inline-grid; place-items: center; width: 42px; height: 42px; margin-bottom: 1.4rem; border: 1px solid rgba(255, 178, 108, 0.35); border-radius: 13px; color: #ffb587; font-size: 1.8rem; line-height: 1; }
+.partner-card h2 { margin: 0; color: #fff; }
+.partner-card__label { display: block; margin-bottom: 0.5rem; font-family: var(--font-serif); font-size: clamp(1.6rem, 2.8vw, 2.3rem); font-style: italic; font-weight: 400; letter-spacing: -0.02em; color: #d9d8cf; }
+.partner-card__brand { display: block; font-family: var(--font-sans); font-size: clamp(2.4rem, 7.4vw, 6.2rem); font-weight: 650; line-height: 1.05; letter-spacing: -0.065em; white-space: nowrap; }
+.partner-card__brand > span { color: #ffb587; }
+.partner-card p { margin: 1rem 0 0; color: #d4d6cf; font-size: clamp(0.875rem, 1.5vw, 1.05rem); }
+.partner-card__arrow { display: grid; place-items: center; flex: none; width: clamp(48px, 7vw, 88px); height: clamp(48px, 7vw, 88px); border-radius: 50%; background: #ffb587; color: #101c18; }
+.partner-card__arrow .icon { width: 38%; height: 38%; }
+.partner-card:focus-visible { outline: 3px solid var(--coral-ink); outline-offset: 6px; }
+@media (prefers-reduced-motion: no-preference) {
+  .partner-card, .partner-card__arrow, .partner-card__spark { transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease); }
+  .partner-card:hover { transform: translateY(-4px); box-shadow: 0 30px 60px -30px rgba(14, 21, 18, 0.5); }
+  .partner-card:hover .partner-card__arrow { transform: rotate(8deg); }
+  .partner-card:hover .partner-card__spark { transform: rotate(35deg); }
+}
+@media (max-width: 559.98px) {
+  .partner-card { padding: 1.75rem 1.25rem; border-radius: 24px; gap: 0.75rem; align-items: flex-end; }
+  .partner-card__brand { font-size: clamp(2rem, 8vw, 2.8rem); }
+  .partner-card__arrow { width: 40px; height: 40px; margin-bottom: 0.1rem; }
+  .partner-card p { max-width: 22ch; }
+  .partner-card__orbit { right: -390px; }
+}

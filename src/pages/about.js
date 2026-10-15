@@ -125,11 +125,17 @@ export default function about() {
     </div>
   </section>
 
-  <section class="section section--navy partner" aria-labelledby="partner-title">
-    <div class="container partner__inner partner__inner--text">
-      <div class="partner__text">
-        <h2 id="partner-title">Built with <a class="partner__brand" href="https://jobgen.ai" rel="noopener">JOBGEN.AI</a></h2>
-      </div>
+  <section class="section partner" aria-labelledby="partner-title">
+    <div class="container">
+      <a class="partner-card" href="https://jobgen.ai" rel="noopener">
+        <span class="partner-card__orbit" aria-hidden="true"></span>
+        <div class="partner-card__content">
+          <span class="partner-card__spark" aria-hidden="true">✳</span>
+          <h2 id="partner-title"><span class="partner-card__label">Built with</span><span class="partner-card__brand">JOBGEN<span>.AI</span></span></h2>
+          <p>Technology that moves you forward.</p>
+        </div>
+        <span class="partner-card__arrow" aria-hidden="true">${icon('external')}</span>
+      </a>
     </div>
   </section>
 
