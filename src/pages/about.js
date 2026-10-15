@@ -125,10 +125,29 @@ export default function about() {
     </div>
   </section>
 
-  <section class="section section--navy partner" aria-labelledby="partner-title">
-    <div class="container partner__inner partner__inner--text">
-      <div class="partner__text">
-        <h2 id="partner-title">Built with <a class="partner__brand" href="https://jobgen.ai" rel="noopener">JOBGEN.AI</a></h2>
+  <section class="section partner" aria-labelledby="partner-title">
+    <div class="container">
+      <div class="partner-card">
+        <span class="partner-card__orbit" aria-hidden="true"></span>
+        <div class="partner-card__intro">
+          <p class="partner-card__label"><span aria-hidden="true">✳</span> Our technology partner</p>
+          <h2 id="partner-title"><a class="partner-card__brand" href="https://jobgen.ai" rel="noopener">JOBGEN<span>.AI</span></a></h2>
+          <h3>Human expertise.<br><em>Smarter technology.</em></h3>
+          <p class="partner-card__copy">JOBGEN.AI brings websites, AI assistants and business automation together—helping businesses answer enquiries, connect with customers and grow.</p>
+          <ul class="partner-card__services" role="list">
+            <li>${icon('laptop')} Websites</li>
+            <li>${icon('chat')} AI assistants</li>
+            <li>${icon('zap')} Automation</li>
+          </ul>
+          <div class="partner-card__actions">
+            <a class="partner-card__primary" href="https://jobgen.ai" rel="noopener">Explore JOBGEN.AI ${icon('arrow-right')}</a>
+            <a class="partner-card__social" href="https://www.linkedin.com/company/jobgenai/" rel="noopener"><span class="partner-card__linkedin" aria-hidden="true">in</span> Follow on LinkedIn ${icon('external')}</a>
+          </div>
+        </div>
+        <figure class="partner-card__photo">
+          <img src="assets/img/partner/partnership-handshake-720.jpg" srcset="assets/img/partner/partnership-handshake-720.jpg 720w, assets/img/partner/partnership-handshake-1440.jpg 1440w" sizes="(min-width: 1000px) 600px, 90vw" width="1440" height="960" alt="AI-created portrait of Poonam and Kush shaking hands against a shared dark green and amber background" loading="lazy" decoding="async">
+          <figcaption><span><strong>Poonam × Kush</strong><span>Pathwise Courses × JOBGEN.AI</span></span><small>AI-created portrait</small></figcaption>
+        </figure>
       </div>
     </div>
   </section>

@@ -570,6 +570,4 @@ body.tray-open .assistant { bottom: 5.5rem; }
 .courses-nav__menu a { display: block; color: var(--ink) !important; }
 .courses-nav__menu a:hover { background: var(--paper) !important; color: var(--ink) !important; }
 .powered { font-size: 1rem; }
-.partner__brand { color: inherit; text-underline-offset: 0.18em; }
-.partner__text h2 { font-size: clamp(2.5rem, 5vw, 5rem); }
 @media (min-width: 1080px) { .courses-nav__menu { position: absolute; top: 100%; left: 0; z-index: 40; } }
