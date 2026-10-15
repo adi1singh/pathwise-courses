@@ -127,15 +127,25 @@ export default function about() {
 
   <section class="section partner" aria-labelledby="partner-title">
     <div class="container">
-      <a class="partner-card" href="https://jobgen.ai" rel="noopener">
+      <div class="partner-card">
         <span class="partner-card__orbit" aria-hidden="true"></span>
-        <div class="partner-card__content">
+        <a class="partner-card__link" href="https://jobgen.ai" rel="noopener">
           <span class="partner-card__spark" aria-hidden="true">✳</span>
           <h2 id="partner-title"><span class="partner-card__label">Built with</span><span class="partner-card__brand">JOBGEN<span>.AI</span></span></h2>
           <p>Technology that moves you forward.</p>
+          <span class="partner-card__arrow" aria-hidden="true">${icon('external')}</span>
+        </a>
+        <div class="partner-card__people">
+          <figure class="partner-person">
+            <img src="assets/img/partner/poonam-360.jpg" srcset="assets/img/partner/poonam-360.jpg 360w, assets/img/partner/poonam-720.jpg 720w" sizes="(min-width: 1000px) 250px, (min-width: 700px) 32vw, 40vw" width="360" height="360" alt="Poonam" loading="lazy" decoding="async">
+            <figcaption><strong>Poonam</strong><span>Pathwise Courses</span></figcaption>
+          </figure>
+          <figure class="partner-person">
+            <img src="assets/img/partner/kush-360.jpg" srcset="assets/img/partner/kush-360.jpg 360w, assets/img/partner/kush-720.jpg 720w" sizes="(min-width: 1000px) 250px, (min-width: 700px) 32vw, 40vw" width="360" height="353" alt="Kush" loading="lazy" decoding="async">
+            <figcaption><strong>Kush</strong><span>JOBGEN.AI</span></figcaption>
+          </figure>
         </div>
-        <span class="partner-card__arrow" aria-hidden="true">${icon('external')}</span>
-      </a>
+      </div>
     </div>
   </section>
 

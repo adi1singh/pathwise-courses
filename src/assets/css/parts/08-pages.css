@@ -198,7 +198,7 @@ html:not(.js) .form-step + .form-step { padding-top: 1.5rem; border-top: 1px sol
 .partner { background: var(--paper); }
 .partner-card {
   position: relative; isolation: isolate; overflow: hidden;
-  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+  display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); align-items: center; gap: clamp(2rem, 4vw, 4rem);
   padding: clamp(2rem, 5vw, 4.5rem); border: 1px solid rgba(255, 178, 108, 0.2);
   border-radius: 32px; background: #101c18; color: #fff; text-decoration: none;
   box-shadow: 0 24px 55px -35px rgba(14, 21, 18, 0.65);
@@ -218,26 +218,40 @@ html:not(.js) .form-step + .form-step { padding-top: 1.5rem; border-top: 1px sol
   border: 1px solid rgba(255, 192, 143, 0.17); border-radius: 50%; pointer-events: none;
   box-shadow: 0 0 0 55px rgba(255, 192, 143, 0.035), 0 0 0 110px rgba(255, 192, 143, 0.025);
 }
-.partner-card__content { min-width: 0; }
+.partner-card__link { display: block; min-width: 0; color: #fff; text-decoration: none; border-radius: 12px; }
 .partner-card__spark { display: inline-grid; place-items: center; width: 42px; height: 42px; margin-bottom: 1.4rem; border: 1px solid rgba(255, 178, 108, 0.35); border-radius: 13px; color: #ffb587; font-size: 1.8rem; line-height: 1; }
 .partner-card h2 { margin: 0; color: #fff; }
 .partner-card__label { display: block; margin-bottom: 0.5rem; font-family: var(--font-serif); font-size: clamp(1.6rem, 2.8vw, 2.3rem); font-style: italic; font-weight: 400; letter-spacing: -0.02em; color: #d9d8cf; }
-.partner-card__brand { display: block; font-family: var(--font-sans); font-size: clamp(2.4rem, 7.4vw, 6.2rem); font-weight: 650; line-height: 1.05; letter-spacing: -0.065em; white-space: nowrap; }
+.partner-card__brand { display: block; font-family: var(--font-sans); font-size: clamp(2.4rem, 4.4vw, 4.3rem); font-weight: 650; line-height: 1.05; letter-spacing: -0.065em; white-space: nowrap; }
 .partner-card__brand > span { color: #ffb587; }
 .partner-card p { margin: 1rem 0 0; color: #d4d6cf; font-size: clamp(0.875rem, 1.5vw, 1.05rem); }
-.partner-card__arrow { display: grid; place-items: center; flex: none; width: clamp(48px, 7vw, 88px); height: clamp(48px, 7vw, 88px); border-radius: 50%; background: #ffb587; color: #101c18; }
+.partner-card__arrow { display: grid; place-items: center; flex: none; width: clamp(48px, 7vw, 88px); height: clamp(48px, 7vw, 88px); border-radius: 50%; background: #ffb587; color: #101c18; margin-top: 1.5rem; }
 .partner-card__arrow .icon { width: 38%; height: 38%; }
-.partner-card:focus-visible { outline: 3px solid var(--coral-ink); outline-offset: 6px; }
+.partner-card__link:focus-visible { outline: 3px solid var(--coral-ink); outline-offset: 6px; }
 @media (prefers-reduced-motion: no-preference) {
   .partner-card, .partner-card__arrow, .partner-card__spark { transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease); }
   .partner-card:hover { transform: translateY(-4px); box-shadow: 0 30px 60px -30px rgba(14, 21, 18, 0.5); }
   .partner-card:hover .partner-card__arrow { transform: rotate(8deg); }
   .partner-card:hover .partner-card__spark { transform: rotate(35deg); }
 }
+.partner-card__people { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(0.75rem, 1.5vw, 1.25rem); align-items: start; }
+.partner-person { margin: 0; min-width: 0; }
+.partner-person:first-child { margin-top: 1.75rem; }
+.partner-person img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 30%; border: 1px solid rgba(255, 212, 183, 0.3); border-radius: 20px; box-shadow: 0 16px 32px -20px rgba(0, 0, 0, 0.6); }
+.partner-person figcaption { display: grid; gap: 0.15rem; padding: 0.85rem 0.15rem 0; }
+.partner-person strong { color: #fff; font-size: 1.05rem; font-weight: 600; }
+.partner-person figcaption span { color: #d4d6cf; font-size: 0.75rem; letter-spacing: 0.035em; }
+@media (max-width: 899.98px) {
+  .partner-card { grid-template-columns: minmax(0, 1fr); }
+  .partner-card__brand { font-size: clamp(2.4rem, 7vw, 4.3rem); }
+  .partner-card__people { width: 100%; max-width: 520px; justify-self: center; }
+  .partner-card__arrow { width: 48px; height: 48px; }
+}
 @media (max-width: 559.98px) {
-  .partner-card { padding: 1.75rem 1.25rem; border-radius: 24px; gap: 0.75rem; align-items: flex-end; }
-  .partner-card__brand { font-size: clamp(2rem, 8vw, 2.8rem); }
-  .partner-card__arrow { width: 40px; height: 40px; margin-bottom: 0.1rem; }
-  .partner-card p { max-width: 22ch; }
+  .partner-card { padding: 1.75rem 1.25rem; border-radius: 24px; gap: 1.5rem; }
+  .partner-card__brand { font-size: clamp(2.4rem, 10vw, 3.4rem); }
   .partner-card__orbit { right: -390px; }
+  .partner-person img { border-radius: 14px; }
+  .partner-person strong { font-size: 1rem; }
+  .partner-person figcaption span { font-size: 0.6875rem; }
 }
