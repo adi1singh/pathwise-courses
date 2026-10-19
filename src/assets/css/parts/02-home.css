@@ -471,7 +471,8 @@ html:not(.js) .pmap__panel + .pmap__panel { margin-top: 2.5rem; }
 .watch__note { margin: 1rem 0 0; font-size: 0.8125rem; color: var(--on-night-muted); }
 
 /* ── Instagram reels: phone-shaped cards at the end of the page ─────────── */
-.reels { --ig: linear-gradient(45deg, #feda75, #fa7e1e 30%, #d62976 60%, #962fbf 85%, #4f5bd5); background: var(--blush); overflow: hidden; }
+.reels { --ig: linear-gradient(45deg, #feda75, #fa7e1e 30%, #d62976 60%, #962fbf 85%, #4f5bd5); background: var(--blush); overflow: hidden; overflow: clip; }
+.reels__row { contain: paint; }
 .reels__head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem 2rem; margin-bottom: clamp(1.75rem, 1.2rem + 2vw, 2.75rem); }
 .reels__head > div { max-width: 44rem; }
 .reels h2 { font-size: clamp(2.2rem, 1.4rem + 3vw, 3.9rem); margin-bottom: 0.3em; }
