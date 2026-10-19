@@ -32,6 +32,19 @@ export const site = {
     avatar: 'assets/img/poonam/avatar', // square, -96 / -192
   },
 
+  // Instagram reels shown at the bottom of the home page. Paste the link of each
+  // public reel (from Instagram's Share > Copy link) with a short title and the
+  // course area it relates to (care, education, training, business, construction,
+  // firstaid). Use reels from Pathwise's own account or ones you have permission to
+  // feature. `handle` adds a "Follow on Instagram" button. With no reels, preview
+  // builds show placeholder cards and the live site hides the section.
+  instagram: {
+    handle: null, // e.g. 'pathwisecourses'
+    reels: [
+      // { url: 'https://www.instagram.com/reel/XXXXXXXXXXX/', title: 'A day in aged care', area: 'care' },
+    ],
+  },
+
   // Technical partner shown on the About us page (approved by Poonam).
   // photo: base name of a 4:3 photo of Poonam and Khush, e.g. 'assets/img/partner/poonam-khush'
   // (the site adds -480.webp / -800.webp). While null, previews show a placeholder.

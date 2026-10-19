@@ -256,6 +256,20 @@ test('student stories: a moving wall that keeps moving under the mouse and can b
   await page.context().close();
 });
 
+test('Instagram reels: a section at the end of the home page that loads nothing from Instagram until asked', async () => {
+  const page = await newPage({ width: 1440, height: 900 });
+  const igRequests = [];
+  page.on('request', (r) => { if (/instagram\.com|cdninstagram/.test(r.url())) igRequests.push(r.url()); });
+  await page.goto(BASE + 'index.html');
+  const sec = page.locator('.reels');
+  await sec.scrollIntoViewIfNeeded();
+  assert.ok(await sec.getByRole('heading', { name: /See the work/ }).isVisible());
+  assert.ok((await sec.locator('.reel-card').count()) >= 1);
+  assert.equal(await page.locator('main > :last-child').evaluate((el) => el.classList.contains('reels')), true, 'reels are the last section on the page');
+  assert.equal(igRequests.length, 0, 'no requests to Instagram before play');
+  await page.context().close();
+});
+
 /* ── Search, filters and comparison ────────────────────────────────────── */
 
 test('search understands everyday words and ranks the best matches first', async () => {

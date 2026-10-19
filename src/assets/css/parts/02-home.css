@@ -469,3 +469,40 @@ html:not(.js) .pmap__panel + .pmap__panel { margin-top: 2.5rem; }
 .video-card figcaption strong { color: #fff; }
 .video-card figcaption span { font-size: 0.85rem; color: var(--on-night-muted); }
 .watch__note { margin: 1rem 0 0; font-size: 0.8125rem; color: var(--on-night-muted); }
+
+/* ── Instagram reels: phone-shaped cards at the end of the page ─────────── */
+.reels { --ig: linear-gradient(45deg, #feda75, #fa7e1e 30%, #d62976 60%, #962fbf 85%, #4f5bd5); background: var(--blush); overflow: hidden; }
+.reels__head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem 2rem; margin-bottom: clamp(1.75rem, 1.2rem + 2vw, 2.75rem); }
+.reels__head > div { max-width: 44rem; }
+.reels h2 { font-size: clamp(2.2rem, 1.4rem + 3vw, 3.9rem); margin-bottom: 0.3em; }
+.reels .lead { margin: 0; color: var(--text); }
+.reels .eyebrow::before { display: none; }
+.reels__ig { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 8px; background: var(--ig); color: #fff; }
+.reels__ig .icon { width: 16px; height: 16px; }
+.reels__row { list-style: none; margin: 0 -8px; padding: 0.75rem 8px 1rem; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(240px, 1fr); gap: clamp(1rem, 0.6rem + 1.2vw, 1.5rem); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.reels__row::-webkit-scrollbar { display: none; }
+@media (max-width: 899.98px) { .reels__row { grid-auto-columns: min(68vw, 280px); margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); } }
+.reel-card { scroll-snap-align: start; display: grid; gap: 0.75rem; }
+.reel-card__frame {
+  position: relative; isolation: isolate; aspect-ratio: 9 / 16; overflow: hidden; border-radius: 28px; background: var(--night);
+  box-shadow: 0 0 0 6px var(--night), 0 30px 50px -24px rgba(14, 21, 18, 0.6); transition: transform 0.35s var(--ease), box-shadow 0.35s;
+}
+.reel-card__frame::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(14, 21, 18, 0.05) 40%, rgba(14, 21, 18, 0.85)); }
+.reel-card:hover .reel-card__frame { transform: translateY(-6px) rotate(-1deg); box-shadow: 0 0 0 6px var(--night), 0 40px 60px -26px rgba(14, 21, 18, 0.7); }
+.reel-card__cover { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease); }
+.reel-card:hover .reel-card__cover { transform: scale(1.06); }
+.reel-card__play { position: absolute; left: 50%; top: 45%; display: grid; place-items: center; width: 68px; height: 68px; margin: -34px 0 0 -34px; border: 0; border-radius: 50%; background: rgba(255, 253, 248, 0.92); color: var(--ink); cursor: pointer; box-shadow: 0 0 0 8px rgba(255, 253, 248, 0.25); transition: transform 0.25s var(--ease); }
+.reel-card__play .icon { width: 28px; height: 28px; margin-left: 4px; fill: currentColor; }
+.reel-card:hover .reel-card__play { transform: scale(1.1); }
+.reel-card--sample .reel-card__play { cursor: default; }
+.reel-card__title { position: absolute; left: 1rem; right: 1rem; bottom: 1rem; margin: 0; color: #fff; font-weight: 600; font-size: 1.15rem; line-height: 1.2; letter-spacing: -0.02em; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); }
+.reel-card__title::before { content: ''; display: block; width: 32px; height: 4px; margin-bottom: 0.6rem; border-radius: 2px; background: var(--acc, var(--coral)); }
+.reel-card__frame.is-playing { background: #fff; }
+.reel-card__frame.is-playing::after { display: none; }
+.reel-card__frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.reel-card__link { display: inline-flex; align-items: center; gap: 0.4rem; justify-self: start; margin: 0; font-size: 0.875rem; font-weight: 560; color: var(--ink); text-decoration: none; }
+a.reel-card__link:hover { color: var(--coral-ink); text-decoration: underline; }
+.reel-card--sample .reel-card__link { color: var(--muted); }
+.reel-card__link .icon { width: 1.1em; height: 1.1em; }
+.reels__note { margin: 1.25rem 0 0; font-size: 0.875rem; color: var(--muted); }
+.reels :focus-visible { box-shadow: 0 0 0 3px var(--blush), 0 0 0 5px var(--ink); }

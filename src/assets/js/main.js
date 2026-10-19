@@ -665,11 +665,26 @@
     });
   });
 
+  /* ── Instagram reels: load Instagram's player only when asked ─────────── */
+  $$('[data-ig]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const frame = document.createElement('iframe');
+      frame.src = `https://www.instagram.com/reel/${encodeURIComponent(btn.dataset.ig)}/embed/`;
+      frame.title = btn.dataset.igTitle;
+      frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      frame.allowFullscreen = true;
+      const box = btn.closest('[data-ig-frame]');
+      box.classList.add('is-playing');
+      box.replaceChildren(frame);
+      frame.focus();
+    });
+  });
+
   /* ── Gentle reveal as sections scroll into view ─────────────────────── */
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const targets = $$([
       '.section-head', '.area-tile', '.about-poonam__photo', '.about-poonam__text', '.wall__head',
-      '.demand__item', '.watch', '.route__stop', '.faq-split > *', '.invite', '.finder-entry__inner > *',
+      '.demand__item', '.watch', '.reel-card', '.route__stop', '.faq-split > *', '.invite', '.finder-entry__inner > *',
       '.path', '.timeline li', '.split > *', '.subhead', '.teams-band', '.compare-table', '.hint-card',
       '.prose-section', '.glance', '.service', '.why-matters .facts-grid > li',
     ].join(','));

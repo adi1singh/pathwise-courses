@@ -293,6 +293,55 @@ const testimonials = () => {
   </section>`;
 };
 
+// Instagram reels about the work these courses lead to. Each reel loads from
+// Instagram only when someone presses play.
+const REEL_AREA_PHOTO = { care: 'courses/chc43121', education: 'courses/chc30125', training: 'areas/training', business: 'areas/business', construction: 'areas/construction', firstaid: 'courses/hltaid011' };
+const SAMPLE_REELS = [
+  { title: 'A day in aged care', area: 'care', img: 'courses/chc33021' },
+  { title: 'Inside an early learning room', area: 'education', img: 'courses/chc30125' },
+  { title: 'Life as a teacher aide', area: 'education', img: 'courses/chc40225' },
+  { title: 'Supporting people with disability', area: 'care', img: 'courses/chc43121' },
+];
+const igIcon = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>';
+const reelCode = (url) => (url.match(/instagram\.com\/(?:reel|reels|p)\/([\w-]+)/) || [])[1];
+const reels = (d) => {
+  const ig = site.instagram ?? {};
+  const list = (ig.reels ?? []).filter((r) => reelCode(r.url));
+  if (!list.length && !site.draft) return '';
+  const cards = list.length
+    ? list.map((r) => html`<li class="reel-card acc-${r.area ?? 'care'}">
+        <div class="reel-card__frame" data-ig-frame>
+          ${photo(REEL_AREA_PHOTO[r.area] ?? 'courses/chc33021', d, { sizes: '300px', cls: 'reel-card__cover' })}
+          <button class="reel-card__play" type="button" data-ig="${reelCode(r.url)}" data-ig-title="${esc(r.title)}" aria-label="Play reel: ${esc(r.title)}">${icon('play')}</button>
+          <p class="reel-card__title">${esc(r.title)}</p>
+        </div>
+        <a class="reel-card__link" href="${esc(r.url)}" rel="noopener">${igIcon} Watch on Instagram</a>
+      </li>`)
+    : SAMPLE_REELS.map((r) => html`<li class="reel-card reel-card--sample acc-${r.area}">
+        <div class="reel-card__frame">
+          ${photo(r.img, d, { sizes: '300px', cls: 'reel-card__cover' })}
+          <span class="reel-card__play" aria-hidden="true">${icon('play')}</span>
+          <p class="reel-card__title">${esc(r.title)}</p>
+        </div>
+        <p class="reel-card__link">${igIcon} Reel link to be added</p>
+      </li>`);
+  return html`
+  <section class="section reels" aria-labelledby="reels-title">
+    <div class="container">
+      <div class="reels__head">
+        <div>
+          <p class="eyebrow"><span class="reels__ig">${igIcon}</span> On Instagram</p>
+          <h2 id="reels-title">See the work, <em>reel by reel</em>${list.length ? '' : tbc('Add Instagram reel links')}</h2>
+          <p class="lead">Short videos from the jobs these courses lead to.</p>
+        </div>
+        ${ig.handle ? `<a class="btn btn--primary" href="https://www.instagram.com/${esc(ig.handle)}/" rel="noopener">${igIcon} Follow @${esc(ig.handle)}</a>` : ''}
+      </div>
+      <ul class="reels__row" role="list" tabindex="0" aria-label="Instagram reels">${cards}</ul>
+      ${list.length ? '<p class="reels__note">Reels play from Instagram, only when you press play.</p>' : ''}
+    </div>
+  </section>`;
+};
+
 // Why these courses matter, said simply: the jobs are growing.
 const whyMatters = () => html`
   <section class="section demand" aria-labelledby="matters-title">
@@ -359,6 +408,7 @@ export default function home() {
     </div>
   </section>
 
+  ${reels(d)}
   `;
 
   return {

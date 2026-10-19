@@ -56,6 +56,10 @@ verified, and only if they belong to Poonam's business.
       she's based / which states she helps. Add these to `contact` in `src/data/site.js`.
 - [x] **Poonam's photo:** new studio headshot supplied (October 2026), used as supplied; only the home
       page cut-out has its background removed. Files in `src/assets/img/poonam/`.
+- [ ] **Instagram reels** (end of the home page): paste each public reel's link, a short title and its course
+      area into `instagram.reels` in `src/data/site.js`, and the account name into `instagram.handle` for a
+      "Follow" button. Use Pathwise's own reels or ones you have permission to feature. With no links the
+      preview shows placeholder cards and the live site hides the section.
 - [ ] **Photo of Poonam and Khush** for the technical partner section on About us: save it as
       `src/assets/img/partner/poonam-khush-480.webp` and `-800.webp` (4:3) and set `partner.photo` in
       `src/data/site.js`. Until then the preview shows a placeholder and the live site shows text only.
