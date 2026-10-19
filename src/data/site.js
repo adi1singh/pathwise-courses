@@ -41,7 +41,10 @@ export const site = {
   instagram: {
     handle: null, // e.g. 'pathwisecourses'
     reels: [
-      // { url: 'https://www.instagram.com/reel/XXXXXXXXXXX/', title: 'A day in aged care', area: 'care' },
+      // { url: 'https://www.instagram.com/reel/XXXXXXXXXXX/', title: 'A day in aged care', area: 'care', account: 'name' },
+      { url: 'https://www.instagram.com/p/DP2dIKOiEsJ/', title: '121,900 Australians waiting for aged care', area: 'care', account: 'humansofaustraliaaa' },
+      { url: 'https://www.instagram.com/p/DU2SJsiky_Q/', title: 'Why aged care needs more workers', area: 'care', account: 'ausrehab' },
+      { url: 'https://www.instagram.com/p/DZHcJmLgcf0/', title: 'A career in childcare in Australia', area: 'education', account: 'mygreataustraliandream' },
     ],
   },
 

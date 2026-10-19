@@ -274,7 +274,7 @@ const testimonials = () => {
 
 // Instagram reels about the work these courses lead to. Each reel loads from
 // Instagram only when someone presses play.
-const REEL_AREA_PHOTO = { care: 'courses/chc43121', education: 'courses/chc30125', training: 'areas/training', business: 'areas/business', construction: 'areas/construction', firstaid: 'courses/hltaid011' };
+const REEL_AREA_PHOTO = { care: 'courses/chc33021', education: 'courses/chc30125', training: 'areas/training', business: 'areas/business', construction: 'areas/construction', firstaid: 'courses/hltaid011' };
 const SAMPLE_REELS = [
   { title: 'A day in aged care', area: 'care', img: 'courses/chc33021' },
   { title: 'Inside an early learning room', area: 'education', img: 'courses/chc30125' },
@@ -294,7 +294,7 @@ const reels = (d) => {
           <button class="reel-card__play" type="button" data-ig="${reelCode(r.url)}" data-ig-title="${esc(r.title)}" aria-label="Play reel: ${esc(r.title)}">${icon('play')}</button>
           <p class="reel-card__title">${esc(r.title)}</p>
         </div>
-        <a class="reel-card__link" href="${esc(r.url)}" rel="noopener">${igIcon} Watch on Instagram</a>
+        <a class="reel-card__link" href="${esc(r.url)}" rel="noopener">${igIcon} ${r.account ? `@${esc(r.account)}` : 'Watch on Instagram'}<span class="visually-hidden"> on Instagram</span></a>
       </li>`)
     : SAMPLE_REELS.map((r) => html`<li class="reel-card reel-card--sample acc-${r.area}">
         <div class="reel-card__frame">

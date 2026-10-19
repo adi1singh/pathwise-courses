@@ -687,7 +687,7 @@
   $$('[data-ig]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const frame = document.createElement('iframe');
-      frame.src = `https://www.instagram.com/reel/${encodeURIComponent(btn.dataset.ig)}/embed/`;
+      frame.src = `https://www.instagram.com/p/${encodeURIComponent(btn.dataset.ig)}/embed/captioned/`;
       frame.title = btn.dataset.igTitle;
       frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
       frame.allowFullscreen = true;
