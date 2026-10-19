@@ -189,7 +189,7 @@ export const areaCard = (s, list, depth) => {
     <span class="area-tile__body">
       <span class="area-tile__icon">${icon(s.icon)}</span>
       <span class="area-tile__name">${esc(s.name)}</span>
-      <span class="area-tile__meta">${list.length} ${list.length === 1 ? 'course' : 'courses'}${Number.isFinite(from) ? ` · from ${money(from)}` : ''} ${icon('arrow-right')}</span>
+      <span class="area-tile__meta">${list.length} ${list.length === 1 ? 'course' : 'courses'}${Number.isFinite(from) ? `, from ${money(from)}` : ''} ${icon('arrow-right')}</span>
     </span>
   </a>`;
 };

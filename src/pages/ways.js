@@ -43,7 +43,6 @@ export default function ways() {
     <div class="container ways-hero__inner">
       <div class="ways-hero__text">
         ${breadcrumbs([{ label: 'Ways to study' }], d)}
-        <p class="eyebrow eyebrow--on-dark">Ways to study</p>
         <h1>Three ways to get qualified</h1>
         <p class="lead">The right route depends on what you already know. Your experience might count towards a qualification, you might study it from scratch, or you might only need one skill.</p>
         <div class="btn-row">
@@ -78,7 +77,6 @@ export default function ways() {
   <section class="section ways-compare" id="compare" aria-labelledby="compare-title">
     <div class="container">
       <div class="section-head section-head--center">
-        <p class="eyebrow">Start here</p>
         <h2 id="compare-title">Compare the three routes</h2>
         <p class="lead">The basics, side by side. Then read about each route in detail below.</p>
       </div>
@@ -135,7 +133,6 @@ export default function ways() {
   <section class="section ways-paths" aria-labelledby="paths-title">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">In detail</p>
         <h2 id="paths-title">Each route, up close</h2>
       </div>
       <ul class="paths" role="list">
@@ -201,7 +198,6 @@ export default function ways() {
     <div class="container">
       <div class="split split--top">
         <div>
-          <p class="eyebrow eyebrow--on-dark">Get a head start</p>
           <h2 id="evidence-title">RPL evidence checklist</h2>
           <p class="lead">Tick off what you already have. It’s a quick way to see how ready you are before your first chat.</p>
           <div class="progress" data-evidence-progress>

@@ -36,7 +36,7 @@
 /* Section headings on About: bigger and easier to spot */
 .page-about main .section .eyebrow {
   padding: 0.45rem 0.95rem 0.45rem 0.8rem; border-radius: 999px; background: var(--ink); color: var(--saffron);
-  font-size: 0.9rem; letter-spacing: 0.12em; margin-bottom: 1.25rem;
+  font-size: 1rem; letter-spacing: 0; margin-bottom: 1.25rem;
 }
 .page-about main .section .eyebrow::before { background: var(--coral); }
 .page-about main .section--navy .eyebrow { background: var(--saffron); color: var(--ink); }

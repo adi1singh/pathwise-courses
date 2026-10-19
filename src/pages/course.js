@@ -84,7 +84,7 @@ export default function coursePage(c) {
   const rto = c.rto && site.partnerRtos.find((r) => r.id === c.rto);
   const studyLine = c.unit
     ? `${c.duration.study}`
-    : [c.pathways.includes('rpl') ? `RPL: ${c.duration.rpl.replace(/^Often /, '')}` : '', `Online study: ${c.duration.study}`].filter(Boolean).join(' · ');
+    : [c.pathways.includes('rpl') ? `RPL: ${c.duration.rpl.replace(/^Often /, '')}` : '', `Online study: ${c.duration.study}`].filter(Boolean).join('; ');
 
   const price = priceDetail(c);
   const typical = price?.study

@@ -396,7 +396,7 @@
       const rows = ranked.map((it, n) => `
         <li class="hs-option" role="option" id="hs-opt-${n}" aria-selected="false" data-href="${esc(it.href)}">
           <img src="${esc(it.img)}" alt="" width="64" height="48" loading="lazy">
-          <span><span class="hs-option__title">${highlight(it.title, q)}</span><span class="hs-option__meta">${esc(it.level)} · ${esc(it.code)}</span></span>
+          <span><span class="hs-option__title">${highlight(it.title, q)}</span><span class="hs-option__meta">${esc(it.level)}, ${esc(it.code)}</span></span>
           ${it.from ? `<span class="hs-option__price">from $${Number(it.from).toLocaleString('en-AU')}<small>typical price</small></span>` : '<span></span>'}
         </li>`);
       if (!ranked.length) {
@@ -917,7 +917,7 @@
     if (config.whatsapp) items.push(`<a href="https://wa.me/${esc(config.whatsapp)}">WhatsApp</a>`);
     if (config.email) items.push(`<a href="mailto:${esc(config.email)}">Email ${esc(config.email)}</a>`);
     return items.length
-      ? `<p>Please contact Poonam directly: ${items.join(' · ')}</p>`
+      ? `<p>Please contact Poonam directly: ${items.join(', ')}</p>`
       : '<p>Poonam’s phone and email details are being added to this site – please check back soon.</p>';
   };
 
@@ -1076,7 +1076,7 @@
         <p class="selection__label">${chosen ? 'You’re asking about' : 'Your course finder suggestions'}</p>
         ${chosen ? `<p class="selection__course">${esc(chosen)}</p>` : ''}
         ${!chosen && finder?.suggestions?.length ? `<ul class="selection__list">${finder.suggestions.map((x) => `<li>${esc(x.title)} <span>· ${esc(x.pathway)}</span></li>`).join('')}</ul>` : ''}
-        ${bits.length ? `<p class="selection__meta">${esc(bits.join(' · '))}</p>` : ''}
+        ${bits.length ? `<p class="selection__meta">${esc(bits.join(', '))}</p>` : ''}
         ${finder ? `<p class="selection__meta">Your course finder answers are included: ${esc(finder.summary)}. <a href="${rootPrefix}course-finder.html${finder.answers ? `?${new URLSearchParams(finder.answers)}#results` : ''}">Change them</a></p>` : ''}`;
       selectionBox.hidden = false;
     }

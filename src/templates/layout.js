@@ -100,7 +100,7 @@ const footer = (depth) => {
           You can check any course or RTO at <a href="https://training.gov.au" rel="noopener">training.gov.au</a>.
         </p>
         <div class="site-footer__bottom">
-          <p>© ${year} ${esc(site.business.legalName ?? site.name)}${site.business.abn ? ` · ABN ${esc(site.business.abn)}` : ''}</p>
+          <p>© ${year} ${esc(site.business.legalName ?? site.name)}${site.business.abn ? `, ABN ${esc(site.business.abn)}` : ''}</p>
           <ul role="list">
             <li><a href="${link(depth, 'privacy.html')}">Privacy</a></li>
             <li><a href="${link(depth, 'contact.html')}">Contact</a></li>

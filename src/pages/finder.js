@@ -43,7 +43,7 @@ export default function finder() {
     <div class="container finder-hero__inner">
       <div class="finder-hero__text">
         ${breadcrumbs([{ label: 'Find my course' }], d)}
-        <p class="eyebrow eyebrow--on-dark">4 questions · about a minute</p>
+        <p class="eyebrow eyebrow--on-dark">Four questions, about a minute</p>
         <h1>Find the course that fits you.</h1>
         <p class="lead">Tell us what interests you and where you’re at. You’ll see suggested courses, and why they may fit, before we ask for any contact details.</p>
         <a class="btn btn--sun btn--lg" href="#finder-start">Start the questions ${icon('arrow-right')}</a>

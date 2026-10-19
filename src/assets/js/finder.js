@@ -215,7 +215,7 @@
     <article class="suggestion${i === 0 ? ' suggestion--first' : ''}" aria-labelledby="sg-${s.c.code}">
       <div class="suggestion__top">
         <span class="chip chip--${s.c.sector}">${esc(s.c.area)}</span>
-        <span class="suggestion__level">${esc(s.c.levelName)} · ${esc(s.c.code)}</span>
+        <span class="suggestion__level">${esc(s.c.levelName)}, ${esc(s.c.code)}</span>
       </div>
       <h3 id="sg-${s.c.code}"><a href="${s.c.href}">${esc(s.c.title)}</a></h3>
       <div class="suggestion__cols">

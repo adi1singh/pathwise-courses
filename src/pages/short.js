@@ -17,7 +17,7 @@ export default function shortPage() {
     <div class="container short-hero__inner">
       <div class="short-hero__text">
         ${breadcrumbs([{ label: 'Short courses' }], d)}
-        <p class="eyebrow eyebrow--on-dark">${shortCourses.length} short courses · ${shortCategories.length} topics · 1 to 20 hours</p>
+        <p class="eyebrow eyebrow--on-dark">${shortCourses.length} short courses in ${shortCategories.length} topics, each 1 to 20 hours</p>
         <h1>Learn one skill. Fast.</h1>
         <p class="lead">Focused online courses for care and support workers: build a specific skill, refresh what you know or meet a workplace training requirement, at your own pace.</p>
         <div class="btn-row">
@@ -86,7 +86,7 @@ export default function shortPage() {
               <h3 id="s-${s.id}">${esc(s.title)}</h3>
               <p>${esc(s.summary)}</p>
               <div class="short-card__foot">
-                <span class="short-card__format">${icon(s.format === 'quick' ? 'zap' : 'book')}${formats[s.format].name} · ${formats[s.format].time.toLowerCase()}</span>
+                <span class="short-card__format">${icon(s.format === 'quick' ? 'zap' : 'book')}${formats[s.format].name}, ${formats[s.format].time.toLowerCase()}</span>
                 <span class="short-card__price">Price on enquiry</span>
               </div>
               <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=${encodeURIComponent(s.title)}" aria-describedby="s-${s.id}">Enquire ${icon('arrow-right')}</a>

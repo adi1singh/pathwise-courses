@@ -63,7 +63,7 @@
 
   const courseCards = (list) =>
     `<ul class="assistant__courses">${list
-      .map((c) => `<li><a href="${base}${c.href}"><img src="${base}${c.img}" alt="" width="56" height="42" loading="lazy"><span><strong>${esc(c.title)}</strong><span>${esc(c.level)} · ${priceLine(c)}</span></span></a></li>`)
+      .map((c) => `<li><a href="${base}${c.href}"><img src="${base}${c.img}" alt="" width="56" height="42" loading="lazy"><span><strong>${esc(c.title)}</strong><span>${esc(c.level)}, ${priceLine(c)}</span></span></a></li>`)
       .join('')}</ul>`;
 
   // Rank courses with the same search the course catalogue uses.
@@ -161,7 +161,7 @@
     panel.innerHTML = `
       <header class="assistant__head">
         <span class="assistant__face" aria-hidden="true">${toggles[0].querySelector('.assistant__face').innerHTML}</span>
-        <div><h2 class="assistant__title">Course questions</h2><p class="assistant__sub">Automated helper · answers from this site</p></div>
+        <div><h2 class="assistant__title">Course questions</h2><p class="assistant__sub">Automated helper that answers from this site</p></div>
         <button type="button" class="assistant__close" aria-label="Close" data-assistant-close>${ICON.x}</button>
       </header>
       <div class="assistant__log" role="log" aria-live="polite" tabindex="0" aria-label="Conversation"></div>

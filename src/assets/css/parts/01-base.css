@@ -173,12 +173,10 @@ main:focus { outline: none; }
 .section-head h2 { margin-bottom: 0.3em; }
 .eyebrow {
   display: inline-flex; align-items: center; gap: 0.6rem; margin: 0 0 1rem;
-  font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+  font-family: var(--font-sans); font-size: 0.975rem; font-weight: 600; letter-spacing: -0.005em; color: var(--coral-ink);
 }
-.eyebrow::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--coral); flex: none; }
 .section-head--center .eyebrow { justify-content: center; }
-.eyebrow--on-dark { color: var(--on-night-muted); }
-.eyebrow--on-dark::before { background: var(--saffron); }
+.eyebrow--on-dark { color: var(--saffron); }
 
 /* ── Buttons ────────────────────────────────────────────────────────────── */
 .btn {

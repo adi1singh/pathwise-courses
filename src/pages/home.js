@@ -102,7 +102,7 @@ const mapStop = (codes, i, d) => {
       <p class="pmap__you" data-you hidden>${icon('pin')} You start here</p>
       <p class="pmap__level">${levelById[first.level].name}</p>
       <h3 class="pmap__title">${list.map((c) => `<a href="${link(d, `course/${c.slug}.html`)}">${esc(c.short ?? c.title)}</a>`).join('<span class="pmap__or"> or </span>')}</h3>
-      <p class="pmap__roles">${esc(first.roles.slice(0, 2).join(' · '))}</p>
+      <p class="pmap__roles">${esc(first.roles.slice(0, 2).join(', '))}</p>
       ${canRpl ? `<p class="pmap__rpl" data-rpl-note hidden>${icon('award')}<span><strong>Your experience may count.</strong> RPL ${esc(first.duration.rpl.replace(/^Often /, 'often '))}${rpl ? `, typically ${rpl}` : ''}.</span></p>` : ''}
       <dl class="pmap__facts">
         <div><dt>Study</dt><dd>${esc(first.duration.study)}</dd></div>
@@ -127,7 +127,6 @@ const pathwayMap = (d) => html`
     <div class="container">
       <div class="pmap__head">
         <div>
-          <p class="eyebrow">The Pathway Map</p>
           <h2 id="pmap-title">See where your next step <em>could take you</em></h2>
         </div>
         <p class="lead">Drag the work you love onto the map. You’ll see each step from your first certificate upwards, the jobs it opens up, the time it takes and typical prices.</p>
@@ -139,7 +138,7 @@ const pathwayMap = (d) => html`
           <div class="pmap__tabs" role="tablist" aria-label="Choose an area of work">
             ${routes.map((r, i) => html`<button type="button" class="pmap__token" role="tab" id="pmt-${r.id}" aria-controls="pm-${r.id}" aria-selected="false" tabindex="${i === 0 ? 0 : -1}" data-pmap-tab="${r.id}" style="${accStyle(r)}">
               <span class="pmap__token-photo">${photo(r.img, d, { sizes: '96px' }).replace('<img', '<img draggable="false"')}</span>
-              <span class="pmap__token-text"><strong>${r.label}</strong><small>${r.steps.length} steps${routeFrom(r) ? ` · from ${money(routeFrom(r))}` : ''}</small></span>
+              <span class="pmap__token-text"><strong>${r.label}</strong><small>${r.steps.length} steps${routeFrom(r) ? `, from ${money(routeFrom(r))}` : ''}</small></span>
               <span class="pmap__grip" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
             </button>`)}
           </div>
@@ -195,7 +194,6 @@ const areas = (d) => html`
     <div class="container">
       <div class="section-head section-head--row">
         <div>
-          <p class="eyebrow">Course areas</p>
           <h2 id="areas-title">Where do you want to make a difference?</h2>
           <p class="lead">Six areas, ${courses.length} courses. Pick one to see its courses, ways to study and typical prices.</p>
         </div>
@@ -324,7 +322,6 @@ const whyMatters = () => html`
   <section class="section demand" aria-labelledby="matters-title">
     <div class="container">
       <div class="demand__head">
-        <p class="eyebrow eyebrow--on-dark">Why these courses</p>
         <h2 id="matters-title">These jobs need more people.</h2>
         <p class="lead">Thousands more qualified carers, educators and teacher aides will be needed in the next ten years. A qualification now puts you in line for that work.</p>
       </div>
@@ -377,7 +374,6 @@ export default function home() {
   <section class="section" aria-labelledby="faq-title">
     <div class="container faq-split">
       <div class="faq-split__intro">
-        <p class="eyebrow">Questions</p>
         <h2 id="faq-title">Good questions to ask first</h2>
         <p>Straight answers to what people ask most before choosing a course.</p>
         <a class="link-arrow" href="faq.html">Read all FAQs ${icon('arrow-right')}</a>

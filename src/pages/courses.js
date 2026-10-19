@@ -22,7 +22,7 @@ const compareData = () =>
           rpl: c.pathways.includes('rpl') ? c.duration.rpl : 'Not usually offered',
           placement: c.placement.detail,
           roles: c.roles.slice(0, 3).join(', '),
-          ways: c.pathways.map((p) => pathways[p]).join(' · '),
+          ways: c.pathways.map((p) => pathways[p]).join(', '),
           price: (() => { const p = priceDetail(c); return c.fees || (p?.study ? `${p.study}${p.rpl ? ` (RPL ${p.rpl})` : ''}` : 'Ask for a quote'); })(),
         },
       ])
@@ -39,7 +39,7 @@ export default function coursesPage() {
     <div class="container cat-hero__inner">
       <div class="cat-hero__text">
         ${breadcrumbs([{ label: 'Courses' }], d)}
-        <p class="eyebrow eyebrow--on-dark">${qualCount} qualifications · ${unitCount} first aid units · ${sectors.length} areas</p>
+        <p class="eyebrow eyebrow--on-dark">${qualCount} qualifications and ${unitCount} first aid units across ${sectors.length} areas</p>
         <h1>Every course, one search away.</h1>
         <p class="lead">Search by job, topic or course name. Filter by area, then compare up to three side by side.</p>
       </div>
