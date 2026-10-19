@@ -86,8 +86,10 @@ verified, and only if they belong to Poonam's business.
       `draft` is `false`. To keep them at launch, replace each quote with what the student actually said
       and move it to `testimonials`. Add only genuine, approved stories to `testimonials`, with the person's permission
       (fake or edited reviews breach Australian Consumer Law). With none, the section is hidden.
-- [ ] **"Why these courses matter":** the figures are Victorian Government workforce projections.
-      If Poonam mainly helps students in other states, swap in national or state figures.
+- [x] **"Why these courses matter":** replaced the Victorian figures with Jobs and Skills
+      Australia's national net employment growth projections for May 2025–May 2035, rounded
+      to the nearest 100 people. Each card links to the official source; workbook tables
+      are noted in `src/data/why.js`. Checked October 2026.
 - [ ] **Imagery:** course photos and the home page video are from Unsplash and Pexels (see `CREDITS.md`).
       Confirm Poonam is happy with them, or supply her own photos (with consent from anyone shown).
 - [ ] **Course finder rules:** check `src/data/finder.js`. Each interest suggests a set of

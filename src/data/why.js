@@ -1,12 +1,13 @@
-// "Why these courses matter": short facts from official government sources,
-// each linked to its source. Figures are Victorian Skills Authority employment
-// projections published on vic.gov.au (checked October 2026). National Jobs and
-// Skills Australia figures could not be verified at the time, so none are used.
+// National net employment growth projected by Jobs and Skills Australia from
+// May 2025 to May 2035, rounded to the nearest 100 people (checked October 2026).
+// These are additional jobs, not vacancies or total hiring/replacement demand.
+// Occupations: Table 6, ANZSCO 4231, 4211 and 4221. Industry: Table 1, ANZSIC Q.
+// Workbook: https://www.jobsandskills.gov.au/sites/default/files/2025-11/employment_projections_-_may_2025_to_may_2035.xlsx
 export const facts = [
-  { icon: 'heart', area: 'care', stat: '47,962', label: 'more aged care and disability carers by 2034', text: 'new aged and disabled carers expected to be by 2034, on top of about 69,900 working in 2024.', source: 'Victorian Government, “Aged carer”', url: 'https://www.vic.gov.au/aged-carer' },
-  { icon: 'blocks', area: 'education', stat: '17,183', label: 'more childcare and OSHC workers by 2034', text: 'new child carers expected to be by 2034, including early childhood and outside-school-hours care.', source: 'Victorian Government, “Out of school hours care worker”', url: 'https://www.vic.gov.au/out-of-school-hours-care-worker' },
-  { icon: 'book', area: 'training', stat: '8,413', label: 'more teacher aides by 2034', text: 'new education aides (teacher aides) expected to be by 2034.', source: 'Victorian Government, “Education aide”', url: 'https://www.vic.gov.au/education-aide' },
-  { icon: 'trending', area: 'business', stat: '335,500', label: 'new health and community services workers by 2034', text: 'new workers expected to enter Victoria’s health care and social assistance industry by 2034, which includes community services.', source: 'Victorian Government, “Working with children and young people”', url: 'https://www.vic.gov.au/skills-working-children-young-people' },
+  { icon: 'heart', area: 'care', stat: '67,100', label: 'more aged care and disability carers by May 2035', text: 'projected net growth in aged and disabled carer employment across Australia from May 2025 to May 2035.', source: 'Jobs and Skills Australia, 2025 projections (Table 6)', url: 'https://www.jobsandskills.gov.au/data/employment-projections' },
+  { icon: 'blocks', area: 'education', stat: '7,800', label: 'more child carers by May 2035', text: 'projected net growth in child carer employment across Australia from May 2025 to May 2035, including childcare and outside-school-hours care.', source: 'Jobs and Skills Australia, 2025 projections (Table 6)', url: 'https://www.jobsandskills.gov.au/data/employment-projections' },
+  { icon: 'book', area: 'training', stat: '13,000', label: 'more education aides by May 2035', text: 'projected net growth in education aide employment across Australia from May 2025 to May 2035, including teacher aides.', source: 'Jobs and Skills Australia, 2025 projections (Table 6)', url: 'https://www.jobsandskills.gov.au/data/employment-projections' },
+  { icon: 'trending', area: 'business', stat: '541,900', label: 'more health care and social assistance jobs by May 2035', text: 'projected net employment growth across Australia’s health care and social assistance industry from May 2025 to May 2035, including community services.', source: 'Jobs and Skills Australia, 2025 projections (Table 1)', url: 'https://www.jobsandskills.gov.au/data/employment-projections' },
 ];
 
 // Official videos. The page shows a self-hosted preview image; the YouTube

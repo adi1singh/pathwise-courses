@@ -68,7 +68,7 @@ const routeStrip = (c, d) => {
             </li>`;
           })}
         </ol>
-        <a class="link-arrow" href="${link(d, 'index.html#pathway-map')}">Explore the full Pathway Map ${icon('arrow-right')}</a>
+        <a class="link-arrow" href="${link(d, 'index.html#pathway-map')}">Explore the full Pathway Map</a>
       </section>`;
 };
 
@@ -182,14 +182,14 @@ export default function coursePage(c) {
             <h3>${icon('briefcase')} ${pathways.rpl}</h3>
             <p class="way-card__time">Typically ${esc(c.duration.rpl.replace(/^Often /, ''))}</p>
             <p>For people with relevant experience. You show what you already know, then fill any gaps. Timing depends mostly on how quickly you gather evidence.</p>
-            <a class="link-arrow" href="${link(d, 'ways-to-study.html#rpl')}">How RPL works ${icon('arrow-right')}</a>
+            <a class="link-arrow" href="${link(d, 'ways-to-study.html#rpl')}">How RPL works</a>
           </div>` : ''}
           ${c.pathways.includes('online') ? html`
           <div class="way-card">
             <h3>${icon('laptop')} ${pathways.online}</h3>
             <p class="way-card__time">Typically ${esc(c.duration.study)}</p>
             <p>Learn the full course at your own pace with trainer support. Most people studying alongside work plan for around 8–15 hours a week.</p>
-            <a class="link-arrow" href="${link(d, 'ways-to-study.html#online')}">How online study works ${icon('arrow-right')}</a>
+            <a class="link-arrow" href="${link(d, 'ways-to-study.html#online')}">How online study works</a>
           </div>` : ''}
           ${c.pathways.includes('practical') ? html`
           <div class="way-card">
@@ -230,7 +230,7 @@ export default function coursePage(c) {
                     <p class="small muted">Typical full-fee prices published by Australian training providers, checked ${pricesCheckedOn}. Government funding can lower the cost in some states. These are not ${site.advisor}’s prices.</p>`
                   : ''}
                 <p>Your price depends on the training provider and on whether you use RPL or study the full course. ${site.advisor} will get you a written quote that shows the full cost, including any extra fees, before you decide. ${tbc('Add agreed fees once set with the partner RTO')}</p>
-                <a class="link-arrow" href="${link(d, `contact.html?topic=course&course=${encodeURIComponent(c.code)}`)}">Ask for a quote ${icon('arrow-right')}</a>`}
+                <a class="link-arrow" href="${link(d, `contact.html?topic=course&course=${encodeURIComponent(c.code)}`)}">Ask for a quote</a>`}
           </div>
         </div>
       </section>
@@ -247,7 +247,7 @@ export default function coursePage(c) {
       <section class="prose-section" aria-labelledby="next">
         <h2 id="next">Where it can lead</h2>
         <ul class="next-list" role="list">
-          ${next.map((n) => `<li><a href="${link(d, `course/${n.slug}.html`)}"><span class="next-list__code">${n.code}</span><span>${esc(n.title)}</span>${icon('arrow-right')}</a></li>`)}
+          ${next.map((n) => `<li><a href="${link(d, `course/${n.slug}.html`)}"><span class="next-list__code">${n.code}</span><span>${esc(n.title)}</span></a></li>`)}
         </ul>
       </section>` : ''}
 

@@ -116,7 +116,7 @@ export default function finder() {
         <div class="finder-note">
           <h2 class="h4">${icon('info')} How suggestions work</h2>
           <p>Suggestions use only the course information on this site: each course’s level, study options, typical timeframes and the jobs it can lead to. They’re a starting point, not an eligibility decision: the training provider confirms entry requirements, and ${site.advisor} checks them with you.${tbc('Typical timeframes – confirm with partner RTOs')}</p>
-          <a class="link-arrow" href="contact.html">Rather talk it through? Ask ${site.advisor} ${icon('arrow-right')}</a>
+          <a class="link-arrow" href="contact.html">Rather talk it through? Ask ${site.advisor}</a>
         </div>
       </aside>
     </div>

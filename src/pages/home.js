@@ -48,7 +48,7 @@ const hero = (d) => html`
         </form>
         <a class="powered powered--hero" href="https://jobgen.ai" rel="noopener">Powered by <strong>JOBGEN.AI</strong></a>
 
-        <p class="hero__finder-link">Not sure what to search for? <a href="course-finder.html">Answer 4 quick questions ${icon('arrow-right')}</a></p>
+        <p class="hero__finder-link">Not sure what to search for? <a href="course-finder.html">Answer 4 quick questions</a></p>
       </div>
 
       <figure class="hero-guide">
@@ -182,7 +182,7 @@ const pathwayMap = (d) => html`
           <span id="finder-q1">Not sure where you fit? Start the 4-question finder:</span>
           <ul class="pmap__pills" role="list" aria-labelledby="finder-q1">
             ${interests.filter((o) => o.id !== 'unsure').slice(0, 4).map((o) => `<li><a class="pill-option" href="course-finder.html?interest=${o.id}">${esc(o.label)}</a></li>`)}
-            <li><a class="pill-option pill-option--more" href="course-finder.html">More options ${icon('arrow-right')}</a></li>
+            <li><a class="pill-option pill-option--more" href="course-finder.html">More options</a></li>
           </ul>
         </div>
       </div>
@@ -197,7 +197,7 @@ const areas = (d) => html`
           <h2 id="areas-title">Where do you want to make a difference?</h2>
           <p class="lead">Six areas, ${courses.length} courses. Pick one to see its courses, ways to study and typical prices.</p>
         </div>
-        <a class="link-arrow" href="courses.html">See all ${courses.length} courses ${icon('arrow-right')}</a>
+        <a class="link-arrow" href="courses.html">See all ${courses.length} courses</a>
       </div>
       <div class="bento">
         ${sectors.map((s) => areaCard(s, courses.filter((c) => c.sector === s.id), d))}
@@ -323,12 +323,12 @@ const whyMatters = () => html`
     <div class="container">
       <div class="demand__head">
         <h2 id="matters-title">These jobs need more people.</h2>
-        <p class="lead">Thousands more qualified carers, educators and teacher aides will be needed in the next ten years. A qualification now puts you in line for that work.</p>
+        <p class="lead">Jobs and Skills Australia projects these increases in employment across Australia from May 2025 to May 2035. Figures are rounded to the nearest 100.</p>
       </div>
       <ul class="demand__grid" role="list">
         ${facts.map(
           (f) => html`<li class="demand__item" style="--acc:var(--c-${f.area})">
-            <p class="demand__intro">Victoria needs</p>
+            <p class="demand__intro">Across Australia</p>
             <p class="demand__stat"><span class="visually-hidden">${f.stat}</span><span aria-hidden="true" data-count="${f.stat.replaceAll(',', '')}">${f.stat}</span></p>
             <p class="demand__label">${f.label}</p>
             <p class="demand__source">Source: <a href="${f.url}" rel="noopener">${esc(f.source)}</a></p>
@@ -376,7 +376,7 @@ export default function home() {
       <div class="faq-split__intro">
         <h2 id="faq-title">Good questions to ask first</h2>
         <p>Straight answers to what people ask most before choosing a course.</p>
-        <a class="link-arrow" href="faq.html">Read all FAQs ${icon('arrow-right')}</a>
+        <a class="link-arrow" href="faq.html">Read all FAQs</a>
       </div>
       ${faqList(faqs)}
     </div>

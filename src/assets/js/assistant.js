@@ -16,7 +16,6 @@
   const ICON = {
     x: icon('<path d="M18 6 6 18M6 6l12 12"/>'),
     send: icon('<path d="M4 12 20 4l-6 16-3-7z"/>'),
-    arrow: icon('<path d="M5 12h14M13 6l6 6-6 6"/>'),
   };
   const QUICK = [
     ['find', 'Help me find a course'],
@@ -53,7 +52,7 @@
   const chips = (items) =>
     `<div class="assistant__chips">${items.map(([id, label]) => `<button type="button" class="assistant__chip" data-quick="${id}">${esc(label)}</button>`).join('')}</div>`;
 
-  const link = (href, label) => `<a class="assistant__link" href="${base}${href}">${esc(label)} ${ICON.arrow}</a>`;
+  const link = (href, label) => `<a class="assistant__link" href="${base}${href}">${esc(label)}</a>`;
 
   const priceLine = (c) => {
     if (c.fees) return esc(c.fees);
@@ -167,8 +166,8 @@
       <div class="assistant__log" role="log" aria-live="polite" tabindex="0" aria-label="Conversation"></div>
       <form class="assistant__form" autocomplete="off">
         <label class="visually-hidden" for="assistant-input">Type your question</label>
-        <input id="assistant-input" class="assistant__input" type="text" placeholder="Ask about a course, RPL or prices…" maxlength="200">
-        <button class="assistant__send" type="submit" aria-label="Send">${ICON.send}</button>
+        <input id="assistant-input" class="assistant__input" type="text" placeholder="Ask about a course, RPL or prices…" maxlength="200" disabled>
+        <button class="assistant__send" type="submit" aria-label="Send" disabled>${ICON.send}</button>
       </form>`;
     log = panel.querySelector('.assistant__log');
     input = panel.querySelector('.assistant__input');
@@ -188,6 +187,9 @@
       const reply = add('bot', '<p class="assistant__typing" aria-label="Typing"><span></span><span></span><span></span></p>');
       setTimeout(() => { reply.innerHTML = answer(q); log.scrollTop = log.scrollHeight; }, 450);
     });
+    // Accept questions only once the data and submit handler are ready.
+    input.disabled = false;
+    panel.querySelector('.assistant__send').disabled = false;
     built = true;
   };
 

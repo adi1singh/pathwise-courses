@@ -7,7 +7,6 @@ export function privacy() {
   const contactLine = c.email ? `<a href="${c.email.href}">${c.email.label}</a>` : `<span class="placeholder">[email address]</span>`;
   const body = html`
   ${pageHero({
-    eyebrow: 'Privacy',
     title: 'Privacy notice',
     lead: 'How we collect, use and look after the personal information you share through this website.',
     crumbs: [{ label: 'Privacy' }],

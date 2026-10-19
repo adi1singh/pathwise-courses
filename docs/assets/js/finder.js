@@ -232,7 +232,7 @@
       </div>
       <div class="suggestion__actions">
         <a class="btn btn--primary" href="${linkFor(s)}">Ask ${esc(config.advisor || 'Poonam')} about this course ${ARROW}</a>
-        <a class="link-arrow" href="${s.c.href}">Course details ${ARROW}</a>
+        <a class="link-arrow" href="${s.c.href}">Course details</a>
       </div>
     </article>`;
 

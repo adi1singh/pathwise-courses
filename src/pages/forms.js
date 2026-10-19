@@ -83,7 +83,6 @@ export function contact() {
   const d = 0;
   const body = html`
   ${pageHero({
-    eyebrow: 'Contact',
     title: `Talk to ${site.advisor}`,
     lead: 'Ask a question, request a call back or tell us about your team’s training needs. You’ll hear back from Poonam herself.',
     crumbs: [{ label: 'Contact' }],
@@ -153,7 +152,6 @@ export function contact() {
         <a class="side-link" href="course-finder.html">
           ${icon('compass')}
           <span><strong>Not sure which course?</strong><span>Answer four quick questions</span></span>
-          ${icon('arrow-right', 'icon--sm')}
         </a>
       </aside>
     </div>
@@ -182,7 +180,6 @@ export function eligibility() {
 
   const body = html`
   ${pageHero({
-    eyebrow: 'Eligibility check',
     title: 'Ask about a course',
     lead: `Answer a few quick questions, in about two minutes, so ${site.advisor} can check the entry requirements and talk you through your options.`,
     crumbs: [{ label: 'Eligibility check' }],

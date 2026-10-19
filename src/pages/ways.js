@@ -147,7 +147,7 @@ export default function ways() {
                 <div><dt>Typical time</dt><dd>${p.time}</dd></div>
                 <div><dt>You receive</dt><dd>${p.get}</dd></div>
               </dl>
-              <a class="link-arrow" href="${p.id === 'short' ? 'short-courses.html' : `#${p.id}`}">${p.id === 'short' ? 'Browse short courses' : `How ${p.id === 'online' ? 'online study' : p.short} works`} ${icon('arrow-right')}</a>
+              <a class="link-arrow" href="${p.id === 'short' ? 'short-courses.html' : `#${p.id}`}">${p.id === 'short' ? 'Browse short courses' : `How ${p.id === 'online' ? 'online study' : p.short} works`}</a>
             </div>
           </li>`
         )}
