@@ -44,7 +44,7 @@ export default function ways() {
       <div class="ways-hero__text">
         ${breadcrumbs([{ label: 'Ways to study' }], d)}
         <p class="eyebrow eyebrow--on-dark">Ways to study</p>
-        <h1>Three ways to get <em>qualified</em></h1>
+        <h1>Three ways to get qualified</h1>
         <p class="lead">The right route depends on what you already know. Your experience might count towards a qualification, you might study it from scratch, or you might only need one skill.</p>
         <div class="btn-row">
           <a class="btn btn--sun btn--lg" href="#compare">Compare the routes ${icon('arrow-right')}</a>
@@ -136,7 +136,7 @@ export default function ways() {
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">In detail</p>
-        <h2 id="paths-title">Each route, <em>up close</em></h2>
+        <h2 id="paths-title">Each route, up close</h2>
       </div>
       <ul class="paths" role="list">
         ${PATHS.map(
@@ -164,7 +164,7 @@ export default function ways() {
       <div class="split">
         <div>
           <p class="eyebrow">Recognition of prior learning</p>
-          <h2 id="rpl-title">Your experience <em>counts</em></h2>
+          <h2 id="rpl-title">Your experience counts</h2>
           <p class="lead">RPL is a formal way of having the skills you already use at work assessed against a nationally recognised qualification.</p>
           <p>If you’ve worked in care, education, training, building or management – paid or unpaid, here or overseas – you may already meet many of the requirements. An assessor from the training organisation reviews your evidence, talks with you about your work, and identifies any gaps. You then complete only what’s missing.</p>
           <div class="notice notice--info">
@@ -233,7 +233,7 @@ export default function ways() {
         </figure>
         <div>
           <p class="eyebrow">Full course online</p>
-          <h2 id="online-title">Learn everything, <em>at your own pace</em></h2>
+          <h2 id="online-title">Learn everything, at your own pace</h2>
           <p class="lead">If you’re new to the field, studying the full course gives you the knowledge and practice you need – without sitting in a classroom.</p>
           <ul class="mini-features" role="list">
             <li>${icon('users')}<span><strong>Trainer support</strong> by phone, email or video</span></li>

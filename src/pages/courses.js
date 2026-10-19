@@ -40,7 +40,7 @@ export default function coursesPage() {
       <div class="cat-hero__text">
         ${breadcrumbs([{ label: 'Courses' }], d)}
         <p class="eyebrow eyebrow--on-dark">${qualCount} qualifications · ${unitCount} first aid units · ${sectors.length} areas</p>
-        <h1>Every course, <em>one search away.</em></h1>
+        <h1>Every course, one search away.</h1>
         <p class="lead">Search by job, topic or course name. Filter by area, then compare up to three side by side.</p>
       </div>
       <div class="cat-hero__fan" aria-hidden="true">

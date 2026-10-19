@@ -42,7 +42,7 @@ export default function about() {
 
   <section class="section section--navy" aria-labelledby="help-title">
     <div class="container">
-      <div class="section-head"><p class="eyebrow eyebrow--on-dark">What I do</p><h2 id="help-title">How I can <em>help</em></h2></div>
+      <div class="section-head"><p class="eyebrow eyebrow--on-dark">What I do</p><h2 id="help-title">How I can help</h2></div>
       <ul class="service-grid" role="list">
         <li class="service">
           <span class="service__icon">${icon('compass')}</span>

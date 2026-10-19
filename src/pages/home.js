@@ -261,7 +261,7 @@ const testimonials = () => {
   return html`
   <section class="section wall" aria-labelledby="reviews-title" data-wall>
     <div class="container wall__head">
-      <h2 id="reviews-title" class="wall__title">Student <em>stories</em></h2>
+      <h2 id="reviews-title" class="wall__title">Student stories</h2>
       <p class="wall__lead">From “I’ve done this work for years” to qualified. From “I don’t know where to start” to enrolled.</p>
       <button type="button" class="wall__pause" data-wall-pause aria-pressed="false"><span class="wall__pause-icon" aria-hidden="true"></span><span data-wall-pause-label>Pause stories</span></button>
     </div>
@@ -308,7 +308,7 @@ const reels = (d) => {
       <div class="reels__head">
         <div>
           <p class="eyebrow"><span class="reels__ig">${igIcon}</span> On Instagram</p>
-          <h2 id="reels-title">See the work, <em>reel by reel</em>${list.length ? '' : tbc('Add Instagram reel links')}</h2>
+          <h2 id="reels-title">See the work, reel by reel${list.length ? '' : tbc('Add Instagram reel links')}</h2>
           <p class="lead">Short videos from the jobs these courses lead to.</p>
         </div>
         ${ig.handle ? `<a class="btn btn--primary" href="https://www.instagram.com/${esc(ig.handle)}/" rel="noopener">${igIcon} Follow @${esc(ig.handle)}</a>` : ''}
@@ -325,7 +325,7 @@ const whyMatters = () => html`
     <div class="container">
       <div class="demand__head">
         <p class="eyebrow eyebrow--on-dark">Why these courses</p>
-        <h2 id="matters-title">These jobs need <em>more people.</em></h2>
+        <h2 id="matters-title">These jobs need more people.</h2>
         <p class="lead">Thousands more qualified carers, educators and teacher aides will be needed in the next ten years. A qualification now puts you in line for that work.</p>
       </div>
       <ul class="demand__grid" role="list">

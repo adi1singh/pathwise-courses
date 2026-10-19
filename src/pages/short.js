@@ -18,7 +18,7 @@ export default function shortPage() {
       <div class="short-hero__text">
         ${breadcrumbs([{ label: 'Short courses' }], d)}
         <p class="eyebrow eyebrow--on-dark">${shortCourses.length} short courses · ${shortCategories.length} topics · 1 to 20 hours</p>
-        <h1>Learn one skill. <em>Fast.</em></h1>
+        <h1>Learn one skill. Fast.</h1>
         <p class="lead">Focused online courses for care and support workers: build a specific skill, refresh what you know or meet a workplace training requirement, at your own pace.</p>
         <div class="btn-row">
           <a class="btn btn--sun btn--lg" href="#short-list">Browse short courses ${icon('arrow-right')}</a>
@@ -116,7 +116,7 @@ export default function shortPage() {
       <div class="teams-band">
         <div class="teams-band__text">
           <p class="eyebrow eyebrow--on-dark">For employers</p>
-          <h2 id="teams-title">Training a <em>whole team?</em></h2>
+          <h2 id="teams-title">Training a whole team?</h2>
           <p class="lead">Induction training for new support workers, refreshers for everyone, or RPL for experienced staff: ${'Poonam'} can put together a plan that fits your roster.</p>
           <ul class="teams-band__list" role="list">
             <li>${icon('check')} Bundles across topics</li>
