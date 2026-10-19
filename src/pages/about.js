@@ -36,7 +36,6 @@ export default function about() {
         <h2 id="story-title">Why I do this ${tbc('Poonam to write her own story – this is placeholder text')}</h2>
         <p>Choosing a course can feel overwhelming. There are hundreds of providers, unfamiliar codes and plenty of sales pressure. I started ${site.name} to make that simpler.</p>
         <p>Many of the people I speak with already do skilled work in aged care, disability support, childcare and other fields, but don’t yet hold the qualification to prove it. Others are starting fresh and want to know the quickest sensible route into a new career. Either way, my job is to help you make a good decision – and then make the process as smooth as possible.</p>
-        <p class="placeholder-note">[Placeholder – replace with Poonam’s background: her own work or study experience, how long she has been helping students, languages she speaks, and where she is based.]</p>
       </div>
     </div>
   </section>
@@ -126,29 +125,29 @@ export default function about() {
     </div>
   </section>
 
-  <section class="section section--navy partner" aria-labelledby="partner-title">
-    <div class="container partner__inner${site.partner.photo || site.draft ? '' : ' partner__inner--text'}">
-      ${site.partner.photo
-        ? html`<figure class="partner__photo">
-            <img src="${site.partner.photo}-480.webp" srcset="${site.partner.photo}-480.webp 480w, ${site.partner.photo}-800.webp 800w" sizes="(min-width: 900px) 520px, 92vw" width="480" height="360" alt="${esc(site.partner.photoAlt)}" loading="lazy" decoding="async">
-            <figcaption>${esc(site.partner.photoAlt)}</figcaption>
-          </figure>`
-        : site.draft
-          ? html`<figure class="partner__photo partner__photo--placeholder">
-              <div class="partner__initials" aria-hidden="true"><span>P</span><span class="partner__plus">+</span><span>K</span></div>
-              <figcaption>Photo of Poonam and Khush ${tbc('Add the photo of Poonam and Khush')}</figcaption>
-            </figure>`
-          : ''}
-      <div class="partner__text">
-        <p class="eyebrow">Technical partner</p>
-        <h2 id="partner-title">Built with <span class="partner__brand">${esc(site.partner.name)}</span></h2>
-        <p class="lead">${site.name} works with jobgen.ai, our technical partner. ${p} brings the course knowledge and the personal guidance; jobgen.ai brings the technology behind it.</p>
-        <ul class="partner__list" role="list">
-          <li>${icon('laptop')}<span>This website</span></li>
-          <li>${icon('compass')}<span>The course finder</span></li>
-          <li>${icon('chat')}<span>The course questions assistant</span></li>
-        </ul>
-        <a class="btn btn--sun btn--lg" href="${site.partner.url}" rel="noopener">Visit jobgen.ai ${icon('external')}</a>
+  <section class="section partner" aria-labelledby="partner-title">
+    <div class="container">
+      <div class="partner-card">
+        <span class="partner-card__orbit" aria-hidden="true"></span>
+        <div class="partner-card__intro">
+          <p class="partner-card__label"><span aria-hidden="true">✳</span> Our technology partner</p>
+          <h2 id="partner-title"><a class="partner-card__brand" href="https://jobgen.ai" rel="noopener">JOBGEN<span>.AI</span></a></h2>
+          <h3>Human expertise.<br><em>Smarter technology.</em></h3>
+          <p class="partner-card__copy">JOBGEN.AI brings websites, AI assistants and business automation together—helping businesses answer enquiries, connect with customers and grow.</p>
+          <ul class="partner-card__services" role="list">
+            <li>${icon('laptop')} Websites</li>
+            <li>${icon('chat')} AI assistants</li>
+            <li>${icon('zap')} Automation</li>
+          </ul>
+          <div class="partner-card__actions">
+            <a class="partner-card__primary" href="https://jobgen.ai" rel="noopener">Explore JOBGEN.AI ${icon('arrow-right')}</a>
+            <a class="partner-card__social" href="https://www.linkedin.com/company/jobgenai/" rel="noopener"><span class="partner-card__linkedin" aria-hidden="true">in</span> Follow on LinkedIn ${icon('external')}</a>
+          </div>
+        </div>
+        <figure class="partner-card__photo">
+          <img src="assets/img/partner/partnership-handshake-720.jpg" srcset="assets/img/partner/partnership-handshake-720.jpg 720w, assets/img/partner/partnership-handshake-1440.jpg 1440w" sizes="(min-width: 1000px) 600px, 90vw" width="1440" height="960" alt="AI-created portrait of Poonam and Kush shaking hands against a shared dark green and amber background" loading="lazy" decoding="async">
+          <figcaption><span><strong>Poonam × Kush</strong><span>Pathwise Courses × JOBGEN.AI</span></span><small>AI-created portrait</small></figcaption>
+        </figure>
       </div>
     </div>
   </section>

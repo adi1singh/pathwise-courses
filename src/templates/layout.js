@@ -6,7 +6,6 @@ export const NAV = [
   { id: 'finder', label: 'Find my course', href: 'course-finder.html' },
   { id: 'courses', label: 'Courses', href: 'courses.html' },
   { id: 'ways', label: 'Ways to study', href: 'ways-to-study.html' },
-  { id: 'short', label: 'Short courses', href: 'short-courses.html' },
   { id: 'about', label: 'About us', href: 'about.html' },
 ];
 
@@ -42,7 +41,7 @@ const header = (depth, active) => html`
         <div class="site-menu" id="site-menu" data-nav-menu>
           <ul class="site-menu__list" role="list">
             ${NAV.map(
-              (item) => html`<li><a href="${link(depth, item.href)}"${item.id === active ? ' aria-current="page"' : ''}>${item.label}</a></li>`
+              (item) => item.id === 'courses' ? html`<li class="courses-nav"><details><summary${['courses', 'short'].includes(active) ? ' class="is-current"' : ''}>Courses ${icon('chevron-down')}</summary><ul class="courses-nav__menu" role="list"><li><a href="${link(depth, 'courses.html')}"${active === 'courses' ? ' aria-current="page"' : ''}>Full courses</a></li><li><a href="${link(depth, 'short-courses.html')}"${active === 'short' ? ' aria-current="page"' : ''}>Short courses</a></li></ul></details></li>` : html`<li><a href="${link(depth, item.href)}"${item.id === active ? ' aria-current="page"' : ''}>${item.label}</a></li>`
             )}
           </ul>
           <div class="site-menu__cta">
@@ -53,15 +52,6 @@ const header = (depth, active) => html`
       </div>
     </div>
   </header>`;
-
-const draftBanner = () =>
-  site.draft
-    ? html`<aside class="draft-banner" aria-label="Preview notice">
-        <div class="container">
-          <strong>Preview.</strong> Details marked <span class="tbc tbc--inline"><span aria-hidden="true">●</span> To confirm</span> are waiting on Poonam, and online enquiries aren’t open yet.
-        </div>
-      </aside>`
-    : '';
 
 const footer = (depth) => {
   const c = contactLinks();
@@ -79,6 +69,7 @@ const footer = (depth) => {
           <h2 class="site-footer__heading">Explore</h2>
           <ul role="list">
             ${NAV.map((item) => `<li><a href="${link(depth, item.href)}">${item.label}</a></li>`)}
+            <li><a href="${link(depth, 'short-courses.html')}">Short courses</a></li>
             <li><a href="${link(depth, 'faq.html')}">FAQ</a></li>
             <li><a href="${link(depth, 'eligibility.html')}">Eligibility check</a></li>
           </ul>
@@ -177,9 +168,8 @@ export const layout = ({ title, description, path, depth = 0, active = '', body,
   <script src="${link(depth, 'assets/js/assistant.js')}" defer></script>
   ${head}
 </head>
-<body class="${[bodyClass, site.draft ? 'has-draft' : ''].filter(Boolean).join(' ')}">
+<body class="${bodyClass}">
   <a class="skip-link" href="#main">Skip to main content</a>
-  ${draftBanner()}
   ${header(depth, active)}
   <main id="main" tabindex="-1">
 ${body}

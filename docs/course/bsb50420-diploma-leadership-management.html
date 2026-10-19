@@ -26,13 +26,8 @@
   <script src="../assets/js/assistant.js" defer></script>
   
 </head>
-<body class="has-mobile-cta has-draft">
+<body class="has-mobile-cta">
   <a class="skip-link" href="#main">Skip to main content</a>
-  <aside class="draft-banner" aria-label="Preview notice">
-        <div class="container">
-          <strong>Preview.</strong> Details marked <span class="tbc tbc--inline"><span aria-hidden="true">●</span> To confirm</span> are waiting on Poonam, and online enquiries aren’t open yet.
-        </div>
-      </aside>
   
   <header class="site-header" data-header>
     <div class="container site-header__inner">
@@ -58,7 +53,7 @@
         </button>
         <div class="site-menu" id="site-menu" data-nav-menu>
           <ul class="site-menu__list" role="list">
-            <li><a href="../course-finder.html">Find my course</a></li><li><a href="../courses.html" aria-current="page">Courses</a></li><li><a href="../ways-to-study.html">Ways to study</a></li><li><a href="../short-courses.html">Short courses</a></li><li><a href="../about.html">About us</a></li>
+            <li><a href="../course-finder.html">Find my course</a></li><li class="courses-nav"><details><summary class="is-current">Courses <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><ul class="courses-nav__menu" role="list"><li><a href="../courses.html" aria-current="page">Full courses</a></li><li><a href="../short-courses.html">Short courses</a></li></ul></details></li><li><a href="../ways-to-study.html">Ways to study</a></li><li><a href="../about.html">About us</a></li>
           </ul>
           <div class="site-menu__cta">
             <a class="btn btn--primary" href="../contact.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg> Talk to Poonam</a>
@@ -110,16 +105,16 @@
               <dd>Team leaders and supervisors in any sector <a class="glance__more" href="#suits">Details<span class="visually-hidden"> about who it suits</span></a></dd>
             </div><div class="glance__item">
               <dt><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/></svg> Study options</dt>
-              <dd>RPL: 6–12 weeks · Online study: 12–18 months <span class="tbc" title="Typical figure – confirm with the delivering RTO"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: Typical figure – confirm with the delivering RTO</span></span> <a class="glance__more" href="#study">Details<span class="visually-hidden"> about study options</span></a></dd>
+              <dd>RPL: 6–12 weeks · Online study: 12–18 months  <a class="glance__more" href="#study">Details<span class="visually-hidden"> about study options</span></a></dd>
             </div><div class="glance__item">
               <dt><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg> Work placement</dt>
               <dd>Not required  <a class="glance__more" href="#placement">Details<span class="visually-hidden"> about work placement</span></a></dd>
             </div><div class="glance__item">
               <dt><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg> Entry requirements</dt>
-              <dd>3 things you’ll need, including a USI <span class="tbc" title="Typical figure – confirm with the delivering RTO"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: Typical figure – confirm with the delivering RTO</span></span> <a class="glance__more" href="#entry">Details<span class="visually-hidden"> about entry requirements</span></a></dd>
+              <dd>3 things you’ll need, including a USI  <a class="glance__more" href="#entry">Details<span class="visually-hidden"> about entry requirements</span></a></dd>
             </div><div class="glance__item">
               <dt><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M16 9h2a2 2 0 0 1 2 2v10M3 21h18M8 7h4M8 11h4M8 15h4"/></svg> Training provider</dt>
-              <dd>Confirmed before you enrol <span class="tbc" title="Add the delivering RTO for this course"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: Add the delivering RTO for this course</span></span> <a class="glance__more" href="#provider">Details<span class="visually-hidden"> about training provider</span></a></dd>
+              <dd>Confirmed before you enrol  <a class="glance__more" href="#provider">Details<span class="visually-hidden"> about training provider</span></a></dd>
             </div><div class="glance__item">
               <dt><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="9" cy="7" rx="6" ry="3"/><path d="M3 7v5c0 1.7 2.7 3 6 3s6-1.3 6-3V7M15 10.5c3.3 0 6 1.3 6 3v4c0 1.7-2.7 3-6 3-2 0-3.8-.5-4.9-1.3"/></svg> Typical price</dt>
               <dd>$3,500–$9,000 to study, $1,750–$2,750 with RPL <span class="glance__note">Typical across providers. Ask Poonam for an exact quote.</span> <a class="glance__more" href="#provider">Details<span class="visually-hidden"> about typical price</span></a></dd>
@@ -170,7 +165,7 @@
       </section>
 
       <section class="prose-section" aria-labelledby="study">
-        <h2 id="study">Study options and commitment <span class="tbc" title="Typical figure – confirm with the delivering RTO"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: Typical figure – confirm with the delivering RTO</span></span></h2>
+        <h2 id="study">Study options and commitment </h2>
         <div class="grid grid--2">
           
           <div class="way-card">
@@ -196,7 +191,7 @@
       </section>
 
       <section class="prose-section" aria-labelledby="entry">
-        <h2 id="entry">Entry requirements <span class="tbc" title="Typical figure – confirm with the delivering RTO"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: Typical figure – confirm with the delivering RTO</span></span></h2>
+        <h2 id="entry">Entry requirements </h2>
         <ul class="checklist " role="list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>A Unique Student Identifier (USI) – free to create at usi.gov.au</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Language, literacy and numeracy skills suited to the course (usually a short check)</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Access to a computer or tablet and reliable internet</span></li></ul>
         <p class="small muted">Entry requirements are set by the training provider. Poonam checks them with you before you enrol.</p>
       </section>
@@ -206,7 +201,7 @@
         <div class="provider-fees">
           <div>
             <h3 class="prose-section__sub"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M16 9h2a2 2 0 0 1 2 2v10M3 21h18M8 7h4M8 11h4M8 15h4"/></svg> Who delivers it</h3>
-            <p>This qualification is delivered, assessed and issued by a partner Registered Training Organisation (RTO). You’ll be told which RTO, and given its RTO code, before you enrol. <span class="tbc" title="Add the delivering RTO name and RTO code for this course (ASQA requirement for third-party marketing)"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: Add the delivering RTO name and RTO code for this course (ASQA requirement for third-party marketing)</span></span></p>
+            <p>This qualification is delivered, assessed and issued by a partner Registered Training Organisation (RTO). You’ll be told which RTO, and given its RTO code, before you enrol. </p>
           </div>
           <div>
             <h3 class="prose-section__sub"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="9" cy="7" rx="6" ry="3"/><path d="M3 7v5c0 1.7 2.7 3 6 3s6-1.3 6-3V7M15 10.5c3.3 0 6 1.3 6 3v4c0 1.7-2.7 3-6 3-2 0-3.8-.5-4.9-1.3"/></svg> What it costs</h3>
@@ -216,7 +211,7 @@
                     </dl>
                     
                     <p class="small muted">Typical full-fee prices published by Australian training providers, checked October 2026. Government funding can lower the cost in some states. These are not Poonam’s prices.</p>
-                <p>Your price depends on the training provider and on whether you use RPL or study the full course. Poonam will get you a written quote that shows the full cost, including any extra fees, before you decide. <span class="tbc" title="Add agreed fees once set with the partner RTO"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: Add agreed fees once set with the partner RTO</span></span></p>
+                <p>Your price depends on the training provider and on whether you use RPL or study the full course. Poonam will get you a written quote that shows the full cost, including any extra fees, before you decide. </p>
                 <a class="link-arrow" href="../contact.html?topic=course&course=BSB50420">Ask for a quote <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
         </div>
@@ -241,10 +236,10 @@
         <div class="faq__body"><p>If you already have relevant work experience, you may be able to have it assessed through recognition of prior learning. You would provide evidence of your skills and talk with an assessor, then complete any gap training needed. Poonam can tell you whether RPL is realistic for you after a short chat.</p></div>
       </details><details class="faq">
         <summary><span>Is there a work placement?</span><svg class="icon faq__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></summary>
-        <div class="faq__body"><p>No placement – assessed through workplace projects. <span class="tbc" title="Check this answer matches how Poonam works"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: Check this answer matches how Poonam works</span></span></p></div>
+        <div class="faq__body"><p>No placement – assessed through workplace projects. </p></div>
       </details><details class="faq">
         <summary><span>How much does it cost?</span><svg class="icon faq__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></summary>
-        <div class="faq__body"><p>Fees depend on the training provider and whether you use RPL or study the full course. Poonam will give you the full cost in writing before you decide – just ask. <span class="tbc" title="Check this answer matches how Poonam works"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: Check this answer matches how Poonam works</span></span></p></div>
+        <div class="faq__body"><p>Fees depend on the training provider and whether you use RPL or study the full course. Poonam will give you the full cost in writing before you decide – just ask. </p></div>
       </details><details class="faq">
         <summary><span>Is this course nationally recognised?</span><svg class="icon faq__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></summary>
         <div class="faq__body"><p>Yes. BSB50420 is part of Australia’s national training system. You can look it up on training.gov.au.</p></div>
@@ -266,7 +261,7 @@
       <span class="contact-tile__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span>
       <div>
         <p class="contact-tile__label">Call</p>
-        <p class="contact-tile__value"><span class="placeholder">Phone number coming soon</span><span class="tbc" title="Phone number coming soon"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: Phone number coming soon</span></span></p>
+        <p class="contact-tile__value"><span class="placeholder">Phone number coming soon</span></p>
       </div>
     </li>
     
@@ -274,7 +269,7 @@
       <span class="contact-tile__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg></span>
       <div>
         <p class="contact-tile__label">WhatsApp</p>
-        <p class="contact-tile__value"><span class="placeholder">WhatsApp number coming soon</span><span class="tbc" title="WhatsApp number coming soon"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: WhatsApp number coming soon</span></span></p>
+        <p class="contact-tile__value"><span class="placeholder">WhatsApp number coming soon</span></p>
       </div>
     </li>
     
@@ -282,7 +277,7 @@
       <span class="contact-tile__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
       <div>
         <p class="contact-tile__label">Email</p>
-        <p class="contact-tile__value"><span class="placeholder">Email address coming soon</span><span class="tbc" title="Email address coming soon"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: Email address coming soon</span></span></p>
+        <p class="contact-tile__value"><span class="placeholder">Email address coming soon</span></p>
       </div>
     </li>
   </ul></div>
@@ -348,7 +343,8 @@
         <div>
           <h2 class="site-footer__heading">Explore</h2>
           <ul role="list">
-            <li><a href="../course-finder.html">Find my course</a></li><li><a href="../courses.html">Courses</a></li><li><a href="../ways-to-study.html">Ways to study</a></li><li><a href="../short-courses.html">Short courses</a></li><li><a href="../about.html">About us</a></li>
+            <li><a href="../course-finder.html">Find my course</a></li><li><a href="../courses.html">Courses</a></li><li><a href="../ways-to-study.html">Ways to study</a></li><li><a href="../about.html">About us</a></li>
+            <li><a href="../short-courses.html">Short courses</a></li>
             <li><a href="../faq.html">FAQ</a></li>
             <li><a href="../eligibility.html">Eligibility check</a></li>
           </ul>
@@ -364,8 +360,8 @@
         <div>
           <h2 class="site-footer__heading">Get in touch</h2>
           <ul role="list" class="site-footer__contact">
-            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span><span class="placeholder">Phone number coming soon</span><span class="tbc" title="Phone number coming soon"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: Phone number coming soon</span></span></span></li>
-            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span><span class="placeholder">Email address coming soon</span><span class="tbc" title="Email address coming soon"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: Email address coming soon</span></span></span></li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span><span class="placeholder">Phone number coming soon</span></span></li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span><span class="placeholder">Email address coming soon</span></span></li>
             
             <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Sydney</span></li>
           </ul>
@@ -375,7 +371,7 @@
       <div class="site-footer__legal">
         <p class="site-footer__disclaimer">
           Pathwise Courses is a course advisory service, not a Registered Training Organisation (RTO).
-          Nationally recognised qualifications are delivered, assessed and issued by our partner RTOs, which are named before you enrol.<span class="tbc" title="Confirm partner RTO arrangements and add their names and RTO codes"><span aria-hidden="true">●</span> To confirm<span class="visually-hidden">: Confirm partner RTO arrangements and add their names and RTO codes</span></span>
+          Nationally recognised qualifications are delivered, assessed and issued by our partner RTOs, which are named before you enrol.
           You can check any course or RTO at <a href="https://training.gov.au" rel="noopener">training.gov.au</a>.
         </p>
         <div class="site-footer__bottom">
