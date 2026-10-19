@@ -71,7 +71,7 @@ html:not(.js) .finder__form { display: none; }
 /* Answer rows: lettered, with a photo on the first question */
 .choice-list { display: grid; gap: 0.6rem; }
 @media (min-width: 640px) and (max-width: 999.98px) { .choice-list--photos { grid-template-columns: 1fr 1fr; } }
-.choice { --acc: var(--coral); --acc-ink: var(--coral-ink); --acc-50: var(--coral-50); position: relative; display: block; cursor: pointer; }
+.choice { --acc: var(--coral); --acc-ink: var(--coral-ink); --acc-50: var(--coral-50); position: relative; display: block; cursor: pointer; border-radius: var(--radius-card); }
 .choice input { z-index: 2; }
 .choice input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
 .choice__body {
@@ -111,7 +111,7 @@ html:not(.js) .finder__form { display: none; }
   .preview { display: grid; gap: 0.9rem; }
   .finder-layout.has-results .preview { display: none; }
 }
-.preview__frame { position: relative; aspect-ratio: 4 / 4.4; border-radius: var(--radius-xl); overflow: hidden; background: var(--night); box-shadow: 0 30px 60px -30px rgba(14, 21, 18, 0.55); }
+.preview__frame { position: relative; aspect-ratio: 4 / 4.4; border-radius: var(--radius-feature); overflow: hidden; background: var(--night); box-shadow: 0 30px 60px -30px rgba(14, 21, 18, 0.55); }
 .preview__slide, .preview__start { position: absolute; inset: 0; opacity: 0; transform: scale(1.05); transition: opacity 0.45s ease, transform 0.8s var(--ease); }
 .preview__slide.is-shown, .preview__start.is-shown { opacity: 1; transform: none; }
 .preview__slide img { width: 100%; height: 100%; object-fit: cover; }
@@ -125,10 +125,10 @@ html:not(.js) .finder__form { display: none; }
 .preview__mark .icon { width: 30px; height: 30px; }
 @media (prefers-reduced-motion: no-preference) { .preview__start.is-shown .preview__mark { animation: spin 18s linear infinite; } }
 .preview__answers { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
-.preview__answers li { display: inline-flex; align-items: baseline; gap: 0.4rem; padding: 0.35rem 0.75rem; border-radius: 999px; background: var(--card); border: 1px solid var(--line); font-size: 0.875rem; }
+.preview__answers li { display: inline-flex; align-items: baseline; gap: 0.4rem; padding: 0.35rem 0.75rem; border-radius: var(--radius-chip); background: var(--card); border: 1px solid var(--line); font-size: 0.875rem; }
 .preview__answers span { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
 .preview__answers strong { font-weight: 560; }
-.finder-note { padding: 1.25rem 1.35rem; border-radius: var(--radius-lg); background: var(--paper-2); }
+.finder-note { padding: 1.25rem 1.35rem; border-radius: var(--radius-card); background: var(--paper-2); }
 .finder-note .h4 { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
 .finder-note .h4 .icon { color: var(--coral-ink); }
 .finder-note p { font-size: 0.9rem; color: var(--muted); }
@@ -149,7 +149,7 @@ html:not(.js) .finder__form { display: none; }
 .answers__edit { border: 0; background: none; padding: 0.35rem 0.25rem; min-height: 32px; font: inherit; font-size: 0.875rem; font-weight: 600; color: var(--coral-ink); text-decoration: underline; text-underline-offset: 0.2em; cursor: pointer; }
 .answers__edit:hover { color: var(--ink); }
 .suggestions { display: grid; gap: 1.25rem; }
-.suggestion { border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(1.15rem, 1rem + 1vw, 1.75rem); background: var(--card); }
+.suggestion { border: 1px solid var(--line); border-radius: var(--radius-card); padding: clamp(1.15rem, 1rem + 1vw, 1.75rem); background: var(--card); }
 .suggestion--first { border: 2px solid var(--ink); box-shadow: 8px 8px 0 var(--coral); }
 .suggestion__top { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; margin-bottom: 0.75rem; }
 .suggestion__level { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }

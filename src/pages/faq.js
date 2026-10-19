@@ -6,7 +6,6 @@ export default function faq() {
   const d = 0;
   const body = html`
   ${pageHero({
-    eyebrow: 'FAQ',
     title: 'Questions, answered simply',
     lead: 'The things people most often ask before choosing a course. Can’t find yours? Just ask Poonam.',
     crumbs: [{ label: 'FAQ' }],

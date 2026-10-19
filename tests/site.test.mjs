@@ -221,11 +221,19 @@ test('chat button wears the Pathwise mark and says hello once a visit', async ()
 
 test('chat assistant answers from site content and closes with Escape', async () => {
   const page = await newPage(undefined, { reducedMotion: 'reduce' });
+  let releaseData;
+  const dataReady = new Promise((resolve) => { releaseData = resolve; });
+  await page.route('**/assets/data/assistant.json', async (route) => {
+    await dataReady;
+    await route.continue();
+  });
   await page.goto(BASE + 'courses.html');
   const toggle = page.getByRole('button', { name: /ask a question about courses/i });
   await toggle.click();
   const dialog = page.getByRole('dialog', { name: 'Course questions assistant' });
   await dialog.getByText(/automated helper/i).first().waitFor();
+  assert.ok(await dialog.getByRole('textbox').isDisabled(), 'questions wait until the assistant data and handlers are ready');
+  releaseData();
   await dialog.getByRole('textbox').fill('how much is the TAE');
   await dialog.getByRole('textbox').press('Enter');
   await dialog.getByRole('link', { name: /Training and Assessment/ }).waitFor();

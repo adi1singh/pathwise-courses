@@ -57,7 +57,7 @@ export const courseCard = (c, depth, { compare = false } = {}) => {
       </dl>
       <ul class="badge-list" role="list" aria-label="Ways to study">${pathwayBadges(c)}</ul>
       <div class="course-card__actions">
-        <a class="link-arrow" href="${href}" aria-describedby="${titleId}">View course ${icon('arrow-right')}</a>
+        <a class="link-arrow" href="${href}" aria-describedby="${titleId}">View course</a>
         ${compare
           ? html`<label class="compare-toggle">
               <input type="checkbox" data-compare value="${c.code}" aria-describedby="${titleId}">
@@ -81,8 +81,7 @@ export const pageHero = ({ eyebrow, title, lead, crumbs = [], depth = 0, aside =
     <div class="container page-hero__inner${aside || media ? ' page-hero__inner--split' : ''}">
       <div class="page-hero__text">
         ${crumbs.length ? breadcrumbs(crumbs, depth) : ''}
-        ${eyebrow && `<p class="eyebrow eyebrow--on-dark">${eyebrow}</p>`}
-        <h1>${title}</h1>
+        ${eyebrow ? `<p class="eyebrow eyebrow--on-dark">${eyebrow}</p>\n        ` : ''}<h1>${title}</h1>
         ${lead && `<p class="lead">${lead}</p>`}
         ${actions && `<div class="btn-row">${actions}</div>`}
         ${stats.length ? html`<ul class="hero-stats" role="list">${stats.map(([v, l]) => `<li><strong>${v}</strong><span>${l}</span></li>`)}</ul>` : ''}
@@ -189,7 +188,7 @@ export const areaCard = (s, list, depth) => {
     <span class="area-tile__body">
       <span class="area-tile__icon">${icon(s.icon)}</span>
       <span class="area-tile__name">${esc(s.name)}</span>
-      <span class="area-tile__meta">${list.length} ${list.length === 1 ? 'course' : 'courses'}${Number.isFinite(from) ? `, from ${money(from)}` : ''} ${icon('arrow-right')}</span>
+      <span class="area-tile__meta">${list.length} ${list.length === 1 ? 'course' : 'courses'}${Number.isFinite(from) ? `, from ${money(from)}` : ''}</span>
     </span>
   </a>`;
 };

@@ -89,7 +89,7 @@ export default function shortPage() {
                 <span class="short-card__format">${icon(s.format === 'quick' ? 'zap' : 'book')}${formats[s.format].name}, ${formats[s.format].time.toLowerCase()}</span>
                 <span class="short-card__price">Price on enquiry</span>
               </div>
-              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=${encodeURIComponent(s.title)}" aria-describedby="s-${s.id}">Enquire ${icon('arrow-right')}</a>
+              <a class="link-arrow short-card__link" href="contact.html?topic=short-course&amp;course=${encodeURIComponent(s.title)}" aria-describedby="s-${s.id}">Enquire</a>
             </div>
           </article>`
         )}
