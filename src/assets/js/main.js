@@ -698,28 +698,6 @@
     });
   });
 
-  /* ── Gentle reveal as sections scroll into view ─────────────────────── */
-  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const targets = $$([
-      '.section-head', '.area-tile', '.about-poonam__photo', '.about-poonam__text', '.wall__head',
-      '.demand__item', '.watch', '.reel-card', '.route__stop', '.faq-split > *', '.invite', '.finder-entry__inner > *',
-      '.path', '.timeline li', '.split > *', '.subhead', '.teams-band', '.compare-table', '.hint-card',
-      '.prose-section', '.glance', '.service', '.why-matters .facts-grid > li',
-    ].join(','));
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-    targets.forEach((el) => {
-      if (el.getBoundingClientRect().top < window.innerHeight) return; // already on screen: no animation
-      const siblings = Array.from(el.parentElement.children).filter((c) => targets.includes(c));
-      el.style.setProperty('--reveal-delay', `${Math.min(siblings.indexOf(el), 5) * 70}ms`);
-      el.classList.add('reveal');
-      io.observe(el);
-    });
-  }
-
   /* ── Course comparison ────────────────────────────────────────────────── */
   const tray = $('[data-compare-tray]');
   const dialog = $('[data-compare-dialog]');
