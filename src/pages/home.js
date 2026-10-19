@@ -289,10 +289,8 @@ const reels = (d) => {
   if (!list.length && !site.draft) return '';
   const cards = list.length
     ? list.map((r) => html`<li class="reel-card acc-${r.area ?? 'care'}">
-        <div class="reel-card__frame" data-ig-frame>
-          ${photo(REEL_AREA_PHOTO[r.area] ?? 'courses/chc33021', d, { sizes: '300px', cls: 'reel-card__cover' })}
-          <button class="reel-card__play" type="button" data-ig="${reelCode(r.url)}" data-ig-title="${esc(r.title)}" aria-label="Play reel: ${esc(r.title)}">${icon('play')}</button>
-          <p class="reel-card__title">${esc(r.title)}</p>
+        <div class="reel-card__frame is-playing">
+          <iframe src="https://www.instagram.com/p/${reelCode(r.url)}/embed/" title="Instagram reel: ${esc(r.title)}" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen scrolling="no"></iframe>
         </div>
         <a class="reel-card__link" href="${esc(r.url)}" rel="noopener">${igIcon} ${r.account ? `@${esc(r.account)}` : 'Watch on Instagram'}<span class="visually-hidden"> on Instagram</span></a>
       </li>`)
@@ -316,7 +314,7 @@ const reels = (d) => {
         ${ig.handle ? `<a class="btn btn--primary" href="https://www.instagram.com/${esc(ig.handle)}/" rel="noopener">${igIcon} Follow @${esc(ig.handle)}</a>` : ''}
       </div>
       <ul class="reels__row" role="list" tabindex="0" aria-label="Instagram reels">${cards}</ul>
-      ${list.length ? '<p class="reels__note">Reels play from Instagram, only when you press play.</p>' : ''}
+      ${list.length ? '<p class="reels__note">Reels load from Instagram when you scroll to this section.</p>' : ''}
     </div>
   </section>`;
 };

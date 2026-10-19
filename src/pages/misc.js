@@ -32,7 +32,7 @@ export function privacy() {
       <p>You can ask to see, correct or delete the information we hold about you at any time. Contact ${site.advisor} at ${contactLine}.</p>
 
       <h2>This website</h2>
-      <p>This site does not use advertising or tracking cookies. The home page shows two official careers videos and may show Instagram reels: the YouTube player (in privacy-enhanced mode) and the Instagram player load only if you press play, and YouTube’s or Instagram’s own privacy policy then applies. The pathway check and RPL evidence checklist run entirely in your browser; the evidence checklist remembers your ticks on your own device only.</p>
+      <p>This site does not use advertising or tracking cookies. The home page shows two official careers videos and may show Instagram reels: the YouTube player (in privacy-enhanced mode) loads only if you press play, and the Instagram reels load when you scroll to them; YouTube’s or Instagram’s own privacy policy then applies. The pathway check and RPL evidence checklist run entirely in your browser; the evidence checklist remembers your ticks on your own device only.</p>
     </div>
   </section>`;
 
